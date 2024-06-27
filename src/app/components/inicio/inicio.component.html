@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/">
+        <img src="https://salud5.guanajuato.gob.mx/sitio/app-assets/images/logo/logotransparente.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+        Inicio
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/configuracion-sistema" routerLinkActive="active">Configuración del Sistema</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/recordatorios" routerLinkActive="active">Recordatorios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/registro-citas-medicas" routerLinkActive="active">Registro de Citas Médicas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/registro-cita" routerLinkActive="active">Registro de Cita</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/registro-usuario" routerLinkActive="active">Registro de Usuario</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <button class="btn btn-outline-primary me-2" type="button" routerLink="/login">Iniciar Sesión</button>
+          <button class="btn btn-primary" type="button" routerLink="/registro-usuario">Registrarse</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <div class="background-image">
+    <router-outlet></router-outlet>
+  </div>
+  

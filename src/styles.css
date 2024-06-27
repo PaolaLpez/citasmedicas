@@ -1,0 +1,70 @@
+/* You can add global styles to this file, and also import other style files */
+/* Estilos para la barra de navegación */
+
+.navbar {
+    background-color: #ffffff; /* Fondo blanco */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    padding: 1rem 2rem; /* Espaciado interior */
+  }
+  
+  .navbar-brand {
+    color: #000000; /* Texto negro */
+    font-weight: 700; /* Negrita */
+  }
+  
+  .navbar-toggler {
+    border-color: #000000; /* Borde negro */
+  }
+  
+  .navbar-toggler-icon {
+    background-color: #000000; /* Icono de hamburguesa negro */
+  }
+  
+  .navbar-nav .nav-link {
+    color: #000000; /* Texto negro inicialmente */
+    transition: color 0.3s ease; /* Transición suave */
+  }
+  
+  .navbar-nav .nav-link:hover,
+  .navbar-nav .nav-link.active {
+    color: #0d6efd; /* Texto azul primario al pasar o estar activo */
+  }
+  
+  /* Estilos para los botones del formulario */
+  
+  .btn-outline-primary {
+    color: #0d6efd; /* Texto azul primario */
+    border-color: #0d6efd; /* Borde azul primario */
+  }
+  
+  .btn-outline-primary:hover {
+    color: #ffffff; /* Texto blanco al pasar */
+    background-color: #0d6efd; /* Fondo azul primario */
+  }
+  
+  .btn-primary {
+    background-color: #0d6efd; /* Fondo azul primario */
+    border-color: #0d6efd; /* Borde azul primario */
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3; /* Fondo azul más oscuro al pasar */
+    border-color: #0056b3; /* Borde azul más oscuro al pasar */
+  }
+  
+  /* Estilos para el fondo de imagen */
+  
+  .background-image {
+    background-image: url('https://img.freepik.com/vector-gratis/asistencia-sanitaria-medica-color-azul_1017-26800.jpg?w=1060&t=st=1719032992~exp=1719033592~hmac=a8906cfbfbd2370c4ad3ccdfa79e79984d4d91aa8a4793775865a4ce980727ea'); /* Ruta a tu imagen de fondo */
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh; /* Altura mínima igual al 100% del viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #ffffff; /* Texto blanco para contrastar con la imagen de fondo */
+    padding: 20px;
+    font-size: 1.5rem;
+  }
+  
