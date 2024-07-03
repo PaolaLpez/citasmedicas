@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ConfiguracionSistemaComponent } from './components/configuracion-sistema/configuracion-sistema.component';
-import { HistorialPacienteComponent } from './components/historial-paciente/historial-paciente.component';
+import { HistorialPacienteComponent } from './components/horarios/historial-paciente.component';
 import { InformacionPacienteComponent } from './components/informacion-paciente/informacion-paciente.component';
 import { IngresoComponent } from './components/ingreso/ingreso.component';
 import { InicioComponent } from './components/inicio/inicio.component';
@@ -12,6 +12,8 @@ import { RecordatoriosComponent } from './components/recordatorios/recordatorios
 import { RegistroCitaComponent } from './components/registro-cita/registro-cita.component';
 import { RegistroCitaMedicasComponent } from './components/registro-cita-medicas/registro-cita-medicas.component';
 import { RegistroUsuarioComponent } from './components/registro-usuario/registro-usuario.component';
+import { FormularioComponent } from './components/formulario/formulario.component';
+import { HistorialComponent } from './components/historial/historial.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { RegistroUsuarioComponent } from './components/registro-usuario/registro
     RecordatoriosComponent,
     RegistroCitaComponent,
     RegistroCitaMedicasComponent,
-    RegistroUsuarioComponent
+    RegistroUsuarioComponent,
+    FormularioComponent,
+    HistorialComponent
   ],
   imports: [
     BrowserModule,

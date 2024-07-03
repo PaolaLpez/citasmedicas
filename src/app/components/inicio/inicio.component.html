@@ -1,4 +1,34 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Citas Médicas</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    
+    .background-image {
+      background: url('https://img.freepik.com/vector-gratis/asistencia-sanitaria-medica-color-azul_1017-26800.jpg?w=1060&t=st=1719887026~exp=1719887626~hmac=0e68460a3db1b28dcc90f74555eef5650ff3202be735a3c7941d303a7bd7fbad') no-repeat center center fixed;
+      background-size: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    
+    .navbar {
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="background-image"></div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
     <div class="container-fluid">
       <a class="navbar-brand" routerLink="/">
         <img src="https://salud5.guanajuato.gob.mx/sitio/app-assets/images/logo/logotransparente.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
@@ -10,29 +40,32 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/configuracion-sistema" routerLinkActive="active">Configuración del Sistema</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/recordatorios" routerLinkActive="active">Recordatorios</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/registro-citas-medicas" routerLinkActive="active">Registro de Citas Médicas</a>
+            <a class="nav-link" routerLink="/registro-cita-medicas" routerLinkActive="active">Registro de Citas Médicas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/registro-cita" routerLinkActive="active">Registro de Cita</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/registro-usuario" routerLinkActive="active">Registro de Usuario</a>
+            <a class="nav-link" routerLink="/historial-paciente" routerLinkActive="active">Horarios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/historial" routerLinkActive="active">Historial</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/recordatorios" routerLinkActive="active">Recordatorios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/configuracion-sistema" routerLinkActive="active">Configuración del Sistema</a>
           </li>
         </ul>
         <form class="d-flex">
-          <button class="btn btn-outline-primary me-2" type="button" routerLink="/login">Iniciar Sesión</button>
-          <button class="btn btn-primary" type="button" routerLink="/registro-usuario">Registrarse</button>
+          <button class="btn btn-outline-primary me-2" type="button" routerLink="/registro-usuario">Registrarse</button>
         </form>
       </div>
     </div>
   </nav>
-  <div class="background-image">
-    <router-outlet></router-outlet>
-  </div>
-  
+</body>
+<router-outlet></router-outlet>
+</html>
+
+
