@@ -1,1 +1,113 @@
-<p>registro-cita-medicas works!</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de la Cita</title>
+    <style>
+        body {
+            background-image: url('https://thumbs.dreamstime.com/b/fondo-m%C3%A9dico-y-de-la-atenci%C3%B3n-sanitaria-ecg-monitor-azul-del-pulso-coraz-n-con-se-al-el-coraz%C3%B3n-bati%C3%B3-154045262.jpg'); /* Reemplaza 'ruta/de/tu/imagen.jpg' con la ruta de tu imagen */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 60%;
+            margin: 0 auto;
+            background-color: rgba(230, 247, 255, 0.9); /* Ajusta la opacidad del fondo */
+            padding: 20px;
+            border-radius: 40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="text"], input[type="date"], input[type="time"], input[type="email"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .pregunta-container {
+            margin-top: 15px;
+        }
+        .pregunta-container label {
+            display: inline;
+            margin-right: 10px;
+        }
+        .pregunta-container div {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        button, .home-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+        }
+        button:hover, .home-button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Registro de Citas Médicas</h1>
+        <form>
+            <fieldset>
+                <label for="identificacion">Ingresa tu CURP</label>
+                <input type="text" id="identificacion" name="identificacion" value="">
+
+                <label for="nombre-paciente">Ingresa tu nombre completo</label>
+                <input type="text" id="nombre-paciente" name="nombre-paciente" value="">
+
+                <label for="fecha-cita">Fecha de tu cita</label>
+                <input type="date" id="fecha-cita" name="fecha-cita">
+                
+                <label for="hora-cita">Hora de tu cita</label>
+                <input type="time" id="hora-cita" name="hora-cita">
+
+                <label for="telefono">Ingresa tu número de teléfono</label>
+                <input type="text" id="telefono" name="telefono" value="">
+                
+                <label for="correo">Ingresa tu correo electrónico</label>
+                <input type="email" id="correo" name="correo" value="">
+            </fieldset>
+            
+            <fieldset>
+                <div class="pregunta-container">
+                    <label>¿Nos has visitado antes?</label>
+                    <div>
+                        <input type="radio" id="si" name="atacado" value="si" required>
+                        <label for="si">Sí</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="no" name="atacado" value="no" required>
+                        <label for="no">No</label>
+                    </div>
+                </div>
+            </fieldset>
+            <button type="submit">Registrar Cita</button>
+        </form>
+        <a href="/" class="home-button">Volver a Inicio</a>
+    </div>
+</body>
+</html>

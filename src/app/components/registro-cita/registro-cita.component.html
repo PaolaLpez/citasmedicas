@@ -1,1 +1,76 @@
-<p>registro-cita works!</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de la Cita</title>
+    <style>
+        body {
+            background-image: url('https://thumbs.dreamstime.com/b/fondo-m%C3%A9dico-y-de-la-atenci%C3%B3n-sanitaria-ecg-monitor-azul-del-pulso-coraz-n-con-se-al-el-coraz%C3%B3n-bati%C3%B3-154045262.jpg'); /* Reemplaza 'ruta/de/tu/imagen.jpg' con la ruta de tu imagen */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            background-color: rgba(230, 247, 255, 0.9); /* Ajusta la opacidad del fondo */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="text"], input[type="date"], input[type="time"], input[type="email"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Registro de la Cita</h1>
+        <form>
+            <fieldset>
+                <legend>Doctor</legend>
+                <label for="tipo-doctor">Tipo de doctor</label>
+                <input type="text" id="tipo-doctor" name="tipo-doctor" placeholder="médico, nutriólogo, psicólogo, dentista, etc">
+                
+                <label for="nombre-doctor">Nombre del doctor</label>
+                <input type="text" id="nombre-doctor" name="nombre-doctor" value="Ana Celia de Armas Caso">
+                
+                <label for="fecha-cita">Fecha de la cita</label>
+                <input type="date" id="fecha-cita" name="fecha-cita">
+                
+                <label for="hora-cita">Hora de la cita</label>
+                <input type="time" id="hora-cita" name="hora-cita">
+            </fieldset>
+            
+            <fieldset>
+                <legend>Paciente</legend>
+                <label for="nombre-paciente">Nombre del paciente</label>
+                <input type="text" id="nombre-paciente" name="nombre-paciente" value="Ryan Thomas Gosling">
+                
+                <label for="identificacion">Número de identificación</label>
+                <input type="text" id="identificacion" name="identificacion" value="25210410877">
+                
+                <label for="telefono">Número de teléfono</label>
+                <input type="text" id="telefono" name="telefono" value="4614024134">
+                
+                <label for="correo">Correo electrónico</label>
+                <input type="email" id="correo" name="correo" value="davidpollollon@gmail.com">
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>
+

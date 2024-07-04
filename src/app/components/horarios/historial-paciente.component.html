@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Horarios Médicos</title>
+    <style>
+        body {
+            background-image: url('https://thumbs.dreamstime.com/b/fondo-m%C3%A9dico-y-de-la-atenci%C3%B3n-sanitaria-ecg-monitor-azul-del-pulso-coraz-n-con-se-al-el-coraz%C3%B3n-bati%C3%B3-154045262.jpg'); /* Reemplaza 'ruta/de/tu/imagen.jpg' con la ruta de tu imagen */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: rgba(230, 247, 255, 0.9); /* Ajusta la opacidad del fondo */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-group button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background: #0056b3;
+        }
+        .admin {
+            text-align: right;
+            margin-bottom: 10px;
+        }
+        .admin img {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+        }
+        .admin span {
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gestión de Horarios Médicos</h1>
+        <div class="admin">
+            <img src="admin-icon.png" alt="Admin Icon">
+            <span>Administrador</span>
+        </div>
+        <form id="horariosForm" onsubmit="return validarFormulario()">
+            <div class="form-group">
+                <label for="doctor">Selecciona un doctor:</label>
+                <select id="doctor" name="doctor" required>
+                    <option value="">Seleccione un doctor</option>
+                    <option value="doctor1">Doctor 1</option>
+                    <option value="doctor2">Doctor 2</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="hora-desde">Selecciona un horario:</label>
+                <div>
+                    Desde: 
+                    <select id="hora-desde-hora" name="hora-desde-hora" required>
+                        <option value="">Hora</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <!-- more options -->
+                    </select>
+                    :
+                    <select id="hora-desde-minuto" name="hora-desde-minuto" required>
+                        <option value="">Minuto</option>
+                        <option value="00">00</option>
+                        <option value="15">15</option>
+                        <!-- more options -->
+                    </select>
+                </div>
+                <div>
+                    Hasta:
+                    <select id="hora-hasta-hora" name="hora-hasta-hora" required>
+                        <option value="">Hora</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <!-- more options -->
+                    </select>
+                    :
+                    <select id="hora-hasta-minuto" name="hora-hasta-minuto" required>
+                        <option value="">Minuto</option>
+                        <option value="00">00</option>
+                        <option value="15">15</option>
+                        <!-- more options -->
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="fecha">Selecciona la fecha:</label>
+                <div>
+                    <select id="dia" name="dia" required>
+                        <option value="">Día</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <!-- more options -->
+                    </select>
+                    <select id="mes" name="mes" required>
+                        <option value="">Mes</option>
+                        <option value="01">Enero</option>
+                        <option value="02">Febrero</option>
+                        <!-- more options -->
+                    </select>
+                    <select id="ano" name="ano" required>
+                        <option value="">Año</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <!-- more options -->
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit">Confirmar horario</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function validarFormulario() {
+            var form = document.getElementById('horariosForm');
+            if (!form.checkValidity()) {
+                var firstInvalidField = form.querySelector(':invalid');
+                firstInvalidField.reportValidity();
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
+

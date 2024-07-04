@@ -1,1 +1,163 @@
-<p>recordatorios works!</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recordatorios</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        body {
+            background-image: url('https://thumbs.dreamstime.com/b/fondo-m%C3%A9dico-y-de-la-atenci%C3%B3n-sanitaria-ecg-monitor-azul-del-pulso-coraz-n-con-se-al-el-coraz%C3%B3n-bati%C3%B3-154045262.jpg'); /* Reemplaza 'ruta/de/tu/imagen.jpg' con la ruta de tu imagen */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: rgba(198, 230, 245, 0.9); /* Ajusta la opacidad del fondo */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .pregunta-container {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: 700;
+        }
+        input[type="text"], input[type="email"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .radio-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .radio-container div {
+            display: flex;
+            align-items: center;
+            margin: 0 10px;
+        }
+        .radio-container input {
+            display: none;
+        }
+        .radio-container label {
+            background: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            font-weight: 400;
+        }
+        .radio-container input:checked + label {
+            background: #0056b3;
+        }
+        .radio-container input#no:checked + label {
+            background: red;
+        }
+        button, .home-button, .link-button {
+            display: block;
+            width: 80px;
+            padding: 5px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 12px;
+        }
+        button:hover, .home-button:hover, .link-button:hover {
+            background: #0056b3;
+        }
+        .hidden {
+            display: none;
+        }
+        .additional-fields {
+            display: none;
+            margin-top: 10px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button[type="submit"] {
+            background: green;
+        }
+        button[type="submit"]:hover {
+            background: darkgreen;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Recordatorios</h1>
+        <form id="recordatoriosForm" onsubmit="return validarFormulario()">
+            <div class="pregunta-container">
+                <label>¿Desea recibir un recordatorio de su cita?</label>
+                <div class="radio-container">
+                    <div>
+                        <input type="radio" id="si" name="recordatorio" value="si" onclick="mostrarCampos(true)">
+                        <a href="/formulario" class="link-button">Sí</a>
+                    </div>
+                    <div>
+                        <input type="radio" id="no" name="recordatorio" value="no" onclick="mostrarCampos(false)">
+                        <label for="no">No</label>
+                    </div>
+                </div>
+            </div>
+
+            <fieldset id="camposRecordatorio" class="hidden">
+                <h3>Coloca los datos en donde te gustaría recibir el recordatorio</h3>
+                <label for="telefono">Ingresa tu número de teléfono</label>
+                <input type="text" id="telefono" name="telefono" pattern="\d{10}" title="El número de teléfono debe contener 10 dígitos">
+
+                <label for="correo">Ingresa tu correo electrónico</label>
+                <input type="email" id="correo" name="correo">
+
+                <div class="additional-fields">
+                    <label for="frecuencia">Frecuencia de recordatorios</label>
+                    <select id="frecuencia" name="frecuencia">
+                        <option value="diario">Diario</option>
+                        <option value="semanal">Semanal</option>
+                        <option value="mensual">Mensual</option>
+                    </select>
+                </div>
+            </fieldset>
+            
+            <div class="button-container">
+                <a href="/inicio" class="home-button">Inicio</a>
+                <a href="/inicio" class="link-button">Enviar</a>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        function validarFormulario() {
+            // Validación del formulario aquí
+            return true;
+        }
+        
+        function mostrarCampos(mostrar) {
+            document.getElementById('camposRecordatorio').classList.toggle('hidden', !mostrar);
+        }
+    </script>
+</body>
+</html>
