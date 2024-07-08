@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de la Cita</title>
+    <title>Registro de Citas Médicas</title>
     <style>
         body {
-            background-image: url('https://thumbs.dreamstime.com/b/fondo-m%C3%A9dico-y-de-la-atenci%C3%B3n-sanitaria-ecg-monitor-azul-del-pulso-coraz-n-con-se-al-el-coraz%C3%B3n-bati%C3%B3-154045262.jpg'); /* Reemplaza 'ruta/de/tu/imagen.jpg' con la ruta de tu imagen */
+            background-image: url('https://thumbs.dreamstime.com/b/fondo-m%C3%A9dico-y-de-la-atenci%C3%B3n-sanitaria-ecg-monitor-azul-del-pulso-coraz-n-con-se-al-el-coraz%C3%B3n-bati%C3%B3-154045262.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -15,13 +15,14 @@
         .container {
             width: 60%;
             margin: 0 auto;
-            background-color: rgba(230, 247, 255, 0.9); /* Ajusta la opacidad del fondo */
+            background-color: rgba(230, 247, 255, 0.9);
             padding: 20px;
             border-radius: 40px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h1 {
             text-align: center;
+            color: #007bff;
         }
         label {
             display: block;
@@ -33,6 +34,7 @@
             margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 16px;
         }
         .pregunta-container {
             margin-top: 15px;
@@ -71,36 +73,42 @@
 <body>
     <div class="container">
         <h1>Registro de Citas Médicas</h1>
-        <form>
+        <form id="appointment-form">
             <fieldset>
                 <label for="identificacion">Ingresa tu CURP</label>
                 <input type="text" id="identificacion" name="identificacion" value="">
+                <span id="curp-error" class="error"></span>
 
                 <label for="nombre-paciente">Ingresa tu nombre completo</label>
                 <input type="text" id="nombre-paciente" name="nombre-paciente" value="">
+                <span id="nombre-error" class="error"></span>
 
                 <label for="fecha-cita">Fecha de tu cita</label>
                 <input type="date" id="fecha-cita" name="fecha-cita">
+                <span id="fecha-error" class="error"></span>
                 
                 <label for="hora-cita">Hora de tu cita</label>
                 <input type="time" id="hora-cita" name="hora-cita">
+                <span id="hora-error" class="error"></span>
 
                 <label for="telefono">Ingresa tu número de teléfono</label>
                 <input type="text" id="telefono" name="telefono" value="">
+                <span id="telefono-error" class="error"></span>
                 
                 <label for="correo">Ingresa tu correo electrónico</label>
                 <input type="email" id="correo" name="correo" value="">
+                <span id="correo-error" class="error"></span>
             </fieldset>
             
             <fieldset>
                 <div class="pregunta-container">
                     <label>¿Nos has visitado antes?</label>
                     <div>
-                        <input type="radio" id="si" name="atacado" value="si" required>
+                        <input type="radio" id="si" name="atendido" value="si" required>
                         <label for="si">Sí</label>
                     </div>
                     <div>
-                        <input type="radio" id="no" name="atacado" value="no" required>
+                        <input type="radio" id="no" name="atendido" value="no" required>
                         <label for="no">No</label>
                     </div>
                 </div>
@@ -109,5 +117,89 @@
         </form>
         <a href="/" class="home-button">Volver a Inicio</a>
     </div>
+    <script>
+        document.getElementById('appointment-form').addEventListener('submit', function(event) {
+            let isValid = true;
+            
+            // Validación de la CURP
+            const curp = document.getElementById('identificacion').value;
+            const curpRegex = /^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]\d$/;
+            if (!curpRegex.test(curp)) {
+                isValid = false;
+                document.getElementById('curp-error').textContent = "CURP inválida. El formato debe ser 4 letras, 6 números, 1 letra (H/M), 5 letras, 1 número/letra, 1 número.";
+            } else {
+                document.getElementById('curp-error').textContent = "";
+            }
+            if (curp === "") {
+                isValid = false;
+                document.getElementById('curp-error').textContent = "El campo CURP no puede estar vacío.";
+            }
+            
+            // Validación del nombre
+            const nombre = document.getElementById('nombre-paciente').value;
+            const nombreRegex = /^[a-zA-Z\sáéíóúÁÉÍÓÚñÑ]+$/;
+            if (!nombreRegex.test(nombre)) {
+                isValid = false;
+                document.getElementById('nombre-error').textContent = "Nombre inválido.";
+            } else {
+                document.getElementById('nombre-error').textContent = "";
+            }
+            if (nombre === "") {
+                isValid = false;
+                document.getElementById('nombre-error').textContent = "El campo nombre no puede estar vacío.";
+            }
+            
+            // Validación del teléfono
+            const telefono = document.getElementById('telefono').value;
+            const telefonoRegex = /^[0-9]{10}$/;
+            if (!telefonoRegex.test(telefono)) {
+                isValid = false;
+                document.getElementById('telefono-error').textContent = "Teléfono inválido. Deben ser 10 dígitos.";
+            } else {
+                document.getElementById('telefono-error').textContent = "";
+            }
+            if (telefono === "") {
+                isValid = false;
+                document.getElementById('telefono-error').textContent = "El campo teléfono no puede estar vacío.";
+            }
+
+            // Validación del correo electrónico
+            const correo = document.getElementById('correo').value;
+            const correoRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!correoRegex.test(correo)) {
+                isValid = false;
+                document.getElementById('correo-error').textContent = "Correo electrónico inválido.";
+            } else {
+                document.getElementById('correo-error').textContent = "";
+            }
+            if (correo === "") {
+                isValid = false;
+                document.getElementById('correo-error').textContent = "El campo correo no puede estar vacío.";
+            }
+            
+            // Validación de la fecha
+            const fecha = document.getElementById('fecha-cita').value;
+            if (fecha === "") {
+                isValid = false;
+                document.getElementById('fecha-error').textContent = "Por favor selecciona una fecha.";
+            } else {
+                document.getElementById('fecha-error').textContent = "";
+            }
+            
+            // Validación de la hora
+            const hora = document.getElementById('hora-cita').value;
+            if (hora === "") {
+                isValid = false;
+                document.getElementById('hora-error').textContent = "Por favor selecciona una hora.";
+            } else {
+                document.getElementById('hora-error').textContent = "";
+            }
+            
+            if (!isValid) {
+                event.preventDefault(); // Evita que se envíe el formulario si hay errores
+            }
+        });
+    </script>
 </body>
 </html>
+

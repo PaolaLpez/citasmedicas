@@ -3,25 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informacion del Paciente</title>
+    <title>Información del Paciente</title>
     <style>
         body {
-            background-image: url('https://thumbs.dreamstime.com/b/fondo-m%C3%A9dico-y-de-la-atenci%C3%B3n-sanitaria-ecg-monitor-azul-del-pulso-coraz-n-con-se-al-el-coraz%C3%B3n-bati%C3%B3-154045262.jpg'); /* Reemplaza 'ruta/de/tu/imagen.jpg' con la ruta de tu imagen */
+            background-image: url('https://thumbs.dreamstime.com/b/fondo-m%C3%A9dico-y-de-la-atenci%C3%B3n-sanitaria-ecg-monitor-azul-del-pulso-coraz-n-con-se-al-el-coraz%C3%B3n-bati%C3%B3-154045262.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
             font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
         .container {
-            width: 80%;
-            margin: 0 auto;
-            background-color: rgba(230, 247, 255, 0.9); /* Ajusta la opacidad del fondo */
+            width: 100%;
+            max-width: 600px;
+            background-color: rgba(230, 247, 255, 0.9);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h1 {
             text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
         }
         .form-group {
             margin-bottom: 15px;
@@ -29,19 +36,21 @@
         .form-group label {
             display: block;
             margin-bottom: 5px;
+            font-weight: bold;
         }
         .form-group input, .form-group textarea {
-            width: 100%;
+            width: calc(100% - 16px);
             padding: 8px;
             margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 16px;
         }
         .form-group textarea {
             resize: vertical;
+            height: 100px;
         }
         button {
-            display: block;
             width: 100%;
             padding: 10px;
             background: #007bff;
@@ -49,6 +58,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 18px;
             margin-top: 10px;
         }
         button:hover {
@@ -58,7 +68,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Informacion del Paciente</h1>
+        <h1>Información del Paciente</h1>
         <form>
             <div class="form-group">
                 <label for="nombre-completo">Nombre del Paciente</label>
@@ -81,4 +91,5 @@
     </div>
 </body>
 </html>
+
 

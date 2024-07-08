@@ -6,39 +6,55 @@
     <title>Gestión de Horarios Médicos</title>
     <style>
         body {
-            background-image: url('https://thumbs.dreamstime.com/b/fondo-m%C3%A9dico-y-de-la-atenci%C3%B3n-sanitaria-ecg-monitor-azul-del-pulso-coraz-n-con-se-al-el-coraz%C3%B3n-bati%C3%B3-154045262.jpg'); /* Reemplaza 'ruta/de/tu/imagen.jpg' con la ruta de tu imagen */
+            background-image: url('https://thumbs.dreamstime.com/b/fondo-m%C3%A9dico-y-de-la-atenci%C3%B3n-sanitaria-ecg-monitor-azul-del-pulso-coraz-n-con-se-al-el-coraz%C3%B3n-bati%C3%B3-154045262.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
             font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
         .container {
-            width: 80%;
-            margin: 0 auto;
-            background-color: rgba(230, 247, 255, 0.9); /* Ajusta la opacidad del fondo */
+            width: 90%;
+            max-width: 600px;
+            background-color: rgba(230, 247, 255, 0.9);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h1 {
             text-align: center;
+            margin-bottom: 20px;
+            color: #007bff;
         }
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         .form-group label {
             display: block;
             margin-bottom: 5px;
+            font-weight: bold;
         }
         .form-group select, .form-group input {
-            width: 100%;
+            width: calc(100% - 16px);
             padding: 8px;
             margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 16px;
         }
-        .form-group button {
-            display: block;
+        .form-group div {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .form-group div select {
+            width: calc(33.33% - 6px);
+        }
+        button {
             width: 100%;
             padding: 10px;
             background: #007bff;
@@ -46,8 +62,9 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 18px;
         }
-        .form-group button:hover {
+        button:hover {
             background: #0056b3;
         }
         .admin {
@@ -55,13 +72,15 @@
             margin-bottom: 10px;
         }
         .admin img {
-            width: 20px;
-            height: 20px;
+            width: 30px;
+            height: 30px;
             vertical-align: middle;
         }
         .admin span {
             vertical-align: middle;
             margin-left: 5px;
+            font-size: 16px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -69,7 +88,7 @@
     <div class="container">
         <h1>Gestión de Horarios Médicos</h1>
         <div class="admin">
-            <img src="admin-icon.png" alt="Admin Icon">
+            <img src="https://cdn-icons-png.freepik.com/512/4326/4326320.png" alt="Admin Icon">
             <span>Administrador</span>
         </div>
         <form id="horariosForm" onsubmit="return validarFormulario()">
@@ -89,30 +108,48 @@
                         <option value="">Hora</option>
                         <option value="08">08</option>
                         <option value="09">09</option>
-                        <!-- more options -->
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
                     </select>
                     :
                     <select id="hora-desde-minuto" name="hora-desde-minuto" required>
                         <option value="">Minuto</option>
                         <option value="00">00</option>
                         <option value="15">15</option>
-                        <!-- more options -->
+                        <option value="30">30</option>
+                        <option value="45">45</option>
                     </select>
                 </div>
                 <div>
                     Hasta:
                     <select id="hora-hasta-hora" name="hora-hasta-hora" required>
                         <option value="">Hora</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
                         <option value="17">17</option>
                         <option value="18">18</option>
-                        <!-- more options -->
                     </select>
                     :
                     <select id="hora-hasta-minuto" name="hora-hasta-minuto" required>
                         <option value="">Minuto</option>
                         <option value="00">00</option>
                         <option value="15">15</option>
-                        <!-- more options -->
+                        <option value="30">30</option>
+                        <option value="45">45</option>
                     </select>
                 </div>
             </div>
@@ -123,19 +160,53 @@
                         <option value="">Día</option>
                         <option value="01">01</option>
                         <option value="02">02</option>
-                        <!-- more options -->
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
+                        <option value="31">31</option>
                     </select>
                     <select id="mes" name="mes" required>
                         <option value="">Mes</option>
                         <option value="01">Enero</option>
                         <option value="02">Febrero</option>
-                        <!-- more options -->
+                        <option value="03">Marzo</option>
+                        <option value="04">Abril</option>
+                        <option value="05">Mayo</option>
+                        <option value="06">Junio</option>
+                        <option value="07">Julio</option>
+                        <option value="08">Agosto</option>
+                        <option value="09">Septiembre</option>
+                        <option value="10">Octubre</option>
+                        <option value="11">Noviembre</option>
+                        <option value="12">Diciembre</option>
                     </select>
                     <select id="ano" name="ano" required>
-                        <option value="">Año</option>
                         <option value="2024">2024</option>
-                        <option value="2025">2025</option>
-                        <!-- more options -->
                     </select>
                 </div>
             </div>
@@ -158,4 +229,6 @@
     </script>
 </body>
 </html>
+
+
 

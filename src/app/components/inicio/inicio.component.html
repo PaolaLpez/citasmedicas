@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Citas Médicas</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     body {
       margin: 0;
@@ -30,42 +31,61 @@
   <div class="background-image"></div>
   <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
     <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/">
-        <img src="https://salud5.guanajuato.gob.mx/sitio/app-assets/images/logo/logotransparente.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
-        Inicio
-      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/registro-cita-medicas" routerLinkActive="active">Registro de Citas Médicas</a>
+            <button class="nav-link btn btn-link" onclick="window.location.href = '/ingreso'">
+              <i class="fas fa-home"></i> Inicio
+            </button>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/registro-cita" routerLinkActive="active">Registro de Cita</a>
+            <a class="nav-link" routerLink="/registro-cita-medicas" routerLinkActive="active">
+              <i class="fas fa-calendar-check"></i> Registro de Citas Médicas
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/historial-paciente" routerLinkActive="active">Horarios</a>
+            <a class="nav-link" routerLink="/registro-cita" routerLinkActive="active">
+              <i class="fas fa-edit"></i> Registro de Cita
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/historial" routerLinkActive="active">Historial</a>
+            <a class="nav-link" routerLink="/historial-paciente" routerLinkActive="active">
+              <i class="fas fa-clock"></i> Horarios
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/recordatorios" routerLinkActive="active">Recordatorios</a>
+            <a class="nav-link" routerLink="/historial" routerLinkActive="active">
+              <i class="fas fa-history"></i> Historial
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/configuracion-sistema" routerLinkActive="active">Configuración del Sistema</a>
+            <a class="nav-link" routerLink="/recordatorios" routerLinkActive="active">
+              <i class="fas fa-bell"></i> Recordatorios
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/configuracion-sistema" routerLinkActive="active">
+              <i class="fas fa-cogs"></i> Configuración del Sistema
+            </a>
           </li>
         </ul>
         <form class="d-flex">
-          <button class="btn btn-outline-primary me-2" type="button" routerLink="/registro-usuario">Registrarse</button>
+          <button class="btn btn-outline-primary me-2" type="button" routerLink="/registro-usuario">
+            <i class="fas fa-user-plus"></i> Registrarse
+          </button>
         </form>
       </div>
     </div>
   </nav>
+  <router-outlet></router-outlet>
 </body>
-<router-outlet></router-outlet>
 </html>
+
+
+
+
 
 

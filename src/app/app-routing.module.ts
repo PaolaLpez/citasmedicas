@@ -8,6 +8,7 @@ import { RegistroUsuarioComponent } from './components/registro-usuario/registro
 import { FormularioComponent } from './components/formulario/formulario.component';
 import { HistorialPacienteComponent } from './components/horarios/historial-paciente.component';
 import { HistorialComponent } from './components/historial/historial.component';
+import { IngresoComponent } from './components/ingreso/ingreso.component';
 
 const routes: Routes = [
 
@@ -52,6 +53,10 @@ const routes: Routes = [
   {
     path : 'registro-cita',
     component : RegistroCitaComponent
+  },
+  {
+    path : 'ingreso',
+    component : IngresoComponent
   }
 
 ];

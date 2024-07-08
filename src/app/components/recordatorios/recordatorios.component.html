@@ -12,27 +12,41 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             font-family: 'Roboto', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
         .container {
-            width: 80%;
-            margin: 0 auto;
+            width: 90%;
+            max-width: 500px;
             background-color: rgba(198, 230, 245, 0.9); /* Ajusta la opacidad del fondo */
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .logo {
+            max-width: 100px;
+            margin: 0 auto 20px auto;
         }
         h1 {
             text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+            font-size: 24px;
         }
         .pregunta-container {
             text-align: center;
+            margin-bottom: 20px;
         }
         label {
             display: block;
             margin-top: 10px;
             font-weight: 700;
         }
-        input[type="text"], input[type="email"] {
+        input[type="text"], input[type="email"], select {
             width: calc(100% - 22px);
             padding: 10px;
             margin-top: 5px;
@@ -108,6 +122,7 @@
 </head>
 <body>
     <div class="container">
+        <img src="https://media.istockphoto.com/id/1150776990/es/vector/%C3%B0%C3%B0%CE%BCd-%C3%B1%C3%B01-4%C3%B1%C3%B01-2%C3%B01-2%C3%B1%C3%B0-2.jpg?s=612x612&w=0&k=20&c=Dh7C9Wj838ZBRs8nrG2MA5aOVunvb7-tmgBiNCGhVt0=" alt="Logo" class="logo"> <!-- Reemplaza la URL por la de tu logo -->
         <h1>Recordatorios</h1>
         <form id="recordatoriosForm" onsubmit="return validarFormulario()">
             <div class="pregunta-container">
@@ -115,7 +130,7 @@
                 <div class="radio-container">
                     <div>
                         <input type="radio" id="si" name="recordatorio" value="si" onclick="mostrarCampos(true)">
-                        <a href="/formulario" class="link-button">Sí</a>
+                        <label for="si">Sí</label>
                     </div>
                     <div>
                         <input type="radio" id="no" name="recordatorio" value="no" onclick="mostrarCampos(false)">
@@ -144,7 +159,7 @@
             
             <div class="button-container">
                 <a href="/inicio" class="home-button">Inicio</a>
-                <a href="/inicio" class="link-button">Enviar</a>
+                <button type="submit">Enviar</button>
             </div>
         </form>
     </div>
