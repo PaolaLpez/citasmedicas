@@ -5,27 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configuración del Sistema</title>
     <style>
-        body {
-            background-image: url('https://thumbs.dreamstime.com/b/fondo-m%C3%A9dico-y-de-la-atenci%C3%B3n-sanitaria-ecg-monitor-azul-del-pulso-coraz-n-con-se-al-el-coraz%C3%B3n-bati%C3%B3-154045262.jpg'); /* Reemplaza 'ruta/de/tu/imagen.jpg' con la ruta de tu imagen */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-image: url('https://thumbs.dreamstime.com/b/fondo-m%C3%A9dico-y-de-la-atenci%C3%B3n-sanitaria-ecg-monitor-azul-del-pulso-coraz-n-con-se-al-el-coraz%C3%B3n-bati%C3%B3-154045262.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .container {
             width: 100%;
-            margin: 0 auto;
-            background-color: rgba(182, 232, 255, 0.9); /* Ajusta la opacidad del fondo */
+            max-width: 600px;
+            margin: 20px;
+            background-color: rgba(182, 232, 255, 0.9);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 80px; /* Ajuste para posicionar el contenedor más abajo */
         }
         h1 {
             text-align: center;
+            color: #007bff;
         }
         label {
             display: block;
             margin-top: 10px;
+            font-weight: bold;
         }
         input[type="text"], input[type="date"], input[type="time"], input[type="email"] {
             width: calc(100% - 22px);
@@ -33,6 +44,14 @@
             margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 5px;
+        }
+        .radio-group {
+            display: flex;
+            justify-content: space-around;
+            margin: 10px 0;
+        }
+        .radio-group label {
+            margin: 0;
         }
         button, .home-button {
             display: block;
@@ -50,6 +69,12 @@
         button:hover, .home-button:hover {
             background: #0056b3;
         }
+        fieldset {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -58,13 +83,15 @@
         <form id="configuracionForm" onsubmit="return validarFormulario()">
             <div class="pregunta-container">
                 <label>¿Desea modificar alguno de sus datos personales?</label>
-                <div>
-                  <input type="radio" id="si" name="modificar" value="si" required>
-                  <label for="si">Sí</label>
-                </div>
-                <div>
-                  <input type="radio" id="no" name="modificar" value="no" required>
-                  <label for="no">No</label>
+                <div class="radio-group">
+                    <div>
+                        <input type="radio" id="si" name="modificar" value="si" required>
+                        <label for="si">Sí</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="no" name="modificar" value="no" required>
+                        <label for="no">No</label>
+                    </div>
                 </div>
             </div>
 
@@ -72,7 +99,7 @@
                 <label for="nombre-paciente">Modificar nombre</label>
                 <input type="text" id="nombre-paciente" name="nombre-paciente" value="Isabel Lora Fuentes" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+" title="El nombre solo debe contener letras y espacios">
 
-                <label for="fecha-cita">Modifica tu Fecha de nacimiento</label>
+                <label for="fecha-cita">Modificar tu Fecha de nacimiento</label>
                 <input type="date" id="fecha-cita" name="fecha-cita">
 
                 <label for="identificacion">Modificar CURP</label>
@@ -103,5 +130,8 @@
     </script>
 </body>
 </html>
+
+
+
 
 
