@@ -14,6 +14,7 @@ import { RegistroCitaMedicasComponent } from './components/registro-cita-medicas
 import { RegistroUsuarioComponent } from './components/registro-usuario/registro-usuario.component';
 import { FormularioComponent } from './components/formulario/formulario.component';
 import { HistorialComponent } from './components/historial/historial.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HistorialComponent } from './components/historial/historial.component';
     RegistroCitaMedicasComponent,
     RegistroUsuarioComponent,
     FormularioComponent,
-    HistorialComponent
+    HistorialComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,

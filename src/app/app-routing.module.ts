@@ -9,6 +9,7 @@ import { FormularioComponent } from './components/formulario/formulario.componen
 import { HistorialPacienteComponent } from './components/horarios/historial-paciente.component';
 import { HistorialComponent } from './components/historial/historial.component';
 import { IngresoComponent } from './components/ingreso/ingreso.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 const routes: Routes = [
 
@@ -57,6 +58,10 @@ const routes: Routes = [
   {
     path : 'ingreso',
     component : IngresoComponent
+  },
+  {
+    path : 'perfil',
+    component : PerfilComponent
   }
 
 ];
