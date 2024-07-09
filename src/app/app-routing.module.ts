@@ -10,6 +10,7 @@ import { HistorialPacienteComponent } from './components/horarios/historial-paci
 import { HistorialComponent } from './components/historial/historial.component';
 import { IngresoComponent } from './components/ingreso/ingreso.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { DatosPacienteComponent } from './components/datos-paciente/datos-paciente.component';
 
 const routes: Routes = [
 
@@ -62,6 +63,10 @@ const routes: Routes = [
   {
     path : 'perfil',
     component : PerfilComponent
+  },
+  {
+    path : 'datos-paciente',
+    component : DatosPacienteComponent
   }
 
 ];
