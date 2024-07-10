@@ -15,6 +15,7 @@ import { RegistroUsuarioComponent } from './components/registro-usuario/registro
 import { FormularioComponent } from './components/formulario/formulario.component';
 import { HistorialComponent } from './components/historial/historial.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { DatosPacienteComponent } from './components/datos-paciente/datos-paciente.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { PerfilComponent } from './components/perfil/perfil.component';
     RegistroUsuarioComponent,
     FormularioComponent,
     HistorialComponent,
-    PerfilComponent
+    PerfilComponent,
+    DatosPacienteComponent
   ],
   imports: [
     BrowserModule,
