@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Citas Médicas</title>
+    <title>Registro de la Cita</title>
     <style>
         body {
             background-image: url('https://thumbs.dreamstime.com/b/fondo-m%C3%A9dico-y-de-la-atenci%C3%B3n-sanitaria-ecg-monitor-azul-del-pulso-coraz-n-con-se-al-el-coraz%C3%B3n-bati%C3%B3-154045262.jpg');
@@ -11,13 +11,19 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .container {
-            width: 60%;
-            margin: 0 auto;
+            width: 100%;
+            max-width: 600px;
             background-color: rgba(230, 247, 255, 0.9);
             padding: 20px;
-            border-radius: 40px;
+            border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h1 {
@@ -28,179 +34,113 @@
             display: block;
             margin-top: 10px;
         }
-        input[type="text"], input[type="date"], input[type="time"], input[type="email"] {
+        input[type="text"], input[type="date"], select {
             width: calc(100% - 22px);
             padding: 10px;
             margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            font-size: 16px;
         }
-        .pregunta-container {
-            margin-top: 15px;
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
         }
-        .pregunta-container label {
-            display: inline;
+        .button-container button {
+            padding: 10px 20px;
             margin-right: 10px;
-        }
-        .pregunta-container div {
-            display: inline-block;
-            margin-right: 10px;
-        }
-        button, .home-button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
             border: none;
             border-radius: 5px;
-            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
             cursor: pointer;
-            margin-top: 20px;
-            text-align: center;
-            text-decoration: none;
+            transition: background-color 0.3s ease;
         }
-        button:hover, .home-button:hover {
+        .button-container button:hover {
             background-color: #0056b3;
         }
-        .error {
-            color: red;
-            font-size: 12px;
+        .time-select {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 5px;
+        }
+        .time-select select {
+            width: 48%;
         }
     </style>
 </head>
 <app-inicio></app-inicio>
 <body>
     <div class="container">
-        <h1>Registro de Citas Médicas</h1>
-        <form id="appointment-form">
+        <h1>Registro de la Cita</h1>
+        <form id="registro-form">
             <fieldset>
-                <label for="identificacion">Ingresa tu CURP</label>
-                <input type="text" id="identificacion" name="identificacion" value="">
-                <span id="curp-error" class="error"></span>
-
-                <label for="nombre-paciente">Ingresa tu nombre completo</label>
-                <input type="text" id="nombre-paciente" name="nombre-paciente" value="">
-                <span id="nombre-error" class="error"></span>
-
-                <label for="fecha-cita">Fecha de tu cita</label>
-                <input type="date" id="fecha-cita" name="fecha-cita">
-                <span id="fecha-error" class="error"></span>
                 
-                <label for="hora-cita">Hora de tu cita</label>
-                <input type="time" id="hora-cita" name="hora-cita">
-                <span id="hora-error" class="error"></span>
+                <legend>Doctor</legend>
+                <label for="tipo-doctor">Tipo de doctor *</label>
+                <select id="tipo-doctor" name="tipo-doctor" required>
+                    <option value="">Seleccione el tipo de doctor</option>
+                    <option value="psiquiatra">Psiquiatra</option>
+                    <option value="doctor general">Doctor General</option>
+                    <option value="medico general">Médico General</option>
+                    <option value="pediatra">Pediatra</option>
+                    <option value="cardiologo">Cardiólogo</option>
+                    <option value="dentista">Dentista</option>
+                    <option value="nutriologo">Nutriólogo</option>
+                    <option value="psicologo">Psicólogo</option>
+                </select>
 
-                <label for="telefono">Ingresa tu número de teléfono</label>
-                <input type="text" id="telefono" name="telefono" value="">
-                <span id="telefono-error" class="error"></span>
-                
-                <label for="correo">Ingresa tu correo electrónico</label>
-                <input type="email" id="correo" name="correo" value="">
-                <span id="correo-error" class="error"></span>
-            </fieldset>
-            
-            <fieldset>
-                <div class="pregunta-container">
-                    <label>¿Nos has visitado antes?</label>
-                    <div>
-                        <input type="radio" id="si" name="atendido" value="si" required>
-                        <label for="si">Sí</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="no" name="atendido" value="no" required>
-                        <label for="no">No</label>
-                    </div>
+                <label for="nombre-doctor">Nombre del doctor *</label>
+                <select id="nombre-doctor" name="nombre-doctor" required>
+                    <option value="">Seleccione el nombre del doctor</option>
+                    <option value="Dr. Juan Pérez">Dr. Juan Pérez</option>
+                    <option value="Dra. María López">Dra. María López</option>
+                    <option value="Dr. José Hernández">Dr. José Hernández</option>
+                    <option value="Dra. Ana García">Dra. Ana García</option>
+                    <option value="Dr. Carlos Martínez">Dr. Carlos Martínez</option>
+                    <option value="Dra. Laura Rodríguez">Dra. Laura Rodríguez</option>
+                    <option value="Dr. Miguel Gómez">Dr. Miguel Gómez</option>
+                    <option value="Dra. Sofía Díaz">Dra. Sofía Díaz</option>
+                </select>
+
+                <label for="fecha-cita">Fecha de la cita *</label>
+                <input type="date" id="fecha-cita" name="fecha-cita" required>
+
+                <label for="hora-cita">Hora de la cita *</label>
+                <div class="time-select">
+                    <select id="hora-desde-hora" name="hora-desde-hora" required>
+                        <option value="">Hora</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                    </select>
+                    :
+                    <select id="hora-desde-minuto" name="hora-desde-minuto" required>
+                        <option value="">Minuto</option>
+                        <option value="00">00</option>
+                        <option value="15">15</option>
+                        <option value="30">30</option>
+                        <option value="45">45</option>
+                    </select>
                 </div>
-            </fieldset>
-            <button type="submit">Registrar Cita</button>
-        </form>
-        <a href="/" class="home-button">Volver a Inicio</a>
-    </div>
-    <script>
-        document.getElementById('appointment-form').addEventListener('submit', function(event) {
-            let isValid = true;
-            
-            // Validación de la CURP
-            const curp = document.getElementById('identificacion').value;
-            const curpRegex = /^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]\d$/;
-            if (!curpRegex.test(curp)) {
-                isValid = false;
-                document.getElementById('curp-error').textContent = "CURP inválida. El formato debe ser 4 letras, 6 números, 1 letra (H/M), 5 letras, 1 número/letra, 1 número.";
-            } else {
-                document.getElementById('curp-error').textContent = "";
-            }
-            if (curp === "") {
-                isValid = false;
-                document.getElementById('curp-error').textContent = "El campo CURP no puede estar vacío.";
-            }
-            
-            // Validación del nombre
-            const nombre = document.getElementById('nombre-paciente').value;
-            const nombreRegex = /^[a-zA-Z\sáéíóúÁÉÍÓÚñÑ]+$/;
-            if (!nombreRegex.test(nombre)) {
-                isValid = false;
-                document.getElementById('nombre-error').textContent = "Nombre inválido.";
-            } else {
-                document.getElementById('nombre-error').textContent = "";
-            }
-            if (nombre === "") {
-                isValid = false;
-                document.getElementById('nombre-error').textContent = "El campo nombre no puede estar vacío.";
-            }
-            
-            // Validación del teléfono
-            const telefono = document.getElementById('telefono').value;
-            const telefonoRegex = /^[0-9]{10}$/;
-            if (!telefonoRegex.test(telefono)) {
-                isValid = false;
-                document.getElementById('telefono-error').textContent = "Teléfono inválido. Deben ser 10 dígitos.";
-            } else {
-                document.getElementById('telefono-error').textContent = "";
-            }
-            if (telefono === "") {
-                isValid = false;
-                document.getElementById('telefono-error').textContent = "El campo teléfono no puede estar vacío.";
-            }
 
-            // Validación del correo electrónico
-            const correo = document.getElementById('correo').value;
-            const correoRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            if (!correoRegex.test(correo)) {
-                isValid = false;
-                document.getElementById('correo-error').textContent = "Correo electrónico inválido.";
-            } else {
-                document.getElementById('correo-error').textContent = "";
-            }
-            if (correo === "") {
-                isValid = false;
-                document.getElementById('correo-error').textContent = "El campo correo no puede estar vacío.";
-            }
+                
+            </fieldset>
             
-            // Validación de la fecha
-            const fecha = document.getElementById('fecha-cita').value;
-            if (fecha === "") {
-                isValid = false;
-                document.getElementById('fecha-error').textContent = "Por favor selecciona una fecha.";
-            } else {
-                document.getElementById('fecha-error').textContent = "";
-            }
-            
-            // Validación de la hora
-            const hora = document.getElementById('hora-cita').value;
-            if (hora === "") {
-                isValid = false;
-                document.getElementById('hora-error').textContent = "Por favor selecciona una hora.";
-            } else {
-                document.getElementById('hora-error').textContent = "";
-            }
-            
-            if (!isValid) {
-                event.preventDefault(); // Evita que se envíe el formulario si hay errores
-            }
-        });
-    </script>
+            <div class="button-container">
+                <button type="submit">Registrar Cita</button>
+                <button type="button" onclick="window.location.href='http://localhost:4200/ingreso'">Ir al Inicio</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
 
