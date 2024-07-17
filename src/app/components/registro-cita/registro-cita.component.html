@@ -13,25 +13,29 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .container {
             width: 100%;
-            max-width: 600px; /* Ajusta el ancho máximo según sea necesario */
-            margin: 10vh auto; /* Centra verticalmente con un espacio superior */
+            max-width: 600px;
             background-color: rgba(230, 247, 255, 0.9);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
         }
         h1 {
             text-align: center;
-            color: #007bff; /* Color azul */
+            color: #007bff;
         }
         label {
             display: block;
             margin-top: 10px;
         }
-        input[type="text"], input[type="date"], input[type="time"], input[type="email"] {
+        input[type="text"], input[type="date"], select {
             width: calc(100% - 22px);
             padding: 10px;
             margin-top: 5px;
@@ -55,51 +59,114 @@
         .button-container button:hover {
             background-color: #0056b3;
         }
+        .time-select {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 5px;
+        }
+        .time-select select {
+            width: 48%;
+        }
+        .footer {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 14px;
+            position: relative;
+            bottom: 0;
+        }
+        .footer p {
+            margin: 5px 0;
+        }
     </style>
 </head>
 <app-inicio></app-inicio>
 <body>
     <div class="container">
         <h1>Registro de la Cita</h1>
-        <form>
-            <fieldset>
-                <legend>Doctor</legend>
-                <label for="tipo-doctor">Tipo de doctor</label>
-                <input type="text" id="tipo-doctor" name="tipo-doctor" placeholder="médico, nutriólogo, psicólogo, dentista, etc">
-                
-                <label for="nombre-doctor">Nombre del doctor</label>
-                <input type="text" id="nombre-doctor" name="nombre-doctor" value="Ana Celia de Armas Caso">
-                
-                <label for="fecha-cita">Fecha de la cita</label>
-                <input type="date" id="fecha-cita" name="fecha-cita">
-                
-                <label for="hora-cita">Hora de la cita</label>
-                <input type="time" id="hora-cita" name="hora-cita">
-            </fieldset>
-            
+        <form id="registro-form">
             <fieldset>
                 <legend>Paciente</legend>
-                <label for="nombre-paciente">Nombre del paciente</label>
-                <input type="text" id="nombre-paciente" name="nombre-paciente" value="Ryan Thomas Gosling">
-                
-                <label for="identificacion">Número de identificación</label>
-                <input type="text" id="identificacion" name="identificacion" value="25210410877">
-                
-                <label for="telefono">Número de teléfono</label>
-                <input type="text" id="telefono" name="telefono" value="4614024134">
-                
-                <label for="correo">Correo electrónico</label>
-                <input type="email" id="correo" name="correo" value="davidpollollon@gmail.com">
+                <label for="nombre-paciente">Nombre del paciente *</label>
+                <input type="text" id="nombre-paciente" name="nombre-paciente" required>
+
+                <legend>Doctor</legend>
+                <label for="tipo-doctor">Tipo de doctor *</label>
+                <select id="tipo-doctor" name="tipo-doctor" required>
+                    <option value="">Seleccione el tipo de doctor</option>
+                    <option value="psiquiatra">Psiquiatra</option>
+                    <option value="doctor general">Doctor General</option>
+                    <option value="medico general">Médico General</option>
+                    <option value="pediatra">Pediatra</option>
+                    <option value="cardiologo">Cardiólogo</option>
+                    <option value="dentista">Dentista</option>
+                    <option value="nutriologo">Nutriólogo</option>
+                    <option value="psicologo">Psicólogo</option>
+                </select>
+
+                <label for="nombre-doctor">Nombre del doctor *</label>
+                <select id="nombre-doctor" name="nombre-doctor" required>
+                    <option value="">Seleccione el nombre del doctor</option>
+                    <option value="Dr. Juan Pérez">Dr. Juan Pérez</option>
+                    <option value="Dra. María López">Dra. María López</option>
+                    <option value="Dr. José Hernández">Dr. José Hernández</option>
+                    <option value="Dra. Ana García">Dra. Ana García</option>
+                    <option value="Dr. Carlos Martínez">Dr. Carlos Martínez</option>
+                    <option value="Dra. Laura Rodríguez">Dra. Laura Rodríguez</option>
+                    <option value="Dr. Miguel Gómez">Dr. Miguel Gómez</option>
+                    <option value="Dra. Sofía Díaz">Dra. Sofía Díaz</option>
+                </select>
+
+                <label for="fecha-cita">Fecha de la cita *</label>
+                <input type="date" id="fecha-cita" name="fecha-cita" required>
+
+                <label for="hora-cita">Hora de la cita *</label>
+                <div class="time-select">
+                    <select id="hora-desde-hora" name="hora-desde-hora" required>
+                        <option value="">Hora</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                    </select>
+                    :
+                    <select id="hora-desde-minuto" name="hora-desde-minuto" required>
+                        <option value="">Minuto</option>
+                        <option value="00">00</option>
+                        <option value="15">15</option>
+                        <option value="30">30</option>
+                        <option value="45">45</option>
+                    </select>
+                </div>
             </fieldset>
             
             <div class="button-container">
                 <button type="submit">Registrar Cita</button>
-                <button onclick="window.location.href = '/'">Ir al Inicio</button>
+                <button type="button" onclick="window.location.href='http://localhost:4200/ingreso'">Ir al Inicio</button>
             </div>
         </form>
     </div>
+
+    <div class="footer">
+        <p>CAISES San Luis de la Paz</p>
+        <p>Dirección: Calle Velasco Ibarra & Calle México 68, La Ladrillera, 37906 San Luis de la Paz, Gto.</p>
+        <p>Teléfono: 468 688 2045</p>
+        <p>Horario: 8 a.m. a 10 p.m.</p>
+    </div>
 </body>
 </html>
+
+
 
 
 

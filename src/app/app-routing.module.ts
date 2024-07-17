@@ -11,13 +11,18 @@ import { HistorialComponent } from './components/historial/historial.component';
 import { IngresoComponent } from './components/ingreso/ingreso.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { DatosPacienteComponent } from './components/datos-paciente/datos-paciente.component';
+import { InicioComponent } from './components/inicio/inicio.component';
 
 const routes: Routes = [
 
   {
     path : '',
-    redirectTo : '/inicio',
+    redirectTo : '/registro-usuario',
     pathMatch : 'full'
+  },
+  {
+    path : 'inicio',
+    component : InicioComponent
   },
   {
     path : 'cita',

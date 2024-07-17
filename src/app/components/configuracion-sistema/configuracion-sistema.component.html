@@ -22,12 +22,11 @@
         .container {
             width: 100%;
             max-width: 600px;
-            margin: 20px;
+            margin: 80px auto; /* Ajuste para centrar verticalmente */
             background-color: rgba(182, 232, 255, 0.9);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 80px; /* Ajuste para posicionar el contenedor más abajo */
         }
         h1 {
             text-align: center;
@@ -77,25 +76,11 @@
         }
     </style>
 </head>
-<app-inicio></app-inicio>
+
 <body>
     <div class="container">
         <h1>Configuración del Sistema</h1>
         <form id="configuracionForm" onsubmit="return validarFormulario()">
-            <div class="pregunta-container">
-                <label>¿Desea modificar alguno de sus datos personales?</label>
-                <div class="radio-group">
-                    <div>
-                        <input type="radio" id="si" name="modificar" value="si" required>
-                        <label for="si">Sí</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="no" name="modificar" value="no" required>
-                        <label for="no">No</label>
-                    </div>
-                </div>
-            </div>
-
             <fieldset>
                 <label for="nombre-paciente">Modificar nombre</label>
                 <input type="text" id="nombre-paciente" name="nombre-paciente" value="Isabel Lora Fuentes" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+" title="El nombre solo debe contener letras y espacios">
@@ -115,7 +100,7 @@
 
             <button type="submit">Enviar</button>
         </form>
-        <a href="/" class="home-button">Volver a Inicio</a>
+        <a href="/ingreso" class="home-button">Volver a Inicio</a>
     </div>
 
     <script>
@@ -131,6 +116,9 @@
     </script>
 </body>
 </html>
+
+
+
 
 
 
