@@ -49,23 +49,30 @@
       font-size: 16px;
     }
 
-    .login-container button {
-      background-color: #00bfff;
-      border: none;
-      color: white;
-      padding: 10px 20px;
-      cursor: pointer;
-      border-radius: 5px;
-      font-size: 16px;
-      width: 120px;
-      display: inline-block;
-      margin: 10px auto;
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
     }
 
-    .login-container button:hover {
+    .login-container button {
+      border: none;
+      color: white;
+      padding: 8px 10px; /* Botones más pequeños */
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 14px; /* Fuente más pequeña */
+      width: 48%;
+    }
+
+    .login-container .primary-button {
+      background-color: #00bfff;
+    }
+
+    .login-container .primary-button:hover {
       background-color: #009acd;
     }
-    
+
     .login-container .secondary-button {
       background-color: #ffa500;
     }
@@ -83,11 +90,16 @@
       <input type="text" id="username" name="username">
       <label for="password">Contraseña</label>
       <input type="password" id="password" name="password">
-      <button type="button" class="secondary-button" onclick="window.location.href='/ingreso'">Ingresar</button>
-      <button type="button" class="secondary-button" onclick="window.location.href='/datos-paciente'">Registrarme</button>
+      <div class="button-container">
+        <button type="button" class="primary-button" onclick="window.location.href='/ingreso'">Ingresar</button>
+        <button type="button" class="secondary-button" onclick="window.location.href='/datos-paciente'">Registrarse</button>
+      </div>
     </form>
   </div>
 </body>
 </html>
+
+
+
 
 
