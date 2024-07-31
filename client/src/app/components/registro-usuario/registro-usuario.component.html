@@ -6,81 +6,47 @@
   <title>Citas Médicas</title>
   <style>
     body {
-      background: linear-gradient(270deg, #00bfff, #7300ff, #ff0080, #00bfff, #02ff63);
-      background-size: 600% 600%;
-      animation: gradientBackground 25s ease infinite;
+      background: url('https://img.freepik.com/vector-gratis/salud-medicina-bandera-azul-fondo_1017-20041.jpg') no-repeat center center fixed;
+      background-size: cover;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
-      font-family: 'Roboto', sans-serif;
-    }
-
-    @keyframes gradientBackground {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
+      font-family: Arial, sans-serif;
     }
 
     .login-container {
-      background: linear-gradient(270deg, #0004ff, #ffffff, #ff69b4, #00e1ff);
-      background-size: 600% 600%;
-      animation: gradientBackground 15s ease infinite;
-      padding: 40px;
+      background-color: rgba(0, 64, 128, 0.9);
+      padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-      width: 350px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      width: 400px;
       text-align: center;
-      color: #000000;
-      position: relative;
-    }
-
-    .corner-image {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      width: 40px;
-      height: 40px;
     }
 
     .login-container h1 {
-      color: #0d00ff;
+      color: #ffffff;
       margin-bottom: 20px;
       font-size: 28px;
-      font-family: 'Roboto', sans-serif;
     }
 
     .login-container label {
       display: block;
-      color: #2600ff;
+      color: #ffffff;
       margin: 10px 0 5px;
       text-align: left;
-      font-size: 14px;
     }
 
     .login-container input[type="text"],
     .login-container input[type="password"] {
       width: calc(100% - 20px);
-      padding: 12px;
+      padding: 10px;
       margin-bottom: 15px;
-      border: none;
+      border: 1px solid #ccc;
       border-radius: 5px;
       display: block;
       font-size: 16px;
-      background-color: rgba(2, 150, 255, 0.607);
-      color: #ffffff;
-    }
-
-    .login-container input[type="text"]::placeholder,
-    .login-container input[type="password"]::placeholder {
-      color: rgba(0, 0, 0, 0.619);
     }
 
     .button-container {
@@ -91,13 +57,12 @@
 
     .login-container button {
       border: none;
-      color: rgb(0, 0, 0);
-      padding: 10px;
+      color: white;
+      padding: 8px 10px; /* Botones más pequeños */
       cursor: pointer;
       border-radius: 5px;
-      font-size: 14px;
+      font-size: 14px; /* Fuente más pequeña */
       width: 48%;
-      transition: background-color 0.3s ease;
     }
 
     .login-container .primary-button {
@@ -113,7 +78,7 @@
     }
 
     .login-container .secondary-button:hover {
-      background-color: #fea601;
+      background-color: #e69500;
     }
   </style>
 </head>
@@ -121,10 +86,10 @@
   <div class="login-container">
     <h1>Citas Médicas</h1>
     <form id="loginForm" action="/ingreso" method="GET" onsubmit="return validarFormulario(event)">
-      <label for="username">Usuario</label>
-      <input type="text" id="username" name="username" pattern="[a-zA-Z0-9]{3,}" title="El nombre de usuario debe tener al menos 3 caracteres y solo contener letras y números." placeholder="Ingrese su usuario" required>
+      <label for="username">CURP</label>
+      <input type="text" id="username" name="username" pattern="[a-zA-Z0-9]{3,}" title="El nombre de usuario debe tener al menos 3 caracteres y solo contener letras y números." required>
       <label for="password">Contraseña</label>
-      <input type="password" id="password" name="password" pattern=".{6,}" title="La contraseña debe tener al menos 6 caracteres." placeholder="Ingrese su contraseña" required>
+      <input type="password" id="password" name="password" pattern=".{6,}" title="La contraseña debe tener al menos 6 caracteres." required>
       <div class="button-container">
         <button type="submit" class="primary-button">Ingresar</button>
         <button type="button" class="secondary-button" onclick="window.location.href='/datos-paciente'">Registrarse</button>
@@ -143,6 +108,7 @@
         return false;
       }
 
+      // No need to prevent default here if the form is valid
       return true;
     }
 
@@ -150,6 +116,7 @@
   </script>
 </body>
 </html>
+
 
 
 
