@@ -16,6 +16,10 @@ import { FormularioComponent } from './components/formulario/formulario.componen
 import { HistorialComponent } from './components/historial/historial.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { DatosPacienteComponent } from './components/datos-paciente/datos-paciente.component';
+import { ModoIngresoComponent } from './components/modo-ingreso/modo-ingreso.component';
+import { LoginAdminComponent } from './components/login-admin/login-admin.component';
+import { IngresoAdminComponent } from './components/ingreso-admin/ingreso-admin.component';
+import { PerfilDoctorComponent } from './components/perfil-doctor/perfil-doctor.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,11 @@ import { DatosPacienteComponent } from './components/datos-paciente/datos-pacien
     FormularioComponent,
     HistorialComponent,
     PerfilComponent,
-    DatosPacienteComponent
+    DatosPacienteComponent,
+    ModoIngresoComponent,
+    LoginAdminComponent,
+    IngresoAdminComponent,
+    PerfilDoctorComponent
   ],
   imports: [
     BrowserModule,

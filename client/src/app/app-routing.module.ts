@@ -12,12 +12,16 @@ import { IngresoComponent } from './components/ingreso/ingreso.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { DatosPacienteComponent } from './components/datos-paciente/datos-paciente.component';
 import { InicioComponent } from './components/inicio/inicio.component';
+import { ModoIngresoComponent } from './components/modo-ingreso/modo-ingreso.component';
+import { LoginAdminComponent } from './components/login-admin/login-admin.component';
+import { IngresoAdminComponent } from './components/ingreso-admin/ingreso-admin.component';
+import { PerfilDoctorComponent } from './components/perfil-doctor/perfil-doctor.component';
 
 const routes: Routes = [
 
   {
     path : '',
-    redirectTo : '/registro-usuario',
+    redirectTo : '/modo-ingreso',
     pathMatch : 'full'
   },
   {
@@ -72,8 +76,23 @@ const routes: Routes = [
   {
     path : 'datos-paciente',
     component : DatosPacienteComponent
+  },
+  {
+    path : 'modo-ingreso',
+    component : ModoIngresoComponent
+  },
+  {
+    path : 'login-admin',
+    component : LoginAdminComponent
+  },
+  {
+    path : 'ingreso-admin',
+    component : IngresoAdminComponent
+  },
+  {
+    path : 'perfil-doctor',
+    component : PerfilDoctorComponent
   }
-
 ];
 
 @NgModule({

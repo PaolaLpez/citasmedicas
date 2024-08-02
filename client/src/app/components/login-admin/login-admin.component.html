@@ -9,7 +9,7 @@
       margin: 0;
       font-family: 'Roboto', sans-serif;
       overflow: hidden; /* Evita el scroll */
-      background: url('https://img.freepik.com/vector-gratis/fondo-medico-azul-moderno_1055-6880.jpg') no-repeat center center fixed; /* Imagen de fondo */
+      background: url('https://static.vecteezy.com/system/resources/previews/006/712/974/non_2x/abstract-health-medical-science-healthcare-icon-digital-technology-doctor-concept-modern-innovation-treatment-medicine-on-hi-tech-future-blue-background-for-wallpaper-template-web-design-vector.jpg') no-repeat center center fixed; /* Imagen de fondo */
       background-size: cover; /* Ajusta el tamaño de la imagen */
       height: 100vh; /* Asegura que el fondo cubra toda la altura de la ventana */
       width: 100vw; /* Asegura que el fondo cubra toda la anchura de la ventana */
@@ -17,19 +17,19 @@
 
     @keyframes borderAnimation {
       0% {
-        border-color: #ff0080;
+        border-color: #b0055b;
       }
       25% {
-        border-color: #00bfff;
+        border-color: #0004ffeb;
       }
       50% {
         border-color: #7300ff;
       }
       75% {
-        border-color: #02fff7;
+        border-color: #3b18d7;
       }
       100% {
-        border-color: #ff0080;
+        border-color: #ca1f75;
       }
     }
 
@@ -59,7 +59,7 @@
       left: 50%; /* Centra horizontalmente */
       transform: translate(-50%, -50%); /* Ajusta el contenedor al centro */
       border: 15px solid transparent; /* Contorno grueso animado */
-      animation: backgroundAnimation 10s linear infinite, borderAnimation 10s linear infinite; /* Aplicación de las animaciones */
+      animation: backgroundAnimation 10s linear infinite, borderAnimation 5s linear infinite; /* Aplicación de las animaciones */
     }
 
     .login-container h1 {
@@ -142,16 +142,15 @@
 <body>
   <div class="login-container">
     <h1>Citas Médicas</h1>
-    <form id="loginForm" action="/ingreso" method="GET" onsubmit="return validarFormulario(event)">
+    <form id="loginForm" action="/ingreso-admin" method="GET" onsubmit="return validarFormulario(event)">
       <label for="username">Usuario</label>
       <input type="text" id="username" name="username" pattern="[a-zA-Z0-9]{3,}" title="El nombre de usuario debe tener al menos 3 caracteres y solo contener letras y números." placeholder="Ingrese su usuario" required>
       <label for="password">Contraseña</label>
       <input type="password" id="password" name="password" pattern=".{6,}" title="La contraseña debe tener al menos 6 caracteres." placeholder="Ingrese su contraseña" required>
       <div class="button-container">
         <button type="submit" class="primary-button">Ingresar</button>
-        <button type="button" class="secondary-button" onclick="window.location.href='/datos-paciente'">Registrarse</button>
+        <button type="button" class="secondary-button" onclick="window.location.href='/modo-ingreso'">Regresar</button>
       </div>
-      <button type="button" class="back-button" onclick="window.location.href='/modo-ingreso'">Regresar</button>
     </form>
   </div>
 
@@ -173,8 +172,5 @@
   </script>
 </body>
 </html>
-
-
-
 
 
