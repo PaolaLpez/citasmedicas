@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-image: url('https://pbs.twimg.com/profile_images/1583167029997031425/3exuANH4_400x400.jpg');
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+        }
+        .border-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .border-animation:before, .border-animation:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(270deg, #ff0000, #00ff00, #0000ff, #ff0000);
+            background-size: 600% 600%;
+            animation: gradientAnimation 15s ease infinite;
+            opacity: 0.6;
+        }
+        .border-animation:before {
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 5px solid transparent;
+            border-radius: 10px;
+        }
+        .container {
+            position: relative;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 40px 60px;
+            border-radius: 10px;
+            z-index: 2;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            color: white;
+            max-width: 500px;
+            width: 90%;
+        }
+        .container p {
+            font-size: 2.4em;
+            margin-bottom: 20px;
+            font-family: 'Lobster', cursive;
+            color: #ffdd57;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        .container h1 {
+            margin-bottom: 30px;
+            font-size: 1.8em; /* Tamaño más pequeño */
+            font-family: 'Roboto', sans-serif;
+        }
+        .btn {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            margin: 15px;
+            cursor: pointer;
+            font-size: 1.2em;
+            border-radius: 50px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn i {
+            margin-right: 10px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .btn:active {
+            transform: scale(1);
+        }
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="border-animation"></div>
+    <div class="container">
+        <p>Hola, bienvenido a la aplicación de citas médicas</p>
+        <h1>¿Cómo desea acceder?</h1>
+        <div class="btn-container">
+            <button type="button" class="btn" onclick="window.location.href='/registro-usuario'">
+                <i class="fas fa-user"></i> Acceder como Paciente
+            </button>
+            <button type="button" class="btn" onclick="window.location.href='/login-admin'">
+                <i class="fas fa-user-shield"></i> Acceder como Administrador
+            </button>
+        </div>
+    </div>
+</body>
+</html>
+
+

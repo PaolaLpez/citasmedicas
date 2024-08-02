@@ -1,41 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Citas Médicas</title>
   <style>
     body {
-      background: url('https://img.freepik.com/vector-gratis/salud-medicina-bandera-azul-fondo_1017-20041.jpg') no-repeat center center fixed;
-      background-size: cover;
+      background: linear-gradient(270deg, #00bfff, #7300ff, #ff0080, #00bfff, #02ff63);
+      background-size: 600% 600%;
+      animation: gradientBackground 25s ease infinite;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    @keyframes gradientBackground {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
     }
 
     .login-container {
-      background-color: rgba(0, 64, 128, 0.9);
-      padding: 30px;
+      background: linear-gradient(270deg, #0004ff, #ffffff, #ff69b4, #00e1ff);
+      background-size: 600% 600%;
+      animation: gradientBackground 15s ease infinite;
+      padding: 40px;
       border-radius: 15px;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
       width: 400px;
       text-align: center;
+      color: #000000;
+      position: relative;
+    }
+
+    .corner-image {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 40px;
+      height: 40px;
     }
 
     .login-container h1 {
-      color: #ffffff;
+      color: #0d00ff;
       margin-bottom: 20px;
       font-size: 28px;
+      font-family: 'Roboto', sans-serif;
     }
 
     .login-container label {
       display: block;
-      color: #ffffff;
+      color: #2600ff;
       margin: 10px 0 5px;
       text-align: left;
+      font-size: 14px;
     }
 
     .login-container input[type="text"],
@@ -66,7 +93,7 @@
     }
 
     .login-container .primary-button {
-      background-color: #00bfff;
+      background-color: #9000ff;
     }
 
     .login-container .primary-button:hover {
@@ -74,11 +101,21 @@
     }
 
     .login-container .secondary-button {
-      background-color: #ffa500;
+      background-color: #0014f1cb;
     }
 
     .login-container .secondary-button:hover {
       background-color: #e69500;
+    }
+
+    .login-container .back-button {
+      background-color: #03b3ad;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .login-container .back-button:hover {
+      background-color: #e63900;
     }
   </style>
 </head>
@@ -94,6 +131,7 @@
         <button type="submit" class="primary-button">Ingresar</button>
         <button type="button" class="secondary-button" onclick="window.location.href='/datos-paciente'">Registrarse</button>
       </div>
+      <button type="button" class="back-button" onclick="window.location.href='/modo-ingreso'">Regresar</button>
     </form>
   </div>
 
