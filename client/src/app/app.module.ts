@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ConfiguracionSistemaComponent } from './components/configuracion-sistema/configuracion-sistema.component';
@@ -20,6 +19,7 @@ import { ModoIngresoComponent } from './components/modo-ingreso/modo-ingreso.com
 import { LoginAdminComponent } from './components/login-admin/login-admin.component';
 import { IngresoAdminComponent } from './components/ingreso-admin/ingreso-admin.component';
 import { PerfilDoctorComponent } from './components/perfil-doctor/perfil-doctor.component';
+import { InicioAdminComponent } from './components/inicio-admin/inicio-admin.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,8 @@ import { PerfilDoctorComponent } from './components/perfil-doctor/perfil-doctor.
     ModoIngresoComponent,
     LoginAdminComponent,
     IngresoAdminComponent,
-    PerfilDoctorComponent
+    PerfilDoctorComponent,
+    InicioAdminComponent
   ],
   imports: [
     BrowserModule,
