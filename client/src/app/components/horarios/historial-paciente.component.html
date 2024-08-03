@@ -98,10 +98,13 @@
 <app-ingreso-admin></app-ingreso-admin>
 <body>
     <div class="container">
+        
         <h1>Gestión de Horarios Médicos</h1>
+        
         <div class="admin">
             <img src="https://cdn-icons-png.freepik.com/512/4326/4326320.png" alt="Admin Icon">
             <span>Administrador</span>
+            
         </div>
         <form id="horariosForm" onsubmit="return validarFormulario()">
             <div class="form-group">
@@ -115,6 +118,7 @@
                     <option value="doctor5">Doctor 5</option>
                 </select>
             </div>
+            
             <div class="form-group">
                 <label for="hora-desde">Selecciona un horario:</label>
                 <div>
@@ -142,6 +146,7 @@
                         <option value="45">45</option>
                     </select>
                 </div>
+                
                 <div>
                     Hasta:
                     <select id="hora-hasta-hora" name="hora-hasta-hora" required>
@@ -285,6 +290,7 @@
                             <option value="2025">2025</option>
                         </select>
                     </div>
+                    
             </div>
             <button type="submit">Guardar</button>
         </form>
@@ -294,6 +300,7 @@
     </footer>
 
     <script>
+        
         function validarFormulario() {
             const horaDesdeHora = document.getElementById("hora-desde-hora").value;
             const horaDesdeMinuto = document.getElementById("hora-desde-minuto").value;

@@ -10,108 +10,35 @@
       font-family: 'Roboto', sans-serif;
       margin: 0;
       display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background-color: #f4f4f9;
       height: 100vh;
-    }
-    .sidebar {
-      background: linear-gradient(270deg, #0033cc, #66b2ff, #0033cc);
-      background-size: 600% 600%;
-      animation: gradientBackground 30s ease infinite;
-      color: white;
-      width: 250px;
-      padding: 20px;
-      position: fixed;
-      height: 100%;
-      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-      overflow-y: auto;
-    }
-    .sidebar h1 {
-      font-size: 1.8rem;
-      margin-bottom: 20px;
-      text-align: center;
-      border-bottom: 1px solid rgba(255,255,255,0.3);
-      padding-bottom: 10px;
-    }
-    .menu {
-      list-style: none;
-      padding: 0;
-    }
-    .menu li {
-      margin-bottom: 10px;
-    }
-    .menu a {
-      color: white;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      padding: 12px;
-      background-color: rgba(0, 82, 204, 0.9);
-      border-radius: 8px;
-      transition: background-color 0.3s, color 0.3s, padding-left 0.3s;
-    }
-    .menu a:hover {
-      background-color: #ffcc00;
-      color: #000000;
-      padding-left: 20px;
-    }
-    .menu a i {
-      margin-right: 12px;
-    }
-    .menu li:nth-child(1) a i {
-      color: #ff6347;
-    }
-    .menu li:nth-child(2) a i {
-      color: #ffd700;
-    }
-    .menu li:nth-child(3) a i {
-      color: #1e90ff;
-    }
-    .menu li:nth-child(4) a i {
-      color: #4b0082;
-    }
-    .menu li:nth-child(4) .submenu a i {
-      color: #b211e3;
-    }
-    .submenu {
-      display: none;
-      margin-left: 20px;
-    }
-    .menu li:hover .submenu {
-      display: block;
-    }
-    .menu li > a::after {
-      content: none;
-    }
-    .sidebar h1 {
-      font-family: 'Roboto', sans-serif;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-    .menu a {
-      font-family: 'Roboto', sans-serif;
-      font-weight: 400;
-      letter-spacing: 0.5px;
-    }
-    .menu a i {
-      font-size: 1.2rem;
+      overflow: hidden; /* Para asegurar que no haya scroll innecesario */
     }
     .content {
-      margin-left: 250px;
       padding: 20px;
-      width: calc(100% - 250px);
+      width: 80%;
+      max-width: 800px;
+      margin-top: 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      border-radius: 10px;
+      overflow-y: auto; /* Permitir scroll interno si es necesario */
+      height: calc(100vh - 100px); /* Ajustar la altura para caber dentro de la pantalla */
     }
     .content h1 {
       margin-bottom: 20px;
     }
     table {
-      width: 80%;
-      max-width: 600px;
+      width: 100%;
       border-collapse: collapse;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       background-color: #fff;
       border-radius: 10px;
+      overflow: hidden;
     }
     th, td {
       border: 1px solid #ddd;
@@ -142,22 +69,8 @@
     }
   </style>
 </head>
+
 <body>
-  <div class="sidebar">
-    <h1>Admin Panel</h1>
-    <ul class="menu">
-      <li><a href="/inicio-admin"><i class="fas fa-home"></i>Inicio</a></li>
-      <li><a href="/registro-cita"><i class="fas fa-edit"></i>Registro de Cita</a></li>
-      <li><a href="/historial-paciente"><i class="fas fa-clock"></i>Horarios</a></li>
-      <li>
-        <a href="#"><i class="fas fa-user"></i>Perfil</a>
-        <ul class="submenu">
-          <li><a href="/perfil-doctor"><i class="fas fa-user-circle"></i>Mi Perfil</a></li>
-        </ul>
-      </li>
-      <li><a href="/modo-ingreso"><i class="fas fa-sign-out-alt"></i>Salir</a></li>
-    </ul>
-  </div>
   <div class="content">
     <h1>Citas Pendientes del Doctor</h1>
     <table id="citasTable">
@@ -193,7 +106,7 @@
       </tbody>
     </table>
   </div>
-
+  <app-ingreso-admin></app-ingreso-admin>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const doctor = 'Dr. Smith'; // Aquí podrías obtener dinámicamente el nombre del doctor
@@ -225,7 +138,6 @@
   </script>
 </body>
 </html>
-
 
 
 
