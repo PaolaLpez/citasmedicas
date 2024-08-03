@@ -84,10 +84,6 @@ const routes: Routes = [
             path : 'ingreso-admin',
             component : IngresoAdminComponent
         },
-        {
-            path : 'login-admin',
-            component : LoginAdminComponent
-          },
           {
             path : 'modo-ingreso',
             component : ModoIngresoComponent
@@ -100,6 +96,7 @@ const routes: Routes = [
             path : 'inicio-admin',
             component : InicioAdminComponent
           }
+      
       ];  
 
       @NgModule({

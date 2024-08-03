@@ -1,223 +1,231 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instituto de Salud Pública del Estado de Guanajuato</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        /* Estilos generales para el cuerpo de la página */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Roboto', sans-serif;
-            background-image: url('https://pbs.twimg.com/profile_images/1583167029997031425/3exuANH4_400x400.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            min-height: 100vh; /* Mínimo tamaño al 100% de la altura de la ventana */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #333;
-        }
-
-        /* Estilos para el contenedor principal */
-        .container {
-            max-width: 900px;
-            padding: 40px;
-            background-color: rgba(255, 255, 255, 0.95); /* Fondo semi-transparente para mejor legibilidad */
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin: 20px;
-        }
-
-        .container:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Estilos para el título */
-        h1 {
-            text-align: center;
-            color: #1a73e8;
-            font-size: 2.5em;
-            margin-bottom: 30px;
-        }
-
-        /* Estilos para los subtítulos */
-        h2 {
-            color: #333;
-            font-size: 1.8em;
-            margin-top: 25px;
-        }
-
-        /* Estilos para los párrafos de texto */
-        p {
-            text-align: justify;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        /* Estilos para las listas */
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        ul li {
-            background: url('https://www.iconsdb.com/icons/preview/royal-blue/rounded-tick-xxl.png') no-repeat left center;
-            background-size: 1.5em;
-            padding-left: 2em;
-            margin-bottom: 15px;
-        }
-
-        ul li strong {
-            color: #1a73e8;
-        }
-
-        /* Estilos para las imágenes */
-        .image-container {
-            text-align: center;
-            margin-top: 40px;
-        }
-        .image-container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-
-        .image-container img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Estilos para el modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.9);
-        }
-
-        .modal-content {
-            display: block;
-            width: 100%;
-            height: auto;
-            max-height: 100vh;
-            object-fit: contain;
-        }
-
-        .close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            color: #fff;
-            font-size: 35px;
-            font-weight: bold;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: #bbb;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* Estilo para el botón de regreso */
-        .back-button {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #1a73e8;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1em;
-            cursor: pointer;
-        }
-
-        .back-button:hover {
-            background-color: #0f5bb5;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Citas Pendientes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      display: flex;
+      height: 100vh;
+    }
+    .sidebar {
+      background: linear-gradient(270deg, #0033cc, #66b2ff, #0033cc);
+      background-size: 600% 600%;
+      animation: gradientBackground 30s ease infinite;
+      color: white;
+      width: 250px;
+      padding: 20px;
+      position: fixed;
+      height: 100%;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+      overflow-y: auto;
+    }
+    .sidebar h1 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      padding-bottom: 10px;
+    }
+    .menu {
+      list-style: none;
+      padding: 0;
+    }
+    .menu li {
+      margin-bottom: 10px;
+    }
+    .menu a {
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      background-color: rgba(0, 82, 204, 0.9);
+      border-radius: 8px;
+      transition: background-color 0.3s, color 0.3s, padding-left 0.3s;
+    }
+    .menu a:hover {
+      background-color: #ffcc00;
+      color: #000000;
+      padding-left: 20px;
+    }
+    .menu a i {
+      margin-right: 12px;
+    }
+    .menu li:nth-child(1) a i {
+      color: #ff6347;
+    }
+    .menu li:nth-child(2) a i {
+      color: #ffd700;
+    }
+    .menu li:nth-child(3) a i {
+      color: #1e90ff;
+    }
+    .menu li:nth-child(4) a i {
+      color: #4b0082;
+    }
+    .menu li:nth-child(4) .submenu a i {
+      color: #b211e3;
+    }
+    .submenu {
+      display: none;
+      margin-left: 20px;
+    }
+    .menu li:hover .submenu {
+      display: block;
+    }
+    .menu li > a::after {
+      content: none;
+    }
+    .sidebar h1 {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .menu a {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+    .menu a i {
+      font-size: 1.2rem;
+    }
+    .content {
+      margin-left: 250px;
+      padding: 20px;
+      width: calc(100% - 250px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .content h1 {
+      margin-bottom: 20px;
+    }
+    table {
+      width: 80%;
+      max-width: 600px;
+      border-collapse: collapse;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      border-radius: 10px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #004080;
+      color: #fff;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    tr:hover {
+      background-color: #e0e0e0;
+    }
+    button {
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #e60000;
+    }
+  </style>
 </head>
-<app-ingreso-admin></app-ingreso-admin>
 <body>
-    <div class="container">
-        <h1>Instituto de Salud Pública del Estado de Guanajuato</h1>
-        
-        <p>Somos un organismo público descentralizado de la Administración Pública Estatal con personalidad jurídica y patrimonio propios, el cual cuenta con autonomía para el manejo de sus recursos humanos, materiales y financieros, identificado mediante sus siglas "ISAPEG". La Secretaría de Salud de Guanajuato ("SSG") tiene la finalidad de posicionar la ética como esencia en el ejercicio de los servidores públicos a través de los siguientes preceptos y valores:</p>
-        
-        <h2>Valores</h2>
-        <ul>
-            <li><strong>Integridad:</strong> Ser un servidor público honesto que genera confianza y actúa en congruencia con la normatividad que nos rige.</li>
-            <li><strong>Compromiso:</strong> Convicción y firme disposición de actuar para contribuir al logro de los objetivos institucionales y la conservación del medio ambiente.</li>
-            <li><strong>Empatía:</strong> Reconocer, comprender y apreciar las necesidades y/o requerimientos de la población a la que atendemos para otorgar un servicio de calidad y calidez.</li>
-            <li><strong>Respeto:</strong> Acciones de atención y convivencia en pro de la igualdad y no discriminación.</li>
-            <li><strong>Lealtad:</strong> Corresponder a la confianza que el ISAPEG ha conferido, tener una vocación de servicio a la sociedad por encima de los intereses particulares o personales.</li>
+  <div class="sidebar">
+    <h1>Admin Panel</h1>
+    <ul class="menu">
+      <li><a href="/inicio-admin"><i class="fas fa-home"></i>Inicio</a></li>
+      <li><a href="/registro-cita"><i class="fas fa-edit"></i>Registro de Cita</a></li>
+      <li><a href="/historial-paciente"><i class="fas fa-clock"></i>Horarios</a></li>
+      <li>
+        <a href="#"><i class="fas fa-user"></i>Perfil</a>
+        <ul class="submenu">
+          <li><a href="/perfil-doctor"><i class="fas fa-user-circle"></i>Mi Perfil</a></li>
         </ul>
-        
-        <h2>Misión</h2>
-        <p>Somos una institución con profesionales íntegros y comprometidos con la salud de la población, a través de servicios vanguardistas y de calidad.</p>
-        
-        <h2>Visión</h2>
-        <p>Compartir nuestra pasión e inspiración para consolidarnos como referente nacional en salud pública, atención médica y generación de conocimiento, a través del acceso efectivo, con servicios de calidad y reducción de riesgos mediante la participación de la sociedad.</p>
-        
-        <div class="image-container">
-            <img id="myImg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgfGzEQUiNKED-sY9y-HMahCJ-oODnmQRi8w&s" alt="Imagen representativa">
-        </div>
-    </div>
+      </li>
+      <li><a href="/modo-ingreso"><i class="fas fa-sign-out-alt"></i>Salir</a></li>
+    </ul>
+  </div>
+  <div class="content">
+    <h1>Citas Pendientes del Doctor</h1>
+    <table id="citasTable">
+      <thead>
+        <tr>
+          <th>Paciente</th>
+          <th>Día</th>
+          <th>Hora</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Ejemplos de citas -->
+        <tr>
+          <td>Juan Perez</td>
+          <td>3 de Agosto, 2024</td>
+          <td>10:00 AM</td>
+          <td><button onclick="cancelarCita(1)">Cancelar</button></td>
+        </tr>
+        <tr>
+          <td>Laura Gomez</td>
+          <td>5 de Agosto, 2024</td>
+          <td>2:30 PM</td>
+          <td><button onclick="cancelarCita(2)">Cancelar</button></td>
+        </tr>
+        <tr>
+          <td>Ricardo Fernandez</td>
+          <td>10 de Agosto, 2024</td>
+          <td>9:00 AM</td>
+          <td><button onclick="cancelarCita(3)">Cancelar</button></td>
+        </tr>
+        <!-- Fin de ejemplos -->
+      </tbody>
+    </table>
+  </div>
 
-    <!-- El Modal -->
-    <div id="myModal" class="modal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="img01">
-        <button class="back-button" onclick="closeModal()">Regresar</button>
-    </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const doctor = 'Dr. Smith'; // Aquí podrías obtener dinámicamente el nombre del doctor
+      fetch(`/citas/${doctor}`)
+        .then(response => response.json())
+        .then(data => {
+          const tableBody = document.querySelector('#citasTable tbody');
+          data.forEach(cita => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${cita.paciente}</td>
+              <td>${cita.dia}</td>
+              <td>${cita.hora}</td>
+              <td><button onclick="cancelarCita(${cita.id})">Cancelar</button></td>
+            `;
+            tableBody.appendChild(row);
+          });
+        });
+    });
 
-    <script>
-        // Obtén el modal
-        var modal = document.getElementById('myModal');
-
-        // Obtén la imagen y el elemento de la modal
-        var img = document.getElementById('myImg');
-        var modalImg = document.getElementById("img01");
-
-        // Cuando se hace clic en la imagen, abre el modal y muestra la imagen ampliada
-        img.onclick = function() {
-            modal.style.display = "block";
-            modalImg.src = this.src;
-        }
-
-        // Obtén el elemento <span> que cierra el modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // Cuando se hace clic en <span> (x), cierra el modal
-        span.onclick = function() { 
-            modal.style.display = "none";
-        }
-
-        // Función para cerrar el modal con el botón de regreso
-        function closeModal() {
-            modal.style.display = "none";
-        }
-        
-    </script>
-    
+    function cancelarCita(id) {
+      fetch(`/citas/${id}`, { method: 'DELETE' })
+        .then(response => response.json())
+        .then(data => {
+          alert(data.message);
+          location.reload(); // Recargar la página para actualizar la lista de citas
+        });
+    }
+  </script>
 </body>
-
 </html>
+
+
+
+
