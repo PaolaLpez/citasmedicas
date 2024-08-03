@@ -7,8 +7,6 @@
     <style>
         body {
             background: url('https://thumbs.dreamstime.com/b/fondo-m%C3%A9dico-y-de-la-atenci%C3%B3n-sanitaria-ecg-monitor-azul-del-pulso-coraz-n-con-se-al-el-coraz%C3%B3n-bati%C3%B3-154045262.jpg') no-repeat center center fixed;
-            
-
             background-size: cover;
             margin: 0;
             font-family: Arial, sans-serif;
@@ -23,6 +21,8 @@
             max-width: 600px;
             margin: 50px auto;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            top: px; /* Ajusta la posición desde la parte superior si es necesario */
         }
         .profile-header {
             display: flex;
@@ -70,6 +70,29 @@
         .profile-info th {
             background-color: #f2f2f2;
         }
+        .profile-info input[type="text"], .profile-info input[type="number"], .profile-info input[type="email"] {
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .save-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #0052cc;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .save-button:hover {
+            background-color: #003a99;
+        }
     </style>
 </head>
 <app-inicio></app-inicio>
@@ -85,34 +108,37 @@
             <table>
                 <tr>
                     <th>Nombre</th>
-                    <td>Juan Perez</td>
+                    <td><input type="text" value="Juan Perez" /></td>
                 </tr>
                 <tr>
                     <th>Edad</th>
-                    <td>35</td>
+                    <td><input type="number" value="35" /></td>
                 </tr>
                 <tr>
                     <th>Género</th>
-                    <td>Masculino</td>
+                    <td><input type="text" value="Masculino" /></td>
                 </tr>
                 <tr>
                     <th>Dirección</th>
-                    <td>Calle Falsa 123, Ciudad, País</td>
+                    <td><input type="text" value="Calle Falsa 123, Ciudad, País" /></td>
                 </tr>
                 <tr>
                     <th>Teléfono</th>
-                    <td>+52 123 456 7890</td>
+                    <td><input type="text" value="+52 123 456 7890" /></td>
                 </tr>
                 <tr>
                     <th>Email</th>
-                    <td>juan.perez.example.com</td>
+                    <td><input type="email" value="juan.perez@example.com" /></td>
                 </tr>
                 <tr>
                     <th>Tipo de sangre</th>
-                    <td>+O</td>
+                    <td>+O</td> <!-- No editable -->
                 </tr>
             </table>
         </div>
+        <button class="save-button">Guardar</button>
     </div>
 </body>
 </html>
+
+

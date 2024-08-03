@@ -10,6 +10,8 @@
             margin: 0;
             font-family: 'Roboto', sans-serif;
             display: flex;
+            height: 100vh;
+            overflow: hidden;
         }
         @keyframes gradientBackground {
             0% {
@@ -32,7 +34,7 @@
             position: fixed;
             height: 100%;
             box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-            transition: width 0.3s;
+            overflow-y: auto;
         }
         .sidebar h1 {
             font-size: 1.8rem;
@@ -79,7 +81,7 @@
             color: #4b0082; /* Índigo (morado) para "Perfil" */
         }
         .menu li:nth-child(4) .submenu a i {
-            color: #b211e3; /* Índigo (morado) para "Mi Perfil" y "Configuración del Sistema" */
+            color: #b211e3; /* Índigo (morado) para "Mi Perfil" */
         }
         .submenu {
             display: none;
@@ -88,11 +90,9 @@
         .menu li:hover .submenu {
             display: block;
         }
-        /* Elimina las flechas del menú */
         .menu li > a::after {
             content: none; /* Elimina el contenido de la flecha */
         }
-        /* Estilos adicionales para mayor atractivo */
         .sidebar h1 {
             font-family: 'Roboto', sans-serif;
             font-weight: 700;
@@ -120,10 +120,15 @@
                 <ul class="submenu">
                     <li><a href="/perfil-doctor"><i class="fas fa-user-circle"></i>Mi Perfil</a></li>
                 </ul>
+
             </li>
             <li><a href="/modo-ingreso"><i class="fas fa-sign-out-alt"></i>Salir</a></li>
         </ul>
     </div>
 </body>
 </html>
+
+
+
+
 
