@@ -1,0 +1,88 @@
+body {
+    background: url('https://thumbs.dreamstime.com/b/fondo-m%C3%A9dico-y-de-la-atenci%C3%B3n-sanitaria-ecg-monitor-azul-del-pulso-coraz-n-con-se-al-el-coraz%C3%B3n-bati%C3%B3-154045262.jpg') no-repeat center center fixed;
+    background-size: cover;
+    margin-left: 249px;
+    font-family: Arial, sans-serif;
+}
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(243, 243, 243, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 50px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: px; /* Ajusta la posición desde la parte superior si es necesario */
+}
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.profile-header img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+.profile-header h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0;
+}
+.profile-header p {
+    color: #777;
+    margin: 5px 0 0;
+}
+.profile-info {
+    width: 100%;
+}
+.profile-info h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #0052cc;
+    padding-bottom: 5px;
+}
+.profile-info table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.profile-info table, .profile-info th, .profile-info td {
+    border: 1px solid #ddd;
+}
+.profile-info th, .profile-info td {
+    padding: 10px;
+    text-align: left;
+}
+.profile-info th {
+    background-color: #f2f2f2;
+}
+.profile-info input[type="text"], .profile-info input[type="number"], .profile-info input[type="email"] {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 8px;
+    box-sizing: border-box;
+}
+.save-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #0052cc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+.save-button:hover {
+    background-color: #003a99;
+}

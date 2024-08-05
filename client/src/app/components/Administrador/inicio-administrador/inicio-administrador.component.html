@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Recordatorios</title>
+    <style>
+      
+    </style>
+</head>
+
+<app-panel-administrador></app-panel-administrador>
+<body>
+    <p>Esto es como ejemplo</p>
+    <h2>Formulario para recibir recordatorios</h2>
+    <form action="https://formspree.io/f/manwyeob" method="post">
+        <label for="email">Correo electrónico:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+        
+        <label for="telefono">Número de teléfono:</label><br>
+        <input type="tel" id="telefono" name="telefono" pattern="[0-9]{10}" required><br><br>
+        
+        <div class="button-container">
+            <a href="/recordatorios" class="link-button">Atrás</a>
+            <input type="submit" value="Enviar">
+        </div>
+    </form>
+</body>
+</html>
+
