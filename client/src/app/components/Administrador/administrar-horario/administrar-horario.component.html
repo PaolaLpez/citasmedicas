@@ -5,19 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Horarios Médicos</title>
     <style>
-   
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .footer {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            text-align: center;
+        }
     </style>
 </head>
-<app-panel-administrador></app-panel-administrador>
 <body>
+    <app-panel-administrador></app-panel-administrador>
     <div class="container">
-        
         <h1>Gestión de Horarios Médicos</h1>
         
         <div class="admin">
             <img src="https://cdn-icons-png.freepik.com/512/4326/4326320.png" alt="Admin Icon">
             <span>Administrador</span>
-            
         </div>
         <form id="horariosForm" onsubmit="return validarFormulario()">
             <div class="form-group">
@@ -86,42 +92,19 @@
                     </select>
                 </div>
             </div>
+            
             <div class="form-group">
                 <label for="fecha-inicio">Selecciona la fecha inicio:</label>
                 <div>
                     <select id="dia-inicio" name="dia-inicio" required>
                         <option value="">Día</option>
-                        <option value="01">01</option>
-                        <option value="02">02</option>
-                        <option value="03">03</option>
-                        <option value="04">04</option>
-                        <option value="05">05</option>
-                        <option value="06">06</option>
-                        <option value="07">07</option>
-                        <option value="08">08</option>
-                        <option value="09">09</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                        <option value="21">21</option>
-                        <option value="22">22</option>
-                        <option value="23">23</option>
-                        <option value="24">24</option>
-                        <option value="25">25</option>
-                        <option value="26">26</option>
-                        <option value="27">27</option>
-                        <option value="28">28</option>
-                        <option value="29">29</option>
-                        <option value="30">30</option>
-                        <option value="31">31</option>
+                        <!-- Opciones de días -->
+                        <!-- 01-31 -->
+                        <script>
+                            for (let i = 1; i <= 31; i++) {
+                                document.write(`<option value="${i < 10 ? '0' + i : i}">${i < 10 ? '0' + i : i}</option>`);
+                            }
+                        </script>
                     </select>
                     <select id="mes-inicio" name="mes-inicio" required>
                         <option value="">Mes</option>
@@ -145,69 +128,49 @@
                         <option value="2025">2025</option>
                     </select>
                 </div>
-                    <label for="fecha-inicio">Selecciona la fecha fin:</label>
-                    <div>
-                        <select id="dia-inicio" name="dia-inicio" required>
-                            <option value="">Día</option>
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="25">25</option>
-                            <option value="26">26</option>
-                            <option value="27">27</option>
-                            <option value="28">28</option>
-                            <option value="29">29</option>
-                            <option value="30">30</option>
-                            <option value="31">31</option>
-                        </select>
-                        <select id="mes-inicio" name="mes-inicio" required>
-                            <option value="">Mes</option>
-                            <option value="01">Enero</option>
-                            <option value="02">Febrero</option>
-                            <option value="03">Marzo</option>
-                            <option value="04">Abril</option>
-                            <option value="05">Mayo</option>
-                            <option value="06">Junio</option>
-                            <option value="07">Julio</option>
-                            <option value="08">Agosto</option>
-                            <option value="09">Septiembre</option>
-                            <option value="10">Octubre</option>
-                            <option value="11">Noviembre</option>
-                            <option value="12">Diciembre</option>
-                        </select>
-                        <select id="anio-inicio" name="anio-inicio" required>
-                            <option value="">Año</option>
-                            <option value="2023">2023</option>
-                            <option value="2024">2024</option>
-                            <option value="2025">2025</option>
-                        </select>
-                    </div>
-                    
             </div>
-            <button type="submit" onclick="window.location.href='/inicio-doctor'">Guardar</button>
+
+            <div class="form-group">
+                <label for="fecha-fin">Selecciona la fecha fin:</label>
+                <div>
+                    <select id="dia-fin" name="dia-fin" required>
+                        <option value="">Día</option>
+                        <!-- Opciones de días -->
+                        <!-- 01-31 -->
+                        <script>
+                            for (let i = 1; i <= 31; i++) {
+                                document.write(`<option value="${i < 10 ? '0' + i : i}">${i < 10 ? '0' + i : i}</option>`);
+                            }
+                        </script>
+                    </select>
+                    <select id="mes-fin" name="mes-fin" required>
+                        <option value="">Mes</option>
+                        <option value="01">Enero</option>
+                        <option value="02">Febrero</option>
+                        <option value="03">Marzo</option>
+                        <option value="04">Abril</option>
+                        <option value="05">Mayo</option>
+                        <option value="06">Junio</option>
+                        <option value="07">Julio</option>
+                        <option value="08">Agosto</option>
+                        <option value="09">Septiembre</option>
+                        <option value="10">Octubre</option>
+                        <option value="11">Noviembre</option>
+                        <option value="12">Diciembre</option>
+                    </select>
+                    <select id="anio-fin" name="anio-fin" required>
+                        <option value="">Año</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button type="submit">Guardar</button>
         </form>
     </div>
+    
     <footer class="footer">
         <p>CAISES San Luis de la Paz</p>
         <p>Dirección: Calle Velasco Ibarra & Calle México 68, La Ladrillera, 37906 San Luis de la Paz, Gto.</p> 
@@ -216,7 +179,6 @@
     </footer>
 
     <script>
-        
         function validarFormulario() {
             const horaDesdeHora = document.getElementById("hora-desde-hora").value;
             const horaDesdeMinuto = document.getElementById("hora-desde-minuto").value;
@@ -225,8 +187,11 @@
             const fechaInicioDia = document.getElementById("dia-inicio").value;
             const fechaInicioMes = document.getElementById("mes-inicio").value;
             const fechaInicioAnio = document.getElementById("anio-inicio").value;
+            const fechaFinDia = document.getElementById("dia-fin").value;
+            const fechaFinMes = document.getElementById("mes-fin").value;
+            const fechaFinAnio = document.getElementById("anio-fin").value;
 
-            if (!horaDesdeHora || !horaDesdeMinuto || !horaHastaHora || !horaHastaMinuto || !fechaInicioDia || !fechaInicioMes || !fechaInicioAnio) {
+            if (!horaDesdeHora || !horaDesdeMinuto || !horaHastaHora || !horaHastaMinuto || !fechaInicioDia || !fechaInicioMes || !fechaInicioAnio || !fechaFinDia || !fechaFinMes || !fechaFinAnio) {
                 alert("Por favor, completa todos los campos.");
                 return false;
             }
@@ -236,6 +201,14 @@
 
             if (horaDesde >= horaHasta) {
                 alert("La hora de inicio debe ser anterior a la hora de fin.");
+                return false;
+            }
+
+            const fechaInicio = new Date(`${fechaInicioAnio}-${fechaInicioMes}-${fechaInicioDia}`);
+            const fechaFin = new Date(`${fechaFinAnio}-${fechaFinMes}-${fechaFinDia}`);
+
+            if (fechaInicio > fechaFin) {
+                alert("La fecha de inicio debe ser anterior a la fecha de fin.");
                 return false;
             }
 
