@@ -5,7 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Asegúrate de incluir estilos básicos si es necesario */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .form-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-submit {
+            display: flex;
+            justify-content: space-between;
+        }
+        .form-submit button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .form-submit button.primary-button {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .form-submit button.secondary-button {
+            background-color: #6c757d;
+            color: #fff;
+        }
+        .form-submit button:hover {
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
@@ -57,7 +110,7 @@
                 <input type="password" id="password" name="password" pattern=".{6,}" title="La contraseña debe tener al menos 6 caracteres." required>
             </div>
             <div class="form-submit">
-                <button type="button" onclick="window.location.href='/inicio-paciente'">Registrar</button>
+                <button type="submit" class="primary-button">Registrar</button>
                 <button type="button" class="secondary-button" onclick="window.location.href='/inicio'">Volver</button>
             </div>
         </form>
