@@ -1,22 +1,25 @@
 {
-  "name": "serve",
+  "name": "server",
   "version": "1.0.0",
-  "description": "Proyecto Citas Medicas",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "build": "tsc -w",
-    "dev" : "nodemon index.js"
+    "dev": "nodemon build/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/morgan": "^1.9.9",
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "morgan": "^1.10.0",
-    "promise-mysql": "^5.2.0"
+    "promise-mysql": "^3.3.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.4"
+    "@types/express": "^4.17.21",
+    "nodemon": "^3.1.3"
   }
 }
