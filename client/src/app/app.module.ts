@@ -2,47 +2,74 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ConfiguracionSistemaComponent } from './components/configuracion-sistema/configuracion-sistema.component';
-import { HistorialPacienteComponent } from './components/horarios/historial-paciente.component';
-import { InformacionPacienteComponent } from './components/informacion-paciente/informacion-paciente.component';
-import { IngresoComponent } from './components/ingreso/ingreso.component';
+
+//componentes de inicio
+import { LoginComponent } from './components/login/login.component';
 import { InicioComponent } from './components/inicio/inicio.component';
+
+
+// componentes de administrador
+import { AdministrarHorarioComponent } from './components/Administrador/administrar-horario/administrar-horario.component';
+import { InicioAdministradorComponent } from './components/Administrador/inicio-administrador/inicio-administrador.component';
+import { PanelAdministradorComponent } from './components/Administrador/panel-administrador/panel-administrador.component';
+
+
+// componentes de doctor
+import { RegistroCitaComponent } from './components/Doctor/registro-cita/registro-cita.component';
+import { PerfilDoctorComponent } from './components/Doctor/perfil-doctor/perfil-doctor.component';
+import { PanelDoctorComponent } from './components/Doctor/panel-doctor/panel-doctor.component';
+import { InicioDoctorComponent } from './components/Doctor/inicio-doctor/inicio-doctor.component';
+
+
+//componentes de paciente
+import { DatosPacienteComponent } from './components/Paciente/registro-paciente/datos-paciente.component';
+import { EdicionDatosComponent } from './components/Paciente/edicion-datos/edicion-datos.component';
+import { RegistroCitasPacienteComponent } from './components/Paciente/registro-citas-paciente/registro-citas-paciente.component';
+import { PanelPacienteComponent } from './components/Paciente/panel-paciente/panel-paciente.component';
+import { InicioPacienteComponent } from './components/Paciente/inicio-paciente/inicio-paciente.component';
+import { PerfilPacienteComponent } from './components/Paciente/perfil-paciente/perfil-paciente.component';
+
+
+// otros componentes
 import { RecordatoriosComponent } from './components/recordatorios/recordatorios.component';
-import { RegistroCitaComponent } from './components/registro-cita/registro-cita.component';
-import { RegistroCitaMedicasComponent } from './components/registro-cita-medicas/registro-cita-medicas.component';
-import { RegistroUsuarioComponent } from './components/registro-usuario/registro-usuario.component';
 import { FormularioComponent } from './components/formulario/formulario.component';
-import { HistorialComponent } from './components/historial/historial.component';
-import { PerfilComponent } from './components/perfil/perfil.component';
-import { DatosPacienteComponent } from './components/datos-paciente/datos-paciente.component';
-import { ModoIngresoComponent } from './components/modo-ingreso/modo-ingreso.component';
-import { LoginAdminComponent } from './components/login-admin/login-admin.component';
-import { IngresoAdminComponent } from './components/ingreso-admin/ingreso-admin.component';
-import { PerfilDoctorComponent } from './components/perfil-doctor/perfil-doctor.component';
-import { InicioAdminComponent } from './components/inicio-admin/inicio-admin.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ConfiguracionSistemaComponent,
-    HistorialPacienteComponent,
-    InformacionPacienteComponent,
-    IngresoComponent,
+
+
+    //inicio
+    LoginComponent,
     InicioComponent,
-    RecordatoriosComponent,
+
+
+    //administrador
+    AdministrarHorarioComponent,
+    InicioAdministradorComponent,
+    PanelAdministradorComponent,
+
+    //doctor
     RegistroCitaComponent,
-    RegistroCitaMedicasComponent,
-    RegistroUsuarioComponent,
-    FormularioComponent,
-    HistorialComponent,
-    PerfilComponent,
-    DatosPacienteComponent,
-    ModoIngresoComponent,
-    LoginAdminComponent,
-    IngresoAdminComponent,
     PerfilDoctorComponent,
-    InicioAdminComponent
+    PanelDoctorComponent,
+    InicioDoctorComponent,
+
+
+    //paciente
+    DatosPacienteComponent,
+    RegistroCitasPacienteComponent,
+    PanelPacienteComponent,
+    InicioPacienteComponent,
+    EdicionDatosComponent,
+
+    //otros
+    RecordatoriosComponent,
+    FormularioComponent
   ],
+  
   imports: [
     BrowserModule,
     AppRoutingModule

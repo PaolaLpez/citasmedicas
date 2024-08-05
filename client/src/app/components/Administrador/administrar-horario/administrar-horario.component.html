@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Horarios Médicos</title>
+    <style>
+   
+    </style>
+</head>
+<app-panel-administrador></app-panel-administrador>
+<body>
+    <div class="container">
+        
+        <h1>Gestión de Horarios Médicos</h1>
+        
+        <div class="admin">
+            <img src="https://cdn-icons-png.freepik.com/512/4326/4326320.png" alt="Admin Icon">
+            <span>Administrador</span>
+            
+        </div>
+        <form id="horariosForm" onsubmit="return validarFormulario()">
+            <div class="form-group">
+                <label for="doctor">Selecciona un doctor:</label>
+                <select id="doctor" name="doctor" required>
+                    <option value="">Seleccione un doctor</option>
+                    <option value="doctor1">Doctor 1</option>
+                    <option value="doctor2">Doctor 2</option>
+                    <option value="doctor3">Doctor 3</option>
+                    <option value="doctor4">Doctor 4</option>
+                    <option value="doctor5">Doctor 5</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="hora-desde">Selecciona un horario:</label>
+                <div>
+                    Desde: 
+                    <select id="hora-desde-hora" name="hora-desde-hora" required>
+                        <option value="">Hora</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                    </select>
+                    :
+                    <select id="hora-desde-minuto" name="hora-desde-minuto" required>
+                        <option value="">Minuto</option>
+                        <option value="00">00</option>
+                        <option value="15">15</option>
+                        <option value="30">30</option>
+                        <option value="45">45</option>
+                    </select>
+                </div>
+                
+                <div>
+                    Hasta:
+                    <select id="hora-hasta-hora" name="hora-hasta-hora" required>
+                        <option value="">Hora</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                    </select>
+                    :
+                    <select id="hora-hasta-minuto" name="hora-hasta-minuto" required>
+                        <option value="">Minuto</option>
+                        <option value="00">00</option>
+                        <option value="15">15</option>
+                        <option value="30">30</option>
+                        <option value="45">45</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="fecha-inicio">Selecciona la fecha inicio:</label>
+                <div>
+                    <select id="dia-inicio" name="dia-inicio" required>
+                        <option value="">Día</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
+                        <option value="31">31</option>
+                    </select>
+                    <select id="mes-inicio" name="mes-inicio" required>
+                        <option value="">Mes</option>
+                        <option value="01">Enero</option>
+                        <option value="02">Febrero</option>
+                        <option value="03">Marzo</option>
+                        <option value="04">Abril</option>
+                        <option value="05">Mayo</option>
+                        <option value="06">Junio</option>
+                        <option value="07">Julio</option>
+                        <option value="08">Agosto</option>
+                        <option value="09">Septiembre</option>
+                        <option value="10">Octubre</option>
+                        <option value="11">Noviembre</option>
+                        <option value="12">Diciembre</option>
+                    </select>
+                    <select id="anio-inicio" name="anio-inicio" required>
+                        <option value="">Año</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                    </select>
+                </div>
+                    <label for="fecha-inicio">Selecciona la fecha fin:</label>
+                    <div>
+                        <select id="dia-inicio" name="dia-inicio" required>
+                            <option value="">Día</option>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                        </select>
+                        <select id="mes-inicio" name="mes-inicio" required>
+                            <option value="">Mes</option>
+                            <option value="01">Enero</option>
+                            <option value="02">Febrero</option>
+                            <option value="03">Marzo</option>
+                            <option value="04">Abril</option>
+                            <option value="05">Mayo</option>
+                            <option value="06">Junio</option>
+                            <option value="07">Julio</option>
+                            <option value="08">Agosto</option>
+                            <option value="09">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>
+                        <select id="anio-inicio" name="anio-inicio" required>
+                            <option value="">Año</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                        </select>
+                    </div>
+                    
+            </div>
+            <button type="submit" onclick="window.location.href='/inicio-doctor'">Guardar</button>
+        </form>
+    </div>
+    <footer class="footer">
+        <p>CAISES San Luis de la Paz</p>
+        <p>Dirección: Calle Velasco Ibarra & Calle México 68, La Ladrillera, 37906 San Luis de la Paz, Gto.</p> 
+        <p>Teléfono: 468 688 2045</p>
+        <p>Horario: 8 a.m. a 10 p.m.</p>
+    </footer>
+
+    <script>
+        
+        function validarFormulario() {
+            const horaDesdeHora = document.getElementById("hora-desde-hora").value;
+            const horaDesdeMinuto = document.getElementById("hora-desde-minuto").value;
+            const horaHastaHora = document.getElementById("hora-hasta-hora").value;
+            const horaHastaMinuto = document.getElementById("hora-hasta-minuto").value;
+            const fechaInicioDia = document.getElementById("dia-inicio").value;
+            const fechaInicioMes = document.getElementById("mes-inicio").value;
+            const fechaInicioAnio = document.getElementById("anio-inicio").value;
+
+            if (!horaDesdeHora || !horaDesdeMinuto || !horaHastaHora || !horaHastaMinuto || !fechaInicioDia || !fechaInicioMes || !fechaInicioAnio) {
+                alert("Por favor, completa todos los campos.");
+                return false;
+            }
+
+            const horaDesde = parseInt(horaDesdeHora) * 60 + parseInt(horaDesdeMinuto);
+            const horaHasta = parseInt(horaHastaHora) * 60 + parseInt(horaHastaMinuto);
+
+            if (horaDesde >= horaHasta) {
+                alert("La hora de inicio debe ser anterior a la hora de fin.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>

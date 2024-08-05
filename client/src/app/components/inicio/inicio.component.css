@@ -1,41 +1,188 @@
-.perfil-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: rgba(255, 255, 255, 0.8);
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-image: url('https://pbs.twimg.com/profile_images/1583167029997031425/3exuANH4_400x400.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
 }
 
-.card {
-  width: 100%;
-  max-width: 500px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.navbar {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.card-header {
-  background-color: #007bff;
-  color: white;
-  font-size: 1.5em;
-  text-align: center;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 20px;
 }
 
-.card-body {
-  padding: 20px;
+.navbar li {
+    margin: 0 15px;
+    display: flex;
+    align-items: center;
 }
 
-.list-group-item {
-  border: none;
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s, transform 0.3s;
 }
 
-.list-group-item a {
-  color: #007bff;
-  text-decoration: none;
-  font-size: 1.2em;
+.navbar a:hover {
+    color: #1a73e8;
+    transform: scale(1.05);
 }
 
-.list-group-item a:hover {
-  text-decoration: underline;
+.navbar a .icon {
+    margin-right: 8px;
+    font-size: 1.5em;
+}
+
+.container {
+    max-width: 900px;
+    padding: 60px 40px 40px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 20px;
+    position: relative;
+    top: 60px;
+}
+
+.container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    text-align: center;
+    color: #1a73e8;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #333;
+    font-size: 1.8em;
+    margin-top: 25px;
+}
+
+p {
+    text-align: justify;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    background: url('https://www.iconsdb.com/icons/preview/royal-blue/rounded-tick-xxl.png') no-repeat left center;
+    background-size: 1.5em;
+    padding-left: 2em;
+    margin-bottom: 15px;
+}
+
+ul li strong {
+    color: #1a73e8;
+}
+
+.image-container {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.image-container img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+}
+
+.modal-content {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 100vh;
+    object-fit: contain;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #fff;
+    font-size: 35px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.back-button {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1a73e8;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.back-button:hover {
+    background-color: #0f5bb5;
 }

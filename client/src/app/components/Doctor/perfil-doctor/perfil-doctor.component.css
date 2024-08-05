@@ -1,0 +1,97 @@
+body {
+    background-image: url('https://thumbs.dreamstime.com/b/fondo-m%C3%A9dico-y-de-la-atenci%C3%B3n-sanitaria-ecg-monitor-azul-del-pulso-coraz-n-con-se-al-el-coraz%C3%B3n-bati%C3%B3-154045262.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: right;
+}
+.profile-container {
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 700px;
+    margin: 50px auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.profile-header img {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 5px solid #0052cc;
+    margin-bottom: 15px;
+}
+.profile-header h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin: 0;
+}
+.profile-header p {
+    color: #555;
+    margin: 5px 0 0;
+    font-size: 1rem;
+}
+.profile-info {
+    width: 100%;
+}
+.profile-info h3 {
+    font-size: 1.5rem;
+    color: #0052cc;
+    margin-bottom: 15px;
+    border-bottom: 3px solid #0052cc;
+    padding-bottom: 10px;
+}
+.profile-info table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.profile-info table, .profile-info th, .profile-info td {
+    border: 1px solid #ddd;
+}
+.profile-info th, .profile-info td {
+    padding: 12px;
+    text-align: left;
+}
+.profile-info th {
+    background-color: #0052cc;
+    color: white;
+    font-weight: bold;
+}
+.profile-info td {
+    background-color: #f9f9f9;
+}
+.profile-info tr:nth-child(even) td {
+    background-color: #f2f2f2;
+}
+.profile-info tr:hover td {
+    background-color: #e1f5fe;
+}
+.footer {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.footer p {
+    margin: 1px ;
+}

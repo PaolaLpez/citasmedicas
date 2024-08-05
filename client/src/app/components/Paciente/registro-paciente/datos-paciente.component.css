@@ -1,0 +1,73 @@
+body {
+    background: url('https://png.pngtree.com/background/20210710/original/pngtree-317-china-national-medical-day-medical-device-doctor-nurse-poster-picture-image_1031864.jpg') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.form-container {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    margin: 50px auto; /* Ajuste el margen superior e inferior */
+}
+.form-header {
+    margin-bottom: 20px;
+}
+.form-header h2 {
+    font-size: 2rem;
+    color: #0052cc;
+}
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+.form-group label {
+    display: block;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+.form-group input, .form-group select {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+.form-group input[type="date"] {
+    padding-right: 36px;
+}
+.form-submit {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-submit button {
+    padding: 12px 24px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #0052cc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 10px;
+}
+.form-submit button:hover {
+    background-color: #0041a8;
+}
+.form-submit .secondary-button {
+    background-color: #ff6347;
+}
+.form-submit .secondary-button:hover {
+    background-color: #e5482f;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Citas Médicas</title>
+  <style>
+   
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>Citas Médicas</h1>
+    <form id="loginForm" action="/inicio-paciente" method="GET" onsubmit="return validarFormulario(event)">
+      <label for="username">Usuario</label>
+      <input type="text" id="username" name="username" pattern="[a-zA-Z0-9]{3,}" title="El nombre de usuario debe tener al menos 3 caracteres y solo contener letras y números." placeholder="Ingrese su usuario" required>
+      <label for="password">Contraseña</label>
+      <input type="password" id="password" name="password" pattern=".{6,}" title="La contraseña debe tener al menos 6 caracteres." placeholder="Ingrese su contraseña" required>
+      <div class="button-container">
+        <button type="submit" class="primary-button"  onclick="window.location.href='/inicio-paciente'">Ingresar</button>
+        <button type="button" class="back-button" onclick="window.location.href='/inicio'">Regresar</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function validarFormulario(event) {
+      const form = document.getElementById('loginForm');
+
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        const firstInvalidField = form.querySelector(':invalid');
+        firstInvalidField.reportValidity();
+        return false;
+      }
+
+      // Redirigir a la página de inicio si el formulario es válido
+      window.location.href = '/inicio-paciente';
+      return false; // Evita que el formulario se envíe de forma tradicional
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', validarFormulario);
+  </script>
+</body>
+</html>
+
+
+
+
