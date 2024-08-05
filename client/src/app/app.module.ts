@@ -64,6 +64,7 @@ import { FormularioComponent } from './components/formulario/formulario.componen
     PanelPacienteComponent,
     InicioPacienteComponent,
     EdicionDatosComponent,
+    PerfilPacienteComponent,
 
     //otros
     RecordatoriosComponent,
