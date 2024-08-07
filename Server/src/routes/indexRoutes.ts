@@ -3,14 +3,14 @@ import { indexController } from "../controllers/indexControllers";
 
 
 class IndexRoutes{
-public router : Router = Router();
-    constructor(){
-        this.Config();
-    }
-Config() : void{
-    this.router.get('/',indexController.index);
-}
+    public router: Router = Router();
+        constructor() {
+    this.config();
 }
 
-const indexRoutes = new IndexRoutes();
+config():void{
+this.router.get('/', (req, resp) => resp.send('Hello')); //Creando una ruta para mi aplicación del servidor para la ruta inicial y se devuelve el mensaje Hello
+}
+}
+const indexRoutes = new IndexRoutes;
 export default indexRoutes.router;
