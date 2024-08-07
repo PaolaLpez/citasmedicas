@@ -20,7 +20,7 @@ class Server {
   }
 
   routes(): void {
-    this.app.use('/api/citas', citaRoutes);
+    this.app.use('/api/cita', citaRoutes);
   }
 
   start(): void {
