@@ -23,9 +23,9 @@ class Server {
   }
 
   routes(): void {
-    this.app.use('/', indexRoutes);
-    this.app.use('/api/citas', citaRoutes);
-    this.app.use('/api/paciente', pacienteRoutes)
+    this.app.use('/',indexRoutes);
+    this.app.use('/api/citas',citaRoutes);
+    this.app.use('/api/paciente',pacienteRoutes)
   }
 
   start(): void {

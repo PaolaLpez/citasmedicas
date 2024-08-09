@@ -11,7 +11,7 @@ class IndexRoutes {
     }
   
     config(): void {
-      this.router.get('/', indexController.index);//Creando una ruta de mi aplicación del servidor para  
+      this.router.get('/',indexController.index);//Creando una ruta de mi aplicación del servidor para  
                                                   //la ruta inicial y se devuelve el mensaje Hello.
       /* this.router.delete('/:Id',inventarioController.delete); //aquí se indica que recibe como parámetro 
       el id  del juego para poder eliminarlo. */
