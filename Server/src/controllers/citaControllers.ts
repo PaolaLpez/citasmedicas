@@ -4,7 +4,7 @@ import pool from '../database';
 class CitaController {
   public async index(req: Request, res: Response): Promise<void> {
     try {
-      const result = await pool.query('DESCRIBE cita');
+      const result = await pool.query('select * from cita');
       res.json(result);
     } catch (error) {
       console.error('Database query error:', error); // Imprimir el error completo
@@ -14,4 +14,3 @@ class CitaController {
 }
 
 export const citaController = new CitaController();
-

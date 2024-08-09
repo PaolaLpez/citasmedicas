@@ -17,8 +17,8 @@ const database_1 = __importDefault(require("../database"));
 class IndexController {
     index(req, resp) {
         return __awaiter(this, void 0, void 0, function* () {
-            const games = yield database_1.default.query('SELECT* FROM games');
-            resp.json(games);
+            const citas = yield database_1.default.query('SELECT * FROM cita');
+            resp.json(citas);
         });
     }
 }

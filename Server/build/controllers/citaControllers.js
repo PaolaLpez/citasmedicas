@@ -18,7 +18,7 @@ class CitaController {
     index(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const result = yield database_1.default.query('DESCRIBE cita');
+                const result = yield database_1.default.query('select * from cita');
                 res.json(result);
             }
             catch (error) {
