@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import pool from '../database';
 
 class CitaController {
+
     // Manejar la solicitud POST para agregar una nueva cita
     public async addCita(req: Request, res: Response): Promise<void> {
         const { id_paciente, id_doctor, fecha, hora, estado } = req.body;
@@ -61,5 +62,4 @@ class CitaController {
     }
 }
 
-export default CitaController;
-
+export const citaController = new CitaController();

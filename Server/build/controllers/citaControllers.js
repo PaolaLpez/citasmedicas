@@ -19,10 +19,12 @@ class CitaController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id_paciente, id_doctor, fecha, hora, estado } = req.body;
             try {
+
                 const sql = 'INSERT INTO cita (id_paciente, id_doctor, fecha, hora, estado) VALUES (?, ?, ?, ?, ?)';
                 const values = [id_paciente, id_doctor, fecha, hora, estado];
                 const result = yield database_1.default.query(sql, values);
                 res.status(201).send(`Cita agregada exitosamente con ID: ${result.insertId}`);
+
             }
             catch (error) {
                 console.error('Error al insertar la cita:', error);

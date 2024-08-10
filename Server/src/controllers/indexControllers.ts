@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
-import pool from "../database";
+import { Request, Response } from 'express';
+
 class IndexController{
-    public async index(req : Request, resp : Response){
-        const games = await pool.query('SELECT* FROM games');
-        resp.json(games);
+    public index(req : Request, resp : Response){
+        resp.json('Hola usuario');
    }
+
 }
 export const indexController = new IndexController();
