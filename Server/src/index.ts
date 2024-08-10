@@ -2,6 +2,9 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import citaRoutes from './routes/citaRoutes';
+import indexRoutes from './routes/indexRoutes';
+import pacienteRoutes from './routes/pacienteRoutes';
+
 
 class Server {
   public app: express.Application;
@@ -20,7 +23,13 @@ class Server {
   }
 
   routes(): void {
+<<<<<<< HEAD
     this.app.use('/api/cita', citaRoutes);
+=======
+    this.app.use('/',indexRoutes);
+    this.app.use('/api/citas',citaRoutes);
+    this.app.use('/api/paciente',pacienteRoutes)
+>>>>>>> origin/Cristian13
   }
 
   start(): void {
