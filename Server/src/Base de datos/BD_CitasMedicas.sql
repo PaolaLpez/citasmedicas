@@ -34,7 +34,6 @@ CREATE TABLE IF NOT EXISTS paciente (
     genero CHAR(10) NOT NULL,
     direccion VARCHAR(60) NOT NULL,
     tipo_sangre CHAR(4) NOT NULL,
-    padecimiento VARCHAR(30),
     curp CHAR(18) NOT NULL,
     num_telefono VARCHAR(15) NOT NULL,
     correo_electronico VARCHAR(40) NOT NULL,
