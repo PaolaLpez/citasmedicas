@@ -1,15 +1,12 @@
 import mysql from 'promise-mysql';
-import keys from './keys';
-
-// Crea un pool de conexiones
-const pool = mysql.createPool(keys.database);
-
-// Método para obtener una conexión y verificar la conexión
-pool.getConnection().then(connection => {
-    pool.releaseConnection(connection);
-    console.log('DB is connected');
-}).catch(err => {
-    console.error('Error connecting to the database:', err);
+const pool = mysql.createPool({
+    host: 'localhost',
+    user: 'root', // Cambia estos valores según tu configuración
+    password: 'password', // Cambia estos valores según tu configuración
+    database: 'citasmedicas', // Asegúrate de usar el nombre correcto de tu base de datos
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
 export default pool;

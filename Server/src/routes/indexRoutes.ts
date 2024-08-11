@@ -1,16 +1,21 @@
 import { Router } from "express";
-import { indexController } from "../controllers/indexControllers";
+import { indexController } from "../controllers/indexControllers"; // Asegúrate de que esta ruta sea correcta
 
-
-class IndexRoutes{
+class IndexRoutes {
     public router: Router = Router();
-        constructor() {
-    this.config();
+
+    constructor() {
+        this.config();
+    }
+
+    config(): void {
+        this.router.get('/api/paciente', indexController.hello);
+        this.router.get('/api/cita', indexController.index);
+        this.router.get('/api/doctor', indexController.index);
+        this.router.get('/api/horario', indexController.index);
+    }
 }
 
-config():void{
-this.router.get('/', (req, resp) => resp.send('Hello')); //Creando una ruta para mi aplicación del servidor para la ruta inicial y se devuelve el mensaje Hello
-}
-}
-const indexRoutes = new IndexRoutes;
+const indexRoutes = new IndexRoutes();
 export default indexRoutes.router;
+

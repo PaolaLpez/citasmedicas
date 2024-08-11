@@ -15,11 +15,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.indexController = void 0;
 const database_1 = __importDefault(require("../database"));
 class IndexController {
-    index(req, resp) {
+    index(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const games = yield database_1.default.query('SELECT* FROM games');
-            resp.json(games);
+            try {
+                const cita = yield database_1.default.query('SELECT * FROM cita');
+                res.json(cita);
+            }
+            catch (error) {
+                console.error('Error al obtener la cita:', error);
+                res.status(500).json({ message: 'Error interno del servidor' });
+            }
         });
+    }
+    hello(req, res) {
+        res.send('Hello');
     }
 }
 exports.indexController = new IndexController();

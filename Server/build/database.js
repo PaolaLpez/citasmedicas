@@ -4,14 +4,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const promise_mysql_1 = __importDefault(require("promise-mysql"));
-const keys_1 = __importDefault(require("./keys"));
-// Crea un pool de conexiones
-const pool = promise_mysql_1.default.createPool(keys_1.default.database);
-// Método para obtener una conexión y verificar la conexión
-pool.getConnection().then(connection => {
-    pool.releaseConnection(connection);
-    console.log('DB is connected');
-}).catch(err => {
-    console.error('Error connecting to the database:', err);
+const pool = promise_mysql_1.default.createPool({
+    host: 'localhost',
+    user: 'root', // Cambia estos valores según tu configuración
+    password: 'password', // Cambia estos valores según tu configuración
+    database: 'citasmedicas', // Asegúrate de usar el nombre correcto de tu base de datos
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 exports.default = pool;

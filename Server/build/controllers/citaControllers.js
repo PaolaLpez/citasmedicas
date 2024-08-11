@@ -12,17 +12,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const database_1 = __importDefault(require("../database"));
+const database_1 = __importDefault(require("../database")); // Asegúrate de que el pool de conexiones esté correctamente configurado
 class CitaController {
     // Manejar la solicitud POST para agregar una nueva cita
     addCita(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id_paciente, id_doctor, fecha, hora, estado } = req.body;
+            // Validar los datos de entrada
+            if (!id_paciente || !id_doctor || !fecha || !hora || !estado) {
+                res.status(400).send('Todos los campos son necesarios');
+                return;
+            }
             try {
                 const sql = 'INSERT INTO cita (id_paciente, id_doctor, fecha, hora, estado) VALUES (?, ?, ?, ?, ?)';
                 const values = [id_paciente, id_doctor, fecha, hora, estado];
-                const result = yield database_1.default.query(sql, values);
-                res.status(201).send(`Cita agregada exitosamente con ID: ${result.insertId}`);
+                const [result] = yield database_1.default.query(sql, values);
+                // Verifica si la consulta se realizó correctamente
+                if ('insertId' in result) {
+                    res.status(201).send(`Cita agregada exitosamente con ID: ${result.insertId}`);
+                }
+                else {
+                    res.status(500).send('Error al obtener el ID de la nueva cita');
+                }
             }
             catch (error) {
                 console.error('Error al insertar la cita:', error);
@@ -34,10 +45,14 @@ class CitaController {
     getCitasByFecha(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { fecha } = req.query;
+            if (!fecha) {
+                res.status(400).send('La fecha es requerida');
+                return;
+            }
             try {
                 const sql = 'SELECT * FROM cita WHERE fecha = ?';
-                const result = yield database_1.default.query(sql, [fecha]);
-                res.status(200).json(result);
+                const [results] = yield database_1.default.query(sql, [fecha]);
+                res.status(200).json(results);
             }
             catch (error) {
                 console.error('Error al obtener citas:', error);
@@ -50,9 +65,17 @@ class CitaController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id_cita } = req.params;
             const { estado } = req.body;
+            if (!estado) {
+                res.status(400).send('El estado es requerido');
+                return;
+            }
             try {
                 const sql = 'UPDATE cita SET estado = ? WHERE id_cita = ?';
-                yield database_1.default.query(sql, [estado, id_cita]);
+                const [result] = yield database_1.default.query(sql, [estado, id_cita]);
+                if (result.affectedRows === 0) {
+                    res.status(404).send('Cita no encontrada');
+                    return;
+                }
                 res.status(200).send('Cita actualizada exitosamente');
             }
             catch (error) {
@@ -67,7 +90,11 @@ class CitaController {
             const { id_cita } = req.params;
             try {
                 const sql = 'DELETE FROM cita WHERE id_cita = ?';
-                yield database_1.default.query(sql, [id_cita]);
+                const [result] = yield database_1.default.query(sql, [id_cita]);
+                if (result.affectedRows === 0) {
+                    res.status(404).send('Cita no encontrada');
+                    return;
+                }
                 res.status(200).send('Cita eliminada exitosamente');
             }
             catch (error) {
