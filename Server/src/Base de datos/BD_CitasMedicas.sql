@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS rol (
 
 -- Crear tabla horario
 CREATE TABLE IF NOT EXISTS horario (
-    id_horario INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_horario INT NOT NULL PRIMARY KEY,
     hora_inicio TIME NOT NULL,
     hora_fin TIME NOT NULL,
     fecha_inicio DATE NOT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS cita (
 
 -- Crear tabla especialidad
 CREATE TABLE IF NOT EXISTS especialidad (
-    id_especialidad INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_especialidad INT NOT NULL PRIMARY KEY,
     nombre_especialidad VARCHAR(50) NOT NULL
 );
 
