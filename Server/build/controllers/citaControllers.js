@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.citaController = void 0;
 const database_1 = __importDefault(require("../database"));
 class CitaController {
     // Manejar la solicitud POST para agregar una nueva cita
@@ -19,12 +20,10 @@ class CitaController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id_paciente, id_doctor, fecha, hora, estado } = req.body;
             try {
-
                 const sql = 'INSERT INTO cita (id_paciente, id_doctor, fecha, hora, estado) VALUES (?, ?, ?, ?, ?)';
                 const values = [id_paciente, id_doctor, fecha, hora, estado];
                 const result = yield database_1.default.query(sql, values);
                 res.status(201).send(`Cita agregada exitosamente con ID: ${result.insertId}`);
-
             }
             catch (error) {
                 console.error('Error al insertar la cita:', error);
@@ -79,4 +78,4 @@ class CitaController {
         });
     }
 }
-exports.default = CitaController;
+exports.citaController = new CitaController();

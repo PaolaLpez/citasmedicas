@@ -25,7 +25,6 @@ class Server {
         this.app.use('/', indexRoutes_1.default);
         this.app.use('/api/citas', citaRoutes_1.default);
         this.app.use('/api/paciente', pacienteRoutes_1.default);
-
     }
     start() {
         this.app.listen(3000, () => {

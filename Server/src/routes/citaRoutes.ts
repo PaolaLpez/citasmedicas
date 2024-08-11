@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import CitaController from '../controllers/citaControllers';
+import { citaController} from '../controllers/citaControllers';
 
 const router = Router();
-const citaController = new CitaController();
+
 
 // Ruta para manejar POST en /api/cita
 router.post('/', citaController.addCita);
