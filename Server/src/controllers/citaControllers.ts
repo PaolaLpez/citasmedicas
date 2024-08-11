@@ -6,23 +6,11 @@ class CitaController {
     public async addCita(req: Request, res: Response): Promise<void> {
         const { id_paciente, id_doctor, fecha, hora, estado } = req.body;
 
-        // Validar los datos de entrada
-        if (!id_paciente || !id_doctor || !fecha || !hora || !estado) {
-            res.status(400).send('Todos los campos son necesarios');
-            return;
-        }
-
         try {
             const sql = 'INSERT INTO cita (id_paciente, id_doctor, fecha, hora, estado) VALUES (?, ?, ?, ?, ?)';
             const values = [id_paciente, id_doctor, fecha, hora, estado];
-            const [result] = await pool.query(sql, values);
-
-            // Verifica si la consulta se realizó correctamente
-            if ('insertId' in result) {
-                res.status(201).send(`Cita agregada exitosamente con ID: ${result.insertId}`);
-            } else {
-                res.status(500).send('Error al obtener el ID de la nueva cita');
-            }
+            const result = await pool.query(sql, values);
+            res.status(201).send(`Cita agregada exitosamente con ID: ${result.insertId}`);
         } catch (error) {
             console.error('Error al insertar la cita:', error);
             res.status(500).send('Error al agregar la cita');
@@ -33,15 +21,10 @@ class CitaController {
     public async getCitasByFecha(req: Request, res: Response): Promise<void> {
         const { fecha } = req.query;
 
-        if (!fecha) {
-            res.status(400).send('La fecha es requerida');
-            return;
-        }
-
         try {
             const sql = 'SELECT * FROM cita WHERE fecha = ?';
-            const [results] = await pool.query(sql, [fecha]);
-            res.status(200).json(results);
+            const result = await pool.query(sql, [fecha]);
+            res.status(200).json(result);
         } catch (error) {
             console.error('Error al obtener citas:', error);
             res.status(500).send('Error al obtener citas');
@@ -53,20 +36,9 @@ class CitaController {
         const { id_cita } = req.params;
         const { estado } = req.body;
 
-        if (!estado) {
-            res.status(400).send('El estado es requerido');
-            return;
-        }
-
         try {
             const sql = 'UPDATE cita SET estado = ? WHERE id_cita = ?';
-            const [result] = await pool.query(sql, [estado, id_cita]);
-
-            if ((result as any).affectedRows === 0) {
-                res.status(404).send('Cita no encontrada');
-                return;
-            }
-
+            await pool.query(sql, [estado, id_cita]);
             res.status(200).send('Cita actualizada exitosamente');
         } catch (error) {
             console.error('Error al actualizar la cita:', error);
@@ -80,13 +52,7 @@ class CitaController {
 
         try {
             const sql = 'DELETE FROM cita WHERE id_cita = ?';
-            const [result] = await pool.query(sql, [id_cita]);
-
-            if ((result as any).affectedRows === 0) {
-                res.status(404).send('Cita no encontrada');
-                return;
-            }
-
+            await pool.query(sql, [id_cita]);
             res.status(200).send('Cita eliminada exitosamente');
         } catch (error) {
             console.error('Error al eliminar la cita:', error);
