@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS doctor (
 
 -- Crear tabla administrador
 CREATE TABLE IF NOT EXISTS administrador (
-    id_administrador CHAR(5) NOT NULL PRIMARY KEY,
+    id_administrador CHAR(5) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     usuario VARCHAR(20) NOT NULL,
     id_doctor INT NOT NULL,
     nombre_adm VARCHAR(50) NOT NULL,
