@@ -44,11 +44,13 @@ CREATE TABLE IF NOT EXISTS paciente (
 CREATE TABLE IF NOT EXISTS doctor (
     id_doctor INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     usuario VARCHAR(20) NOT NULL,
+    id_especialidad INT NOT NULL,
     id_horario INT NOT NULL,
     nombre_doc VARCHAR(50) NOT NULL,
     tipo_doctor VARCHAR(20) NOT NULL,
     FOREIGN KEY (usuario) REFERENCES sesion(usuario),
-    FOREIGN KEY (id_horario) REFERENCES horario(id_horario)
+    FOREIGN KEY (id_horario) REFERENCES horario(id_horario),
+    FOREIGN KEY (id_especialidad) REFERENCES especialidad(id_especialidad)
 );
 
 -- Crear tabla administrador
@@ -81,6 +83,7 @@ CREATE TABLE IF NOT EXISTS especialidad (
 
 -- Crear tabla doctor_especialidad
 CREATE TABLE IF NOT EXISTS doctor_especialidad (
+    id_doctor_especialidad INT NOT NULL,
     id_especialidad INT NOT NULL,
     id_doctor INT NOT NULL,
     PRIMARY KEY (id_especialidad, id_doctor),

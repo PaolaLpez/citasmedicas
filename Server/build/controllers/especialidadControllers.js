@@ -12,14 +12,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.doctor_especialidadControllers = void 0;
+exports.especialidaControllers = void 0;
 const database_1 = __importDefault(require("../database"));
-class doctor_especialidadController {
+class EspecialidadController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const doctor_especialidad = yield database_1.default.query('select *  FROM doctor_especialidad');
-                res.json(doctor_especialidad);
+                const result = yield database_1.default.query('select * from especialidad');
+                res.json(result);
             }
             catch (error) {
                 console.error('Database query error:', error); // Imprimir el error completo
@@ -31,17 +31,17 @@ class doctor_especialidadController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 // Asumir que req.body es un array de objetos y tomar el primer objeto
-                const doctor_especialidad = Array.isArray(req.body) ? req.body[0] : req.body;
+                const resultado = Array.isArray(req.body) ? req.body[0] : req.body;
                 // Validar que todos los campos requeridos están presentes
-                const { id_especialidad, id_doctor } = doctor_especialidad;
-                if (!id_especialidad || !id_doctor) {
+                const { id_especialidad, nombre_especialidad } = resultado;
+                if (!id_especialidad || !nombre_especialidad) {
                     res.status(400).json({ message: 'Datos incompletos' });
                 }
                 // Mostrar datos recibidos para depuración
-                console.log('Received data:', doctor_especialidad);
+                console.log('Received data:', resultado);
                 // Ejecutar la consulta
-                const result = yield database_1.default.query('INSERT INTO doctor_especialidad (id_especialidad, id_doctor) VALUES (?, ?)', [id_especialidad, id_doctor]);
-                res.status(201).json({ message: 'Datos de paciente insertados' });
+                const result = yield database_1.default.query('INSERT INTO especialidad (id_especialidad, nombre_especialidad) VALUES (?, ?)', [id_especialidad, nombre_especialidad]);
+                res.status(201).json({ message: 'Datos de la especialidad insertados' });
             }
             catch (error) {
                 console.error('Database query error:', error); // Imprimir el error completo
@@ -54,47 +54,46 @@ class doctor_especialidadController {
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id_doctor } = req.params;
-                yield database_1.default.query('DELETE FROM doctor_especialidad WHERE id_doctor =?', [id_doctor]);
-                res.json({ message: 'Datos de doctor eliminados' });
+                const { id_especialidad } = req.params;
+                yield database_1.default.query('DELETE FROM especialidad WHERE id_especialidad =?', [id_especialidad]);
+                res.json({ message: 'Datos de la especialidad eliminados' });
             }
             catch (error) {
                 console.error('Database query error:', error); // Imprimir el error completo
-                res.status(500).send('Error al eliminar los datos del paciente');
+                res.status(500).send('Error al eliminar los datos de la especialidad');
             }
         });
     }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id_doctor_especialidad } = req.params;
-                const { id_especialidad, id_doctor } = req.body;
+                const { id_especialidad, nombre_especialidad } = req.body;
                 // Verifica si todos los campos necesarios están presentes
-                if (!id_especialidad || !id_doctor || !id_doctor_especialidad) {
+                if (!id_especialidad || !nombre_especialidad) {
                     res.status(400).json({ message: 'Datos incompletos' });
-                    return; // Agrega un retorno para evitar que el código continúe
+                    return;
                 }
-                const result = yield database_1.default.query('UPDATE doctor_especialidad SET id_especialidad=?, id_doctor=? WHERE id_doctor_especialidad=?', [id_especialidad, id_doctor, id_doctor_especialidad]);
-                res.json({ message: 'Datos del paciente actualizados' });
+                const result = yield database_1.default.query('UPDATE especialidad SET nombre_especialidad=? WHERE id_especialidad=?', [id_especialidad, nombre_especialidad]);
+                res.json({ message: 'Datos de la especialidad actualizados' });
             }
             catch (error) {
                 console.error('Database query error:', error);
-                res.status(500).send('Error al actualizar los datos del doctor');
+                res.status(500).send('Error al actualizar los datos de la especialidad');
             }
         });
     }
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id_doctor_especialidad } = req.params; //Se recupera el id del params
-                const result = yield database_1.default.query('SELECT * FROM doctor_especialidad WHERE id_doctor_especialidad=?', [id_doctor_especialidad]);
+                const { id_especialidad } = req.params; //Se recupera el id del params
+                const result = yield database_1.default.query('SELECT * FROM especialidad WHERE id_especialidad=?', [id_especialidad]);
                 res.json(result);
             }
             catch (error) {
                 console.error('Database query error:', error);
-                res.status(500).send('Error el doctor no existe');
+                res.status(500).send('Error la especialidad no existe');
             }
         });
     }
 }
-exports.doctor_especialidadControllers = new doctor_especialidadController();
+exports.especialidaControllers = new EspecialidadController();

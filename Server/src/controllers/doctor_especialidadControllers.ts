@@ -5,7 +5,7 @@ class doctor_especialidadController {
 
 public async list(req: Request, res: Response): Promise<void> {
     try {
-        const doctor_especialidad = await pool.query('select * doctor_especialidad');
+        const doctor_especialidad = await pool.query('select *  FROM doctor_especialidad');
         res.json(doctor_especialidad);
     } catch (error) {
         console.error('Database query error:', error); // Imprimir el error completo
@@ -30,7 +30,7 @@ public async list(req: Request, res: Response): Promise<void> {
     
             // Ejecutar la consulta
             const result = await pool.query(
-                'INSERT INTO paciente (id_especialidad, id_doctor) VALUES (?, ?)',
+                'INSERT INTO doctor_especialidad (id_especialidad, id_doctor) VALUES (?, ?)',
                 [id_especialidad, id_doctor]
             );
     
@@ -44,9 +44,9 @@ public async list(req: Request, res: Response): Promise<void> {
     }  
 public async delete(req: Request, res: Response): Promise<void> {
     try {
-        const {id_especialidad} = req.params;
-        await pool.query('DELETE FROM id_especialidad WHERE id_especialidad, id_doctor =?', [id_especialidad])
-        res.json({message : 'Datos de paciente eliminados'});
+        const {id_doctor} = req.params;
+        await pool.query('DELETE FROM doctor_especialidad WHERE id_doctor =?', [id_doctor])
+        res.json({message : 'Datos de doctor eliminados'});
     } catch (error) {
           console.error('Database query error:', error); // Imprimir el error completo
           res.status(500).send('Error al eliminar los datos del paciente');
@@ -55,25 +55,31 @@ public async delete(req: Request, res: Response): Promise<void> {
       
 public async update(req: Request, res: Response): Promise<void> {
     try {
-        const {id_especialidad} = req.params;
-        const {id_especialidad1, id_doctor } = req.body;
+        const {id_doctor_especialidad} = req.params;
+        const {id_especialidad, id_doctor } = req.body;
 
-        const result=await pool.query('UPDATE doctor_especialidad SET id_especialidad1=?, id_doctor=? WHERE id_especialidad=?', [id_especialidad1, id_doctor])
+              // Verifica si todos los campos necesarios están presentes
+        if (!id_especialidad || !id_doctor || !id_doctor_especialidad) {
+            res.status(400).json({ message: 'Datos incompletos' });
+            return; // Agrega un retorno para evitar que el código continúe
+        }
+
+        const result=await pool.query('UPDATE doctor_especialidad SET id_especialidad=?, id_doctor=? WHERE id_doctor_especialidad=?', [id_especialidad, id_doctor, id_doctor_especialidad])
              res.json({ message: 'Datos del paciente actualizados' });
     } catch (error) {
         console.error('Database query error:', error);
-        res.status(500).send('Error al actualizar los datos del paciente');
+        res.status(500).send('Error al actualizar los datos del doctor');
       }
     }
 
 public async getOne(req: Request, res: Response) {
     try {
-        const {id_especialidad} = req.params;//Se recupera el id del params
-        const paciente=await pool.query('SELECT * FROM doctor_especialidad WHERE id_especialidad=?', [id_especialidad])
-        res.json(paciente);
+        const {id_doctor_especialidad} = req.params;//Se recupera el id del params
+        const result=await pool.query('SELECT * FROM doctor_especialidad WHERE id_doctor_especialidad=?', [id_doctor_especialidad])
+        res.json(result);
     } catch (error) {
         console.error('Database query error:', error);
-        res.status(500).send('Error el paciente no existe');
+        res.status(500).send('Error el doctor no existe');
       }
     }
   }
