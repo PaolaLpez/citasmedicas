@@ -11,6 +11,8 @@ const indexRoutes_1 = __importDefault(require("./routes/indexRoutes"));
 const pacienteRoutes_1 = __importDefault(require("./routes/pacienteRoutes"));
 const doctor_especialidadRoutes_1 = __importDefault(require("./routes/doctor_especialidadRoutes"));
 const especialidadRoutes_1 = __importDefault(require("./routes/especialidadRoutes"));
+const doctorRoutes_1 = __importDefault(require("./routes/doctorRoutes"));
+const horario_1 = __importDefault(require("./routes/horario"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -25,10 +27,12 @@ class Server {
     }
     routes() {
         this.app.use('/', indexRoutes_1.default);
-        this.app.use('/api/citas', citaRoutes_1.default);
+        this.app.use('/api/cita', citaRoutes_1.default);
         this.app.use('/api/paciente', pacienteRoutes_1.default);
         this.app.use('/api/doctor_especialidad', doctor_especialidadRoutes_1.default);
         this.app.use('/api/especialidad', especialidadRoutes_1.default);
+        this.app.use('/api/doctor', doctorRoutes_1.default);
+        this.app.use('/api/horario', horario_1.default);
     }
     start() {
         this.app.listen(3000, () => {
