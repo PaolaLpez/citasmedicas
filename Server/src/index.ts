@@ -6,6 +6,9 @@ import indexRoutes from './routes/indexRoutes';
 import pacienteRoutes from './routes/pacienteRoutes';
 import doctor_especialidadRoutes from './routes/doctor_especialidadRoutes';
 import especialidadRoutes from './routes/especialidadRoutes';
+import doctorRoutes from './routes/doctorRoutes';
+import horarioRoutes from './routes/horario';
+
 
 
 class Server {
@@ -27,10 +30,12 @@ class Server {
   routes(): void {
 
     this.app.use('/',indexRoutes);
-    this.app.use('/api/citas',citaRoutes);
+    this.app.use('/api/cita',citaRoutes);
     this.app.use('/api/paciente',pacienteRoutes);
     this.app.use('/api/doctor_especialidad', doctor_especialidadRoutes);
     this.app.use('/api/especialidad', especialidadRoutes);
+    this.app.use('/api/doctor',doctorRoutes);
+    this.app.use('/api/horario',horarioRoutes);
   }
 
   start(): void {
