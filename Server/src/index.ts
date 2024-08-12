@@ -5,6 +5,7 @@ import citaRoutes from './routes/citaRoutes';
 import indexRoutes from './routes/indexRoutes';
 import pacienteRoutes from './routes/pacienteRoutes';
 import doctor_especialidadRoutes from './routes/doctor_especialidadRoutes';
+import especialidadRoutes from './routes/especialidadRoutes';
 
 
 class Server {
@@ -29,6 +30,7 @@ class Server {
     this.app.use('/api/citas',citaRoutes);
     this.app.use('/api/paciente',pacienteRoutes);
     this.app.use('/api/doctor_especialidad', doctor_especialidadRoutes);
+    this.app.use('/api/especialidad', especialidadRoutes);
   }
 
   start(): void {
