@@ -1,3 +1,5 @@
+// routes/rolRoutes.ts
+
 import express, { Router } from 'express';
 import { rolControllers } from '../controllers/rolControllers'; // Asegúrate de que la ruta al controlador sea correcta
 
@@ -19,3 +21,4 @@ router.put('/:id_rol', rolControllers.update);
 router.delete('/:id_rol', rolControllers.delete);
 
 export default router;
+
