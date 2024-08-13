@@ -1,89 +1,115 @@
+<app-panel-administrador></app-panel-administrador>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Recordatorios</title>
+    <title>Agregar nuevo administrador</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Enlace al archivo CSS -->
     <style>
-      body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 50px auto;
-    max-width: 400px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-h2 {
-    color: #333;
-}
-form {
-    text-align: left;
-}
-label {
-    display: block;
-    margin-bottom: 8px;
-    color: #555;
-}
-input[type="email"],
-input[type="tel"] {
-    width: calc(100% - 20px);
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 14px;
-}
-.button-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.link-button {
-    background-color: #f44336;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 4px;
-    font-size: 16px;
-    display: inline-block;
-}
-.link-button:hover {
-    background-color: #e31e1e;
-}
-input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-}
-input[type="submit"]:hover {
-    background-color: #45a049;
-}
+
+        body {
+            background-image: url('https://thumbs.dreamstime.com/b/fondo-m%C3%A9dico-y-de-la-atenci%C3%B3n-sanitaria-ecg-monitor-azul-del-pulso-coraz-n-con-se-al-el-coraz%C3%B3n-bati%C3%B3-154045262.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            background-color: rgba(230, 247, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"], input[type="date"], select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .footer {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 14px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer p {
+            margin: 1px;
+        }
     </style>
 </head>
 
-<app-panel-administrador></app-panel-administrador>
 <body>
-    <p>Esto es como ejemplo</p>
-    <h2>Formulario para recibir recordatorios</h2>
-    <form action="https://formspree.io/f/manwyeob" method="post">
-        <label for="email">Correo electrónico:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
-        
-        <label for="telefono">Número de teléfono:</label><br>
-        <input type="tel" id="telefono" name="telefono" pattern="[0-9]{10}" required><br><br>
-        
-        <div class="button-container">
-            <a href="/recordatorios" class="link-button">Atrás</a>
-            <input type="submit" value="Enviar">
+    <div class="main-content">
+        <div class="container">
+            <h1>Agregar nuevo administrador</h1>
+            <form id="adminForm">
+                <label for="nombre">Nombre de usuario:</label>
+                <input type="text" id="nombre" name="nombre" required><br><br>
+
+                <label for="apellido">ID del doctor:</label>
+                <input type="text" id="apellido" name="apellido" required><br><br>
+
+                <label for="email">Nombre completo del administrador:</label>
+                <input type="email" id="email" name="email" required><br><br>
+
+                <div class="button-container">
+                    <button type="submit">Agregar administrador</button>
+                    <button type="reset">Cancelar</button>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
+    <footer class="footer">
+        <p>&copy; 2024 Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>
-
