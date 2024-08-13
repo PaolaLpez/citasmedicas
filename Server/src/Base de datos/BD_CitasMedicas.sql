@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS paciente (
     num_telefono VARCHAR(15) NOT NULL,
     correo_electronico VARCHAR(40) NOT NULL,
     FOREIGN KEY (usuario) REFERENCES sesion(usuario)
+    On delete cascade;
 );
 
 -- Crear tabla doctor
@@ -48,7 +49,8 @@ CREATE TABLE IF NOT EXISTS doctor (
     id_horario INT NOT NULL,
     nombre_doc VARCHAR(50) NOT NULL,
     tipo_doctor VARCHAR(20) NOT NULL,
-    FOREIGN KEY (usuario) REFERENCES sesion(usuario),
+    FOREIGN KEY (usuario) REFERENCES sesion(usuario)
+    on delete cascade,
     FOREIGN KEY (id_horario) REFERENCES horario(id_horario),
     FOREIGN KEY (id_especialidad) REFERENCES especialidad(id_especialidad)
 );
@@ -59,7 +61,8 @@ CREATE TABLE IF NOT EXISTS administrador (
     usuario VARCHAR(20) NOT NULL,
     id_doctor INT NOT NULL,
     nombre_adm VARCHAR(50) NOT NULL,
-    FOREIGN KEY (usuario) REFERENCES sesion(usuario),
+    FOREIGN KEY (usuario) REFERENCES sesion(usuario)
+    on delete cascade,
     FOREIGN KEY (id_doctor) REFERENCES doctor(id_doctor)
 );
 
@@ -83,7 +86,6 @@ CREATE TABLE IF NOT EXISTS especialidad (
 
 -- Crear tabla doctor_especialidad
 CREATE TABLE IF NOT EXISTS doctor_especialidad (
-    id_doctor_especialidad INT NOT NULL,
     id_especialidad INT NOT NULL,
     id_doctor INT NOT NULL,
     PRIMARY KEY (id_especialidad, id_doctor),
