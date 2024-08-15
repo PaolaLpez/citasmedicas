@@ -1,19 +1,22 @@
-import { Router } from 'express';
-import { citaController} from '../controllers/citaControllers';
+import { Router } from "express";
+import { citaController } from "../controllers/citaControllers";
 
-const router = Router();
+class CitaRoutes {
+    public router: Router = Router();
 
+    constructor() {
+        this.config();
+    }
 
-// Ruta para manejar POST en /api/cita
-router.post('/', citaController.addCita);
+    config(): void {
+        this.router.get('/', citaController.list);
+        this.router.post('/', citaController.create);
+        this.router.delete('/:id_cita', citaController.delete);
+        this.router.put('/:id_cita', citaController.update);
+        this.router.get('/:id_cita', citaController.getOne);
+    }
+}
 
-// Ruta para obtener citas por fecha
-router.get('/', citaController.getCitasByFecha);
+export const citaRoutes = new CitaRoutes().router;
+export default citaRoutes;
 
-// Ruta para actualizar el estado de una cita
-router.put('/:id_cita', citaController.updateCita);
-
-// Ruta para eliminar una cita
-router.delete('/:id_cita', citaController.deleteCita);
-
-export default router;

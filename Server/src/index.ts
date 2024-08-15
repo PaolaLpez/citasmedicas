@@ -6,11 +6,11 @@ import indexRoutes from './routes/indexRoutes';
 import pacienteRoutes from './routes/pacienteRoutes';
 import doctor_especialidadRoutes from './routes/doctor_especialidadRoutes';
 import especialidadRoutes from './routes/especialidadRoutes';
-import doctorRoutes from './routes/doctorRoutes';
-import horarioRoutes from './routes/horario';
+import horarioRoutes from './routes/horarioRoutes';
 import inicioadminRoutes from './routes/inicioadminRoutes';  
 import rolRoutes from './routes/rolRoutes';
 import sesionRoutes from './routes/sesionRoutes';
+import doctorRoutes from './routes/doctorRoutes';
 
 class Server {
   public app: express.Application;

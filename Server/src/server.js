@@ -1,16 +1,25 @@
 import express from 'express';
-import citaRoutes from './routes/citaRoutes';
+import morgan from 'morgan';
+import cors from 'cors';
+
+import pacienteRoutes from './routes/pacienteRoutes';
 
 const app = express();
-const port = 3000;
 
-// Middleware para parsear JSON
+// Configuración del servidor
+app.set('port', process.env.PORT || 3000);
+
+// Middlewares
+app.use(morgan('dev'));
+app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-// Usar las rutas
-app.use('/api/cita', citaRoutes);
+// Rutas
+app.use('/api/paciente', pacienteRoutes);
 
 // Iniciar el servidor
-app.listen(port, () => {
-    console.log(`Servidor escuchando en http://localhost:${port}`);
+app.listen(app.get('port'), () => {
+    console.log(`Servidor en el puerto ${app.get('port')}`);
 });
+

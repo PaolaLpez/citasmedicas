@@ -17,11 +17,16 @@
             background: #fff;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         .form-header {
             text-align: center;
             margin-bottom: 20px;
+        }
+        .form-header h2 {
+            margin: 0;
+            color: #007bff;
+            font-size: 24px;
         }
         .form-group {
             margin-bottom: 15px;
@@ -29,6 +34,7 @@
         .form-group label {
             display: block;
             margin-bottom: 5px;
+            font-weight: bold;
         }
         .form-group input,
         .form-group select {
@@ -36,10 +42,12 @@
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 4px;
+            font-size: 16px;
         }
         .form-submit {
             display: flex;
             justify-content: space-between;
+            margin-top: 20px;
         }
         .form-submit button {
             padding: 10px 20px;
@@ -47,6 +55,7 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
+            transition: background-color 0.3s ease;
         }
         .form-submit button.primary-button {
             background-color: #007bff;
@@ -57,7 +66,7 @@
             color: #fff;
         }
         .form-submit button:hover {
-            opacity: 0.8;
+            opacity: 0.9;
         }
     </style>
 </head>
@@ -66,7 +75,7 @@
         <div class="form-header">
             <h2>Registro de Paciente</h2>
         </div>
-        <form id="registerForm" onsubmit="return validarFormulario(event)">
+        <form id="registerForm">
             <div class="form-group">
                 <label for="full-name">Nombre Completo</label>
                 <input type="text" id="full-name" name="full-name" required>
@@ -115,22 +124,38 @@
             </div>
         </form>
     </div>
-    <script>
-        function validarFormulario(event) {
-            event.preventDefault(); // Evita el envío tradicional del formulario
 
-            const form = document.getElementById('registerForm');
-    
-            if (!form.checkValidity()) {
-                const firstInvalidField = form.querySelector(':invalid');
-                firstInvalidField.reportValidity();
-                return false;
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch('/api/paciente', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                    // Manejo del éxito
+                    alert('Paciente registrado con éxito');
+                    window.location.href = '/inicio';
+                } else {
+                    // Manejo de errores
+                    const errorData = await response.json();
+                    alert(`Error: ${errorData.message || 'Error desconocido'}`);
+                }
+            } catch (error) {
+                console.error('Error en la solicitud:', error);
+                alert('Hubo un problema con la solicitud. Por favor, inténtelo de nuevo más tarde.');
             }
-    
-            // Redirigir a la página de inicio-paciente si el formulario es válido
-            window.location.href = '/inicio-paciente';
-            return false; // Evita que el formulario se envíe de forma tradicional
-        }
+        });
     </script>
 </body>
 </html>
+

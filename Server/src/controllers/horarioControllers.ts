@@ -1,92 +1,86 @@
-import { Request, Response } from 'express';
-import pool from '../database'; // Ensure your pool configuration is correct
+import { Request, Response } from "express";
+import pool from "../database";
 
 class HorarioController {
-    // Handle POST request to add a new horario
-    public async addHorario(req: Request, res: Response): Promise<void> {
-        const { hora_inicio, hora_fin, fecha_inicio, fecha_fin } = req.body;
-
-        // Validate input data
-        if (!hora_inicio || !hora_fin || !fecha_inicio || !fecha_fin) {
-            res.status(400).send('Todos los campos son necesarios');
-            return;
-        }
-
+    public async list(req: Request, res: Response): Promise<void> {
         try {
-            const sql = 'INSERT INTO horario (hora_inicio, hora_fin, fecha_inicio, fecha_fin) VALUES (?, ?, ?, ?)';
-            const values = [hora_inicio, hora_fin, fecha_inicio, fecha_fin];
-            const [result] = await pool.query(sql, values);
-
-            // Check if the insert was successful
-            if ('insertId' in result) {
-                res.status(201).send(`Horario agregado exitosamente con ID: ${result.insertId}`);
-            } else {
-                res.status(500).send('Error al obtener el ID del nuevo horario');
-            }
+            const horarios = await pool.query('SELECT * FROM horario');
+            res.json(horarios);
         } catch (error) {
-            console.error('Error al insertar el horario:', error);
-            res.status(500).send('Error al agregar el horario');
+            console.error('Database query error:', error);
+            res.status(500).send('Error al consultar la base de datos');
         }
     }
 
-    // Handle GET request to fetch all horarios
-    public async getHorarios(req: Request, res: Response): Promise<void> {
+    public async create(req: Request, res: Response): Promise<void> {
         try {
-            const sql = 'SELECT * FROM horario';
-            const [results] = await pool.query(sql);
-            res.status(200).json(results);
-        } catch (error) {
-            console.error('Error al obtener horarios:', error);
-            res.status(500).send('Error al obtener horarios');
-        }
-    }
+            const horario = Array.isArray(req.body) ? req.body[0] : req.body;
 
-    // Handle PUT request to update a horario
-    public async updateHorario(req: Request, res: Response): Promise<void> {
-        const { id_horario } = req.params;
-        const { hora_inicio, hora_fin, fecha_inicio, fecha_fin } = req.body;
-
-        // Validate input data
-        if (!hora_inicio || !hora_fin || !fecha_inicio || !fecha_fin) {
-            res.status(400).send('Todos los campos son necesarios');
-            return;
-        }
-
-        try {
-            const sql = 'UPDATE horario SET hora_inicio = ?, hora_fin = ?, fecha_inicio = ?, fecha_fin = ? WHERE id_horario = ?';
-            const [result] = await pool.query(sql, [hora_inicio, hora_fin, fecha_inicio, fecha_fin, id_horario]);
-
-            if ((result as any).affectedRows === 0) {
-                res.status(404).send('Horario no encontrado');
+            const { hora_inicio, hora_fin, fecha_inicio, fecha_fin } = horario;
+            if (!hora_inicio || !hora_fin || !fecha_inicio || !fecha_fin) {
+                res.status(400).json({ message: 'Datos incompletos' });
                 return;
             }
 
-            res.status(200).send('Horario actualizado exitosamente');
+            console.log('Received data:', horario);
+
+            const result = await pool.query(
+                'INSERT INTO horario (hora_inicio, hora_fin, fecha_inicio, fecha_fin) VALUES (?, ?, ?, ?)',
+                [hora_inicio, hora_fin, fecha_inicio, fecha_fin]
+            );
+
+            res.status(201).json({ message: 'Horario insertado' });
         } catch (error) {
-            console.error('Error al actualizar el horario:', error);
+            console.error('Database query error:', error);
+            if (!res.headersSent) {
+                res.status(500).json({ message: 'Error al insertar en la base de datos' });
+            }
+        }
+    }
+
+    public async delete(req: Request, res: Response): Promise<void> {
+        try {
+            const { id_horario } = req.params;
+            await pool.query('DELETE FROM horario WHERE id_horario = ?', [id_horario]);
+            res.json({ message: 'Horario eliminado' });
+        } catch (error) {
+            console.error('Database query error:', error);
+            res.status(500).send('Error al eliminar el horario');
+        }
+    }
+
+    public async update(req: Request, res: Response): Promise<void> {
+        try {
+            const { id_horario } = req.params;
+            const { hora_inicio, hora_fin, fecha_inicio, fecha_fin } = req.body;
+
+            if (!hora_inicio || !hora_fin || !fecha_inicio || !fecha_fin) {
+                res.status(400).json({ message: 'Datos incompletos' });
+                return;
+            }
+
+            const result = await pool.query(
+                'UPDATE horario SET hora_inicio = ?, hora_fin = ?, fecha_inicio = ?, fecha_fin = ? WHERE id_horario = ?',
+                [hora_inicio, hora_fin, fecha_inicio, fecha_fin, id_horario]
+            );
+
+            res.json({ message: 'Horario actualizado' });
+        } catch (error) {
+            console.error('Database query error:', error);
             res.status(500).send('Error al actualizar el horario');
         }
     }
 
-    // Handle DELETE request to remove a horario
-    public async deleteHorario(req: Request, res: Response): Promise<void> {
-        const { id_horario } = req.params;
-
+    public async getOne(req: Request, res: Response): Promise<void> {
         try {
-            const sql = 'DELETE FROM horario WHERE id_horario = ?';
-            const [result] = await pool.query(sql, [id_horario]);
-
-            if ((result as any).affectedRows === 0) {
-                res.status(404).send('Horario no encontrado');
-                return;
-            }
-
-            res.status(200).send('Horario eliminado exitosamente');
+            const { id_horario } = req.params;
+            const result = await pool.query('SELECT * FROM horario WHERE id_horario = ?', [id_horario]);
+            res.json(result);
         } catch (error) {
-            console.error('Error al eliminar el horario:', error);
-            res.status(500).send('Error al eliminar el horario');
+            console.error('Database query error:', error);
+            res.status(500).send('Error al consultar el horario');
         }
     }
 }
 
-export default HorarioController;
+export const horarioController = new HorarioController();
