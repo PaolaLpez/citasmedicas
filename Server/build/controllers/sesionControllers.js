@@ -12,85 +12,87 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.horarioController = void 0;
+exports.sesionControllers = void 0;
 const database_1 = __importDefault(require("../database"));
-class HorarioController {
+class SesionController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const horarios = yield database_1.default.query('SELECT * FROM horario');
-                res.json(horarios);
+                const sesiones = yield database_1.default.query('SELECT * FROM sesion');
+                res.json(sesiones);
             }
             catch (error) {
                 console.error('Database query error:', error);
-                res.status(500).send('Error al consultar la base de datos');
+                res.status(500).send('Error al consultar las sesiones');
             }
         });
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const horario = Array.isArray(req.body) ? req.body[0] : req.body;
-                const { hora_inicio, hora_fin, fecha_inicio, fecha_fin } = horario;
-                if (!hora_inicio || !hora_fin || !fecha_inicio || !fecha_fin) {
+                const sesion = req.body;
+                const { usuario, id_rol, contraseña } = sesion;
+                if (!usuario || !id_rol || !contraseña) {
                     res.status(400).json({ message: 'Datos incompletos' });
                     return;
                 }
-                console.log('Received data:', horario);
-                const result = yield database_1.default.query('INSERT INTO horario (hora_inicio, hora_fin, fecha_inicio, fecha_fin) VALUES (?, ?, ?, ?)', [hora_inicio, hora_fin, fecha_inicio, fecha_fin]);
-                res.status(201).json({ message: 'Horario insertado' });
+                yield database_1.default.query('INSERT INTO sesion (usuario, id_rol, contraseña) VALUES (?, ?, ?)', [usuario, id_rol, contraseña]);
+                res.status(201).json({ message: 'Sesión creada con éxito' });
             }
             catch (error) {
                 console.error('Database query error:', error);
-                if (!res.headersSent) {
-                    res.status(500).json({ message: 'Error al insertar en la base de datos' });
-                }
-            }
-        });
-    }
-    delete(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const { id_horario } = req.params;
-                yield database_1.default.query('DELETE FROM horario WHERE id_horario = ?', [id_horario]);
-                res.json({ message: 'Horario eliminado' });
-            }
-            catch (error) {
-                console.error('Database query error:', error);
-                res.status(500).send('Error al eliminar el horario');
-            }
-        });
-    }
-    update(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const { id_horario } = req.params;
-                const { hora_inicio, hora_fin, fecha_inicio, fecha_fin } = req.body;
-                if (!hora_inicio || !hora_fin || !fecha_inicio || !fecha_fin) {
-                    res.status(400).json({ message: 'Datos incompletos' });
-                    return;
-                }
-                const result = yield database_1.default.query('UPDATE horario SET hora_inicio = ?, hora_fin = ?, fecha_inicio = ?, fecha_fin = ? WHERE id_horario = ?', [hora_inicio, hora_fin, fecha_inicio, fecha_fin, id_horario]);
-                res.json({ message: 'Horario actualizado' });
-            }
-            catch (error) {
-                console.error('Database query error:', error);
-                res.status(500).send('Error al actualizar el horario');
+                res.status(500).send('Error al crear la sesión');
             }
         });
     }
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id_horario } = req.params;
-                const result = yield database_1.default.query('SELECT * FROM horario WHERE id_horario = ?', [id_horario]);
-                res.json(result);
+                const { usuario } = req.params;
+                const result = yield database_1.default.query('SELECT * FROM sesion WHERE usuario = ?', [usuario]);
+                if (result.length > 0) {
+                    res.json(result[0]);
+                }
+                else {
+                    res.status(404).send('Sesión no encontrada');
+                }
             }
             catch (error) {
                 console.error('Database query error:', error);
-                res.status(500).send('Error al consultar el horario');
+                res.status(500).send('Error al obtener la sesión');
+            }
+        });
+    }
+    update(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { usuario } = req.params;
+                const { id_rol, contraseña } = req.body;
+                if (!id_rol || !contraseña) {
+                    res.status(400).json({ message: 'Datos incompletos' });
+                    return;
+                }
+                yield database_1.default.query('UPDATE sesion SET id_rol = ?, contraseña = ? WHERE usuario = ?', [id_rol, contraseña, usuario]);
+                res.json({ message: 'Sesión actualizada con éxito' });
+            }
+            catch (error) {
+                console.error('Database query error:', error);
+                res.status(500).send('Error al actualizar la sesión');
+            }
+        });
+    }
+    delete(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { usuario } = req.params;
+                yield database_1.default.query('DELETE FROM sesion WHERE usuario = ?', [usuario]);
+                res.json({ message: 'Sesión eliminada con éxito' });
+            }
+            catch (error) {
+                console.error('Database query error:', error);
+                res.status(500).send('Error al eliminar la sesión');
             }
         });
     }
 }
-exports.horarioController = new HorarioController();
+exports.sesionControllers = new SesionController();

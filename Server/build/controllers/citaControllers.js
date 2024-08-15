@@ -15,65 +15,80 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.citaController = void 0;
 const database_1 = __importDefault(require("../database"));
 class CitaController {
-    // Manejar la solicitud POST para agregar una nueva cita
-    addCita(req, res) {
+    list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id_paciente, id_doctor, fecha, hora, estado } = req.body;
             try {
-                const sql = 'INSERT INTO cita (id_paciente, id_doctor, fecha, hora, estado) VALUES (?, ?, ?, ?, ?)';
-                const values = [id_paciente, id_doctor, fecha, hora, estado];
-                const result = yield database_1.default.query(sql, values);
-                res.status(201).send(`Cita agregada exitosamente con ID: ${result.insertId}`);
+                const citas = yield database_1.default.query('SELECT * FROM cita');
+                res.json(citas);
             }
             catch (error) {
-                console.error('Error al insertar la cita:', error);
-                res.status(500).send('Error al agregar la cita');
+                console.error('Database query error:', error);
+                res.status(500).send('Error al consultar la base de datos');
             }
         });
     }
-    // Manejar la solicitud GET para obtener citas por fecha
-    getCitasByFecha(req, res) {
+    create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { fecha } = req.query;
             try {
-                const sql = 'SELECT * FROM cita WHERE fecha = ?';
-                const result = yield database_1.default.query(sql, [fecha]);
-                res.status(200).json(result);
+                const cita = Array.isArray(req.body) ? req.body[0] : req.body;
+                const { id_paciente, id_doctor, fecha, hora, estado } = cita;
+                if (!id_paciente || !id_doctor || !fecha || !hora || !estado) {
+                    res.status(400).json({ message: 'Datos incompletos' });
+                    return;
+                }
+                console.log('Received data:', cita);
+                const result = yield database_1.default.query('INSERT INTO cita (id_paciente, id_doctor, fecha, hora, estado) VALUES (?, ?, ?, ?, ?)', [id_paciente, id_doctor, fecha, hora, estado]);
+                res.status(201).json({ message: 'Cita insertada' });
             }
             catch (error) {
-                console.error('Error al obtener citas:', error);
-                res.status(500).send('Error al obtener citas');
+                console.error('Database query error:', error);
+                if (!res.headersSent) {
+                    res.status(500).json({ message: 'Error al insertar en la base de datos' });
+                }
             }
         });
     }
-    // Manejar la solicitud PUT para actualizar el estado de una cita
-    updateCita(req, res) {
+    delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id_cita } = req.params;
-            const { estado } = req.body;
             try {
-                const sql = 'UPDATE cita SET estado = ? WHERE id_cita = ?';
-                yield database_1.default.query(sql, [estado, id_cita]);
-                res.status(200).send('Cita actualizada exitosamente');
+                const { id_cita } = req.params;
+                yield database_1.default.query('DELETE FROM cita WHERE id_cita = ?', [id_cita]);
+                res.json({ message: 'Cita eliminada' });
             }
             catch (error) {
-                console.error('Error al actualizar la cita:', error);
+                console.error('Database query error:', error);
+                res.status(500).send('Error al eliminar la cita');
+            }
+        });
+    }
+    update(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { id_cita } = req.params;
+                const { id_paciente, id_doctor, fecha, hora, estado } = req.body;
+                if (!id_paciente || !id_doctor || !fecha || !hora || !estado) {
+                    res.status(400).json({ message: 'Datos incompletos' });
+                    return;
+                }
+                const result = yield database_1.default.query('UPDATE cita SET id_paciente = ?, id_doctor = ?, fecha = ?, hora = ?, estado = ? WHERE id_cita = ?', [id_paciente, id_doctor, fecha, hora, estado, id_cita]);
+                res.json({ message: 'Cita actualizada' });
+            }
+            catch (error) {
+                console.error('Database query error:', error);
                 res.status(500).send('Error al actualizar la cita');
             }
         });
     }
-    // Manejar la solicitud DELETE para eliminar una cita
-    deleteCita(req, res) {
+    getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id_cita } = req.params;
             try {
-                const sql = 'DELETE FROM cita WHERE id_cita = ?';
-                yield database_1.default.query(sql, [id_cita]);
-                res.status(200).send('Cita eliminada exitosamente');
+                const { id_cita } = req.params;
+                const result = yield database_1.default.query('SELECT * FROM cita WHERE id_cita = ?', [id_cita]);
+                res.json(result);
             }
             catch (error) {
-                console.error('Error al eliminar la cita:', error);
-                res.status(500).send('Error al eliminar la cita');
+                console.error('Database query error:', error);
+                res.status(500).send('Error al consultar la cita');
             }
         });
     }
