@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctores Disponibles</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url('https://thumbs.dreamstime.com/b/fondo-m%C3%A9dico-y-de-la-atenci%C3%B3n-sanitaria-ecg-monitor-azul-del-pulso-coraz-n-con-se-al-el-coraz%C3%B3n-bati%C3%B3-154045262.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .container {
+        width: 80%;
+        max-width: 1000px;
+        background-color: rgba(230, 247, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: #007bff;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    table, th, td {
+        border: 1px solid #ccc;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .cancel-button {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .cancel-button:hover {
+        background-color: #c82333;
+    }
+
+    .no-data {
+        text-align: center;
+        color: #888;
+    }
+  </style>
+</head>
+<app-panel-administrador></app-panel-administrador>
+<body>
+  <div class="container">
+    <h1>Doctores Disponibles</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>ID Doctor</th>
+          <th>Nombre Completo</th>
+          <th>Especialidad</th>
+          <th>Tipo de Doctor</th>
+          <th>Acciones</th> 
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Dr. Juan Pérez</td>
+          <td>Cardiólogo</td>
+          <td>General</td>
+          <td><button class="cancel-button" onclick="verDetalles(1)">Detalles</button></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Dra. Laura Gómez</td>
+          <td>Pediatra</td>
+          <td>General</td>
+          <td><button class="cancel-button" onclick="verDetalles(2)">Detalles</button></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Dr. Ricardo Fernández</td>
+          <td>Psiquiatra</td>
+          <td>General</td>
+          <td><button class="cancel-button" onclick="verDetalles(3)">Detalles</button></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Dra. Ana Martínez</td>
+          <td>Dermatóloga</td>
+          <td>General</td>
+          <td><button class="cancel-button" onclick="verDetalles(4)">Detalles</button></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Dr. Luis Hernández</td>
+          <td>Oftalmólogo</td>
+          <td>General</td>
+          <td><button class="cancel-button" onclick="verDetalles(5)">Detalles</button></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Dra. Paula Sánchez</td>
+          <td>Ginecóloga</td>
+          <td>General</td>
+          <td><button class="cancel-button" onclick="verDetalles(6)">Detalles</button></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Dr. Fernando Morales</td>
+          <td>Traumatólogo</td>
+          <td>General</td>
+          <td><button class="cancel-button" onclick="verDetalles(7)">Detalles</button></td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Dra. Marta López</td>
+          <td>Endocrinóloga</td>
+          <td>General</td>
+          <td><button class="cancel-button" onclick="verDetalles(8)">Detalles</button></td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Dr. Jorge Ramírez</td>
+          <td>Neurólogo</td>
+          <td>General</td>
+          <td><button class="cancel-button" onclick="verDetalles(9)">Detalles</button></td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Dra. Carolina Castro</td>
+          <td>Infectóloga</td>
+          <td>General</td>
+          <td><button class="cancel-button" onclick="verDetalles(10)">Detalles</button></td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>Dr. Manuel Vargas</td>
+          <td>Oncólogo</td>
+          <td>General</td>
+          <td><button class="cancel-button" onclick="verDetalles(11)">Detalles</button></td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td>Dra. Elena Torres</td>
+          <td>Reumatóloga</td>
+          <td>General</td>
+          <td><button class="cancel-button" onclick="verDetalles(12)">Detalles</button></td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td>Dr. Roberto Castillo</td>
+          <td>Neumólogo</td>
+          <td>General</td>
+          <td><button class="cancel-button" onclick="verDetalles(13)">Detalles</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function verDetalles(idDoctor) {
+      alert(`Ver detalles del doctor con ID: ${idDoctor}`);
+    }
+  </script>
+</body>
+</html>
