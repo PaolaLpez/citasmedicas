@@ -12,7 +12,8 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { AdministrarHorarioComponent } from './components/Administrador/administrar-horario/administrar-horario.component';
 import { InicioAdministradorComponent } from './components/Administrador/inicio-administrador/inicio-administrador.component';
 import { PanelAdministradorComponent } from './components/Administrador/panel-administrador/panel-administrador.component';
-
+import { AdministrarDoctoresComponent } from './components/Administrador/administrar-doctores/administrar-doctores.component';
+import { VerDoctoresComponent } from './components/Administrador/ver-doctores/ver-doctores.component';
 
 // componentes de doctor
 import { RegistroCitaComponent } from './components/Doctor/registro-cita/registro-cita.component';
@@ -33,6 +34,7 @@ import { PerfilPacienteComponent } from './components/Paciente/perfil-paciente/p
 // otros componentes
 import { RecordatoriosComponent } from './components/recordatorios/recordatorios.component';
 import { FormularioComponent } from './components/formulario/formulario.component';
+
 
 
 
@@ -68,7 +70,9 @@ import { FormularioComponent } from './components/formulario/formulario.componen
 
     //otros
     RecordatoriosComponent,
-    FormularioComponent
+    FormularioComponent,
+    AdministrarDoctoresComponent,
+    VerDoctoresComponent
   ],
   
   imports: [
