@@ -36,7 +36,7 @@ class Server {
     this.app.use('/api/especialidad', especialidadRoutes);
     this.app.use('/api/doctor', doctorRoutes);
     this.app.use('/api/horario', horarioRoutes);
-    this.app.use('/api/inicio-administrador', inicioadminRoutes);  
+    this.app.use('/api/inicioadmin', inicioadminRoutes);  
     this.app.use('/api/rol', rolRoutes);
     this.app.use('/api/sesion', sesionRoutes);
   }
