@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import pool from '../database';
 
 class SesionController {
+  // Obtener todas las sesiones
   public async list(req: Request, res: Response): Promise<void> {
     try {
       const sesiones = await pool.query('SELECT * FROM sesion');
@@ -12,6 +13,7 @@ class SesionController {
     }
   }
 
+  // Crear una nueva sesión
   public async create(req: Request, res: Response): Promise<void> {
     try {
       const sesion = req.body;
@@ -29,6 +31,7 @@ class SesionController {
     }
   }
 
+  // Obtener una sesión específica
   public async getOne(req: Request, res: Response): Promise<void> {
     try {
       const { usuario } = req.params;
@@ -44,6 +47,7 @@ class SesionController {
     }
   }
 
+  // Actualizar una sesión
   public async update(req: Request, res: Response): Promise<void> {
     try {
       const { usuario } = req.params;
@@ -54,14 +58,29 @@ class SesionController {
         return;
       }
 
-      await pool.query('UPDATE sesion SET id_rol = ?, contraseña = ? WHERE usuario = ?', [id_rol, contraseña, usuario]);
-      res.json({ message: 'Sesión actualizada con éxito' });
+      // Verificar que el usuario existe antes de actualizar
+      const userExists = await pool.query('SELECT * FROM sesion WHERE usuario = ?', [usuario]);
+      if (userExists.length === 0) {
+        res.status(404).json({ message: 'Sesión no encontrada' });
+        return;
+      }
+
+      // Actualizar la sesión
+      const result = await pool.query('UPDATE sesion SET id_rol = ?, contraseña = ? WHERE usuario = ?', [id_rol, contraseña, usuario]);
+      
+      // Verificar si se actualizó alguna fila
+      if (result.affectedRows > 0) {
+        res.json({ message: 'Sesión actualizada con éxito' });
+      } else {
+        res.status(500).send('No se realizó ninguna actualización');
+      }
     } catch (error) {
       console.error('Database query error:', error);
       res.status(500).send('Error al actualizar la sesión');
     }
   }
 
+  // Eliminar una sesión
   public async delete(req: Request, res: Response): Promise<void> {
     try {
       const { usuario } = req.params;

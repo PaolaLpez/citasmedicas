@@ -37,8 +37,10 @@
               }
             ],
             "styles": [
-              "src/styles.css"
-            ],
+
+  "./src/styles.css"
+
+],
             "scripts": []
           },
           "configurations": {
@@ -51,7 +53,7 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
+                  "maximumWarning": "3kB",
                   "maximumError": "4kB"
                 }
               ],
