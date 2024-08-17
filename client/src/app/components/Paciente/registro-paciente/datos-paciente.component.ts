@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
+import { PacienteService } from '../../../services/paciente.service';
+import { Paciente } from '../../../models/paciente';
+import { ActivatedRoute,Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-datos-paciente',
@@ -7,4 +11,48 @@ import { Component } from '@angular/core';
 })
 export class DatosPacienteComponent {
 
+  @HostBinding('class') classes='row';
+  paciente : Paciente = {
+    usuario: '',
+    nom_paciente: '',
+    fecha_nac: null,
+    genero: '',
+    direccion: '',
+    tipo_sangre: '',
+    curp: '',
+    num_telefono: '',
+    correo_electronico: '',
+  }
+  edit : boolean = false
+
+constructor(private pacienteService : PacienteService,
+            private router :Router,
+            private activatedRoute : ActivatedRoute
+)  {}
+
+/* ngOnInit(){
+  const params = this.activatedRoute.snapshot.params;
+  if ((params)['id_paciente']){
+    this.pacienteService.getOnePaciente((params)['id_paciente']).subscribe(
+      resp =>{
+        console.log(resp);
+        this.paciente = resp;
+        this.edit = true;
+      },  
+      err => console.error(err)
+    )
+  }
+ } */
+saveNewPaciente(){
+  delete this.paciente.id_paciente;
+  this.pacienteService.createPaciente(this.paciente).subscribe(
+    resp => {
+      console.log(resp)
+      this.router.navigate(['/inicio-paciente'])
+    },
+    err=> console.error(err)
+  )
+   
+  }
 }
+

@@ -4,7 +4,7 @@ USE citasmedicas;
 
 -- Crear tabla rol
 CREATE TABLE IF NOT EXISTS rol (
-    id_rol CHAR(5) NOT NULL PRIMARY KEY,
+    id_rol INT NOT NULL PRIMARY KEY,
     tipo_rol VARCHAR(20) NOT NULL
 );
 
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS horario (
 -- Crear tabla sesion
 CREATE TABLE IF NOT EXISTS sesion (
     usuario VARCHAR(20) NOT NULL PRIMARY KEY,
-    id_rol CHAR(5) NOT NULL,
+    id_rol INT NOT NULL,
     contraseña VARCHAR(20) NOT NULL,
     FOREIGN KEY (id_rol) REFERENCES rol(id_rol)
 );
@@ -29,16 +29,16 @@ CREATE TABLE IF NOT EXISTS sesion (
 CREATE TABLE IF NOT EXISTS paciente (
     id_paciente INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     usuario VARCHAR(20) NOT NULL,
-    nom_paciente VARCHAR(50) NOT NULL,
+    nom_paciente VARCHAR(60) NOT NULL,
     fecha_nac DATE NOT NULL,
     genero CHAR(10) NOT NULL,
     direccion VARCHAR(60) NOT NULL,
     tipo_sangre CHAR(4) NOT NULL,
     curp CHAR(18) NOT NULL,
     num_telefono VARCHAR(15) NOT NULL,
-    correo_electronico VARCHAR(40) NOT NULL,
+    correo_electronico CHAR(60) NOT NULL,
     FOREIGN KEY (usuario) REFERENCES sesion(usuario)
-    On delete cascade;
+    On delete cascade
 );
 
 -- Crear tabla doctor
@@ -57,13 +57,11 @@ CREATE TABLE IF NOT EXISTS doctor (
 
 -- Crear tabla administrador
 CREATE TABLE IF NOT EXISTS administrador (
-    id_administrador CHAR(5) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_administrador INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     usuario VARCHAR(20) NOT NULL,
-    id_doctor INT NOT NULL,
-    nombre_adm VARCHAR(50) NOT NULL,
+    nombre_adm VARCHAR(60) NOT NULL,
     FOREIGN KEY (usuario) REFERENCES sesion(usuario)
-    on delete cascade,
-    FOREIGN KEY (id_doctor) REFERENCES doctor(id_doctor)
+    on delete cascade
 );
 
 -- Crear tabla cita
@@ -81,7 +79,7 @@ CREATE TABLE IF NOT EXISTS cita (
 -- Crear tabla especialidad
 CREATE TABLE IF NOT EXISTS especialidad (
     id_especialidad INT NOT NULL PRIMARY KEY,
-    nombre_especialidad VARCHAR(50) NOT NULL
+    nombre_especialidad VARCHAR(60) NOT NULL
 );
 
 -- Crear tabla doctor_especialidad

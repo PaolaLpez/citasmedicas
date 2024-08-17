@@ -8,6 +8,7 @@
         /* Agrega aquí los estilos CSS que desees */
     </style>
 </head>
+<app-panel-doctor></app-panel-doctor>
 <body>
     <div class="main-content">
         <div class="container">
@@ -86,46 +87,47 @@
         </div>
     </div>
 
-    <script type="text/typescript">
+    <!-- Bloque de script para las validaciones -->
+    <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const form = document.getElementById("registro-form") as HTMLFormElement;
-            
+            const form = document.getElementById("registro-form");
+
             form.addEventListener("submit", (event) => {
                 event.preventDefault();
 
                 // Validación de Nombre del Paciente
-                const nombrePaciente = (document.getElementById("nombre-paciente") as HTMLInputElement).value.trim();
+                const nombrePaciente = document.getElementById("nombre-paciente").value.trim();
                 if (!nombrePaciente) {
                     alert("El nombre del paciente es obligatorio.");
                     return;
-                } else if (nombrePaciente.length < 2) {
-                    alert("El nombre del paciente debe tener al menos 2 caracteres.");
+                } else if (nombrePaciente.length < 10) {
+                    alert("El nombre del paciente debe tener al menos 10 caracteres.");
                     return;
-                } else if (!/^[a-zA-Z\s]+$/.test(nombrePaciente)) {
+                } else if (!/^[a-zA-Z\sáéíóúÁÉÍÓÚñÑ]+$/.test(nombrePaciente)) {
                     alert("El nombre del paciente solo puede contener letras y espacios.");
                     return;
                 }
 
                 // Validación de Tipo de Doctor
-                const tipoDoctor = (document.getElementById("tipo-doctor") as HTMLSelectElement).value;
+                const tipoDoctor = document.getElementById("tipo-doctor").value;
                 if (!tipoDoctor) {
                     alert("Debe seleccionar un tipo de doctor.");
                     return;
                 }
 
                 // Validación de Nombre del Doctor
-                const nombreDoctor = (document.getElementById("nombre-doctor") as HTMLSelectElement).value;
+                const nombreDoctor = document.getElementById("nombre-doctor").value;
                 if (!nombreDoctor) {
                     alert("Debe seleccionar un nombre de doctor.");
                     return;
                 }
 
                 // Validación de Fecha de la Cita
-                const fechaCita = (document.getElementById("fecha-cita") as HTMLInputElement).value;
+                const fechaCita = document.getElementById("fecha-cita").value;
                 const fechaActual = new Date();
                 fechaActual.setHours(0, 0, 0, 0);  // Ignorar la hora en la fecha actual
                 const fechaSeleccionada = new Date(fechaCita);
-                
+
                 if (!fechaCita) {
                     alert("Debe seleccionar una fecha para la cita.");
                     return;
@@ -135,9 +137,9 @@
                 }
 
                 // Validación de Hora de la Cita
-                const horaCitaHora = (document.getElementById("hora-desde-hora") as HTMLSelectElement).value;
-                const horaCitaMinuto = (document.getElementById("hora-desde-minuto") as HTMLSelectElement).value;
-                
+                const horaCitaHora = document.getElementById("hora-desde-hora").value;
+                const horaCitaMinuto = document.getElementById("hora-desde-minuto").value;
+
                 if (!horaCitaHora || !horaCitaMinuto) {
                     alert("Debe seleccionar una hora para la cita.");
                     return;
@@ -162,8 +164,7 @@
             });
         });
     </script>
+    <!-- Fin del bloque de script -->
 
-    <!-- Aquí podrías agregar la referencia a tu compilador de TypeScript si estás usando uno -->
-    <!-- <script src="path/to/typescript-compiler.js"></script> -->
 </body>
 </html>
