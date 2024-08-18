@@ -37,8 +37,15 @@ import { RecordatoriosComponent } from './components/recordatorios/recordatorios
 import { FormularioComponent } from './components/formulario/formulario.component';
 
 //-------importsServices----------------------------------------------------------------------------//
-import { PacienteService } from './services/paciente.service';
+import { AdministradorService } from './services/administrador.service';
+import { CitaService } from './services/cita.service';
+import { Doctor_especialidadService } from './services/doctor-especialidad.service';
 import { DoctorService } from './services/doctor.service';
+import { HorarioService } from './services/horario.service';
+import { PacienteService } from './services/paciente.service';
+import { RolService } from './services/rol.service';
+import { EspecialidadService } from './services/especialidad.service';
+
 
 @NgModule({
   declarations: [
@@ -79,11 +86,17 @@ import { DoctorService } from './services/doctor.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
+    FormsModule
   ],
   providers: [
-    PacienteService, //este servicio tendrá todos los metodos para los datos
-    DoctorService
+    AdministradorService,
+    CitaService,
+    Doctor_especialidadService,
+    DoctorService,
+    EspecialidadService,
+    HorarioService,
+    PacienteService,
+    RolService //este servicio tendrá todos los metodos para los datos
   ],
   bootstrap: [AppComponent]
 })

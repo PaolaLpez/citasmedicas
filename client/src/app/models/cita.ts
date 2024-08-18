@@ -5,5 +5,6 @@ export interface Cita {
     id_doctor: number;
     fecha: Date;
     hora: Date;
-    stado: string;
+    stado?: string;
   }
+  

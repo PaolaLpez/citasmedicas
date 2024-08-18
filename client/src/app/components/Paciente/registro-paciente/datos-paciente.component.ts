@@ -13,7 +13,7 @@ export class DatosPacienteComponent {
 
   @HostBinding('class') classes='row';
   paciente : Paciente = {
-    usuario: '',
+    id_rol:3 ,
     nom_paciente: '',
     fecha_nac: null,
     genero: '',
@@ -22,6 +22,7 @@ export class DatosPacienteComponent {
     curp: '',
     num_telefono: '',
     correo_electronico: '',
+    contrasena: '',
   }
   edit : boolean = false
 
@@ -30,10 +31,10 @@ constructor(private pacienteService : PacienteService,
             private activatedRoute : ActivatedRoute
 )  {}
 
-/* ngOnInit(){
+ngOnInit(){
   const params = this.activatedRoute.snapshot.params;
-  if ((params)['id_paciente']){
-    this.pacienteService.getOnePaciente((params)['id_paciente']).subscribe(
+  /* if ((params)['id_paciente=']) */{
+    this.pacienteService.getOnePaciente((params)['id_paciente=']).subscribe(
       resp =>{
         console.log(resp);
         this.paciente = resp;
@@ -42,15 +43,16 @@ constructor(private pacienteService : PacienteService,
       err => console.error(err)
     )
   }
- } */
+ }
 saveNewPaciente(){
   delete this.paciente.id_paciente;
+  console.log(this.paciente);
   this.pacienteService.createPaciente(this.paciente).subscribe(
     resp => {
-      console.log(resp)
+      console.log('Paciente creado',resp)
       this.router.navigate(['/inicio-paciente'])
     },
-    err=> console.error(err)
+    err=> console.error('Error al crear el paciente',err)
   )
    
   }

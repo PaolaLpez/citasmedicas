@@ -7,27 +7,29 @@ import { Doctor } from '../models/doctor';
   providedIn: 'root'
 })
 export class DoctorService {
-  private doctor = 'http://localhost:3000/api/doctor';//la ruta tiene que estar igual que en el back-end (index.ts)
+  private doctorUr1 = 'http://localhost:3000/api/doctor'; // Asegúrate de que esta URL es correcta
+//la ruta tiene que estar igual que en el back-end
+//private doctorUr2 = 'http://localhost:3000/doctor'; // Asegúrate de que esta URL es correcta
 
   constructor(private http: HttpClient) {}
 
-  /* getDoctor(): Observable<Doctor> {
-    return this.http.get<Doctor[]>(this.doctor);
-  } */
+  getDoctor() {
+    return this.http.get(this.doctorUr1);
+  }
 
   getOneDoctor(id_doctor: number): Observable<Doctor> {
-    return this.http.get<Doctor>('${this.doctor}/${id_doctor}');
+    return this.http.get<Doctor>(`${this.doctorUr1}/${id_doctor}`);
   }
 
   createDoctor(doctor: Doctor): Observable<Doctor> {
-    return this.http.post<Doctor>(this.doctor, doctor);
+    return this.http.post<Doctor>(`${this.doctorUr1}`, doctor);
   }
 
-  updateDoctor(id_doctor: number, doctor: Doctor): Observable<Doctor> {
-    return this.http.put<Doctor>('${this.doctor}/${id_doctor}', doctor);
+  updateDoctor(id_doctor: number | string, updateDoctor: Doctor): Observable<Doctor> {
+    return this.http.put<Doctor>(`${this.doctorUr1}/${id_doctor}`, updateDoctor);
   }
 
-  deleteDoctor(id_doctor: number): Observable<void> {
-    return this.http.delete<void>('${this.doctor}/${id}');
+  deleteDoctor(id_doctor: number | string) {
+    return this.http.delete(`${this.doctorUr1}/${id_doctor}`);
   }
 }

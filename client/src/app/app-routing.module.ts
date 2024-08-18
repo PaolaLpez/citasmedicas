@@ -40,7 +40,7 @@ const routes: Routes = [
 //Pantalla de inicio
 { path : '', redirectTo : '/inicio', pathMatch : 'full' },
 { path : 'inicio', component : InicioComponent }, 
-//{path: '**', component : InicioComponent,}, //Esta es por si ningua de las otras rutas coinicide
+{path: '**', component : InicioComponent,}, //Esta es por si ningua de las otras rutas coinicide
 
 //Para el login
    { path : 'login', component : LoginComponent },

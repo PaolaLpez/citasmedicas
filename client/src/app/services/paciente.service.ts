@@ -14,22 +14,22 @@ export class PacienteService {
   constructor(private http: HttpClient) {}
 
   getPaciente() {
-    return this.http.get<Paciente[]>(this.pacienteUr1);
+    return this.http.get(this.pacienteUr1);
   }
 
   getOnePaciente(id_paciente: number): Observable<Paciente> {
     return this.http.get<Paciente>(`${this.pacienteUr1}/${id_paciente}`);
   }
 
-  createPaciente(createPaciente: Paciente): Observable<Paciente> {
-    return this.http.post<Paciente>(`${this.pacienteUr1}`, createPaciente);
+  createPaciente(paciente: Paciente): Observable<Paciente> {
+    return this.http.post<Paciente>(`${this.pacienteUr1}`, paciente);
   }
 
-  updatePaciente(id_paciente: number, updatePaciente: Paciente): Observable<Paciente> {
+  updatePaciente(id_paciente: number | string, updatePaciente: Paciente): Observable<Paciente> {
     return this.http.put<Paciente>(`${this.pacienteUr1}/${id_paciente}`, updatePaciente);
   }
 
-  deletePaciente(id_paciente: number) {
+  deletePaciente(id_paciente: number | string) {
     return this.http.delete(`${this.pacienteUr1}/${id_paciente}`);
   }
 }

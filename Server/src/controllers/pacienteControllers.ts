@@ -20,8 +20,8 @@ public async list(req: Request, res: Response): Promise<void> {
             const paciente = Array.isArray(req.body) ? req.body[0] : req.body;
     
             // Validar que todos los campos requeridos están presentes
-            const { usuario, nom_paciente, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, correo_electronico } = paciente;
-            if (!usuario || !nom_paciente || !fecha_nac || !genero || !direccion || !tipo_sangre || !curp || !num_telefono || !correo_electronico) {
+            const {nom_paciente, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, correo_electronico, contrasena } = paciente;
+            if (!nom_paciente || !fecha_nac || !genero || !direccion || !tipo_sangre || !curp || !num_telefono || !correo_electronico || !contrasena) {
                  res.status(400).json({ message: 'Datos incompletos' });
             }
     
@@ -30,8 +30,8 @@ public async list(req: Request, res: Response): Promise<void> {
     
             // Ejecutar la consulta
             const result = await pool.query(
-                'INSERT INTO paciente (usuario, nom_paciente, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, correo_electronico) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                [usuario, nom_paciente, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, correo_electronico]
+                'INSERT INTO paciente (id_rol, nom_paciente, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, correo_electronico, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                [3, nom_paciente, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, correo_electronico, contrasena]
             );
     
             res.status(201).json({ message: 'Datos de paciente insertados', id_paciente: result.insertId });
@@ -56,9 +56,9 @@ public async delete(req: Request, res: Response): Promise<void> {
 public async update(req: Request, res: Response): Promise<void> {
     try {
         const {id_paciente} = req.params;
-        const { usuario, nom_paciente, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, correo_electronico } = req.body;
+        const {nom_paciente, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, correo_electronico, contrasena } = req.body;
 
-        const result=await pool.query('UPDATE paciente SET usuario =?, nom_paciente =?, fecha_nac =?, genero =?, direccion =?, tipo_sangre =?, curp =?, num_telefono =?, correo_electronico =? WHERE id_paciente=?', [usuario, nom_paciente, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, correo_electronico, id_paciente])
+        const result=await pool.query('UPDATE paciente SET nom_paciente =?, fecha_nac =?, genero =?, direccion =?, tipo_sangre =?, curp =?, num_telefono =?, correo_electronico =?, contrasena=? WHERE id_paciente=?', [nom_paciente, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, correo_electronico,contrasena, id_paciente])
              res.json({ message: 'Datos del paciente actualizados' });
     } catch (error) {
         console.error('Database query error:', error);

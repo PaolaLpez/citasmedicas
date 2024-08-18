@@ -16,11 +16,18 @@
         <form id="registerForm" (ngsubmit)="saveNewPaciente()"#registerForm="ngForm">
             <div class="form-group">
                 <label for="full-name">Nombre Completo</label>
-                <input type="text" id="full-name" name="full-name" [(ngModel)]="paciente.nom_paciente" required>
+                <input type="text" name="full-name" [(ngModel)]="paciente.nom_paciente" required>
             </div>
             <div class="form-group">
                 <label for="birth-date">Fecha de Nacimiento</label>
-                <input type="date" id="birth-date" name="birth-date" [(ngModel)]="paciente.fecha_nac" required>
+                <input type="date"  name="birth-date" [(ngModel)]="paciente.fecha_nac" required>
+            </div>
+            <div class="form-group">
+                <label for="blood-type">Género</label>
+                <select id="blood-genero" name="blood-genero" [(ngModel)]="paciente.genero" placeholder="selecciona tu genero" required>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="curp">CURP</label>
@@ -28,8 +35,7 @@
             </div>
             <div class="form-group">
                 <label for="blood-type">Tipo de Sangre</label>
-                <select id="blood-type" name="blood-type" [(ngModel)]="paciente.tipo_sangre" required>
-                    <option value="">Seleccione...</option>
+                <select id="blood-type" name="blood-type" [(ngModel)]="paciente.tipo_sangre" placeholder="Selecciona tu tipo de sangre" required>
                     <option value="A+">A+</option>
                     <option value="A-">A-</option>
                     <option value="B+">B+</option>
@@ -54,7 +60,7 @@
             </div>
             <div class="form-group">
                 <label for="password">Crea tu Contraseña</label>
-                <input type="password" id="password" name="password" [(ngModel)]="paciente.usuario" pattern=".{6,}" title="La contraseña debe tener al menos 6 caracteres." required>
+                <input type="password" id="password" name="password" [(ngModel)]="paciente.contrasena" pattern=".{6,}" title="La contraseña debe tener al menos 6 caracteres." required>
             </div>
             <div class="form-submit">
                 <button class="btn btn-success btn-block" (click)="saveNewPaciente()"> Registrar</button>
