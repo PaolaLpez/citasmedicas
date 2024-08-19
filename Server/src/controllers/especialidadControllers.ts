@@ -64,7 +64,7 @@ public async update(req: Request, res: Response): Promise<void> {
             return;
         }
 
-        const result=await pool.query('UPDATE especialidad SET nombre_especialidad=? WHERE id_especialidad=?', [id_especialidad, nombre_especialidad])
+        const result=await pool.query('UPDATE especialidad SET nombre_especialidad=? WHERE id_especialidad=?', [nombre_especialidad, id_especialidad])
              res.json({ message: 'Datos de la especialidad actualizados' });
     } catch (error) {
         console.error('Database query error:', error);
@@ -85,4 +85,4 @@ public async getOne(req: Request, res: Response) {
   }
   
 
-export const especialidaControllers = new EspecialidadController ();
+export const especialidadControllers = new EspecialidadController ();

@@ -2,15 +2,20 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const inicioadminControllers_1 = require("../controllers/inicioadminControllers");
-const router = (0, express_1.Router)();
-// Ruta para crear un nuevo administrador
-router.post('/', inicioadminControllers_1.inicioAdminControllers.create);
-// Ruta para obtener todos los administradores
-router.get('/', inicioadminControllers_1.inicioAdminControllers.list);
-// Ruta para obtener un administrador por ID
-router.get('/:id_administrador', inicioadminControllers_1.inicioAdminControllers.getOne);
-// Ruta para actualizar un administrador existente
-router.put('/:id_administrador', inicioadminControllers_1.inicioAdminControllers.update);
-// Ruta para eliminar un administrador existente
-router.delete('/:id_administrador', inicioadminControllers_1.inicioAdminControllers.delete);
-exports.default = router;
+class InicioAdminRoutes {
+    constructor() {
+        this.router = (0, express_1.Router)(); // Se crea la propiedad router y se inicializa
+        this.config();
+    }
+    config() {
+        // Definir las rutas y asociarlas con los métodos del controlador
+        this.router.post('/', inicioadminControllers_1.inicioAdminControllers.create);
+        this.router.get('/', inicioadminControllers_1.inicioAdminControllers.list);
+        this.router.get('/:id_administrador', inicioadminControllers_1.inicioAdminControllers.getOne);
+        this.router.put('/:id_administrador', inicioadminControllers_1.inicioAdminControllers.update);
+        this.router.delete('/:id_administrador', inicioadminControllers_1.inicioAdminControllers.delete);
+    }
+}
+// Crear una instancia de la clase y exportar solo el objeto router
+const inicioAdminRoutes = new InicioAdminRoutes();
+exports.default = inicioAdminRoutes.router;

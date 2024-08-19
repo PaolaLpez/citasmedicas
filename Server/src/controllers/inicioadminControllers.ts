@@ -12,15 +12,15 @@ class InicioAdminController {
       }
 
       // Verificar si el usuario ya existe en la tabla sesion
-      const [usuarioExists] = await pool.query('SELECT * FROM sesion WHERE usuario = ?', [usuario]);
-      if (usuarioExists.length === 0) {
+      const [usuarioExists]: any[] = await pool.query('SELECT * FROM sesion WHERE usuario = ?', [usuario]);
+      if (Array.isArray(usuarioExists) && usuarioExists.length === 0) {
         res.status(400).json({ message: 'El usuario no existe en la tabla sesion' });
         return;
       }
 
       // Verificar si el id_doctor existe en la tabla doctor
-      const [doctorExists] = await pool.query('SELECT * FROM doctor WHERE id_doctor = ?', [id_doctor]);
-      if (doctorExists.length === 0) {
+      const [doctorExists]: any[] = await pool.query('SELECT * FROM doctor WHERE id_doctor = ?', [id_doctor]);
+      if (Array.isArray(doctorExists) && doctorExists.length === 0) {
         res.status(400).json({ message: 'El ID de doctor no existe' });
         return;
       }
@@ -40,7 +40,7 @@ class InicioAdminController {
   // Método para listar todos los administradores
   public async list(req: Request, res: Response): Promise<void> {
     try {
-      const admins = await pool.query('SELECT * FROM administrador');
+      const [admins]: any[] = await pool.query('SELECT * FROM administrador');
       res.json(admins);
     } catch (error) {
       console.error('Database query error:', error);
@@ -52,8 +52,8 @@ class InicioAdminController {
   public async getOne(req: Request, res: Response): Promise<void> {
     try {
       const { id_administrador } = req.params;
-      const [result] = await pool.query('SELECT * FROM administrador WHERE id_administrador = ?', [id_administrador]);
-      if (result.length === 0) {
+      const [result]: any[] = await pool.query('SELECT * FROM administrador WHERE id_administrador = ?', [id_administrador]);
+      if (Array.isArray(result) && result.length === 0) {
         res.status(404).json({ message: 'Administrador no encontrado' });
         return;
       }
@@ -75,22 +75,22 @@ class InicioAdminController {
       }
 
       // Verificar si el id_administrador existe
-      const [adminExists] = await pool.query('SELECT * FROM administrador WHERE id_administrador = ?', [id_administrador]);
-      if (adminExists.length === 0) {
+      const [adminExists]: any[] = await pool.query('SELECT * FROM administrador WHERE id_administrador = ?', [id_administrador]);
+      if (Array.isArray(adminExists) && adminExists.length === 0) {
         res.status(404).json({ message: 'Administrador no encontrado' });
         return;
       }
 
       // Verificar si el usuario existe en la tabla sesion
-      const [usuarioExists] = await pool.query('SELECT * FROM sesion WHERE usuario = ?', [usuario]);
-      if (usuarioExists.length === 0) {
+      const [usuarioExists]: any[] = await pool.query('SELECT * FROM sesion WHERE usuario = ?', [usuario]);
+      if (Array.isArray(usuarioExists) && usuarioExists.length === 0) {
         res.status(400).json({ message: 'El usuario no existe en la tabla sesion' });
         return;
       }
 
       // Verificar si el id_doctor existe en la tabla doctor
-      const [doctorExists] = await pool.query('SELECT * FROM doctor WHERE id_doctor = ?', [id_doctor]);
-      if (doctorExists.length === 0) {
+      const [doctorExists]: any[] = await pool.query('SELECT * FROM doctor WHERE id_doctor = ?', [id_doctor]);
+      if (Array.isArray(doctorExists) && doctorExists.length === 0) {
         res.status(400).json({ message: 'El ID de doctor no existe' });
         return;
       }
@@ -112,8 +112,8 @@ class InicioAdminController {
     try {
       const { id_administrador } = req.params;
       // Verificar si el id_administrador existe
-      const [adminExists] = await pool.query('SELECT * FROM administrador WHERE id_administrador = ?', [id_administrador]);
-      if (adminExists.length === 0) {
+      const [adminExists]: any[] = await pool.query('SELECT * FROM administrador WHERE id_administrador = ?', [id_administrador]);
+      if (Array.isArray(adminExists) && adminExists.length === 0) {
         res.status(404).json({ message: 'Administrador no encontrado' });
         return;
       }
