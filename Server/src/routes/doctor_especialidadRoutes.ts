@@ -11,9 +11,9 @@ class Doctor_EspecialidadRoutes {
     config(): void {
       this.router.get('/', doctor_especialidadControllers.list);
       this.router.post('/', doctor_especialidadControllers.create);
-      this.router.delete('/:id_doctor_especialidad', doctor_especialidadControllers.delete);
-      this.router.put('/:id_doctor_especialidad', doctor_especialidadControllers.update);
-      this.router.get('/:id_doctor_especialidad', doctor_especialidadControllers.getOne);
+      this.router.delete('/:id_doctor/:id_especialidad', doctor_especialidadControllers.delete);
+      this.router.put('/:id_doctor/:id_especialidad', doctor_especialidadControllers.update);
+      this.router.get('/:id_doctor/:id_especialidad', doctor_especialidadControllers.getOne);
     }
   }
   
