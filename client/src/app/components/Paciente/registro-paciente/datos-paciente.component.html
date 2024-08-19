@@ -14,6 +14,7 @@
             <h2>Registro de Paciente</h2>
         </div>
         <form id="registerForm" (ngsubmit)="saveNewPaciente()"#registerForm="ngForm">
+
             <div class="form-group">
                 <label for="full-name">Nombre Completo</label>
                 <input type="text" name="full-name" [(ngModel)]="paciente.nom_paciente" required>
@@ -68,22 +69,38 @@
             </div>
         </form>
     </div>
-    <script>
-        function validarFormulario(event) {
-            event.preventDefault(); // Evita el envío tradicional del formulario
 
-            const form = document.getElementById('registerForm');
-    
-            if (!form.checkValidity()) {
-                const firstInvalidField = form.querySelector(':invalid');
-                firstInvalidField.reportValidity();
-                return false;
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch('/api/paciente', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                    // Manejo del éxito
+                    alert('Paciente registrado con éxito');
+                    window.location.href = '/inicio';
+                } else {
+                    // Manejo de errores
+                    const errorData = await response.json();
+                    alert(`Error: ${errorData.message || 'Error desconocido'}`);
+                }
+            } catch (error) {
+                console.error('Error en la solicitud:', error);
+                alert('Hubo un problema con la solicitud. Por favor, inténtelo de nuevo más tarde.');
             }
-    
-            // Redirigir a la página de inicio-paciente si el formulario es válido
-            window.location.href = '/inicio-paciente';
-            return false; // Evita que el formulario se envíe de forma tradicional
-        }
+        });
     </script>
 </body>
 </html>
+

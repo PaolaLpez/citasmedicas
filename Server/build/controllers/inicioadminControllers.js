@@ -26,13 +26,13 @@ class InicioAdminController {
                 }
                 // Verificar si el usuario ya existe en la tabla sesion
                 const [usuarioExists] = yield database_1.default.query('SELECT * FROM sesion WHERE usuario = ?', [usuario]);
-                if (usuarioExists.length === 0) {
+                if (Array.isArray(usuarioExists) && usuarioExists.length === 0) {
                     res.status(400).json({ message: 'El usuario no existe en la tabla sesion' });
                     return;
                 }
                 // Verificar si el id_doctor existe en la tabla doctor
                 const [doctorExists] = yield database_1.default.query('SELECT * FROM doctor WHERE id_doctor = ?', [id_doctor]);
-                if (doctorExists.length === 0) {
+                if (Array.isArray(doctorExists) && doctorExists.length === 0) {
                     res.status(400).json({ message: 'El ID de doctor no existe' });
                     return;
                 }
@@ -50,7 +50,7 @@ class InicioAdminController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const admins = yield database_1.default.query('SELECT * FROM administrador');
+                const [admins] = yield database_1.default.query('SELECT * FROM administrador');
                 res.json(admins);
             }
             catch (error) {
@@ -65,7 +65,7 @@ class InicioAdminController {
             try {
                 const { id_administrador } = req.params;
                 const [result] = yield database_1.default.query('SELECT * FROM administrador WHERE id_administrador = ?', [id_administrador]);
-                if (result.length === 0) {
+                if (Array.isArray(result) && result.length === 0) {
                     res.status(404).json({ message: 'Administrador no encontrado' });
                     return;
                 }
@@ -89,19 +89,19 @@ class InicioAdminController {
                 }
                 // Verificar si el id_administrador existe
                 const [adminExists] = yield database_1.default.query('SELECT * FROM administrador WHERE id_administrador = ?', [id_administrador]);
-                if (adminExists.length === 0) {
+                if (Array.isArray(adminExists) && adminExists.length === 0) {
                     res.status(404).json({ message: 'Administrador no encontrado' });
                     return;
                 }
                 // Verificar si el usuario existe en la tabla sesion
                 const [usuarioExists] = yield database_1.default.query('SELECT * FROM sesion WHERE usuario = ?', [usuario]);
-                if (usuarioExists.length === 0) {
+                if (Array.isArray(usuarioExists) && usuarioExists.length === 0) {
                     res.status(400).json({ message: 'El usuario no existe en la tabla sesion' });
                     return;
                 }
                 // Verificar si el id_doctor existe en la tabla doctor
                 const [doctorExists] = yield database_1.default.query('SELECT * FROM doctor WHERE id_doctor = ?', [id_doctor]);
-                if (doctorExists.length === 0) {
+                if (Array.isArray(doctorExists) && doctorExists.length === 0) {
                     res.status(400).json({ message: 'El ID de doctor no existe' });
                     return;
                 }
@@ -122,7 +122,7 @@ class InicioAdminController {
                 const { id_administrador } = req.params;
                 // Verificar si el id_administrador existe
                 const [adminExists] = yield database_1.default.query('SELECT * FROM administrador WHERE id_administrador = ?', [id_administrador]);
-                if (adminExists.length === 0) {
+                if (Array.isArray(adminExists) && adminExists.length === 0) {
                     res.status(404).json({ message: 'Administrador no encontrado' });
                     return;
                 }

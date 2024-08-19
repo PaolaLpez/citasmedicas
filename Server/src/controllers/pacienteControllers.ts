@@ -11,7 +11,7 @@ public async list(req: Request, res: Response): Promise<void> {
         console.error('Database query error:', error); // Imprimir el error completo
         res.status(500).send('Error al consultar la base de datos');
       }
-    }
+    } 
 
     
     public async create(req: Request, res: Response): Promise<void> {

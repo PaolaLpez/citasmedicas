@@ -12,7 +12,8 @@ import { DatosPacienteComponent } from "./components/Paciente/registro-paciente/
 //Componentes del administrador
 import { InicioAdministradorComponent } from "./components/Administrador/inicio-administrador/inicio-administrador.component";
 import { AdministrarHorarioComponent } from "./components/Administrador/administrar-horario/administrar-horario.component";
-
+import { AdministrarDoctoresComponent } from './components/Administrador/administrar-doctores/administrar-doctores.component';
+import { VerDoctoresComponent } from './components/Administrador/ver-doctores/ver-doctores.component';
 
 // Componentes del doctor
 import { PanelDoctorComponent } from "./components/Doctor/panel-doctor/panel-doctor.component";
@@ -49,8 +50,8 @@ const routes: Routes = [
   { path : 'inicio-administrador', component : InicioAdministradorComponent },
   { path : 'administrar-horario', component : AdministrarHorarioComponent },
   { path : 'panel-administrador', component : PanelAdministradorComponent },
-
-
+  { path : 'administrar-doctores', component : AdministrarDoctoresComponent },
+  { path : 'ver-doctores', component : VerDoctoresComponent },
 
    //Ruteo doctor
    { path : 'panel-doctor', component : PanelDoctorComponent },

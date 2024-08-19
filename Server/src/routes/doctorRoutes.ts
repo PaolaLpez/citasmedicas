@@ -1,19 +1,23 @@
-import { Router } from 'express';
-import DoctorController from '../controllers/doctorControllers';
+import { Router } from "express";
+import { doctorController } from "../controllers/doctorControllers";
 
-const router = Router();
-const doctorController = new DoctorController();
+class DoctorRoutes {
+    public router: Router = Router();
 
-// Ruta para manejar POST en /api/doctor
-router.post('/', doctorController.addDoctor);
+    constructor() {
+        this.config();
+    }
 
-// Ruta para obtener todos los doctores
-router.get('/', doctorController.getDoctors);
+    config(): void {
+        this.router.get('/', doctorController.list);
+        this.router.post('/', doctorController.create);
+        this.router.delete('/:id_doctor', doctorController.delete);
+        this.router.put('/:id_doctor', doctorController.update);
+        this.router.get('/:id_doctor', doctorController.getOne);
+    }
+}
 
-// Ruta para actualizar un doctor
-router.put('/:id_doctor', doctorController.updateDoctor);
+export const doctorRoutes = new DoctorRoutes().router;
+export default doctorRoutes;
 
-// Ruta para eliminar un doctor
-router.delete('/:id_doctor', doctorController.deleteDoctor);
 
-export default router;

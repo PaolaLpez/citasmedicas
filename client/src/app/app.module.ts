@@ -15,7 +15,8 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { AdministrarHorarioComponent } from './components/Administrador/administrar-horario/administrar-horario.component';
 import { InicioAdministradorComponent } from './components/Administrador/inicio-administrador/inicio-administrador.component';
 import { PanelAdministradorComponent } from './components/Administrador/panel-administrador/panel-administrador.component';
-
+import { AdministrarDoctoresComponent } from './components/Administrador/administrar-doctores/administrar-doctores.component';
+import { VerDoctoresComponent } from './components/Administrador/ver-doctores/ver-doctores.component';
 
 // componentes de doctor
 import { RegistroCitaComponent } from './components/Doctor/registro-cita/registro-cita.component';
@@ -45,6 +46,7 @@ import { HorarioService } from './services/horario.service';
 import { PacienteService } from './services/paciente.service';
 import { RolService } from './services/rol.service';
 import { EspecialidadService } from './services/especialidad.service';
+
 
 
 @NgModule({
@@ -79,7 +81,9 @@ import { EspecialidadService } from './services/especialidad.service';
 
     //otros
     RecordatoriosComponent,
-    FormularioComponent
+    FormularioComponent,
+    AdministrarDoctoresComponent,
+    VerDoctoresComponent
   ],
   
   imports: [

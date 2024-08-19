@@ -1,14 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.citaRoutes = void 0;
 const express_1 = require("express");
 const citaControllers_1 = require("../controllers/citaControllers");
-const router = (0, express_1.Router)();
-// Ruta para manejar POST en /api/cita
-router.post('/', citaControllers_1.citaController.addCita);
-// Ruta para obtener citas por fecha
-router.get('/', citaControllers_1.citaController.getCitasByFecha);
-// Ruta para actualizar el estado de una cita
-router.put('/:id_cita', citaControllers_1.citaController.updateCita);
-// Ruta para eliminar una cita
-router.delete('/:id_cita', citaControllers_1.citaController.deleteCita);
-exports.default = router;
+class CitaRoutes {
+    constructor() {
+        this.router = (0, express_1.Router)();
+        this.config();
+    }
+    config() {
+        this.router.get('/', citaControllers_1.citaController.list);
+        this.router.post('/', citaControllers_1.citaController.create);
+        this.router.delete('/:id_cita', citaControllers_1.citaController.delete);
+        this.router.put('/:id_cita', citaControllers_1.citaController.update);
+        this.router.get('/:id_cita', citaControllers_1.citaController.getOne);
+    }
+}
+exports.citaRoutes = new CitaRoutes().router;
+exports.default = exports.citaRoutes;

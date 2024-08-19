@@ -6,10 +6,14 @@ import indexRoutes from './routes/indexRoutes';
 import pacienteRoutes from './routes/pacienteRoutes';
 import doctor_especialidadRoutes from './routes/doctor_especialidadRoutes';
 import especialidadRoutes from './routes/especialidadRoutes';
-import doctorRoutes from './routes/doctorRoutes';
-import horarioRoutes from './routes/horario';
+import horarioRoutes from './routes/horarioRoutes';
 import inicioadminRoutes from './routes/inicioadminRoutes';  
 import rolRoutes from './routes/rolRoutes';
+<<<<<<< HEAD
+=======
+import sesionRoutes from './routes/sesionRoutes';
+import doctorRoutes from './routes/doctorRoutes';
+>>>>>>> b93385d7b90b9818b3f90007f8d236c80f3f0468
 
 class Server {
   public app: express.Application;
@@ -35,7 +39,7 @@ class Server {
     this.app.use('/api/especialidad', especialidadRoutes);
     this.app.use('/api/doctor', doctorRoutes);
     this.app.use('/api/horario', horarioRoutes);
-    this.app.use('/api/inicio-administrador', inicioadminRoutes);  
+    this.app.use('/api/inicioadmin', inicioadminRoutes);  
     this.app.use('/api/rol', rolRoutes);
   }
 

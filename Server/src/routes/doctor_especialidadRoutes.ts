@@ -2,9 +2,8 @@ import { Router } from "express";
 import { doctor_especialidadControllers } from "../controllers/doctor_especialidadControllers";
 
 class Doctor_EspecialidadRoutes {
-    public router: Router = Router();// Se está creando la propiedad que guardara el objeto
-    // devuelto y se inicializa esta propiedad en la misma línea de código. 
-  
+    public router: Router = Router();
+
     constructor() {
       this.config();
     }
@@ -18,7 +17,5 @@ class Doctor_EspecialidadRoutes {
     }
   }
   
-
-
 const doctor_especialidadRoutes = new Doctor_EspecialidadRoutes()
 export default doctor_especialidadRoutes.router;

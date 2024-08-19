@@ -12,11 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const database_1 = __importDefault(require("../database")); // Asegúrate de que el pool de conexiones esté correctamente configurado
+exports.doctorController = void 0;
+const database_1 = __importDefault(require("../database"));
 class DoctorController {
-    // Manejar la solicitud POST para agregar un nuevo doctor
-    addDoctor(req, res) {
+    list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+<<<<<<< HEAD
             const { id_especialidad, id_horario, nombre_doc, tipo_doctor, correo_electronico, contrasena } = req.body;
             // Validar los datos de entrada
             if (!id_especialidad || !id_horario || !nombre_doc || !tipo_doctor || !correo_electronico || !contrasena || !tipo_doctor) {
@@ -34,17 +35,22 @@ class DoctorController {
                 else {
                     res.status(500).send('Error al obtener el ID del nuevo doctor');
                 }
+=======
+            try {
+                const doctors = yield database_1.default.query('SELECT * FROM doctor');
+                res.json(doctors);
+>>>>>>> b93385d7b90b9818b3f90007f8d236c80f3f0468
             }
             catch (error) {
-                console.error('Error al insertar el doctor:', error);
-                res.status(500).send('Error al agregar el doctor');
+                console.error('Database query error:', error); // Imprimir el error completo
+                res.status(500).send('Error al consultar la base de datos');
             }
         });
     }
-    // Manejar la solicitud GET para obtener todos los doctores
-    getDoctors(req, res) {
+    create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+<<<<<<< HEAD
                 const sql = 'SELECT * FROM doctor';
                 const [results] = yield database_1.default.query(sql);
                 res.status(200).json(results);
@@ -70,34 +76,69 @@ class DoctorController {
                 const [result] = yield database_1.default.query(sql, values);
                 if (result.affectedRows === 0) {
                     res.status(404).send('Doctor no encontrado');
+=======
+                const doctor = Array.isArray(req.body) ? req.body[0] : req.body;
+                const { usuario, id_especialidad, id_horario, nombre_doc, tipo_doctor } = doctor;
+                if (!usuario || !id_especialidad || !id_horario || !nombre_doc || !tipo_doctor) {
+                    res.status(400).json({ message: 'Datos incompletos' });
+>>>>>>> b93385d7b90b9818b3f90007f8d236c80f3f0468
                     return;
                 }
-                res.status(200).send('Doctor actualizado exitosamente');
+                console.log('Received data:', doctor);
+                const result = yield database_1.default.query('INSERT INTO doctor (usuario, id_especialidad, id_horario, nombre_doc, tipo_doctor) VALUES (?, ?, ?, ?, ?)', [usuario, id_especialidad, id_horario, nombre_doc, tipo_doctor]);
+                res.status(201).json({ message: 'Doctor insertado' });
             }
             catch (error) {
-                console.error('Error al actualizar el doctor:', error);
-                res.status(500).send('Error al actualizar el doctor');
+                console.error('Database query error:', error); // Imprimir el error completo
+                if (!res.headersSent) {
+                    res.status(500).json({ message: 'Error al insertar en la base de datos' });
+                }
             }
         });
     }
-    // Manejar la solicitud DELETE para eliminar un doctor
-    deleteDoctor(req, res) {
+    delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id_doctor } = req.params;
             try {
-                const sql = 'DELETE FROM doctor WHERE id_doctor = ?';
-                const [result] = yield database_1.default.query(sql, [id_doctor]);
-                if (result.affectedRows === 0) {
-                    res.status(404).send('Doctor no encontrado');
-                    return;
-                }
-                res.status(200).send('Doctor eliminado exitosamente');
+                const { id_doctor } = req.params;
+                yield database_1.default.query('DELETE FROM doctor WHERE id_doctor = ?', [id_doctor]);
+                res.json({ message: 'Doctor eliminado' });
             }
             catch (error) {
-                console.error('Error al eliminar el doctor:', error);
+                console.error('Database query error:', error); // Imprimir el error completo
                 res.status(500).send('Error al eliminar el doctor');
             }
         });
     }
+    update(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { id_doctor } = req.params;
+                const { usuario, id_especialidad, id_horario, nombre_doc, tipo_doctor } = req.body;
+                if (!usuario || !id_especialidad || !id_horario || !nombre_doc || !tipo_doctor) {
+                    res.status(400).json({ message: 'Datos incompletos' });
+                    return;
+                }
+                const result = yield database_1.default.query('UPDATE doctor SET usuario = ?, id_especialidad = ?, id_horario = ?, nombre_doc = ?, tipo_doctor = ? WHERE id_doctor = ?', [usuario, id_especialidad, id_horario, nombre_doc, tipo_doctor, id_doctor]);
+                res.json({ message: 'Doctor actualizado' });
+            }
+            catch (error) {
+                console.error('Database query error:', error);
+                res.status(500).send('Error al actualizar el doctor');
+            }
+        });
+    }
+    getOne(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { id_doctor } = req.params;
+                const result = yield database_1.default.query('SELECT * FROM doctor WHERE id_doctor = ?', [id_doctor]);
+                res.json(result);
+            }
+            catch (error) {
+                console.error('Database query error:', error);
+                res.status(500).send('Error al consultar el doctor');
+            }
+        });
+    }
 }
-exports.default = DoctorController;
+exports.doctorController = new DoctorController();
