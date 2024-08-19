@@ -1,21 +1,21 @@
-import express, { Router } from 'express';
+import { Router } from 'express';
 import { sesionControllers } from '../controllers/sesionControllers';
 
-const router: Router = express.Router();
+class SesionRoutes {
+    public router: Router = Router();
 
-// Ruta para obtener la lista de sesiones
-router.get('/', sesionControllers.list);
+    constructor() {
+        this.config();
+    }
 
-// Ruta para crear una nueva sesión
-router.post('/', sesionControllers.create);
+    config(): void {
+        this.router.get('/', sesionControllers.list);
+        this.router.post('/', sesionControllers.create);
+        this.router.get('/:usuario', sesionControllers.getOne);
+        this.router.put('/:usuario', sesionControllers.update);
+        this.router.delete('/:usuario', sesionControllers.delete);
+    }
+}
 
-// Ruta para obtener una sesión específica por usuario
-router.get('/:usuario', sesionControllers.getOne);
-
-// Ruta para actualizar una sesión existente por usuario
-router.put('/:usuario', sesionControllers.update);
-
-// Ruta para eliminar una sesión existente por usuario
-router.delete('/:usuario', sesionControllers.delete);
-
-export default router;
+const sesionRoutes = new SesionRoutes();
+export default sesionRoutes.router;
