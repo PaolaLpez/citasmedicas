@@ -15,9 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.doctorController = void 0;
 const database_1 = __importDefault(require("../database"));
 class DoctorController {
-    list(req, res) {
+    addDoctor(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-<<<<<<< HEAD
             const { id_especialidad, id_horario, nombre_doc, tipo_doctor, correo_electronico, contrasena } = req.body;
             // Validar los datos de entrada
             if (!id_especialidad || !id_horario || !nombre_doc || !tipo_doctor || !correo_electronico || !contrasena || !tipo_doctor) {
@@ -35,11 +34,6 @@ class DoctorController {
                 else {
                     res.status(500).send('Error al obtener el ID del nuevo doctor');
                 }
-=======
-            try {
-                const doctors = yield database_1.default.query('SELECT * FROM doctor');
-                res.json(doctors);
->>>>>>> b93385d7b90b9818b3f90007f8d236c80f3f0468
             }
             catch (error) {
                 console.error('Database query error:', error); // Imprimir el error completo
@@ -50,18 +44,12 @@ class DoctorController {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-<<<<<<< HEAD
-                const sql = 'SELECT * FROM doctor';
-                const [results] = yield database_1.default.query(sql);
-                res.status(200).json(results);
+                const doctor = Array.isArray(req.body) ? req.body[0] : req.body;
             }
-            catch (error) {
-                console.error('Error al obtener los doctores:', error);
-                res.status(500).send('Error al obtener los doctores');
+            finally {
             }
         });
     }
-    // Manejar la solicitud PUT para actualizar un doctor
     updateDoctor(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id_doctor } = req.params;
@@ -76,12 +64,6 @@ class DoctorController {
                 const [result] = yield database_1.default.query(sql, values);
                 if (result.affectedRows === 0) {
                     res.status(404).send('Doctor no encontrado');
-=======
-                const doctor = Array.isArray(req.body) ? req.body[0] : req.body;
-                const { usuario, id_especialidad, id_horario, nombre_doc, tipo_doctor } = doctor;
-                if (!usuario || !id_especialidad || !id_horario || !nombre_doc || !tipo_doctor) {
-                    res.status(400).json({ message: 'Datos incompletos' });
->>>>>>> b93385d7b90b9818b3f90007f8d236c80f3f0468
                     return;
                 }
                 console.log('Received data:', doctor);

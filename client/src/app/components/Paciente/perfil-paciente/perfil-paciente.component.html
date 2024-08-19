@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 </head>
 <body>
     <app-panel-paciente></app-panel-paciente>
@@ -22,10 +21,8 @@
                 <table>
                     <tr>
                         <th>Nombre</th>
-
                         <td><input type="text" id="name" name="name" [(ngModel)]="paciente.nom_paciente" required></td>
                     </tr> 
-
                     <tr>
                         <th>Edad</th>
                         <td><input type="number" id="age" name="age" [(ngModel)]="paciente.fecha_nac" required></td>
@@ -38,7 +35,6 @@
                     <tr>
                         <th>Dirección</th>
                         <td><input type="text" id="address" name="address" [(ngModel)]="paciente.direccion" required></td>
-
                     </tr>
                     <tr>
                         <th>Teléfono</th>
@@ -55,7 +51,6 @@
                 </table>
                 <div class="form-actions" style="margin-top: 20px;">
                     <button class="btn btn-success btn-block" (click)="edit ? updatePaciente() : saveNewPaciente()">Guardar</button>
-
                 </div>
             </form>
         </div>
