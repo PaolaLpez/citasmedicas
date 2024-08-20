@@ -1,19 +1,19 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
+const express_1 = require("express");
 const sesionControllers_1 = require("../controllers/sesionControllers");
-const router = express_1.default.Router();
-// Ruta para obtener la lista de sesiones
-router.get('/', sesionControllers_1.sesionControllers.list);
-// Ruta para crear una nueva sesión
-router.post('/', sesionControllers_1.sesionControllers.create);
-// Ruta para obtener una sesión específica por usuario
-router.get('/:usuario', sesionControllers_1.sesionControllers.getOne);
-// Ruta para actualizar una sesión existente por usuario
-router.put('/:usuario', sesionControllers_1.sesionControllers.update);
-// Ruta para eliminar una sesión existente por usuario
-router.delete('/:usuario', sesionControllers_1.sesionControllers.delete);
-exports.default = router;
+class SesionRoutes {
+    constructor() {
+        this.router = (0, express_1.Router)();
+        this.config();
+    }
+    config() {
+        this.router.get('/', sesionControllers_1.sesionControllers.list);
+        this.router.post('/', sesionControllers_1.sesionControllers.create);
+        this.router.get('/:usuario', sesionControllers_1.sesionControllers.getOne);
+        this.router.put('/:usuario', sesionControllers_1.sesionControllers.update);
+        this.router.delete('/:usuario', sesionControllers_1.sesionControllers.delete);
+    }
+}
+const sesionRoutes = new SesionRoutes();
+exports.default = sesionRoutes.router;
