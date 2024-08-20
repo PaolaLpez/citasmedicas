@@ -13,7 +13,8 @@ class DoctorRoutes {
         this.router.post('/', doctorControllers_1.doctorController.create);
         this.router.delete('/:id_doctor', doctorControllers_1.doctorController.delete);
         this.router.put('/:id_doctor', doctorControllers_1.doctorController.update);
-        this.router.get('/:id_doctor', doctorControllers_1.doctorController.getOne);
+        /*         this.router.get('/:id_doctor', doctorController.getOne); */
+        this.router.get('/especialidad/:id_especialidad'), doctorControllers_1.doctorController.getDoctoresByEspecialidad;
     }
 }
 exports.doctorRoutes = new DoctorRoutes().router;

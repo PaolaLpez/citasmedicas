@@ -10,7 +10,6 @@ import horarioRoutes from './routes/horarioRoutes';
 import inicioadminRoutes from './routes/inicioadminRoutes';  
 import rolRoutes from './routes/rolRoutes';
 import doctorRoutes from './routes/doctorRoutes';
-import sesionRoutes from './routes/sesionRoutes';
 
 
 
@@ -40,7 +39,7 @@ class Server {
     this.app.use('/api/horario', horarioRoutes);
     this.app.use('/api/inicioadmin', inicioadminRoutes);  
     this.app.use('/api/rol', rolRoutes);
-    this.app.use('/api/sesion', sesionRoutes);
+
   }
 
   start(): void {

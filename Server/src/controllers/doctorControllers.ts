@@ -2,32 +2,19 @@ import { Request, Response } from "express";
 import pool from "../database";
 
 class DoctorController {
-    // Manejar la solicitud POST para agregar un nuevo doctor
-    public async addDoctor(req: Request, res: Response): Promise<void> {
-        const { id_especialidad, id_horario, nombre_doc, tipo_doctor, correo_electronico, contrasena } = req.body;
 
-        // Validar los datos de entrada
-        if (!id_especialidad || !id_horario || !nombre_doc || !tipo_doctor || !correo_electronico || !contrasena) {
-            res.status(400).send('Todos los campos son necesarios');
-            return;
-        }
-
-        try {
-            const sql = 'INSERT INTO doctor (id_especialidad, id_horario, nombre_doc, tipo_doctor, correo_electronico, contrasena) VALUES (?, ?, ?, ?, ?, ?)';
-            const values = [id_especialidad, id_horario, nombre_doc, tipo_doctor, correo_electronico, contrasena];
-            const [result] = await pool.query(sql, values);
-
-            // Verifica si la consulta se realizó correctamente
-            if ('insertId' in result) {
-                res.status(201).send(`Doctor agregado exitosamente con ID: ${result.insertId}`);
-            } else {
-                res.status(500).send('Error al obtener el ID del nuevo doctor');
-            }
-        } catch (error) {
-            console.error('Database query error:', error);
-            res.status(500).send('Error al agregar el doctor');
-        }
+   // Obtener doctores por especialidad
+   public async getDoctoresByEspecialidad(req: Request, res: Response): Promise<void> {
+    try {
+        const { id_especialidad } = req.params;
+        const [doctores] = await pool.query('SELECT * FROM doctor WHERE id_especialidad = ?', [id_especialidad]);
+        res.json(doctores);
+    } catch (error) {
+        console.error('Database query error:', error);
+        res.status(500).send('Error al consultar la base de datos');
     }
+}
+
 
     // Manejar la solicitud GET para listar todos los doctores
     public async list(req: Request, res: Response): Promise<void> {
@@ -112,7 +99,7 @@ class DoctorController {
     }
 
     // Manejar la solicitud GET para obtener un doctor específico
-    public async getOne(req: Request, res: Response): Promise<void> {
+/*     public async getOne(req: Request, res: Response): Promise<void> {
         try {
             const { id_doctor } = req.params;
             const [result] = await pool.query('SELECT * FROM doctor WHERE id_doctor = ?', [id_doctor]);
@@ -120,13 +107,13 @@ class DoctorController {
             if ((result as any).length === 0) {
                 res.status(404).send('Doctor no encontrado');
             } else {
-                res.json(result);
+                res.json(result[0]);
             }
         } catch (error) {
             console.error('Database query error:', error);
             res.status(500).send('Error al consultar el doctor');
         }
-    }
+    } */
 }
 
 export const doctorController = new DoctorController();

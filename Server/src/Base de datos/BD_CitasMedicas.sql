@@ -78,9 +78,11 @@ CREATE TABLE IF NOT EXISTS cita (
     id_cita INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     id_paciente INT NOT NULL,
     id_doctor INT NOT NULL,
+    nombre_especialidad VARCHAR(60) NOT NULL,
+    nombre_doc VARCHAR(60) NOT NULL,
+    nom_paciente VARCHAR(60) NOT NULL,
     fecha DATE NOT NULL,
     hora TIME NOT NULL,
-    estado VARCHAR(20) NOT NULL,
     FOREIGN KEY (id_paciente) REFERENCES paciente(id_paciente),
     FOREIGN KEY (id_doctor) REFERENCES doctor(id_doctor)
 );

@@ -15,65 +15,50 @@
         <form id="registro-form">
             <fieldset>
                 <legend>Doctor</legend>
-                <label for="tipo-doctor">Tipo de doctor *</label>
-                <select id="tipo-doctor" name="tipo-doctor" required>
-                    <option value="">Seleccione el tipo de doctor</option>
-                    <option value="psiquiatra">Psiquiatra</option>
-                    <option value="doctor general">Doctor General</option>
-                    <option value="medico general">Médico General</option>
-                    <option value="pediatra">Pediatra</option>
-                    <option value="cardiologo">Cardiólogo</option>
-                    <option value="dentista">Dentista</option>
-                    <option value="nutriologo">Nutriólogo</option>
-                    <option value="psicologo">Psicólogo</option>
+                <label for="tipo-doctor">Tipo de doctor </label>
+                <select id="tipo-doctor" name="tipo-doctor" [(ngModel)]="selectedTipoDoctor" (change)="onTipoDoctorChange($event)" required>
+                    <option *ngFor="let especialidad of especialidades" [value]="especialidad.id_especialidad">{{ especialidad.nombre_especialidad }}</option>
                 </select>
 
-                <label for="nombre-doctor">Nombre del doctor *</label>
-                <select id="nombre-doctor" name="nombre-doctor" required>
-                    <option value="">Seleccione el nombre del doctor</option>
-                    <option value="Dr. Juan Pérez">Dr. Juan Pérez</option>
-                    <option value="Dra. María López">Dra. María López</option>
-                    <option value="Dr. José Hernández">Dr. José Hernández</option>
-                    <option value="Dra. Ana García">Dra. Ana García</option>
-                    <option value="Dr. Carlos Martínez">Dr. Carlos Martínez</option>
-                    <option value="Dra. Laura Rodríguez">Dra. Laura Rodríguez</option>
-                    <option value="Dr. Miguel Gómez">Dr. Miguel Gómez</option>
-                    <option value="Dra. Sofía Díaz">Dra. Sofía Díaz</option>
+                <label for="nombre-doctor">Nombre del doctor </label>
+                <select id="nombre-doctor" name="nombre-doctor"  [(ngModel)]="selectedDoctor" required>
+                    <option *ngFor="let doctor of doctores" [value]="doctor.id_doctor">{{ doctor.nombre_doc }}</option>
                 </select>
 
-                <label for="fecha-cita">Fecha de la cita *</label>
-                <input type="date" id="fecha-cita" name="fecha-cita" required>
+                <label for="fecha-cita">Fecha de la cita </label>
+                <input type="date" id="fecha-cita" name="fecha-cita" [(ngModel)]="cita.fecha" required>
 
-                <label for="hora-cita">Hora de la cita *</label>
+                <label for="hora-cita">Hora de la cita </label>
                 <div class="time-select">
-                    <select id="hora-desde-hora" name="hora-desde-hora" required>
+                    <select id="hora-desde-hora" name="hora-desde-hora" [(ngModel)]="cita.hora" required>
                         <option value="">Hora</option>
-                        <option value="08">08</option>
-                        <option value="09">09</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                    </select>
-                    :
-                    <select id="hora-desde-minuto" name="hora-desde-minuto" required>
-                        <option value="">Minuto</option>
-                        <option value="00">00</option>
-                        <option value="15">15</option>
-                        <option value="30">30</option>
-                        <option value="45">45</option>
+                        <option value="08">08:00</option>
+                        <option value="08:30">08:30</option>
+                        <option value="09:00">09:00</option>
+                        <option value="09:30">09:30</option>
+                        <option value="10:00">10:00</option>
+                        <option value="10:30">10:30</option>
+                        <option value="11:00">11:00</option>
+                        <option value="11:30">11:30</option>
+                        <option value="12:00">12:00</option>
+                        <option value="12:30">12:30</option>
+                        <option value="13:00">13:00</option>
+                        <option value="13:00">13:30</option>
+                        <option value="14:00">14:00</option>
+                        <option value="14:00">14:30</option>
+                        <option value="15:00">15:00</option>
+                        <option value="15:30">15:30</option>
+                        <option value="16:00">16:00</option>
+                        <option value="16:30">16:30</option>
+                        <option value="17:00">17:00</option>
+                        <option value="17:30">17:30</option>
                     </select>
                 </div>
             </fieldset>
             
             <div class="button-container">
-                <button type="submit">Registrar Cita</button>
-                <button type="button" onclick="window.location.href='http://localhost:4200/ingreso'">Ir al Inicio</button>
+                <button type="submit" (click)="registrarCita()">Registrar Cita</button>
+                <button type="button" onclick="window.location.href='/inicio-paciente'">Ir al Inicio</button>
             </div>
         </form>
     </div>

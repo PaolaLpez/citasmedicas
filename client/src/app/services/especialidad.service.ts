@@ -6,15 +6,15 @@ import { Especialidad } from '../models/especialidad';
 @Injectable({
   providedIn: 'root'
 })
-export class EspecialidadService {
+export class especialidadService {
   private especialidadUr1 = 'http://localhost:3000/api/especialidad'; // Asegúrate de que esta URL es correcta
 //la ruta tiene que estar igual que en el back-end
 //private especialidadUr2 = 'http://localhost:3000/especialidad'; // Asegúrate de que esta URL es correcta
 
   constructor(private http: HttpClient) {}
 
-  getEspecialidad() {
-    return this.http.get(this.especialidadUr1);
+  getEspecialidades(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.especialidadUr1}`);
   }
 
   getOneEspecialidad(id_especialidad: number): Observable<Especialidad> {
