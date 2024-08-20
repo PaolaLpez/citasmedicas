@@ -9,11 +9,10 @@ import especialidadRoutes from './routes/especialidadRoutes';
 import horarioRoutes from './routes/horarioRoutes';
 import inicioadminRoutes from './routes/inicioadminRoutes';  
 import rolRoutes from './routes/rolRoutes';
-<<<<<<< HEAD
-=======
-import sesionRoutes from './routes/sesionRoutes';
 import doctorRoutes from './routes/doctorRoutes';
->>>>>>> b93385d7b90b9818b3f90007f8d236c80f3f0468
+import sesionRoutes from './routes/sesionRoutes';
+
+
 
 class Server {
   public app: express.Application;
@@ -41,6 +40,7 @@ class Server {
     this.app.use('/api/horario', horarioRoutes);
     this.app.use('/api/inicioadmin', inicioadminRoutes);  
     this.app.use('/api/rol', rolRoutes);
+    this.app.use('/api/sesion', sesionRoutes);
   }
 
   start(): void {
