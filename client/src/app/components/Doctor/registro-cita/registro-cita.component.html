@@ -17,8 +17,7 @@
                 <fieldset>
                     <legend>Paciente</legend>
                     <label for="nombre-paciente">Nombre del paciente *</label>
-                    <input type="text" id="nombre-paciente" name="nombre-paciente" required>
-
+<input type="text" id="nombre-paciente" name="nombre-paciente" maxlength="50" pattern="[A-Za-z\s]+" title="El nombre solo debe contener letras y espacios." required>
                     <legend>Doctor</legend>
                     <label for="tipo-doctor">Tipo de doctor *</label>
                     <select id="tipo-doctor" name="tipo-doctor" required>
@@ -74,13 +73,15 @@
                 </fieldset>
                 
                 <div class="button-container">
-                    <button type="submit">Registrar Cita</button>
+                    <button type="submit" onclick="window.location.href='/inicio-doctor'">Registrar Cita</button>
                     <button type="button" onclick="window.location.href='/inicio-doctor'">Ir al Inicio</button>
                 </div>
                 <div class="sidebar">
                     <div class="footer">
                         <p>CAISES San Luis de la Paz</p>
-                        <p>Horario: 8 a.m. a 10 p.m.</p>
+                        <p>Dirección: Calle Velasco Ibarra & Calle México 68, La Ladrillera, 37906 San Luis de la Paz, Gto.</p>
+                        <p>Teléfono: 468 688 2045</p>
+                        <p>Horario: 8 a.m. a 10 p.m.</p>
                     </div>
                 </div>
             </form>

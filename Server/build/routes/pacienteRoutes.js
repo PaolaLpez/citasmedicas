@@ -3,9 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const pacienteControllers_1 = require("../controllers/pacienteControllers");
 class PacienteRoutes {
-    // devuelto y se inicializa esta propiedad en la misma línea de código. 
     constructor() {
-        this.router = (0, express_1.Router)(); // Se está creando la propiedad que guardara el objeto
+        this.router = (0, express_1.Router)();
         this.config();
     }
     config() {
