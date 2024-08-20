@@ -31,17 +31,21 @@ class DoctorController {
     }
     // Manejar la solicitud GET para listar todos los doctores
     list(req, res) {
+
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const [doctors] = yield database_1.default.query('SELECT * FROM doctor');
                 res.json(doctors);
+
             }
             catch (error) {
                 console.error('Database query error:', error);
                 res.status(500).send('Error al consultar la base de datos');
+
             }
         });
     }
+
     // Manejar la solicitud POST para crear un nuevo doctor (duplicado, por lo tanto, se recomienda eliminar o consolidar con addDoctor)
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -76,6 +80,7 @@ class DoctorController {
                 else {
                     res.json({ message: 'Doctor eliminado' });
                 }
+
             }
             catch (error) {
                 console.error('Database query error:', error);
@@ -100,6 +105,7 @@ class DoctorController {
                 else {
                     res.json({ message: 'Doctor actualizado' });
                 }
+
             }
             catch (error) {
                 console.error('Database query error:', error);

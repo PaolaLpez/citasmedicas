@@ -14,7 +14,6 @@ const especialidadRoutes_1 = __importDefault(require("./routes/especialidadRoute
 const horarioRoutes_1 = __importDefault(require("./routes/horarioRoutes"));
 const inicioadminRoutes_1 = __importDefault(require("./routes/inicioadminRoutes"));
 const rolRoutes_1 = __importDefault(require("./routes/rolRoutes"));
-const doctorRoutes_1 = __importDefault(require("./routes/doctorRoutes"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -37,6 +36,7 @@ class Server {
         this.app.use('/api/horario', horarioRoutes_1.default);
         this.app.use('/api/inicioadmin', inicioadminRoutes_1.default);
         this.app.use('/api/rol', rolRoutes_1.default);
+        this.app.use('/api/sesion', sesionRoutes_1.default);
     }
     start() {
         this.app.listen(3000, () => {
