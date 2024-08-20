@@ -2,21 +2,50 @@ import { Request, Response } from "express";
 import pool from "../database";
 
 class DoctorController {
+    // Manejar la solicitud POST para agregar un nuevo doctor
+    public async addDoctor(req: Request, res: Response): Promise<void> {
+        const { id_especialidad, id_horario, nombre_doc, tipo_doctor, correo_electronico, contrasena } = req.body;
+
+        // Validar los datos de entrada
+        if (!id_especialidad || !id_horario || !nombre_doc || !tipo_doctor || !correo_electronico || !contrasena) {
+            res.status(400).send('Todos los campos son necesarios');
+            return;
+        }
+
+        try {
+            const sql = 'INSERT INTO doctor (id_especialidad, id_horario, nombre_doc, tipo_doctor, correo_electronico, contrasena) VALUES (?, ?, ?, ?, ?, ?)';
+            const values = [id_especialidad, id_horario, nombre_doc, tipo_doctor, correo_electronico, contrasena];
+            const [result] = await pool.query(sql, values);
+
+            // Verifica si la consulta se realizó correctamente
+            if ('insertId' in result) {
+                res.status(201).send(`Doctor agregado exitosamente con ID: ${result.insertId}`);
+            } else {
+                res.status(500).send('Error al obtener el ID del nuevo doctor');
+            }
+        } catch (error) {
+            console.error('Database query error:', error);
+            res.status(500).send('Error al agregar el doctor');
+        }
+    }
+
+    // Manejar la solicitud GET para listar todos los doctores
     public async list(req: Request, res: Response): Promise<void> {
         try {
-            const doctors = await pool.query('SELECT * FROM doctor');
+            const [doctors] = await pool.query('SELECT * FROM doctor');
             res.json(doctors);
         } catch (error) {
-            console.error('Database query error:', error); // Imprimir el error completo
+            console.error('Database query error:', error);
             res.status(500).send('Error al consultar la base de datos');
         }
     }
 
+    // Manejar la solicitud POST para crear un nuevo doctor (duplicado, por lo tanto, se recomienda eliminar o consolidar con addDoctor)
     public async create(req: Request, res: Response): Promise<void> {
         try {
             const doctor = Array.isArray(req.body) ? req.body[0] : req.body;
-
             const { usuario, id_especialidad, id_horario, nombre_doc, tipo_doctor } = doctor;
+
             if (!usuario || !id_especialidad || !id_horario || !nombre_doc || !tipo_doctor) {
                 res.status(400).json({ message: 'Datos incompletos' });
                 return;
@@ -31,24 +60,31 @@ class DoctorController {
 
             res.status(201).json({ message: 'Doctor insertado' });
         } catch (error) {
-            console.error('Database query error:', error); // Imprimir el error completo
+            console.error('Database query error:', error);
             if (!res.headersSent) {
                 res.status(500).json({ message: 'Error al insertar en la base de datos' });
             }
         }
     }
 
+    // Manejar la solicitud DELETE para eliminar un doctor
     public async delete(req: Request, res: Response): Promise<void> {
         try {
             const { id_doctor } = req.params;
-            await pool.query('DELETE FROM doctor WHERE id_doctor = ?', [id_doctor]);
-            res.json({ message: 'Doctor eliminado' });
+            const [result] = await pool.query('DELETE FROM doctor WHERE id_doctor = ?', [id_doctor]);
+
+            if ((result as any).affectedRows === 0) {
+                res.status(404).send('Doctor no encontrado');
+            } else {
+                res.json({ message: 'Doctor eliminado' });
+            }
         } catch (error) {
-            console.error('Database query error:', error); // Imprimir el error completo
+            console.error('Database query error:', error);
             res.status(500).send('Error al eliminar el doctor');
         }
     }
 
+    // Manejar la solicitud PUT para actualizar un doctor
     public async update(req: Request, res: Response): Promise<void> {
         try {
             const { id_doctor } = req.params;
@@ -59,23 +95,33 @@ class DoctorController {
                 return;
             }
 
-            const result = await pool.query(
+            const [result] = await pool.query(
                 'UPDATE doctor SET usuario = ?, id_especialidad = ?, id_horario = ?, nombre_doc = ?, tipo_doctor = ? WHERE id_doctor = ?',
                 [usuario, id_especialidad, id_horario, nombre_doc, tipo_doctor, id_doctor]
             );
 
-            res.json({ message: 'Doctor actualizado' });
+            if ((result as any).affectedRows === 0) {
+                res.status(404).send('Doctor no encontrado');
+            } else {
+                res.json({ message: 'Doctor actualizado' });
+            }
         } catch (error) {
             console.error('Database query error:', error);
             res.status(500).send('Error al actualizar el doctor');
         }
     }
 
+    // Manejar la solicitud GET para obtener un doctor específico
     public async getOne(req: Request, res: Response): Promise<void> {
         try {
             const { id_doctor } = req.params;
-            const result = await pool.query('SELECT * FROM doctor WHERE id_doctor = ?', [id_doctor]);
-            res.json(result);
+            const [result] = await pool.query('SELECT * FROM doctor WHERE id_doctor = ?', [id_doctor]);
+
+            if ((result as any).length === 0) {
+                res.status(404).send('Doctor no encontrado');
+            } else {
+                res.json(result);
+            }
         } catch (error) {
             console.error('Database query error:', error);
             res.status(500).send('Error al consultar el doctor');

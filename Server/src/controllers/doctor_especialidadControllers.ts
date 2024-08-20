@@ -34,7 +34,7 @@ public async list(req: Request, res: Response): Promise<void> {
                 [id_especialidad, id_doctor]
             );
     
-            res.status(201).json({ message: 'Datos de paciente insertados'});
+            res.status(201).json({ message: 'Datos de la especialidad del paciente insertados correctamente'});
         } catch (error) {
             console.error('Database query error:', error); // Imprimir el error completo
             if (!res.headersSent) {
@@ -42,46 +42,59 @@ public async list(req: Request, res: Response): Promise<void> {
             }
         }
     }  
-public async delete(req: Request, res: Response): Promise<void> {
-    try {
-        const {id_doctor} = req.params;
-        await pool.query('DELETE FROM doctor_especialidad WHERE id_doctor =?', [id_doctor])
-        res.json({message : 'Datos de doctor eliminados'});
-    } catch (error) {
-          console.error('Database query error:', error); // Imprimir el error completo
-          res.status(500).send('Error al eliminar los datos del paciente');
+
+    public async delete(req: Request, res: Response): Promise<void> {
+        try {
+            const { id_doctor, id_especialidad } = req.params;
+            await pool.query('DELETE FROM doctor_especialidad WHERE id_doctor = ? AND id_especialidad = ?', [id_doctor, id_especialidad]);
+            res.json({ message: 'Datos de la especialidad del doctor eliminados correctamente' });
+        } catch (error) {
+            console.error('Database query error:', error); // Imprimir el error completo
+            res.status(500).send('Error al eliminar los datos del doctor');
         }
     }
+    
       
-public async update(req: Request, res: Response): Promise<void> {
-    try {
-        const {id_doctor_especialidad} = req.params;
-        const {id_especialidad, id_doctor } = req.body;
-
-              // Verifica si todos los campos necesarios están presentes
-        if (!id_especialidad || !id_doctor || !id_doctor_especialidad) {
-            res.status(400).json({ message: 'Datos incompletos' });
-            return; // Agrega un retorno para evitar que el código continúe
+    public async update(req: Request, res: Response): Promise<void> {
+        try {
+            const { id_doctor, id_especialidad } = req.params; // Estos son los valores actuales de la URL
+            const { id_doctor: nuevo_id_doctor, id_especialidad: nuevo_id_especialidad } = req.body; // Nuevos valores en el cuerpo de la solicitud
+    
+            // Verificar que los nuevos valores estén presentes
+            if (!nuevo_id_doctor || !nuevo_id_especialidad) {
+                res.status(400).json({ message: 'Datos incompletos' });
+                return;
+            }
+    
+            // Ejecutar la consulta de actualización
+            await pool.query('UPDATE doctor_especialidad SET id_doctor = ?, id_especialidad = ? WHERE id_doctor = ? AND id_especialidad = ?', 
+                             [nuevo_id_doctor, nuevo_id_especialidad, id_doctor, id_especialidad]);
+    
+            res.json({ message: 'Datos de la especialidad del doctor actualizados correctamente' });
+        } catch (error) {
+            console.error('Database query error:', error);
+            res.status(500).send('Error al actualizar los datos del doctor');
         }
-
-        const result=await pool.query('UPDATE doctor_especialidad SET id_especialidad=?, id_doctor=? WHERE id_doctor_especialidad=?', [id_especialidad, id_doctor, id_doctor_especialidad])
-             res.json({ message: 'Datos del paciente actualizados' });
-    } catch (error) {
-        console.error('Database query error:', error);
-        res.status(500).send('Error al actualizar los datos del doctor');
-      }
     }
+    
+    
+
 
 public async getOne(req: Request, res: Response) {
     try {
-        const {id_doctor_especialidad} = req.params;//Se recupera el id del params
-        const result=await pool.query('SELECT * FROM doctor_especialidad WHERE id_doctor_especialidad=?', [id_doctor_especialidad])
-        res.json(result);
+        const { id_doctor, id_especialidad } = req.params;
+        const result = await pool.query(
+            `SELECT *
+             FROM doctor_especialidad 
+             WHERE id_doctor = ? AND id_especialidad = ?`,
+            [id_doctor, id_especialidad]
+        );
+            res.json(result[0]); // Devolver el primer resultado
     } catch (error) {
         console.error('Database query error:', error);
-        res.status(500).send('Error el doctor no existe');
-      }
+        res.status(500).send('Error al obtener los datos del doctor_especialidad');
     }
+}
   }
   
 

@@ -14,8 +14,8 @@ const especialidadRoutes_1 = __importDefault(require("./routes/especialidadRoute
 const horarioRoutes_1 = __importDefault(require("./routes/horarioRoutes"));
 const inicioadminRoutes_1 = __importDefault(require("./routes/inicioadminRoutes"));
 const rolRoutes_1 = __importDefault(require("./routes/rolRoutes"));
-const sesionRoutes_1 = __importDefault(require("./routes/sesionRoutes"));
 const doctorRoutes_1 = __importDefault(require("./routes/doctorRoutes"));
+const sesionRoutes_1 = __importDefault(require("./routes/sesionRoutes"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();

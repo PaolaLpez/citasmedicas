@@ -9,8 +9,10 @@ import especialidadRoutes from './routes/especialidadRoutes';
 import horarioRoutes from './routes/horarioRoutes';
 import inicioadminRoutes from './routes/inicioadminRoutes';  
 import rolRoutes from './routes/rolRoutes';
-import sesionRoutes from './routes/sesionRoutes';
 import doctorRoutes from './routes/doctorRoutes';
+import sesionRoutes from './routes/sesionRoutes';
+
+
 
 class Server {
   public app: express.Application;

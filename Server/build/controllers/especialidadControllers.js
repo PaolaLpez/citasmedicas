@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.especialidaControllers = void 0;
+exports.especialidadControllers = void 0;
 const database_1 = __importDefault(require("../database"));
 class EspecialidadController {
     list(req, res) {
@@ -73,7 +73,7 @@ class EspecialidadController {
                     res.status(400).json({ message: 'Datos incompletos' });
                     return;
                 }
-                const result = yield database_1.default.query('UPDATE especialidad SET nombre_especialidad=? WHERE id_especialidad=?', [id_especialidad, nombre_especialidad]);
+                const result = yield database_1.default.query('UPDATE especialidad SET nombre_especialidad=? WHERE id_especialidad=?', [nombre_especialidad, id_especialidad]);
                 res.json({ message: 'Datos de la especialidad actualizados' });
             }
             catch (error) {
@@ -96,4 +96,4 @@ class EspecialidadController {
         });
     }
 }
-exports.especialidaControllers = new EspecialidadController();
+exports.especialidadControllers = new EspecialidadController();
