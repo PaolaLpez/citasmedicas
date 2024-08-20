@@ -90,8 +90,7 @@
                 <div>
                     <select id="dia-inicio" name="dia-inicio" required>
                         <option value="">Día</option>
-                        <!-- Opciones de días -->
-                        <!-- 01-31 -->
+                    
                         <script>
                             for (let i = 1; i <= 31; i++) {
                                 document.write(`<option value="${i < 10 ? '0' + i : i}">${i < 10 ? '0' + i : i}</option>`);
@@ -127,8 +126,6 @@
                 <div>
                     <select id="dia-fin" name="dia-fin" required>
                         <option value="">Día</option>
-                        <!-- Opciones de días -->
-                        <!-- 01-31 -->
                         <script>
                             for (let i = 1; i <= 31; i++) {
                                 document.write(`<option value="${i < 10 ? '0' + i : i}">${i < 10 ? '0' + i : i}</option>`);
@@ -162,8 +159,6 @@
             <button type="submit">Guardar</button>
         </form>
     </div>
-    
-
 
     <script>
         function validarFormulario() {

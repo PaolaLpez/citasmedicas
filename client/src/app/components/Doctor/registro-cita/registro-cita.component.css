@@ -9,14 +9,16 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    position: right;
+    align-items: center; /* Centro el contenido horizontalmente */
 }
 
 .main-content {
-    margin-right: 250px; /* Same width as the sidebar */
     padding: 20px;
     box-sizing: border-box;
+    width: 100%;
+    max-width: 600px; /* Asegura que el contenido no se expanda más allá de 600px */
 }
+
 .container {
     width: 100%;
     max-width: 600px;
@@ -24,17 +26,19 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    margin-left: 290px;
+    margin: 20px auto; /* Centro el contenedor horizontalmente */
 }
+
 h1 {
     text-align: center;
     color: #007bff;
 }
+
 label {
     display: block;
     margin-top: 10px;
 }
+
 input[type="text"], input[type="date"], select {
     width: calc(100% - 22px);
     padding: 10px;
@@ -42,10 +46,12 @@ input[type="text"], input[type="date"], select {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
 .button-container {
     text-align: center;
     margin-top: 20px;
 }
+
 .button-container button {
     padding: 10px 20px;
     margin-right: 10px;
@@ -56,18 +62,22 @@ input[type="text"], input[type="date"], select {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+
 .button-container button:hover {
     background-color: #0056b3;
 }
+
 .time-select {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 5px;
 }
+
 .time-select select {
     width: 48%;
 }
+
 .footer {
     width: 100%;
     background-color: rgba(0, 0, 0, 0.7);
@@ -81,5 +91,5 @@ input[type="text"], input[type="date"], select {
 }
 
 .footer p {
-    margin: 1px ;
+    margin: 1px;
 }
