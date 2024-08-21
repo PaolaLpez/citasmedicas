@@ -6,7 +6,7 @@ import { Especialidad } from '../models/especialidad';
 @Injectable({
   providedIn: 'root'
 })
-export class especialidadService {
+export class EspecialidadService {
   private especialidadUr1 = 'http://localhost:3000/api/especialidad'; // Asegúrate de que esta URL es correcta
 //la ruta tiene que estar igual que en el back-end
 //private especialidadUr2 = 'http://localhost:3000/especialidad'; // Asegúrate de que esta URL es correcta
