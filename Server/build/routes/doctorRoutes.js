@@ -10,6 +10,7 @@ class DoctorRoutes {
     }
     config() {
         this.router.get('/', doctorControllers_1.doctorController.list);
+        this.router.get('/especialidad/:id_especialidad', doctorControllers_1.doctorController.getDoctoresByEspecialidad);
         this.router.post('/', doctorControllers_1.doctorController.create);
         this.router.delete('/:id_doctor', doctorControllers_1.doctorController.delete);
         this.router.put('/:id_doctor', doctorControllers_1.doctorController.update);

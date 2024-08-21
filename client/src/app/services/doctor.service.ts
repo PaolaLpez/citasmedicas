@@ -13,8 +13,16 @@ export class DoctorService {
 
   constructor(private http: HttpClient) {}
 
-  getDoctor() {
-    return this.http.get(this.doctorUr1);
+  getEspecialidades(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.doctorUr1}/especialidad`);
+  }
+
+  getDoctoresByEspecialidad(id_especialidad: number): Observable<Doctor[]> {
+    return this.http.get<Doctor[]>(`${this.doctorUr1}/especialidad/${id_especialidad}`);
+  }
+
+  getDoctor(): Observable<Doctor[]> {
+    return this.http.get<Doctor[]>(`${this.doctorUr1}/doctor`);
   }
 
   getOneDoctor(id_doctor: number): Observable<Doctor> {

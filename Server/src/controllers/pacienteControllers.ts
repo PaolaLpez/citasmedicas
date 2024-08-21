@@ -16,6 +16,12 @@ public async list(req: Request, res: Response): Promise<void> {
     
     public async create(req: Request, res: Response): Promise<void> {
         try {
+            console.log ('datos recibidos', req.body);
+
+            if (!req.body || typeof req.body !== 'object') {
+                res.status(400).json({ message: 'No se enviaron datos de paciente o el formato es incorrecto' });
+            }
+
             // Asumir que req.body es un array de objetos y tomar el primer objeto
             const paciente = Array.isArray(req.body) ? req.body[0] : req.body;
     

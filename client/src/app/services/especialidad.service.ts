@@ -13,8 +13,8 @@ export class EspecialidadService {
 
   constructor(private http: HttpClient) {}
 
-  getEspecialidad() {
-    return this.http.get(this.especialidadUr1);
+  getEspecialidades(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.especialidadUr1}`);
   }
 
   getOneEspecialidad(id_especialidad: number): Observable<Especialidad> {
