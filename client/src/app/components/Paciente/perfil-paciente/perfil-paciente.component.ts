@@ -58,7 +58,6 @@ ngOnInit(){
  }
 
 updatePaciente(){
-  delete this.paciente.id_paciente;
   let number : number = Number(this.paciente.id_paciente);
   console.log(this.paciente);
 this.pacienteService.updatePaciente(number, this.paciente).subscribe(

@@ -32,17 +32,7 @@ constructor(private pacienteService : PacienteService,
 )  {}
 
 ngOnInit(){
-  const params = this.activatedRoute.snapshot.params;
-  /* if ((params)['id_paciente=']) */{
-    this.pacienteService.getOnePaciente((params)['id_paciente=']).subscribe(
-      resp =>{
-        console.log(resp);
-        this.paciente = resp;
-        this.edit = true;
-      },  
-      err => console.error(err)
-    )
-  }
+  this.saveNewPaciente();
  }
 saveNewPaciente(){
   delete this.paciente.id_paciente;

@@ -14,7 +14,6 @@
             <h2>Registro de Paciente</h2>
         </div>
         <form id="registerForm" (ngsubmit)="saveNewPaciente()"#registerForm="ngForm">
-
             <div class="form-group">
                 <label for="full-name">Nombre Completo</label>
                 <input type="text" name="full-name" [(ngModel)]="paciente.nom_paciente" required>
@@ -89,7 +88,7 @@
                 if (response.ok) {
                     // Manejo del éxito
                     alert('Paciente registrado con éxito');
-                    window.location.href = '/inicio';
+                    window.location.href = '/inicio-paciente';
                 } else {
                     // Manejo de errores
                     const errorData = await response.json();
