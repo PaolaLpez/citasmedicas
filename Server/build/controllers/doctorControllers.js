@@ -21,7 +21,9 @@ class DoctorController {
             try {
                 const { id_especialidad } = req.params;
                 const [doctores] = yield database_1.default.query('SELECT * FROM doctor WHERE id_especialidad = ?', [id_especialidad]);
-                res.json(doctores);
+                // Convierte RowDataPacket en un array plano
+                const doctoresArray = Array.isArray(doctores) ? doctores : [doctores];
+                res.json(doctoresArray);
             }
             catch (error) {
                 console.error('Database query error:', error);
@@ -31,21 +33,17 @@ class DoctorController {
     }
     // Manejar la solicitud GET para listar todos los doctores
     list(req, res) {
-
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const [doctors] = yield database_1.default.query('SELECT * FROM doctor');
                 res.json(doctors);
-
             }
             catch (error) {
                 console.error('Database query error:', error);
                 res.status(500).send('Error al consultar la base de datos');
-
             }
         });
     }
-
     // Manejar la solicitud POST para crear un nuevo doctor (duplicado, por lo tanto, se recomienda eliminar o consolidar con addDoctor)
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -80,7 +78,6 @@ class DoctorController {
                 else {
                     res.json({ message: 'Doctor eliminado' });
                 }
-
             }
             catch (error) {
                 console.error('Database query error:', error);
@@ -105,11 +102,29 @@ class DoctorController {
                 else {
                     res.json({ message: 'Doctor actualizado' });
                 }
-
             }
             catch (error) {
                 console.error('Database query error:', error);
                 res.status(500).send('Error al actualizar el doctor');
+            }
+        });
+    }
+    // Manejar la solicitud GET para obtener un doctor específico
+    getOne(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { id_doctor } = req.params;
+                const [result] = yield database_1.default.query('SELECT * FROM doctor WHERE id_doctor = ?', [id_doctor]);
+                if (result.length === 0) {
+                    res.status(404).send('Doctor no encontrado');
+                }
+                else {
+                    res.json(result[0]);
+                }
+            }
+            catch (error) {
+                console.error('Database query error:', error);
+                res.status(500).send('Error al consultar el doctor');
             }
         });
     }

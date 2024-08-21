@@ -6,15 +6,19 @@ class DoctorController {
    // Obtener doctores por especialidad
    public async getDoctoresByEspecialidad(req: Request, res: Response): Promise<void> {
     try {
-        const { id_especialidad } = req.params;
-        const [doctores] = await pool.query('SELECT * FROM doctor WHERE id_especialidad = ?', [id_especialidad]);
-        res.json(doctores);
+      const { id_especialidad } = req.params;
+      const [doctores] = await pool.query('SELECT * FROM doctor WHERE id_especialidad = ?', [id_especialidad]);
+  
+      // Convierte RowDataPacket en un array plano
+      const doctoresArray = Array.isArray(doctores) ? doctores : [doctores];
+  
+      res.json(doctoresArray);
     } catch (error) {
-        console.error('Database query error:', error);
-        res.status(500).send('Error al consultar la base de datos');
+      console.error('Database query error:', error);
+      res.status(500).send('Error al consultar la base de datos');
     }
-}
-
+  }
+  
 
     // Manejar la solicitud GET para listar todos los doctores
     public async list(req: Request, res: Response): Promise<void> {
@@ -99,7 +103,7 @@ class DoctorController {
     }
 
     // Manejar la solicitud GET para obtener un doctor específico
-/*     public async getOne(req: Request, res: Response): Promise<void> {
+    public async getOne(req: Request, res: Response): Promise<void> {
         try {
             const { id_doctor } = req.params;
             const [result] = await pool.query('SELECT * FROM doctor WHERE id_doctor = ?', [id_doctor]);
@@ -113,7 +117,7 @@ class DoctorController {
             console.error('Database query error:', error);
             res.status(500).send('Error al consultar el doctor');
         }
-    } */
+    }
 }
 
 export const doctorController = new DoctorController();

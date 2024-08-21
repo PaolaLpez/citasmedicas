@@ -15,20 +15,20 @@
         <form id="registro-form">
             <fieldset>
                 <legend>Doctor</legend>
-                <label for="tipo-doctor">Tipo de doctor </label>
+                <label for="tipo-doctor">Tipo de doctor</label>
                 <select id="tipo-doctor" name="tipo-doctor" [(ngModel)]="selectedTipoDoctor" (change)="onTipoDoctorChange($event)" required>
-                    <option *ngFor="let especialidad of especialidades" [value]="especialidad.id_especialidad">{{ especialidad.nombre_especialidad }}</option>
+                  <option *ngFor="let especialidad of especialidades" [value]="especialidad.id_especialidad">{{ especialidad.nombre_especialidad }}</option>
                 </select>
-
-                <label for="nombre-doctor">Nombre del doctor </label>
-                <select id="nombre-doctor" name="nombre-doctor"  [(ngModel)]="selectedDoctor" required>
-                    <option *ngFor="let doctor of doctores" [value]="doctor.id_doctor">{{ doctor.nombre_doc }}</option>
+                
+                <label for="nombre-doctor">Nombre del doctor</label>
+                <select id="nombre-doctor" name="nombre-doctor" [(ngModel)]="selectedDoctor" required>
+                  <option *ngFor="let doctor of doctores" [value]="doctor.id_doctor">{{ doctor.nombre_doc }}</option>
                 </select>
-
+                
                 <label for="fecha-cita">Fecha de la cita </label>
                 <input type="date" id="fecha-cita" name="fecha-cita" [(ngModel)]="cita.fecha" required>
 
-                <label for="hora-cita">Hora de la cita </label>
+   <label for="hora-cita">Hora de la cita </label>
                 <div class="time-select">
                     <select id="hora-desde-hora" name="hora-desde-hora" [(ngModel)]="cita.hora" required>
                         <option value="">Hora</option>
@@ -53,7 +53,7 @@
                         <option value="17:00">17:00</option>
                         <option value="17:30">17:30</option>
                     </select>
-                </div>
+                </div> 
             </fieldset>
             
             <div class="button-container">
@@ -67,7 +67,7 @@
         <p>CAISES San Luis de la Paz</p>
         <p>Dirección: Calle Velasco Ibarra & Calle México 68, La Ladrillera, 37906 San Luis de la Paz, Gto.</p>
         <p>Teléfono: 468 688 2045</p>
-        <p>Horario: 8 a.m. a 10 p.m.</p>
+        <p>Horario: 8 a.m. a 10 p.m.</p>
     </div>
     </div>
 </body>

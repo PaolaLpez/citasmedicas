@@ -1,8 +1,8 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { CitaService} from '../../../services/cita.service';
 import { DoctorService } from '../../../services/doctor.service';
-import { especialidadService } from '../../../services/especialidad.service';
+import { EspecialidadService } from '../../../services/especialidad.service';
 import { Especialidad } from '../../../models/especialidad';
 import { Doctor } from '../../../models/doctor';
 import { Cita } from '../../../models/cita';
@@ -29,7 +29,8 @@ export class RegistroCitasPacienteComponent {
 
   constructor(private doctorService : DoctorService,
               private citaService : CitaService,
-              private especialidadService : especialidadService,
+              private especialidadService : EspecialidadService,
+              private cdr: ChangeDetectorRef,
     private router :Router,
     private activatedRoute : ActivatedRoute
 )  {}
@@ -50,13 +51,27 @@ getEspecialidades(): void {
 
 onTipoDoctorChange(event: any): void {
   const id_especialidad = event.target.value;
+  console.log('Seleccionado Especialidad ID:', id_especialidad)
+  
   this.doctorService.getDoctoresByEspecialidad(id_especialidad).subscribe(
-    (doctores: Doctor[]) => {
+      (doctores: Doctor[]) => {
+          console.log('doctores', doctores);
+          this.doctores = doctores;
+          this.cdr.detectChanges(); // Fuerza la detección de cambios
+    // Asegúrate de que doctores sea un array
+    if (Array.isArray(doctores)) {
       this.doctores = doctores;
-    },
-    err => console.error(err)
+      this.cdr.detectChanges(); // Fuerza la detección de cambios
+  } else {
+      console.error('Respuesta inesperada:', doctores);
+      this.doctores = []; // Limpia la lista si la respuesta no es un array
+  }
+},
+      err => {console.error(err);
+      }
   );
 }
+
 
 registrarCita(): void {
   this.cita.id_doctor = this.selectedDoctor;
@@ -71,8 +86,5 @@ registrarCita(): void {
     err => console.error(err)
   );
 }
-
-
-
 
 }
