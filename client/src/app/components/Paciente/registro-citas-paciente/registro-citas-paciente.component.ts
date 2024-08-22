@@ -1,11 +1,11 @@
 import { Component, OnInit, HostBinding, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { CitaService} from '../../../services/cita.service';
-import { DoctorService } from '../../../services/doctor.service';
 import { EspecialidadService } from '../../../services/especialidad.service';
 import { Especialidad } from '../../../models/especialidad';
-import { Doctor } from '../../../models/doctor';
+import { Usuario } from '../../../models/usuario';
 import { Cita } from '../../../models/cita';
+import { UsuarioService } from '../../../services/usuario.service';
 
 @Component({
   selector: 'app-registro-citas-paciente',
@@ -15,7 +15,7 @@ import { Cita } from '../../../models/cita';
 export class RegistroCitasPacienteComponent {
 
   especialidades: any[] = [];
-  doctores: Doctor[] = [];
+  doctores: Usuario[] = [];
   selectedTipoDoctor: string = '';
   selectedDoctor: number = 0;
   cita: Cita = {
@@ -23,11 +23,12 @@ export class RegistroCitasPacienteComponent {
     id_doctor: 0,
     nombre_especialidad: '',
     nombre_doc: '',
+    nom_paciente: '',
     fecha: new Date(),
-    hora: new Date()
+    hora: ''
   };
 
-  constructor(private doctorService : DoctorService,
+  constructor(private usuarioService : UsuarioService,
               private citaService : CitaService,
               private especialidadService : EspecialidadService,
               private cdr: ChangeDetectorRef,
@@ -51,24 +52,16 @@ getEspecialidades(): void {
 
 onTipoDoctorChange(event: any): void {
   const id_especialidad = event.target.value;
-  console.log('Seleccionado Especialidad ID:', id_especialidad)
-  
-  this.doctorService.getDoctoresByEspecialidad(id_especialidad).subscribe(
-      (doctores: Doctor[]) => {
-          console.log('doctores', doctores);
-          this.doctores = doctores;
-          this.cdr.detectChanges(); // Fuerza la detección de cambios
-    // Asegúrate de que doctores sea un array
-    if (Array.isArray(doctores)) {
-      this.doctores = doctores;
-      this.cdr.detectChanges(); // Fuerza la detección de cambios
-  } else {
-      console.error('Respuesta inesperada:', doctores);
-      this.doctores = []; // Limpia la lista si la respuesta no es un array
-  }
-},
-      err => {console.error(err);
+  this.usuarioService.getDoctoresByEspecialidad(id_especialidad).subscribe(
+    (doctores: Usuario[]) => {
+      if (Array.isArray(doctores)) {
+        this.doctores = doctores;
+      } else {
+        console.error('Respuesta inesperada:', doctores);
+        this.doctores = [];
       }
+    },
+    err => console.error(err)
   );
 }
 
@@ -76,15 +69,18 @@ onTipoDoctorChange(event: any): void {
 registrarCita(): void {
   this.cita.id_doctor = this.selectedDoctor;
   this.cita.nombre_especialidad = this.especialidades.find(especialidad => especialidad.id_especialidad == this.selectedTipoDoctor)?.nombre_especialidad || '';
-  this.cita.nombre_doc = this.doctores.find(doctor => doctor.id_doctor == this.selectedDoctor)?.nombre_doc || '';
+  this.cita.nombre_doc = this.doctores.find(doctores => doctores.id_usuario == this.selectedDoctor)?.nombre || '';
+  this.cita.nom_paciente = ''; // O el valor correcto si es necesario
 
   this.citaService.createCita(this.cita).subscribe(
     res => {
       console.log('Cita registrada:', res);
-      this.router.navigate(['/ingreso']);
+      this.router.navigate(['/inicio-paciente']);
     },
     err => console.error(err)
   );
 }
 
 }
+
+

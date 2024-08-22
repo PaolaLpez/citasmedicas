@@ -31,13 +31,13 @@ class CitaController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const cita = Array.isArray(req.body) ? req.body[0] : req.body;
-                const { id_paciente, id_doctor, fecha, hora, estado } = cita;
-                if (!id_paciente || !id_doctor || !fecha || !hora || !estado) {
+                const { id_paciente, id_doctor, nombre_especialidad, nombre_doc, nombre_paciente, fecha, hora } = cita;
+                if (!id_paciente || !id_doctor || !nombre_especialidad || !nombre_doc || !nombre_paciente || !fecha || !hora) {
                     res.status(400).json({ message: 'Datos incompletos' });
                     return;
                 }
                 console.log('Received data:', cita);
-                const result = yield database_1.default.query('INSERT INTO cita (id_paciente, id_doctor, fecha, hora, estado) VALUES (?, ?, ?, ?, ?)', [id_paciente, id_doctor, fecha, hora, estado]);
+                const result = yield database_1.default.query('INSERT INTO cita (id_paciente, id_doctor, nombre_especialidad, nombre_doc, nom_paciente, fecha, hora) VALUES (?, ?, ?, ?, ?, ?, ?)', [id_paciente, id_doctor, nombre_especialidad, nombre_doc, nombre_paciente, fecha, hora]);
                 res.status(201).json({ message: 'Cita insertada' });
             }
             catch (error) {

@@ -38,14 +38,16 @@ import { RecordatoriosComponent } from './components/recordatorios/recordatorios
 import { FormularioComponent } from './components/formulario/formulario.component';
 
 //-------importsServices----------------------------------------------------------------------------//
-import { AdministradorService } from './services/administrador.service';
+//import { AdministradorService } from './services/administrador.service';
 import { CitaService } from './services/cita.service';
-import { Doctor_especialidadService } from './services/doctor-especialidad.service';
-import { DoctorService } from './services/doctor.service';
+//import { Doctor_especialidadService } from './services/doctor-especialidad.service';
+//import { DoctorService } from './services/doctor.service';
 import { HorarioService } from './services/horario.service';
-import { PacienteService } from './services/paciente.service';
+//import { PacienteService } from './services/paciente.service';
 import { RolService } from './services/rol.service';
 import { EspecialidadService } from './services/especialidad.service';
+import { LoginService } from './services/login.service';
+import { UsuarioService } from './services/usuario.service';
 
 
 
@@ -93,14 +95,16 @@ import { EspecialidadService } from './services/especialidad.service';
     FormsModule
   ],
   providers: [
-    AdministradorService,
+    //AdministradorService,
     CitaService,
-    Doctor_especialidadService,
-    DoctorService,
+    //Doctor_especialidadService,
+    //DoctorService,
     EspecialidadService,
     HorarioService,
-    PacienteService,
-    RolService //este servicio tendrá todos los metodos para los datos
+    //PacienteService,
+    RolService, //este servicio tendrá todos los metodos para los datos
+    LoginService,
+    UsuarioService
   ],
   bootstrap: [AppComponent]
 })
