@@ -99,16 +99,31 @@ class UsuarioController {
             }
         });
     }
-    getOnePaciente(req, res) {
+    //obtener id del paciente (usuario)
+    getPacienteId(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id_paciente } = req.params; //Se recupera el id del params
-                const paciente = yield database_1.default.query('SELECT * FROM paciente WHERE id_paciente=?', [id_paciente]);
+                const { id_usuario } = req.params;
+                const paciente = yield database_1.default.query('SELECT id_usuario FROM usuario WHERE id_usuario = ? AND id_rol = 3', [id_usuario]);
                 res.json(paciente);
             }
             catch (error) {
                 console.error('Database query error:', error);
-                res.status(500).send('Error el paciente no existe');
+                res.status(500).send('Error al consultar el paciente');
+            }
+        });
+    }
+    //obtener nombre del paciente (usuario)
+    getPacienteNom(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { id_usuario } = req.params;
+                const paciente = yield database_1.default.query('SELECT nombre FROM usuario WHERE id_usuario = ? AND id_rol = 3', [id_usuario]);
+                res.json(paciente);
+            }
+            catch (error) {
+                console.error('Database query error:', error);
+                res.status(500).send('Error al consultar el nombre del paciente');
             }
         });
     }
@@ -118,7 +133,7 @@ class UsuarioController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const { id_especialidad } = req.params;
-                const result = yield database_1.default.query('SELECT * FROM doctor WHERE id_especialidad = ?', [id_especialidad]);
+                const result = yield database_1.default.query('SELECT * FROM usuario WHERE id_especialidad = ? AND id_rol = ?', [id_especialidad, 2]);
                 if (Array.isArray(result) && result.length > 0) {
                     res.json(result); // Devuelve todas las filas como un array
                 }

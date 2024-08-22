@@ -18,11 +18,10 @@ class CitaController {
     
             const { id_paciente, id_doctor, nombre_especialidad, nombre_doc, nombre_paciente, fecha, hora } = cita;
             if (!id_paciente || !id_doctor || !nombre_especialidad || !nombre_doc || !nombre_paciente || !fecha || !hora) {
+                console.log('Datos incompletos:', cita); // Imprime los datos que se están recibiendo
                 res.status(400).json({ message: 'Datos incompletos' });
                 return;
             }
-    
-            console.log('Received data:', cita);
     
             const result = await pool.query(
                 'INSERT INTO cita (id_paciente, id_doctor, nombre_especialidad, nombre_doc, nom_paciente, fecha, hora) VALUES (?, ?, ?, ?, ?, ?, ?)',
@@ -37,6 +36,7 @@ class CitaController {
             }
         }
     }
+    
     
 
     public async delete(req: Request, res: Response): Promise<void> {

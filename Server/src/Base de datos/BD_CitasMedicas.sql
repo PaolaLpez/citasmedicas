@@ -11,8 +11,8 @@ CREATE TABLE IF NOT EXISTS rol (
 -- Crear tabla horario
 CREATE TABLE IF NOT EXISTS horario (
     id_horario INT NOT NULL PRIMARY KEY,
-    hora_inicio TIME NOT NULL,
-    hora_fin TIME NOT NULL,
+    hora_inicio Char(10) NOT NULL,
+    hora_fin Char(10) NOT NULL,
     fecha_inicio DATE NOT NULL,
     fecha_fin DATE NOT NULL
 );
