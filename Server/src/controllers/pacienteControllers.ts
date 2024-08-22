@@ -12,42 +12,41 @@ public async list(req: Request, res: Response): Promise<void> {
         res.status(500).send('Error al consultar la base de datos');
       }
     } 
-
     
-    public async create(req: Request, res: Response): Promise<void> {
+      public async create(req: Request, res: Response): Promise<void> {
         try {
-            console.log ('datos recibidos', req.body);
-
-            if (!req.body || typeof req.body !== 'object') {
-                res.status(400).json({ message: 'No se enviaron datos de paciente o el formato es incorrecto' });
-            }
-
-            // Asumir que req.body es un array de objetos y tomar el primer objeto
-            const paciente = Array.isArray(req.body) ? req.body[0] : req.body;
+          console.log('Datos recibidos', req.body);
     
-            // Validar que todos los campos requeridos están presentes
-            const {nom_paciente, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, correo_electronico, contrasena } = paciente;
-            if (!nom_paciente || !fecha_nac || !genero || !direccion || !tipo_sangre || !curp || !num_telefono || !correo_electronico || !contrasena) {
-                 res.status(400).json({ message: 'Datos incompletos' });
-            }
+          if (!req.body || typeof req.body !== 'object') {
+            res.status(400).json({ message: 'No se enviaron datos de usuario o el formato es incorrecto' });
+            return;
+          }
     
-            // Mostrar datos recibidos para depuración
-            console.log('Received data:', paciente);
+          const usuario = req.body;
     
-            // Ejecutar la consulta
-            const result = await pool.query(
-                'INSERT INTO paciente (id_rol, nom_paciente, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, correo_electronico, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                [3, nom_paciente, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, correo_electronico, contrasena]
-            );
+          // Validar que todos los campos requeridos están presentes
+          const { nombre, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, id_especialidad, id_horario, correo_electronico, contrasena, id_rol } = usuario;
+          if (!nombre || !correo_electronico || !contrasena || !id_rol) {
+            res.status(400).json({ message: 'Datos incompletos' });
+            return;
+          }
     
-            res.status(201).json({ message: 'Datos de paciente insertados', id_paciente: result.insertId });
+          // Ejecutar la consulta
+          const result = await pool.query(
+            'INSERT INTO usuario (id_rol, nombre, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, id_especialidad, id_horario, correo_electronico, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [id_rol, nombre, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, id_especialidad, id_horario, correo_electronico, contrasena]
+          );
+    
+          res.status(201).json({ message: 'Datos de usuario insertados', id_usuario: result.insertId });
         } catch (error) {
-            console.error('Database query error:', error); // Imprimir el error completo
-            if (!res.headersSent) {
-                res.status(500).json({ message: 'Error al consultar la base de datos' });
-            }
+          console.error('Error en la base de datos:', error);
+          if (!res.headersSent) {
+            res.status(500).json({ message: 'Error al consultar la base de datos' });
+          }
         }
-    }  
+      }
+
+      
 public async delete(req: Request, res: Response): Promise<void> {
     try {
         const {id_paciente} = req.params;

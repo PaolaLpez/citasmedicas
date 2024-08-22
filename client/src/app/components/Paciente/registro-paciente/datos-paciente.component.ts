@@ -1,20 +1,19 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { PacienteService } from '../../../services/paciente.service';
-import { Paciente } from '../../../models/paciente';
-import { ActivatedRoute,Router } from '@angular/router';
-
+import { UsuarioService } from '../../../services/usuario.service';
+import { Usuario } from '../../../models/usuario';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-datos-paciente',
   templateUrl: './datos-paciente.component.html',
-  styleUrl: './datos-paciente.component.css'
+  styleUrls: ['./datos-paciente.component.css']
 })
 export class DatosPacienteComponent {
 
   @HostBinding('class') classes='row';
-  paciente : Paciente = {
-    id_rol:3 ,
-    nom_paciente: '',
+  paciente: Usuario = {
+    id_rol: 3,  // Rol de paciente
+    nombre: '',
     fecha_nac: null,
     genero: '',
     direccion: '',
@@ -23,28 +22,20 @@ export class DatosPacienteComponent {
     num_telefono: '',
     correo_electronico: '',
     contrasena: '',
-  }
-  edit : boolean = false
+  };
 
-constructor(private pacienteService : PacienteService,
-            private router :Router,
-            private activatedRoute : ActivatedRoute
-)  {}
+  constructor(private usuarioService: UsuarioService, private router: Router) {}
 
-ngOnInit(){
-  this.saveNewPaciente();
- }
-saveNewPaciente(){
-  delete this.paciente.id_paciente;
-  console.log(this.paciente);
-  this.pacienteService.createPaciente(this.paciente).subscribe(
-    resp => {
-      console.log('Paciente creado',resp)
-      this.router.navigate(['/inicio-paciente'])
-    },
-    err=> console.error('Error al crear el paciente',err)
-  )
-   
+  ngOnInit(): void {}
+
+  saveNewPaciente(): void {
+    console.log(this.paciente);
+    this.usuarioService.createUsuario(this.paciente).subscribe(
+      resp => {
+        console.log('Paciente creado', resp);
+        this.router.navigate(['/inicio-paciente']);
+      },
+      err => console.error('Error al crear el paciente', err)
+    );
   }
 }
-

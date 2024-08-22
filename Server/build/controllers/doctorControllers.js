@@ -20,14 +20,19 @@ class DoctorController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const { id_especialidad } = req.params;
-                const [doctores] = yield database_1.default.query('SELECT * FROM doctor WHERE id_especialidad = ?', [id_especialidad]);
-                // Convierte RowDataPacket en un array plano
-                const doctoresArray = Array.isArray(doctores) ? doctores : [doctores];
-                res.json(doctoresArray);
+                const result = yield database_1.default.query('SELECT * FROM doctor WHERE id_especialidad = ?', [id_especialidad]);
+                console.log(result);
+                // Verifica que result sea un array y tenga al menos un elemento
+                if (Array.isArray(result) && result.length > 0) {
+                    res.json(result); // Devuelve todas las filas como un array
+                }
+                else {
+                    res.status(404).send('No se encontraron doctores para esta especialidad');
+                }
             }
             catch (error) {
                 console.error('Database query error:', error);
-                res.status(500).send('Error al consultar la base de datos');
+                res.status(500).send('Error al consultar los doctores');
             }
         });
     }
