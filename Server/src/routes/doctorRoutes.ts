@@ -1,4 +1,4 @@
-import { Router } from "express";
+/* import { Router } from "express";
 import { doctorController } from "../controllers/doctorControllers";
 
 class DoctorRoutes {
@@ -23,3 +23,4 @@ export const doctorRoutes = new DoctorRoutes().router;
 export default doctorRoutes;
 
 
+ */

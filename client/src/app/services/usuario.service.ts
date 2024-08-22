@@ -18,5 +18,14 @@ export class UsuarioService {
   getDoctoresByEspecialidad(id_especialidad: number): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(`${this.usuarioUrl}/especialidad/${id_especialidad}`);
   }
+
+  getPacienteId(id_paciente: number): Observable<any> {
+    return this.http.get<any>(`${this.usuarioUrl}/pacientes/${id_paciente}`);
+  }
+
+  getPacienteNombre(id_paciente: number): Observable<any> {
+    return this.http.get<any>(`${this.usuarioUrl}/pacientes/nombre/${id_paciente}`);
+  } 
+
   // Otros métodos como getUsuario, updateUsuario, deleteUsuario pueden ser añadidos aquí
 }

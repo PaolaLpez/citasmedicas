@@ -6,29 +6,28 @@ class LoginController {
     const { correo_electronico, contrasena } = req.body;
 
     try {
-      // Verificar paciente
-      let result = await pool.query('SELECT * FROM paciente WHERE LOWER(correo_electronico) = LOWER(?) AND contrasena = ?', [correo_electronico, contrasena]);
+      // Verificar usuario en la tabla usuario
+      const result = await pool.query('SELECT * FROM usuario WHERE LOWER(correo_electronico) = LOWER(?) AND contrasena = ?', [correo_electronico, contrasena]);
+      
       if (result.length > 0) {
-        res.json({ role: 'paciente', id: result[0].id_paciente });
-        return;
-      }
+        const user = result[0];
+        const roleId = user.id_rol;
 
-      // Verificar doctor
-      result = await pool.query('SELECT * FROM doctor WHERE LOWER(correo_electronico) = LOWER(?) AND contrasena = ?', [correo_electronico, contrasena]);
-      if (result.length > 0) {
-        res.json({ role: 'doctor', id: result[0].id_doctor });
-        return;
-      }
+        // Determinar el rol basado en id_rol
+        let role = '';
+        if (roleId === 1) {
+          role = 'administrador';
+        } else if (roleId === 2) {
+          role = 'doctor';
+        } else if (roleId === 3) {
+          role = 'paciente';
+        }
 
-      // Verificar administrador
-      result = await pool.query('SELECT * FROM administrador WHERE LOWER(correo_electronico) = LOWER(?) AND contrasena = ?', [correo_electronico, contrasena]);
-      if (result.length > 0) {
-        res.json({ role: 'administrador', id: result[0].id_administrador });
-        return;
+        res.json({ role, id: user.id_usuario });
+      } else {
+        // Si no se encuentra ningún registro
+        res.status(401).json({ message: 'Credenciales incorrectas' });
       }
-
-      // Si no se encuentra ningún registro
-      res.status(401).json({ message: 'Credenciales incorrectas' });
 
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
