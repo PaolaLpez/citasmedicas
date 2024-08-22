@@ -12,7 +12,7 @@
             <img src="https://cdn-icons-png.flaticon.com/512/6073/6073873.png" alt="Profile Picture">
             <h2>Perfil paciente</h2>
             <p>
-                {{paciente.nom_paciente}}
+                {{paciente.nombre}}
             </p>
         </div>
         <div class="profile-info">
@@ -21,7 +21,7 @@
                 <table>
                     <tr>
                         <th>Nombre</th>
-                        <td><input type="text" id="name" name="name" [(ngModel)]="paciente.nom_paciente" required></td>
+                        <td><input type="text" id="name" name="name" [(ngModel)]="paciente.nombre" required></td>
                     </tr> 
                     <tr>
                         <th>Edad</th>
@@ -50,7 +50,8 @@
                     </tr>
                 </table>
                 <div class="form-actions" style="margin-top: 20px;">
-                    <button class="btn btn-success btn-block" (click)="edit ? updatePaciente() : saveNewPaciente()">Guardar</button>
+                    <button class="btn btn-success btn-block"                                                      >Guardar</button>
+                                                              //(click)="edit ? updatePaciente() : saveNewPaciente()"
                 </div>
             </form>
         </div>

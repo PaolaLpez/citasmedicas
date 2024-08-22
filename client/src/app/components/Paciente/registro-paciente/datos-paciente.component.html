@@ -16,7 +16,7 @@
         <form id="registerForm" (ngsubmit)="saveNewPaciente()"#registerForm="ngForm">
             <div class="form-group">
                 <label for="full-name">Nombre Completo</label>
-                <input type="text" name="full-name" [(ngModel)]="paciente.nom_paciente" required>
+                <input type="text" name="full-name" [(ngModel)]="paciente.nombre" required>
             </div>
             <div class="form-group">
                 <label for="birth-date">Fecha de Nacimiento</label>
@@ -68,38 +68,6 @@
             </div>
         </form>
     </div>
-
-    <script>
-        document.getElementById('registerForm').addEventListener('submit', async (event) => {
-            event.preventDefault();
-
-            const formData = new FormData(event.target);
-            const data = Object.fromEntries(formData.entries());
-
-            try {
-                const response = await fetch('/api/paciente', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                });
-
-                if (response.ok) {
-                    // Manejo del éxito
-                    alert('Paciente registrado con éxito');
-                    window.location.href = '/inicio-paciente';
-                } else {
-                    // Manejo de errores
-                    const errorData = await response.json();
-                    alert(`Error: ${errorData.message || 'Error desconocido'}`);
-                }
-            } catch (error) {
-                console.error('Error en la solicitud:', error);
-                alert('Hubo un problema con la solicitud. Por favor, inténtelo de nuevo más tarde.');
-            }
-        });
-    </script>
 </body>
 </html>
 

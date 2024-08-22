@@ -1,6 +1,6 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { PacienteService } from '../../../services/paciente.service';
-import { Paciente } from '../../../models/paciente';
+import { Usuario } from '../../../models/usuario';
+import { UsuarioService } from '../../../services/usuario.service';
 import { ActivatedRoute,Router } from '@angular/router';
 
 @Component({
@@ -11,9 +11,9 @@ import { ActivatedRoute,Router } from '@angular/router';
 export class PerfilPacienteComponent {
 
   @HostBinding('class') classes='row';
-  paciente : Paciente = {
+  paciente : Usuario = {
     id_rol:3 ,
-    nom_paciente: '',
+    nombre: '',
     fecha_nac: null,
     genero: '',
     direccion: '',
@@ -26,7 +26,7 @@ export class PerfilPacienteComponent {
 
   edit : boolean = false
 
-constructor(private pacienteService : PacienteService,
+constructor(private usuarioService : UsuarioService,
             private router :Router,
             private activatedRoute : ActivatedRoute
 )  {}
@@ -34,7 +34,7 @@ constructor(private pacienteService : PacienteService,
 ngOnInit(){
   const params = this.activatedRoute.snapshot.params;
   if ((params)['id_paciente']){
-    this.pacienteService.getOnePaciente((params)['id_paciente']).subscribe(
+    this.usuarioService.createUsuario((params)['id_paciente']).subscribe(
       resp =>{
         console.log(resp);
         this.paciente = resp;
@@ -47,8 +47,8 @@ ngOnInit(){
 
  
  saveNewPaciente(){
-  delete this.paciente.id_paciente;
-  this.pacienteService.createPaciente(this.paciente).subscribe(
+  delete this.paciente.id_usuario;
+  this.usuarioService.createUsuario(this.paciente).subscribe(
     resp => {
         console.log(resp);
         this.router.navigate(['/perfil-paciente']);
@@ -57,17 +57,16 @@ ngOnInit(){
   );
  }
 
-updatePaciente(){
-  let number : number = Number(this.paciente.id_paciente);
+/* updatePaciente(){
+  let number : number = Number(this.paciente.id_usuario);
   console.log(this.paciente);
-this.pacienteService.updatePaciente(number, this.paciente).subscribe(
+this.usuarioService.updateUsuario(number, this.paciente).subscribe(
     resp => {
       console.log('Paciente actualizado',resp)
       this.router.navigate(['/perfil-paciente'])
     },
     err=> console.error('Error al actualizar el paciente',err)
-  )
-   
-  }
+  ) 
+  } */
 }
 

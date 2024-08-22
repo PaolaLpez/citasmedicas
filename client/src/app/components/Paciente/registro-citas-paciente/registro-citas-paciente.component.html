@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de la Cita</title>
-    <style>
-       
-    </style>
+
 </head>
 <app-panel-paciente></app-panel-paciente>
 <body>
@@ -22,7 +20,7 @@
                 
                 <label for="nombre-doctor">Nombre del doctor</label>
                 <select id="nombre-doctor" name="nombre-doctor" [(ngModel)]="selectedDoctor" required>
-                  <option *ngFor="let doctor of doctores" [value]="doctor.id_doctor">{{ doctor.nombre_doc }}</option>
+                  <option *ngFor="let doctor of doctores" [value]="doctor.id_usuario">{{ doctor.nombre }}</option>
                 </select>
                 
                 <label for="fecha-cita">Fecha de la cita </label>
