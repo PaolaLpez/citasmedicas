@@ -9,7 +9,7 @@ class LoginRoutes {
         this.config();
     }
     config() {
-        this.router.post('/login', loginControllers_1.loginController.login);
+        this.router.post('/', loginControllers_1.loginController.login);
     }
 }
 exports.loginRoutes = new LoginRoutes().router;

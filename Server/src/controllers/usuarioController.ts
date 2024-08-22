@@ -80,16 +80,29 @@ public async updatePaciente(req: Request, res: Response): Promise<void> {
       }
     }
 
-public async getOnePaciente(req: Request, res: Response) {
-    try {
-        const {id_paciente} = req.params;//Se recupera el id del params
-        const paciente=await pool.query('SELECT * FROM paciente WHERE id_paciente=?', [id_paciente])
-        res.json(paciente);
-    } catch (error) {
-        console.error('Database query error:', error);
-        res.status(500).send('Error el paciente no existe');
+    //obtener id del paciente (usuario)
+    public async getPacienteId(req: Request, res: Response): Promise<void> {
+      try {
+          const { id_usuario } = req.params;
+          const paciente = await pool.query('SELECT id_usuario FROM usuario WHERE id_usuario = ? AND id_rol = 3', [id_usuario]);
+          res.json(paciente);
+      } catch (error) {
+          console.error('Database query error:', error);
+          res.status(500).send('Error al consultar el paciente');
       }
-    }
+  }
+
+        //obtener nombre del paciente (usuario)
+        public async getPacienteNom(req: Request, res: Response): Promise<void> {
+          try {
+              const { id_usuario } = req.params;
+              const paciente = await pool.query('SELECT nombre FROM usuario WHERE id_usuario = ? AND id_rol = 3', [id_usuario]);
+              res.json(paciente);
+          } catch (error) {
+              console.error('Database query error:', error);
+              res.status(500).send('Error al consultar el nombre del paciente');
+          }
+      }
 
 
     //METODOS PARA DOCTOR
@@ -97,7 +110,7 @@ public async getOnePaciente(req: Request, res: Response) {
     public async getDoctoresByEspecialidad(req: Request, res: Response): Promise<void> {
         try {
             const { id_especialidad } = req.params;
-            const result = await pool.query('SELECT * FROM doctor WHERE id_especialidad = ?', [id_especialidad]);
+            const result = await pool.query('SELECT * FROM usuario WHERE id_especialidad = ? AND id_rol = ?', [id_especialidad, 2]);
             if (Array.isArray(result) && result.length > 0) {
                 res.json(result); // Devuelve todas las filas como un array
             } else {
