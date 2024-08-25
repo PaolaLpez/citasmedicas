@@ -112,7 +112,10 @@ registrarCita(): void {
   }
 
   // Asegurar que la fecha esté en el formato correcto
-
+  if (this.cita.fecha) {
+    this.cita.fecha = new Date(this.cita.fecha).toISOString().split('T')[0];
+  }
+  
   delete this.cita.id_cita;
   this.cita.id_doctor = this.selectedDoctor;
   this.cita.nombre_especialidad = this.especialidades.find(especialidad => especialidad.id_especialidad == this.selectedTipoDoctor)?.nombre_especialidad || '';
@@ -124,7 +127,7 @@ registrarCita(): void {
   this.citaService.createCita(this.cita).subscribe(
     res => {
       console.log('Cita registrada:', res);
-      this.router.navigate(['/inicio-paciente/:id']);
+      this.router.navigate(['/inicio-paciente', this.cita.id_paciente]);
     },
     err => console.error(err)
   );
