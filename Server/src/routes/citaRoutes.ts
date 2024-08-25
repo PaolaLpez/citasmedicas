@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { citaController } from "../controllers/citaControllers";
+import { citaController } from "../controllers/citaControllers"
 
 class CitaRoutes {
     public router: Router = Router();
@@ -14,9 +14,9 @@ class CitaRoutes {
         this.router.delete('/:id_cita', citaController.delete);
         this.router.put('/:id_cita', citaController.update);
         this.router.get('/:id_cita', citaController.getOne);
+        this.router.get('/horas-ocupadas', citaController.getHorasOcupadas);
     }
 }
 
 export const citaRoutes = new CitaRoutes().router;
 export default citaRoutes;
-

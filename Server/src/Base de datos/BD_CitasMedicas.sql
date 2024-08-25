@@ -1,4 +1,3 @@
--- Crear la base de datos solo si no existe
 CREATE DATABASE IF NOT EXISTS citasmedicas;
 USE citasmedicas;
 
@@ -11,8 +10,8 @@ CREATE TABLE IF NOT EXISTS rol (
 -- Crear tabla horario
 CREATE TABLE IF NOT EXISTS horario (
     id_horario INT NOT NULL PRIMARY KEY,
-    hora_inicio Char(10) NOT NULL,
-    hora_fin Char(10) NOT NULL,
+    hora_inicio CHAR(10) NOT NULL,
+    hora_fin CHAR(10) NOT NULL,
     fecha_inicio DATE NOT NULL,
     fecha_fin DATE NOT NULL
 );
@@ -53,9 +52,10 @@ CREATE TABLE IF NOT EXISTS cita (
     nom_paciente VARCHAR(60) NOT NULL,
     fecha DATE NOT NULL,
     hora TIME NOT NULL,
-    FOREIGN KEY (id_paciente) REFERENCES usuario(id_usuario), -- Relaciona con la tabla usuario
-    FOREIGN KEY (id_doctor) REFERENCES usuario(id_usuario) -- Relaciona con la tabla usuario
+    FOREIGN KEY (id_paciente) REFERENCES usuario(id_usuario),
+    FOREIGN KEY (id_doctor) REFERENCES usuario(id_usuario)
 );
+
 
 -- Describir la base de datos para verificar
 DESCRIBE rol;

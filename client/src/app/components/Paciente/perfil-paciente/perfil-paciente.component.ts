@@ -2,6 +2,7 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { Usuario } from '../../../models/usuario';
 import { UsuarioService } from '../../../services/usuario.service';
 import { ActivatedRoute,Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-perfil-paciente',
@@ -9,6 +10,12 @@ import { ActivatedRoute,Router } from '@angular/router';
   styleUrl: './perfil-paciente.component.css'
 })
 export class PerfilPacienteComponent {
+onSubmit(_t20: NgForm) {
+throw new Error('Method not implemented.');
+}
+updatePaciente() {
+throw new Error('Method not implemented.');
+}
 
   @HostBinding('class') classes='row';
   paciente : Usuario = {

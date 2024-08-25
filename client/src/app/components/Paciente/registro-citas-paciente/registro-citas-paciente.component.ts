@@ -12,6 +12,10 @@ import { UsuarioService } from '../../../services/usuario.service';
   styleUrls: ['./registro-citas-paciente.component.css']
 })
 export class RegistroCitasPacienteComponent implements OnInit {
+horasDisponibles: any;
+irInicio() {
+throw new Error('Method not implemented.');
+}
   especialidades: any[] = [];
   doctores: Usuario[] = [];
   selectedTipoDoctor: string = '';
@@ -102,3 +106,5 @@ export class RegistroCitasPacienteComponent implements OnInit {
     );
   }
 }
+
+
