@@ -7,6 +7,9 @@ import { Usuario } from '../models/usuario';
   providedIn: 'root'
 })
 export class UsuarioService {
+  getOneUsuario(arg0: any) {
+    throw new Error('Method not implemented.');
+  }
   private usuarioUrl = 'http://localhost:3000/api/usuario'; // Ajusta la URL según corresponda
 
   constructor(private http: HttpClient) {}

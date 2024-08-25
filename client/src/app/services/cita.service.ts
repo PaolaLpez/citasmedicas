@@ -7,6 +7,12 @@ import { Cita } from '../models/cita';
   providedIn: 'root'
 })
 export class CitaService {
+  getCitasByDoctor(arg0: any) {
+    throw new Error('Method not implemented.');
+  }
+  getCitasByPaciente(arg0: any) {
+    throw new Error('Method not implemented.');
+  }
   private citaUrl = 'http://localhost:3000/api/cita'; // Asegúrate de que esta URL es correcta
 
   constructor(private http: HttpClient) {}
@@ -40,4 +46,6 @@ export class CitaService {
   registrarCita(cita: Cita): Observable<any> {
     return this.createCita(cita);
   }
+
+  
 }
