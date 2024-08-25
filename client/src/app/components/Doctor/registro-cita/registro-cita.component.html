@@ -4,168 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de la Cita</title>
-    <style>
-        /* Agrega aquí los estilos CSS que desees */
-    </style>
 </head>
 <app-panel-doctor></app-panel-doctor>
 <body>
     <div class="main-content">
         <div class="container">
+            <!-- Success message -->
+            <div class="success-message">
+                {{ successMessage }}
+            </div>
+
             <h1>Registro de la Cita</h1>
-            <form id="registro-form">
+            <form id="registro-form" #registroForm="ngForm" (ngSubmit)="registrarCita()" novalidate>
                 <fieldset>
-                    <legend>Paciente</legend>
-                    <label for="nombre-paciente">Nombre del paciente *</label>
-<input type="text" id="nombre-paciente" name="nombre-paciente" maxlength="50" pattern="[A-Za-z\s]+" title="El nombre solo debe contener letras y espacios." required>
                     <legend>Doctor</legend>
+
+                    <!-- Tipo de doctor -->
                     <label for="tipo-doctor">Tipo de doctor *</label>
-                    <select id="tipo-doctor" name="tipo-doctor" required>
+                    <select id="tipo-doctor" name="tipo-doctor" [(ngModel)]="selectedTipoDoctor" (change)="onTipoDoctorChange($event)" required #tipoDoctor="ngModel">
                         <option value="">Seleccione el tipo de doctor</option>
-                        <option value="medico general">Médico General</option>
-                        <option value="dentista">Dentista</option>
-                        <option value="nutriologo">Nutriólogo</option>
-                        <option value="psicologo">Psicólogo</option>
+                        <option *ngFor="let especialidad of especialidades" [value]="especialidad.nombre_especialidad">{{ especialidad.nombre_especialidad }}</option>
                     </select>
+                    <div *ngIf="tipoDoctor.invalid && tipoDoctor.touched" class="error-message">
+                        Campo obligatorio.
+                    </div>
 
+                    <!-- Nombre del doctor -->
                     <label for="nombre-doctor">Nombre del doctor *</label>
-                    <select id="nombre-doctor" name="nombre-doctor" required>
+                    <select id="nombre-doctor" name="nombre-doctor" [(ngModel)]="selectedDoctor" required #nombreDoctor="ngModel">
                         <option value="">Seleccione el nombre del doctor</option>
-                        <option value="Dr. Juan Pérez">Dr. Juan Pérez</option>
-                        <option value="Dra. María López">Dra. María López</option>
-                        <option value="Dr. José Hernández">Dr. José Hernández</option>
-                        <option value="Dra. Ana García">Dra. Ana García</option>
-                        <option value="Dr. Carlos Martínez">Dr. Carlos Martínez</option>
-                        <option value="Dra. Laura Rodríguez">Dra. Laura Rodríguez</option>
-                        <option value="Dr. Miguel Gómez">Dr. Miguel Gómez</option>
-                        <option value="Dra. Sofía Díaz">Dra. Sofía Díaz</option>
+                        <option *ngFor="let doctor of doctores" [value]="doctor.nombre">{{ doctor.nombre }}</option>
                     </select>
+                    <div *ngIf="nombreDoctor.invalid && nombreDoctor.touched" class="error-message">
+                        Campo obligatorio.
+                    </div>
 
+                    <!-- Nombre del paciente -->
+                    <label for="nombre-paciente">Nombre del paciente *</label>
+                    <input type="text" id="nombre-paciente" name="nombre-paciente" [(ngModel)]="cita.nom_paciente" required #nombrePaciente="ngModel">
+                    <div *ngIf="nombrePaciente.invalid && nombrePaciente.touched" class="error-message">
+                        Campo obligatorio.
+                    </div>
+
+                    <!-- Fecha de la cita -->
                     <label for="fecha-cita">Fecha de la cita *</label>
-                    <input type="date" id="fecha-cita" name="fecha-cita" required>
+                    <input type="date" id="fecha-cita" name="fecha-cita" [(ngModel)]="cita.fecha" required #fechaCita="ngModel">
+                    <div *ngIf="fechaCita.invalid && fechaCita.touched" class="error-message">
+                        Campo obligatorio.
+                    </div>
 
+                    <!-- Hora de la cita -->
                     <label for="hora-cita">Hora de la cita *</label>
                     <div class="time-select">
-                        <select id="hora-desde-hora" name="hora-desde-hora" required>
+                        <select id="hora-cita" name="hora-cita" [(ngModel)]="cita.hora" required #horaCita="ngModel">
                             <option value="">Hora</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
+                            <option *ngFor="let hora of horasDisponibles" [value]="hora">{{ hora }}</option>
                         </select>
-                        :
-                        <select id="hora-desde-minuto" name="hora-desde-minuto" required>
-                            <option value="">Minuto</option>
-                            <option value="00">00</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                        </select>
+                        <div *ngIf="horaCita.invalid && horaCita.touched" class="error-message">
+                            Campo obligatorio.
+                        </div>
                     </div>
-                    
                 </fieldset>
                 
+                <!-- Button container -->
                 <div class="button-container">
-                    <button type="submit" onclick="window.location.href='/inicio-doctor'">Registrar Cita</button>
-                    <button type="button" onclick="window.location.href='/inicio-doctor'">Ir al Inicio</button>
-                </div>
-                <div class="sidebar">
-                    <div class="footer">
-                        <p>CAISES San Luis de la Paz</p>
-                        <p>Dirección: Calle Velasco Ibarra & Calle México 68, La Ladrillera, 37906 San Luis de la Paz, Gto.</p>
-                        <p>Teléfono: 468 688 2045</p>
-                        <p>Horario: 8 a.m. a 10 p.m.</p>
-                    </div>
+                    <button type="submit" [disabled]="registroForm.invalid">Registrar Cita</button>
+                    <button type="button" (click)="irInicio()">Ir al Inicio</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Bloque de script para las validaciones -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const form = document.getElementById("registro-form");
-
-            form.addEventListener("submit", (event) => {
-                event.preventDefault();
-
-                // Validación de Nombre del Paciente
-                const nombrePaciente = document.getElementById("nombre-paciente").value.trim();
-                if (!nombrePaciente) {
-                    alert("El nombre del paciente es obligatorio.");
-                    return;
-                } else if (nombrePaciente.length < 10) {
-                    alert("El nombre del paciente debe tener al menos 10 caracteres.");
-                    return;
-                } else if (!/^[a-zA-Z\sáéíóúÁÉÍÓÚñÑ]+$/.test(nombrePaciente)) {
-                    alert("El nombre del paciente solo puede contener letras y espacios.");
-                    return;
-                }
-
-                // Validación de Tipo de Doctor
-                const tipoDoctor = document.getElementById("tipo-doctor").value;
-                if (!tipoDoctor) {
-                    alert("Debe seleccionar un tipo de doctor.");
-                    return;
-                }
-
-                // Validación de Nombre del Doctor
-                const nombreDoctor = document.getElementById("nombre-doctor").value;
-                if (!nombreDoctor) {
-                    alert("Debe seleccionar un nombre de doctor.");
-                    return;
-                }
-
-                // Validación de Fecha de la Cita
-                const fechaCita = document.getElementById("fecha-cita").value;
-                const fechaActual = new Date();
-                fechaActual.setHours(0, 0, 0, 0);  // Ignorar la hora en la fecha actual
-                const fechaSeleccionada = new Date(fechaCita);
-
-                if (!fechaCita) {
-                    alert("Debe seleccionar una fecha para la cita.");
-                    return;
-                } else if (fechaSeleccionada < fechaActual) {
-                    alert("La fecha de la cita debe ser igual o posterior al día de hoy.");
-                    return;
-                }
-
-                // Validación de Hora de la Cita
-                const horaCitaHora = document.getElementById("hora-desde-hora").value;
-                const horaCitaMinuto = document.getElementById("hora-desde-minuto").value;
-
-                if (!horaCitaHora || !horaCitaMinuto) {
-                    alert("Debe seleccionar una hora para la cita.");
-                    return;
-                } else {
-                    const ahora = new Date();
-                    const horaCita = new Date(fechaSeleccionada);
-                    horaCita.setHours(parseInt(horaCitaHora));
-                    horaCita.setMinutes(parseInt(horaCitaMinuto));
-
-                    if (fechaSeleccionada.getTime() === fechaActual.getTime() && horaCita < ahora) {
-                        alert("La hora de la cita no puede ser anterior a la hora actual.");
-                        return;
-                    } else if (parseInt(horaCitaHora) < 8 || parseInt(horaCitaHora) > 18) {
-                        alert("La hora de la cita debe estar entre las 08:00 y las 18:00.");
-                        return;
-                    }
-                }
-
-                // Si todas las validaciones son correctas, se puede enviar el formulario
-                alert("Cita registrada con éxito.");
-                form.submit();
-            });
-        });
-    </script>
-    <!-- Fin del bloque de script -->
-
+    <!-- Footer -->
+    <div class="footer">
+        <p>CAISES San Luis de la Paz</p>
+        <p>Dirección: Calle Velasco Ibarra & Calle México 68, La Ladrillera, 37906 San Luis de la Paz, Gto.</p>
+        <p>Teléfono: 468 688 2045</p>
+        <p>Horario: 8 a.m. a 10 p.m.</p>
+    </div>
 </body>
 </html>
+
+
+
+
+

@@ -20,3 +20,4 @@ class HorarioRoutes {
 export const horarioRoutes = new HorarioRoutes().router;
 export default horarioRoutes;
 
+

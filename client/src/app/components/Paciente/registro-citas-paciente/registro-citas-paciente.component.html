@@ -4,31 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de la Cita</title>
-
 </head>
 <app-panel-paciente></app-panel-paciente>
 <body>
+   
     <div class="container">
         <h1>Registro de la Cita</h1>
-        <form id="registro-form"  (ngSubmit)="registrarCita()">
+        <form id="registro-form" #registroForm="ngForm" (ngSubmit)="registrarCita()" novalidate>
             <fieldset>
                 <legend>Doctor</legend>
+                
+                <!-- Tipo de doctor -->
                 <label for="tipo-doctor">Tipo de doctor</label>
-                <select id="tipo-doctor" name="tipo-doctor" [(ngModel)]="selectedTipoDoctor" (change)="onTipoDoctorChange($event)" required>
-                  <option *ngFor="let especialidad of especialidades" [value]="especialidad.id_especialidad">{{ especialidad.nombre_especialidad }}</option>
+                <select id="tipo-doctor" name="tipo-doctor" [(ngModel)]="selectedTipoDoctor" (change)="onTipoDoctorChange($event)" required #tipoDoctor="ngModel">
+                    <option *ngFor="let especialidad of especialidades" [value]="especialidad.id_especialidad">{{ especialidad.nombre_especialidad }}</option>
                 </select>
-                
-                <label for="nombre-doctor">Nombre del doctor</label>
-                <select id="nombre-doctor" name="nombre-doctor" [(ngModel)]="selectedDoctor" required>
-                  <option *ngFor="let doctor of doctores" [value]="doctor.id_usuario">{{ doctor.nombre }}</option>
-                </select>
-                
-                <label for="fecha-cita">Fecha de la cita </label>
-                <input type="date" id="fecha-cita" name="fecha-cita" [(ngModel)]="cita.fecha" required>
+                <div *ngIf="tipoDoctor.invalid && tipoDoctor.touched" class="error-message">
+                    Campo obligatorio.
+                </div>
 
-   <label for="hora-cita">Hora de la cita </label>
+                <!-- Nombre del doctor -->
+                <label for="nombre-doctor">Nombre del doctor</label>
+                <select id="nombre-doctor" name="nombre-doctor" [(ngModel)]="selectedDoctor" required #nombreDoctor="ngModel">
+                    <option *ngFor="let doctor of doctores" [value]="doctor.id_usuario">{{ doctor.nombre }}</option>
+                </select>
+                <div *ngIf="nombreDoctor.invalid && nombreDoctor.touched" class="error-message">
+                    Campo obligatorio.
+                </div>
+
+                <!-- Fecha de la cita -->
+                <label for="fecha-cita">Fecha de la cita</label>
+                <input type="date" id="fecha-cita" name="fecha-cita" [(ngModel)]="cita.fecha" required #fechaCita="ngModel">
+                <div *ngIf="fechaCita.invalid && fechaCita.touched" class="error-message">
+                    Campo obligatorio.
+                </div>
+
+                <!-- Hora de la cita -->
+                <label for="hora-cita">Hora de la cita</label>
                 <div class="time-select">
-                    <select id="hora-desde-hora" name="hora-desde-hora" [(ngModel)]="cita.hora" required>
+                    <select id="hora-desde-hora" name="hora-desde-hora" [(ngModel)]="cita.hora" required #horaCita="ngModel">
                         <option value="">Hora</option>
                         <option value="08">08:00</option>
                         <option value="08:30">08:30</option>
@@ -51,25 +65,33 @@
                         <option value="17:00">17:00</option>
                         <option value="17:30">17:30</option>
                     </select>
-                </div> 
+                    <div *ngIf="horaCita.invalid && horaCita.touched" class="error-message">
+                        Campo obligatorio.
+                    </div>
+                </div>
             </fieldset>
             
+            <!-- Button container -->
             <div class="button-container">
-                <button type="submit">Registrar Cita</button>
+                <button type="submit" [disabled]="registroForm.invalid">Registrar Cita</button>
                 <button type="button" onclick="window.location.href='/inicio-paciente'">Ir al Inicio</button>
             </div>
         </form>
     </div>
+    
+    <!-- Sidebar -->
     <div class="sidebar">
-    <div class="footer">
-        <p>CAISES San Luis de la Paz</p>
-        <p>Dirección: Calle Velasco Ibarra & Calle México 68, La Ladrillera, 37906 San Luis de la Paz, Gto.</p>
-        <p>Teléfono: 468 688 2045</p>
-        <p>Horario: 8 a.m. a 10 p.m.</p>
+        <div class="footer">
+            <p>CAISES San Luis de la Paz</p>
+            <p>Dirección: Calle Velasco Ibarra & Calle México 68, La Ladrillera, 37906 San Luis de la Paz, Gto.</p>
+            <p>Teléfono: 468 688 2045</p>
+            <p>Horario: 8 a.m. a 10 p.m.</p>
+        </div>
     </div>
-    </div>
-</body>
 
+    
+</body>
 </html>
+
 
 

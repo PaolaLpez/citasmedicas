@@ -14,6 +14,7 @@ class CitaRoutes {
         this.router.delete('/:id_cita', citaControllers_1.citaController.delete);
         this.router.put('/:id_cita', citaControllers_1.citaController.update);
         this.router.get('/:id_cita', citaControllers_1.citaController.getOne);
+        this.router.get('/horas-ocupadas', citaControllers_1.citaController.getHorasOcupadas);
     }
 }
 exports.citaRoutes = new CitaRoutes().router;

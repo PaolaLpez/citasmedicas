@@ -75,6 +75,7 @@ import { UsuarioService } from './services/usuario.service';
 
     //paciente
     DatosPacienteComponent,
+    RegistroCitaComponent,
     RegistroCitasPacienteComponent,
     PanelPacienteComponent,
     InicioPacienteComponent,

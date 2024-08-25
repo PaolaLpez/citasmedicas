@@ -1,4 +1,4 @@
-// cita
+// cita.ts
 export interface Cita {
   id_cita?: number;  // Opcional al crear, ya que es AUTO_INCREMENT
   id_paciente: number;
@@ -9,5 +9,3 @@ export interface Cita {
   fecha: Date;
   hora: string;      // Se recomienda manejar el tipo `string` para TIME
 }
-
-  

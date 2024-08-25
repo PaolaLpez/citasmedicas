@@ -12,7 +12,7 @@ export class DatosPacienteComponent {
 
   @HostBinding('class') classes='row';
   paciente: Usuario = {
-    id_rol: 3,  // Rol de paciente
+    id_rol: 3, // Rol de paciente
     nombre: '',
     fecha_nac: null,
     genero: '',
@@ -22,6 +22,7 @@ export class DatosPacienteComponent {
     num_telefono: '',
     correo_electronico: '',
     contrasena: '',
+    
   };
 
   constructor(private usuarioService: UsuarioService, private router: Router) {}

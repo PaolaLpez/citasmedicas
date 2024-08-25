@@ -1,4 +1,5 @@
 export interface Usuario {
+
     id_usuario?: number; // Opcional al crear, ya que es AUTO_INCREMENT
     id_rol: number;
     nombre: string;

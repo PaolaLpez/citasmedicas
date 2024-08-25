@@ -1,9 +1,11 @@
 body {
     background: url('https://thumbs.dreamstime.com/b/fondo-m%C3%A9dico-y-de-la-atenci%C3%B3n-sanitaria-ecg-monitor-azul-del-pulso-coraz-n-con-se-al-el-coraz%C3%B3n-bati%C3%B3-154045262.jpg') no-repeat center center fixed;
     background-size: cover;
-    margin-left: 249px;
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
 }
+
 .profile-container {
     display: flex;
     flex-direction: column;
@@ -13,35 +15,41 @@ body {
     border-radius: 10px;
     max-width: 600px;
     margin: 50px auto;
+    margin-left: 270px; /* Ajusta este valor para evitar superposición con la barra de navegación */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: relative;
-    top: px; /* Ajusta la posición desde la parte superior si es necesario */
 }
+
 .profile-header {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
 }
+
 .profile-header img {
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     object-fit: cover;
     margin-bottom: 10px;
 }
+
 .profile-header h2 {
     font-size: 1.5rem;
     color: #333;
     margin: 0;
 }
+
 .profile-header p {
     color: #777;
     margin: 5px 0 0;
 }
+
 .profile-info {
     width: 100%;
 }
+
 .profile-info h3 {
     font-size: 1.2rem;
     color: #333;
@@ -49,27 +57,38 @@ body {
     border-bottom: 2px solid #0052cc;
     padding-bottom: 5px;
 }
+
 .profile-info table {
     width: 100%;
     border-collapse: collapse;
 }
-.profile-info table, .profile-info th, .profile-info td {
+
+.profile-info th,
+.profile-info td {
+    padding: 10px;
     border: 1px solid #ddd;
 }
-.profile-info th, .profile-info td {
-    padding: 10px;
-    text-align: left;
-}
+
 .profile-info th {
     background-color: #f2f2f2;
 }
-.profile-info input[type="text"], .profile-info input[type="number"], .profile-info input[type="email"] {
+
+.profile-info input[type="text"],
+.profile-info input[type="number"],
+.profile-info input[type="email"],
+.profile-info input[type="tel"] { /* Aseguramos que el campo de teléfono tenga el mismo estilo */
     width: 100%;
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 8px;
     box-sizing: border-box;
 }
+
+.profile-info input[readonly] {
+    background-color: #f9f9f9;
+    cursor: not-allowed;
+}
+
 .save-button {
     display: block;
     width: 100%;
@@ -83,73 +102,26 @@ body {
     cursor: pointer;
     text-align: center;
 }
+
 .save-button:hover {
     background-color: #003a99;
 }
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-}
-.profile-container {
-    max-width: 800px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-.profile-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-.profile-header img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-.profile-header h2 {
-    margin: 10px 0;
-}
-.profile-info {
-    margin-top: 20px;
-}
-.profile-info h3 {
-    margin-bottom: 15px;
-}
-.profile-info table {
-    width: 100%;
-    border-collapse: collapse;
-}
-.profile-info table th,
-.profile-info table td {
-    padding: 10px;
-    border: 1px solid #ddd;
-}
-.profile-info table th {
-    background-color: #f4f4f4;
-    text-align: left;
-}
-.profile-info table input,
-.profile-info table select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-.profile-info table input[readonly] {
-    background-color: #f9f9f9;
-    cursor: not-allowed;
-}
+
 .footer {
     margin-top: 20px;
     padding: 10px;
     background-color: #f1f1f1;
     text-align: center;
 }
+
 .footer p {
     margin: 5px 0;
 }
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+
