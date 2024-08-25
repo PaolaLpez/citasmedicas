@@ -34,10 +34,16 @@ class CitaController {
             try {
                 const cita = Array.isArray(req.body) ? req.body[0] : req.body;
                 const { id_paciente, id_doctor, nombre_especialidad, nombre_doc, nom_paciente, fecha, hora } = cita;
-                // Validar que todos los campos necesarios estén presentes
+                // Validar que todos los campos necesarios estén presentes y tengan un formato válido
                 if (!id_paciente || !id_doctor || !nombre_especialidad || !nombre_doc || !nom_paciente || !fecha || !hora) {
                     console.log('Datos incompletos:', cita);
-                    res.status(400).json({ message: 'Datos incompletos' });
+                    res.status(400).json({ message: 'Datos incompletos. Asegúrese de que todos los campos requeridos estén presentes.' });
+                    return;
+                }
+                // Asegurarse de que los campos tengan el tipo de datos correcto
+                if (typeof id_paciente !== 'number' || typeof id_doctor !== 'number' || typeof nombre_especialidad !== 'string' ||
+                    typeof nombre_doc !== 'string' || typeof nom_paciente !== 'string' || isNaN(new Date(fecha).getTime()) || typeof hora !== 'string') {
+                    res.status(400).json({ message: 'Formato de datos incorrecto. Verifique los tipos de datos.' });
                     return;
                 }
                 // Insertar la nueva cita en la base de datos

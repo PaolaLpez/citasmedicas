@@ -139,27 +139,39 @@ body {
 .success-message {
     background-color: #28a745; /* Green color for success */
     color: #ffffff; /* White text */
-    padding: 20px 40px; /* Increased padding for larger area */
-    border-radius: 50px; /* Rounded corners */
-    margin: 20px auto; /* Margin for spacing */
-    text-align: center; /* Centered text */
-    font-size: 24px; /* Larger font size */
+    padding: 20px; /* Padding around content */
+    border-radius: 50%; /* Circular shape */
+    width: 200px; /* Set width to fit content */
+    height: 200px; /* Set height to fit content */
+    display: flex; /* Flexbox for centering content */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    text-align: center; /* Center text */
+    font-size: 20px; /* Font size */
     font-weight: bold; /* Bold text */
     position: fixed; /* Fixed position */
-    top: 20%; /* Positioned 20% from the top */
+    top: 50%; /* Center vertically */
     left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Center horizontally */
-    width: 80%; /* Full width with some margin */
-    max-width: 600px; /* Maximum width to prevent it from getting too wide */
+    transform: translate(-50%, -50%); /* Center in both axes */
     z-index: 1000; /* Ensure it appears above other elements */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for better visibility */
-    display: none; /* Hidden by default */
-  }
-  
-  .success-message.visible {
-    display: block; /* Show the message when needed */
-  }
-  
-  
-  
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.5s ease; /* Smooth transition for opacity */
+}
 
+.success-message.visible {
+    opacity: 1; /* Show the message */
+}
+
+.success-message .icon {
+    font-size: 40px; /* Larger icon size */
+}
+
+.success-message .text {
+    margin-top: 10px; /* Margin between icon and text */
+}
+
+.success-message::before {
+    content: '✔'; /* Checkmark icon */
+    font-size: 40px; /* Larger icon */
+}

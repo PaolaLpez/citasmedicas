@@ -11,23 +11,33 @@ export class CitaService {
 
   constructor(private http: HttpClient) {}
 
+  // Método para obtener todas las citas
   getCitas(): Observable<Cita[]> {
     return this.http.get<Cita[]>(this.citaUrl);
   }
 
+  // Método para obtener una cita por ID
   getCita(id_cita: number): Observable<Cita> {
     return this.http.get<Cita>(`${this.citaUrl}/${id_cita}`);
   }
 
+  // Método para crear una nueva cita
   createCita(cita: Cita): Observable<Cita> {
     return this.http.post<Cita>(this.citaUrl, cita);
   }
 
+  // Método para actualizar una cita existente
   updateCita(id_cita: number | string, updateCita: Cita): Observable<Cita> {
     return this.http.put<Cita>(`${this.citaUrl}/${id_cita}`, updateCita);
   }
 
+  // Método para eliminar una cita por ID
   deleteCita(id_cita: number | string): Observable<void> {
     return this.http.delete<void>(`${this.citaUrl}/${id_cita}`);
+  }
+
+  // Implementación del método registrarCita que reutiliza createCita
+  registrarCita(cita: Cita): Observable<any> {
+    return this.createCita(cita);
   }
 }
