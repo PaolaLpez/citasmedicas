@@ -7,9 +7,14 @@
 </head>
 <app-panel-paciente></app-panel-paciente>
 <body>
-   
     <div class="container">
         <h1>Registro de la Cita</h1>
+
+        <!-- Mensaje de confirmación -->
+        <div *ngIf="showConfirmationMessage" class="confirmation-message">
+            ¡Cita registrada correctamente!
+        </div>
+
         <form id="registro-form" #registroForm="ngForm" (ngSubmit)="registrarCita()" novalidate>
             <fieldset>
                 <legend>Doctor</legend>
@@ -17,7 +22,10 @@
                 <!-- Tipo de doctor -->
                 <label for="tipo-doctor">Tipo de doctor</label>
                 <select id="tipo-doctor" name="tipo-doctor" [(ngModel)]="selectedTipoDoctor" (change)="onTipoDoctorChange($event)" required #tipoDoctor="ngModel">
-                    <option *ngFor="let especialidad of especialidades" [value]="especialidad.id_especialidad">{{ especialidad.nombre_especialidad }}</option>
+                    <option value="" disabled selected>Seleccione un tipo de doctor</option>
+                    <option *ngFor="let especialidad of especialidades" [value]="especialidad.id_especialidad">
+                        {{ especialidad.nombre_especialidad }}
+                    </option>
                 </select>
                 <div *ngIf="tipoDoctor.invalid && tipoDoctor.touched" class="error-message">
                     Campo obligatorio.
@@ -26,7 +34,10 @@
                 <!-- Nombre del doctor -->
                 <label for="nombre-doctor">Nombre del doctor</label>
                 <select id="nombre-doctor" name="nombre-doctor" [(ngModel)]="selectedDoctor" required #nombreDoctor="ngModel">
-                    <option *ngFor="let doctor of doctores" [value]="doctor.id_usuario">{{ doctor.nombre }}</option>
+                    <option value="" disabled selected>Seleccione un doctor</option>
+                    <option *ngFor="let doctor of doctores" [value]="doctor.id_usuario">
+                        {{ doctor.nombre }}
+                    </option>
                 </select>
                 <div *ngIf="nombreDoctor.invalid && nombreDoctor.touched" class="error-message">
                     Campo obligatorio.
@@ -44,26 +55,7 @@
                 <div class="time-select">
                     <select id="hora-desde-hora" name="hora-desde-hora" [(ngModel)]="cita.hora" required #horaCita="ngModel">
                         <option value="">Hora</option>
-                        <option value="08">08:00</option>
-                        <option value="08:30">08:30</option>
-                        <option value="09:00">09:00</option>
-                        <option value="09:30">09:30</option>
-                        <option value="10:00">10:00</option>
-                        <option value="10:30">10:30</option>
-                        <option value="11:00">11:00</option>
-                        <option value="11:30">11:30</option>
-                        <option value="12:00">12:00</option>
-                        <option value="12:30">12:30</option>
-                        <option value="13:00">13:00</option>
-                        <option value="13:00">13:30</option>
-                        <option value="14:00">14:00</option>
-                        <option value="14:00">14:30</option>
-                        <option value="15:00">15:00</option>
-                        <option value="15:30">15:30</option>
-                        <option value="16:00">16:00</option>
-                        <option value="16:30">16:30</option>
-                        <option value="17:00">17:00</option>
-                        <option value="17:30">17:30</option>
+                        <option *ngFor="let hora of horasDisponibles">{{ hora }}</option>
                     </select>
                     <div *ngIf="horaCita.invalid && horaCita.touched" class="error-message">
                         Campo obligatorio.
@@ -88,10 +80,6 @@
             <p>Horario: 8 a.m. a 10 p.m.</p>
         </div>
     </div>
-
     
 </body>
 </html>
-
-
-

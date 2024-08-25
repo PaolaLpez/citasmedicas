@@ -1,10 +1,10 @@
-import { Component, OnInit, HostBinding, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { CitaService } from '../../../services/cita.service';
 import { EspecialidadService } from '../../../services/especialidad.service';
-import { Usuario } from '../../../models/usuario';
-import { Cita } from '../../../models/cita';
 import { UsuarioService } from '../../../services/usuario.service';
+import { Cita } from '../../../models/cita';
+import { Usuario } from '../../../models/usuario';
 
 @Component({
   selector: 'app-registro-citas-paciente',
@@ -12,13 +12,31 @@ import { UsuarioService } from '../../../services/usuario.service';
   styleUrls: ['./registro-citas-paciente.component.css']
 })
 export class RegistroCitasPacienteComponent implements OnInit {
-horasDisponibles: any;
-irInicio() {
-throw new Error('Method not implemented.');
-}
-  especialidades: any[] = [];
+  horasDisponibles: string[] = [
+    '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00',
+    '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30'
+  ];
+  
+  especialidades: any[] = [
+    { id_especialidad: 1, nombre_especialidad: 'Médico General' },
+    { id_especialidad: 2, nombre_especialidad: 'Dentista' },
+    { id_especialidad: 3, nombre_especialidad: 'Nutriólogo' },
+    { id_especialidad: 4, nombre_especialidad: 'Psicólogo' }
+  ];
+
   doctores: Usuario[] = [];
-  selectedTipoDoctor: string = '';
+  todosDoctores: Usuario[] = [
+    { id_usuario: 1, nombre: 'Dr. Juan Pérez', id_especialidad: 1, id_rol: 0, correo_electronico: '', contrasena: '' },
+    { id_usuario: 2, nombre: 'Dr. María Gómez', id_especialidad: 1, id_rol: 0, correo_electronico: '', contrasena: '' },
+    { id_usuario: 3, nombre: 'Dr. Luis Rodríguez', id_especialidad: 2, id_rol: 0, correo_electronico: '', contrasena: '' },
+    { id_usuario: 4, nombre: 'Dra. Ana Martínez', id_especialidad: 2, id_rol: 0, correo_electronico: '', contrasena: '' },
+    { id_usuario: 5, nombre: 'Lic. Ana López', id_especialidad: 3, id_rol: 0, correo_electronico: '', contrasena: '' },
+    { id_usuario: 6, nombre: 'Lic. Carlos Ruiz', id_especialidad: 3, id_rol: 0, correo_electronico: '', contrasena: '' },
+    { id_usuario: 7, nombre: 'Dr. José Martínez', id_especialidad: 4, id_rol: 0, correo_electronico: '', contrasena: '' },
+    { id_usuario: 8, nombre: 'Dra. Laura Fernández', id_especialidad: 4, id_rol: 0, correo_electronico: '', contrasena: '' }
+  ];
+
+  selectedTipoDoctor: number = 0;
   selectedDoctor: number = 0;
   cita: Cita = {
     id_paciente: 0,
@@ -29,82 +47,88 @@ throw new Error('Method not implemented.');
     fecha: new Date(),
     hora: ''
   };
+  showConfirmationMessage: boolean = false;
+  successMessage: string = '';
+minDate: any;
+maxDate: any;
 
   constructor(
     private usuarioService: UsuarioService,
     private citaService: CitaService,
     private especialidadService: EspecialidadService,
     private cdr: ChangeDetectorRef,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.getEspecialidades();
-    this.getPacienteInfo(); // Obtiene la información del paciente
-  }
-
-  getEspecialidades(): void {
-    this.especialidadService.getEspecialidades().subscribe(
-      (especialidades: any[]) => {
-        this.especialidades = especialidades;
-      },
-      err => console.error(err)
-    );
+    this.getPacienteInfo();
   }
 
   onTipoDoctorChange(event: any): void {
-    const id_especialidad = event.target.value;
-    this.usuarioService.getDoctoresByEspecialidad(id_especialidad).subscribe(
-      (doctores: Usuario[]) => {
-        this.doctores = doctores;
-        this.cdr.detectChanges(); // Detecta cambios para actualizar la vista
-      },
-      err => console.error(err)
-    );
+    const id_especialidad = Number(event.target.value);  // Convertimos a número para comparación
+
+    if (id_especialidad) {
+      this.doctores = this.todosDoctores.filter(doctor => doctor.id_especialidad === id_especialidad);
+    } else {
+      this.doctores = [];
+    }
+    this.cdr.detectChanges();
   }
 
   getPacienteInfo(): void {
-    const pacienteId = 1; // Aquí debes colocar el ID del paciente autenticado
+    const pacienteId = 1;  // Aquí debes colocar el ID del paciente autenticado
     this.usuarioService.getPacienteId(pacienteId).subscribe(
       (data: any) => {
         if (data.length > 0) {
           this.cita.id_paciente = data[0].id_usuario;
-        }
-      },
-      err => console.error(err)
-    );
-
-    this.usuarioService.getPacienteNombre(pacienteId).subscribe(
-      (data: any) => {
-        if (data.length > 0) {
-          this.cita.nom_paciente = data[0].nombre;
+          this.cita.nom_paciente = data[0].nombre; // Asegúrate de que este campo está disponible
         }
       },
       err => console.error(err)
     );
   }
 
-  registrarCita(): void {
-    if (!this.selectedTipoDoctor || !this.selectedDoctor) {
-      console.error('Debe seleccionar un tipo de doctor y un doctor');
-      return;
-    }
-    
-    this.cita.id_doctor = this.selectedDoctor;
-    this.cita.nombre_especialidad = this.especialidades.find(especialidad => especialidad.id_especialidad == this.selectedTipoDoctor)?.nombre_especialidad || '';
-    this.cita.nombre_doc = this.doctores.find(doctor => doctor.id_usuario == this.selectedDoctor)?.nombre || '';
-  
-    console.log('Datos de cita:', this.cita); // Verifica los datos antes de enviarlos
+  registrarCita() {
+    if (this.selectedTipoDoctor && this.selectedDoctor && this.cita.fecha && this.cita.hora) {
+      // Asignar valores a la cita
+      this.cita.nombre_especialidad = this.especialidades.find(e => e.id_especialidad === this.selectedTipoDoctor)?.nombre_especialidad || '';
+      this.cita.nombre_doc = this.doctores.find(d => d.id_usuario === this.selectedDoctor)?.nombre || '';
+      this.cita.id_doctor = this.selectedDoctor;
 
-    this.citaService.createCita(this.cita).subscribe(
-      res => {
-        console.log('Cita registrada:', res);
-        this.router.navigate(['/inicio-paciente']);
-      },
-      err => console.error(err)
-    );
+      // Registrar la cita usando el servicio
+      this.citaService.createCita(this.cita).subscribe(
+        (response: any) => {
+          console.log('Cita registrada:', response);
+          this.successMessage = 'Cita registrada correctamente';
+          this.showConfirmationMessage = true;
+          setTimeout(() => this.showConfirmationMessage = false, 3000); // Ocultar mensaje después de 3 segundos
+          this.clearForm();
+        },
+        (error: any) => {
+          console.error('Error al registrar la cita:', error);
+        }
+      );
+    } else {
+      console.log('Por favor complete todos los campos.');
+    }
+  }
+
+  irInicio() {
+    this.router.navigate(['/inicio-paciente']);
+  }
+
+  clearForm() {
+    this.selectedTipoDoctor = 0;
+    this.selectedDoctor = 0;
+    this.cita = {
+      id_paciente: 0,
+      id_doctor: 0,
+      nombre_especialidad: '',
+      nombre_doc: '',
+      nom_paciente: '',
+      fecha: new Date(),
+      hora: ''
+    };
+    this.doctores = [];
   }
 }
-
-

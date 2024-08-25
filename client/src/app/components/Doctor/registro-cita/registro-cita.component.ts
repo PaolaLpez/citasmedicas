@@ -82,7 +82,7 @@ export class RegistroCitaComponent implements OnInit {
 
   irInicio() {
     // Logic to redirect to the home page
-    window.location.href = '/inicio-paciente';
+    window.location.href = '/inicio-doctor';
   }
 
   clearForm() {
