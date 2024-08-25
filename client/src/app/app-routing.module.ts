@@ -46,6 +46,9 @@ const routes: Routes = [
 //Para el login
    { path : 'login', component : LoginComponent },
 
+//Para el registro del paciente:
+{ path : 'registro-paciente', component : DatosPacienteComponent },
+
   //Ruteo administrador
   { path : 'inicio-administrador', component : InicioAdministradorComponent },
   { path : 'administrar-horario', component : AdministrarHorarioComponent },
@@ -55,18 +58,17 @@ const routes: Routes = [
 
    //Ruteo doctor
    { path : 'panel-doctor', component : PanelDoctorComponent },
-   { path : 'perfil-doctor', component : PerfilDoctorComponent },
-   { path : 'inicio-doctor', component : InicioDoctorComponent },
-   { path : 'registro-cita', component : RegistroCitaComponent },
+   { path : 'perfil-doctor/:id', component : PerfilDoctorComponent },
+   { path : 'inicio-doctor/:id', component : InicioDoctorComponent },
+   { path : 'registro-cita/:id', component : RegistroCitaComponent },
 
 
    //Ruteo paciente
     {path : 'panel-paciente',component : PanelPacienteComponent },
-    { path : 'registro-citas-paciente', component :  RegistroCitasPacienteComponent },
+    { path : 'registro-citas-paciente/:id', component :  RegistroCitasPacienteComponent },
     { path : 'edicion-datos', component : EdicionDatosComponent },
-    { path : 'inicio-paciente', component : InicioPacienteComponent },
-    { path : 'perfil-paciente', component : PerfilPacienteComponent },
-    { path : 'registro-paciente', component : DatosPacienteComponent },
+    { path : 'inicio-paciente/:id', component : InicioPacienteComponent },
+    { path : 'perfil-paciente/:id', component : PerfilPacienteComponent },
 
 
 

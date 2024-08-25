@@ -15,46 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.usuarioControllers = void 0;
 const database_1 = __importDefault(require("../database"));
 class UsuarioController {
-    //METODOS PARA PACIENTE
-    listPaciente(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const paciente = yield database_1.default.query('select * from paciente');
-                res.json(paciente);
-            }
-            catch (error) {
-                console.error('Database query error:', error); // Imprimir el error completo
-                res.status(500).send('Error al consultar la base de datos');
-            }
-        });
-    }
-    registrarUsuario(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const { id_rol, nombre, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, id_especialidad, id_horario, correo_electronico, contrasena } = req.body;
-                // Aquí puedes agregar validaciones y encriptar la contraseña si es necesario
-                yield database_1.default.query('INSERT INTO usuario SET ?', {
-                    id_rol,
-                    nombre,
-                    fecha_nac,
-                    genero,
-                    direccion,
-                    tipo_sangre,
-                    curp,
-                    num_telefono,
-                    id_especialidad,
-                    id_horario,
-                    correo_electronico,
-                    contrasena
-                });
-                res.status(201).json({ message: 'Usuario registrado correctamente' });
-            }
-            catch (error) {
-                res.status(500).json({ error: 'Error al registrar el usuario' });
-            }
-        });
-    }
-    ;
+    //Metodo para Login
     loginUsuario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -72,30 +33,35 @@ class UsuarioController {
         });
     }
     ;
-    deletePaciente(req, res) {
+    //Metodo para registrar paciente 
+    registrarUsuario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id_paciente } = req.params;
-                yield database_1.default.query('DELETE FROM paciente WHERE id_paciente =?', [id_paciente]);
-                res.json({ message: 'Datos de paciente eliminados' });
+                const { id_rol, nombre, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, id_especialidad, id_horario, correo_electronico, contrasena } = req.body;
+                // Aquí puedes agregar validaciones y encriptar la contraseña si es necesario
+                yield database_1.default.query('INSERT INTO usuario SET ?', {
+                    id_rol, nombre, fecha_nac, genero, direccion, tipo_sangre, curp,
+                    num_telefono, id_especialidad, id_horario, correo_electronico, contrasena
+                });
+                res.status(201).json({ message: 'Usuario registrado correctamente' });
             }
             catch (error) {
-                console.error('Database query error:', error); // Imprimir el error completo
-                res.status(500).send('Error al eliminar los datos del paciente');
+                res.status(500).json({ error: 'Error al registrar el usuario' });
             }
         });
     }
-    updatePaciente(req, res) {
+    ;
+    //METODOS PARA PACIENTE
+    //Muestra todos los pacientes
+    listPaciente(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id_paciente } = req.params;
-                const { nom_paciente, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, correo_electronico, contrasena } = req.body;
-                const result = yield database_1.default.query('UPDATE paciente SET nom_paciente =?, fecha_nac =?, genero =?, direccion =?, tipo_sangre =?, curp =?, num_telefono =?, correo_electronico =?, contrasena=? WHERE id_paciente=?', [nom_paciente, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, correo_electronico, contrasena, id_paciente]);
-                res.json({ message: 'Datos del paciente actualizados' });
+                const paciente = yield database_1.default.query('select * from usuario where id_rol=3');
+                res.json(paciente);
             }
             catch (error) {
-                console.error('Database query error:', error);
-                res.status(500).send('Error al actualizar los datos del paciente');
+                console.error('Database query error:', error); // Imprimir el error completo
+                res.status(500).send('Error al consultar la base de datos');
             }
         });
     }
@@ -104,26 +70,67 @@ class UsuarioController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const { id_usuario } = req.params;
-                const paciente = yield database_1.default.query('SELECT id_usuario FROM usuario WHERE id_usuario = ? AND id_rol = 3', [id_usuario]);
+                const paciente = yield database_1.default.query('SELECT id_usuario FROM usuario WHERE id_usuario = ? AND id_rol =3', [id_usuario]);
                 res.json(paciente);
             }
             catch (error) {
                 console.error('Database query error:', error);
-                res.status(500).send('Error al consultar el paciente');
+                res.status(500).json({ message: 'Error al consultar el paciente' });
             }
         });
     }
     //obtener nombre del paciente (usuario)
-    getPacienteNom(req, res) {
+    getPacienteNombre(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            var _a;
             try {
                 const { id_usuario } = req.params;
-                const paciente = yield database_1.default.query('SELECT nombre FROM usuario WHERE id_usuario = ? AND id_rol = 3', [id_usuario]);
-                res.json(paciente);
+                const nombrePaciente = yield database_1.default.query('SELECT nombre FROM usuario WHERE id_usuario = ? AND id_rol =3', [id_usuario]);
+                res.json({ nombre: (_a = nombrePaciente[0]) === null || _a === void 0 ? void 0 : _a.nombre });
             }
             catch (error) {
                 console.error('Database query error:', error);
-                res.status(500).send('Error al consultar el nombre del paciente');
+                res.status(500).json({ message: 'Error al consultar el nombre del paciente' });
+            }
+        });
+    }
+    getOneUsuario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { id_usuario } = req.params; //Se recupera el id del params
+                const usuario = yield database_1.default.query('SELECT * FROM usuario WHERE id_usuario=?', [id_usuario]);
+                res.json(usuario);
+            }
+            catch (error) {
+                console.error('Database query error:', error);
+                res.status(500).send('Error el paciente no existe');
+            }
+        });
+    }
+    deleteUsuario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { id_usuario } = req.params;
+                yield database_1.default.query('DELETE FROM usuario WHERE id_usuario =?', [id_usuario]);
+                res.json({ message: 'Datos del usuario eliminados' });
+            }
+            catch (error) {
+                console.error('Database query error:', error); // Imprimir el error completo
+                res.status(500).send('Error al eliminar los datos del paciente');
+            }
+        });
+    }
+    updateUsuario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { id_usuario } = req.params;
+                const { nombre, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, correo_electronico, contrasena } = req.body;
+                const result = yield database_1.default.query('UPDATE usuario SET nombre =?, fecha_nac =?, genero =?, direccion =?, tipo_sangre =?, curp =?, num_telefono =?, correo_electronico =?, contrasena=? WHERE id_paciente=?', [nombre, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, correo_electronico, contrasena, id_usuario]);
+                res.json({ message: 'Datos del paciente actualizados' });
+            }
+            catch (error) {
+                console.error('Database query error:', error);
+                res.status(500).send('Error al actualizar los datos del paciente');
             }
         });
     }
@@ -151,7 +158,7 @@ class UsuarioController {
     listDoctor(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const [doctors] = yield database_1.default.query('SELECT * FROM doctor');
+                const [doctors] = yield database_1.default.query('SELECT * FROM usuario where id_rol=2');
                 res.json(doctors);
             }
             catch (error) {
@@ -171,7 +178,7 @@ class UsuarioController {
                     return;
                 }
                 console.log('Received data:', doctor);
-                const result = yield database_1.default.query('INSERT INTO doctor (usuario, id_especialidad, id_horario, nombre_doc, tipo_doctor) VALUES (?, ?, ?, ?, ?)', [usuario, id_especialidad, id_horario, nombre_doc, tipo_doctor]);
+                const result = yield database_1.default.query('INSERT INTO usuario (id_rol, id_especialidad, id_horario, nombre_doc, especialidad) VALUES (?, ?, ?, ?, ?)', [usuario, id_especialidad, id_horario, nombre_doc, tipo_doctor]);
                 res.status(201).json({ message: 'Doctor insertado' });
             }
             catch (error) {
@@ -187,7 +194,7 @@ class UsuarioController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const { id_doctor } = req.params;
-                const [result] = yield database_1.default.query('DELETE FROM doctor WHERE id_doctor = ?', [id_doctor]);
+                const [result] = yield database_1.default.query('DELETE FROM usuario WHERE id_usuario = ? and id_rol=2', [id_doctor]);
                 if (result.affectedRows === 0) {
                     res.status(404).send('Doctor no encontrado');
                 }
@@ -230,7 +237,7 @@ class UsuarioController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const { id_doctor } = req.params;
-                const [result] = yield database_1.default.query('SELECT * FROM doctor WHERE id_doctor = ?', [id_doctor]);
+                const [result] = yield database_1.default.query('SELECT * usuario doctor WHERE id_usuario = ? and id_rol=2', [id_doctor]);
                 if (result.length === 0) {
                     res.status(404).send('Doctor no encontrado');
                 }
@@ -357,7 +364,7 @@ class UsuarioController {
                     return;
                 }
                 // Eliminar administrador
-                yield database_1.default.query('DELETE FROM administrador WHERE id_administrador = ?', [id_administrador]);
+                yield database_1.default.query('DELETE FROM usuario WHERE id_usuario = ?', [id_administrador]);
                 res.json({ message: 'Administrador eliminado con éxito' });
             }
             catch (error) {

@@ -16,8 +16,8 @@ class CitaController {
         try {
             const cita = Array.isArray(req.body) ? req.body[0] : req.body;
     
-            const { id_paciente, id_doctor, nombre_especialidad, nombre_doc, nombre_paciente, fecha, hora } = cita;
-            if (!id_paciente || !id_doctor || !nombre_especialidad || !nombre_doc || !nombre_paciente || !fecha || !hora) {
+            const { id_paciente, id_doctor, nombre_especialidad, nombre_doc, nom_paciente, fecha, hora } = cita;
+            if (!id_paciente || !id_doctor || !nombre_especialidad || !nombre_doc || !nom_paciente || !fecha || !hora) {
                 console.log('Datos incompletos:', cita); // Imprime los datos que se están recibiendo
                 res.status(400).json({ message: 'Datos incompletos' });
                 return;
@@ -25,7 +25,7 @@ class CitaController {
     
             const result = await pool.query(
                 'INSERT INTO cita (id_paciente, id_doctor, nombre_especialidad, nombre_doc, nom_paciente, fecha, hora) VALUES (?, ?, ?, ?, ?, ?, ?)',
-                [id_paciente, id_doctor, nombre_especialidad, nombre_doc, nombre_paciente, fecha, hora]
+                [id_paciente, id_doctor, nombre_especialidad, nombre_doc, nom_paciente, fecha, hora]
             );
     
             res.status(201).json({ message: 'Cita insertada' });
@@ -37,7 +37,19 @@ class CitaController {
         }
     }
     
-    
+    // citaController.ts
+
+public async getCitasByPaciente(req: Request, res: Response): Promise<void> {
+    try {
+        const { id_paciente } = req.params;
+        const result = await pool.query('SELECT * FROM cita WHERE id_paciente = ?', [id_paciente]);
+        res.json(result);
+    } catch (error) {
+        console.error('Database query error:', error);
+        res.status(500).send('Error al consultar las citas del paciente');
+    }
+}
+
 
     public async delete(req: Request, res: Response): Promise<void> {
         try {

@@ -10,10 +10,11 @@ class CitaRoutes {
 
     config(): void {
         this.router.get('/', citaController.list);
+        this.router.get('/:id_cita', citaController.getOne);
+        this.router.get('/paciente/:id_paciente', citaController.getCitasByPaciente); // Nueva ruta
         this.router.post('/', citaController.create);
         this.router.delete('/:id_cita', citaController.delete);
         this.router.put('/:id_cita', citaController.update);
-        this.router.get('/:id_cita', citaController.getOne);
     }
 }
 

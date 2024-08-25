@@ -5,6 +5,7 @@ import { EspecialidadService } from '../../../services/especialidad.service';
 import { Usuario } from '../../../models/usuario';
 import { Cita } from '../../../models/cita';
 import { UsuarioService } from '../../../services/usuario.service';
+import { AuthIDService } from '../../../services/auto-id.service';
 
 @Component({
   selector: 'app-registro-citas-paciente',
@@ -13,7 +14,7 @@ import { UsuarioService } from '../../../services/usuario.service';
 })
 export class RegistroCitasPacienteComponent implements OnInit {
   especialidades: any[] = [];
-  doctores: Usuario[] = [];
+  doctores: any[] = [];
   selectedTipoDoctor: string = '';
   selectedDoctor: number = 0;
   cita: Cita = {
@@ -22,11 +23,12 @@ export class RegistroCitasPacienteComponent implements OnInit {
     nombre_especialidad: '',
     nombre_doc: '',
     nom_paciente: '',
-    fecha: new Date(),
+    fecha: '',
     hora: ''
   };
 
   constructor(
+    private authIDService: AuthIDService,
     private usuarioService: UsuarioService,
     private citaService: CitaService,
     private especialidadService: EspecialidadService,
@@ -37,7 +39,7 @@ export class RegistroCitasPacienteComponent implements OnInit {
 
   ngOnInit() {
     this.getEspecialidades();
-    this.getPacienteInfo(); // Obtiene la información del paciente
+    this.getPacienteInfo(); // Obtiene la información del paciente autenticado
   }
 
   getEspecialidades(): void {
@@ -60,45 +62,72 @@ export class RegistroCitasPacienteComponent implements OnInit {
     );
   }
 
-  getPacienteInfo(): void {
-    const pacienteId = 1; // Aquí debes colocar el ID del paciente autenticado
-    this.usuarioService.getPacienteId(pacienteId).subscribe(
-      (data: any) => {
-        if (data.length > 0) {
-          this.cita.id_paciente = data[0].id_usuario;
-        }
-      },
-      err => console.error(err)
-    );
+/* setPacienteInfo(): void {
+    const userData = localStorage.getItem('userData');
+    if (userData) {
+        const user = JSON.parse(userData);
+        this.cita.id_paciente = user.id_usuario;
+        this.cita.nom_paciente = user.nombre;
+        console.log('Datos del paciente:', this.cita.id_paciente, this.cita.nom_paciente);
+    } else {
+        console.error('No se pudo obtener la información del paciente desde localStorage');
+    }
+} */
 
-    this.usuarioService.getPacienteNombre(pacienteId).subscribe(
-      (data: any) => {
-        if (data.length > 0) {
-          this.cita.nom_paciente = data[0].nombre;
-        }
-      },
-      err => console.error(err)
-    );
-  }
 
-  registrarCita(): void {
-    if (!this.selectedTipoDoctor || !this.selectedDoctor) {
-      console.error('Debe seleccionar un tipo de doctor y un doctor');
-      return;
+    getPacienteInfo(): void {
+      const pacienteIdStr = this.authIDService.getUsuarioStored();
+      const pacienteId = pacienteIdStr ? parseInt(pacienteIdStr, 10) : null;
+    
+      if (pacienteId) {
+        this.usuarioService.getPacienteId(pacienteId).subscribe(
+          (data: any) => {
+            if (data.length > 0) {
+              this.cita.id_paciente = data[0].id_usuario;
+    
+              this.usuarioService.getPacienteNombre(pacienteId).subscribe(
+                (nombreData: any) => {
+                  this.cita.nom_paciente = nombreData.nombre || ''; // Asegúrate de asignar correctamente el nombre
+                  console.log('Nombre del paciente asignado a la cita:', this.cita.nom_paciente);
+                },
+                err => console.error(err)
+              );
+            }
+          },
+          err => console.error(err)
+        );
+      } else {
+        console.error('No se pudo obtener el ID del paciente');
+      }
     }
     
-    this.cita.id_doctor = this.selectedDoctor;
-    this.cita.nombre_especialidad = this.especialidades.find(especialidad => especialidad.id_especialidad == this.selectedTipoDoctor)?.nombre_especialidad || '';
-    this.cita.nombre_doc = this.doctores.find(doctor => doctor.id_usuario == this.selectedDoctor)?.nombre || '';
-  
-    console.log('Datos de cita:', this.cita); // Verifica los datos antes de enviarlos
+    
 
-    this.citaService.createCita(this.cita).subscribe(
-      res => {
-        console.log('Cita registrada:', res);
-        this.router.navigate(['/inicio-paciente']);
-      },
-      err => console.error(err)
-    );
+
+registrarCita(): void {
+  // Verificar que el ID del paciente y su nombre están correctamente establecidos
+  if (!this.cita.id_paciente || !this.cita.nom_paciente) {
+    console.error('Faltan datos del paciente. ID:', this.cita.id_paciente, 'Nombre:', this.cita.nom_paciente);
+    return;
   }
+
+  // Asegurar que la fecha esté en el formato correcto
+
+  delete this.cita.id_cita;
+  this.cita.id_doctor = this.selectedDoctor;
+  this.cita.nombre_especialidad = this.especialidades.find(especialidad => especialidad.id_especialidad == this.selectedTipoDoctor)?.nombre_especialidad || '';
+  this.cita.nombre_doc = this.doctores.find(doctor => doctor.id_usuario == this.selectedDoctor)?.nombre || '';
+  this.cita.fecha = new Date(this.cita.fecha).toISOString().split('T')[0];
+
+  console.log('Datos de cita:', this.cita); // Verifica los datos antes de enviarlos
+
+  this.citaService.createCita(this.cita).subscribe(
+    res => {
+      console.log('Cita registrada:', res);
+      this.router.navigate(['/inicio-paciente/:id']);
+    },
+    err => console.error(err)
+  );
+}
+
 }

@@ -10,60 +10,29 @@
 </head>
 <app-panel-paciente></app-panel-paciente>
 <body>
-  <div class="container">
-    <h1>Citas Agendadas</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Hora</th>
-          <th>Día</th>
-          <th>Nom. Doctor</th>
-          <th>Acciones</th> <!-- Nueva columna para botones -->
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Aquí puedes insertar los datos de tus citas médicas -->
-        <tr>
-          <td>10:00 AM</td>
-          <td>3 de Agosto, 2024</td>
-          <td>Dr. Juan Pérez</td>
-          <td><button class="cancel-button" onclick="cancelarCita('10:00 AM', '3 de Agosto, 2024')">Cancelar</button></td>
-        </tr>
-        <tr>
-          <td>2:30 PM</td>
-          <td>5 de Agosto, 2024</td>
-          <td>Dra. Laura Gómez</td>
-          <td><button class="cancel-button" onclick="cancelarCita('2:30 PM', '5 de Agosto, 2024')">Cancelar</button></td>
-        </tr>
-        <tr>
-          <td>9:00 AM</td>
-          <td>10 de Agosto, 2024</td>
-          <td>Dr. Ricardo Fernández</td>
-          <td><button class="cancel-button" onclick="cancelarCita('9:00 AM', '10 de Agosto, 2024')">Cancelar</button></td>
-        </tr>
-        <!-- Fin de los datos de ejemplo -->
-        <!-- Si no hay datos -->
-        <!--
-        <tr>
-          <td colspan="4" class="no-data">No hay citas agendadas.</td>
-        </tr>
-        -->
-      </tbody>
-    </table>
-  </div>
+ <!-- inicio-paciente.component.html -->
 
-  <script>
-    function cancelarCita(hora, dia) {
-      if (confirm(`¿Está seguro de que desea cancelar la cita de ${hora} del ${dia}?`)) {
-        // Aquí podrías añadir código para manejar la cancelación de la cita
-        alert('Cita cancelada.');
-        // Ejemplo: Eliminar la fila de la tabla
-        // const row = event.target.closest('tr');
-        // row.remove();
-      }
-    }
-  </script>
-</body>
-</html>
-
-
+<div class="container">
+  <h1>Citas Agendadas</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Hora</th>
+        <th>Día</th>
+        <th>Nom. Doctor</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cita of citas">
+        <td>{{ cita.hora }}</td>
+        <td>{{ cita.fecha }}</td>
+        <td>{{ cita.nombre_doc }}</td>
+        <td><button class="cancel-button" (click)="cancelarCita(cita.id_cita)">Cancelar</button></td>
+      </tr>
+      <tr *ngIf="citas.length === 0">
+        <td colspan="4" class="no-data">No hay citas agendadas.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

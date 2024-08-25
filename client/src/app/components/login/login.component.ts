@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../../services/login.service';
+import { AuthIDService } from '../../services/auto-id.service';
 import { Router } from '@angular/router';
-//import { Paciente } from '../../models/paciente';
 
 @Component({
   selector: 'app-login',
@@ -12,26 +12,34 @@ export class LoginComponent {
   correo: string = '';
   contrasena: string = '';
 
-  constructor(private loginService: LoginService,
-             private router: Router) {}
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private authIdService: AuthIDService,
+  ) {}
+
 
   onSubmit() {
     this.loginService.login(this.correo, this.contrasena).subscribe(
       (response) => {
-        // Guardar el id y redirigir según el rol
-        localStorage.setItem('userId', response.id);
+        console.log('Respuesta del servidor:', response);
+
+        // Guardar el id en el servicio compartido
+        this.authIdService.setUsuario(response.id);
+  
+        // Redirigir según el rol y pasar el ID del usuario en la URL
         switch (response.role) {
           case 'paciente':
-            this.router.navigate(['/inicio-paciente']);
+            this.router.navigate([`/inicio-paciente/${response.id}`]);
             break;
           case 'doctor':
-            this.router.navigate(['/inicio-doctor']);
+            this.router.navigate([`/inicio-doctor/${response.id}`]);
             break;
           case 'administrador':
-            this.router.navigate(['/inicio-administrador']);
+            this.router.navigate([`/inicio-administrador/${response.id}`]);
             break;
-            default:
-              console.error('Rol desconocido:', response.role);
+          default:
+            console.error('Rol desconocido:', response.role);
         }
       },
       (error) => {
@@ -39,5 +47,10 @@ export class LoginComponent {
         // Mostrar mensaje de error
       }
     );
+  }
+  
+  
+  volver() {
+    this.router.navigate(['/inicio']);
   }
 }

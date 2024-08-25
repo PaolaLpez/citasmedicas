@@ -6,7 +6,7 @@ export interface Cita {
   nombre_especialidad: string;
   nombre_doc: string;
   nom_paciente: string;
-  fecha: Date;
+  fecha: string;
   hora: string;      // Se recomienda manejar el tipo `string` para TIME
 }
 

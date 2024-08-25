@@ -48,6 +48,7 @@ import { RolService } from './services/rol.service';
 import { EspecialidadService } from './services/especialidad.service';
 import { LoginService } from './services/login.service';
 import { UsuarioService } from './services/usuario.service';
+import { AuthIDService } from './services/auto-id.service';
 
 
 
@@ -104,7 +105,8 @@ import { UsuarioService } from './services/usuario.service';
     //PacienteService,
     RolService, //este servicio tendrá todos los metodos para los datos
     LoginService,
-    UsuarioService
+    UsuarioService,
+    AuthIDService
   ],
   bootstrap: [AppComponent]
 })

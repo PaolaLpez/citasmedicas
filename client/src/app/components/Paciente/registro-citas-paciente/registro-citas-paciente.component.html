@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <h1>Registro de la Cita</h1>
-        <form id="registro-form"  (ngSubmit)="registrarCita()">
+        <form id="registro-form" (ngSubmit)="registrarCita()">
             <fieldset>
                 <legend>Doctor</legend>
                 <label for="tipo-doctor">Tipo de doctor</label>
@@ -56,7 +56,7 @@
             
             <div class="button-container">
                 <button type="submit">Registrar Cita</button>
-                <button type="button" onclick="window.location.href='/inicio-paciente'">Ir al Inicio</button>
+                <button type="button" onclick="window.location.href='/inicio-paciente/:id_usuario'">Ir al Inicio</button>
             </div>
         </form>
     </div>

@@ -12,7 +12,7 @@ export class UsuarioService {
   constructor(private http: HttpClient) {}
 
   createUsuario(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(this.usuarioUrl, usuario);
+    return this.http.post<Usuario>(`${this.usuarioUrl}`, usuario);
   }
 
   getDoctoresByEspecialidad(id_especialidad: number): Observable<Usuario[]> {
@@ -20,12 +20,16 @@ export class UsuarioService {
   }
 
   getPacienteId(id_paciente: number): Observable<any> {
-    return this.http.get<any>(`${this.usuarioUrl}/pacientes/${id_paciente}`);
+    return this.http.get<any>(`${this.usuarioUrl}/paciente/id/${id_paciente}`);
   }
 
   getPacienteNombre(id_paciente: number): Observable<any> {
-    return this.http.get<any>(`${this.usuarioUrl}/pacientes/nombre/${id_paciente}`);
+    return this.http.get<any>(`${this.usuarioUrl}/paciente/nombre/${id_paciente}`);
   } 
+
+getOneUsuario(id_usuario: number): Observable<Usuario>{
+  return this.http.get<Usuario>(`${this.usuarioUrl}/${id_usuario}`);
+}
 
   // Otros métodos como getUsuario, updateUsuario, deleteUsuario pueden ser añadidos aquí
 }

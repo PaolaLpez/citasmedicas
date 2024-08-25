@@ -2,77 +2,107 @@ import { Request, Response } from "express";
 import pool from "../database";
 
 class UsuarioController {
+//Metodo para Login
+public async  loginUsuario (req: Request, res: Response) : Promise<void> {
+  try {
+      const { correo_electronico, contrasena } = req.body;
+      const result = await pool.query('SELECT * FROM usuario WHERE correo_electronico = ? AND contrasena = ?', [correo_electronico, contrasena]);
+
+      if (result.length === 0) {
+      res.status(401).json({ error: 'Correo electrónico o contraseña incorrectos' });
+      }
+
+      // Aquí puedes agregar lógica para generar y devolver un token de autenticación
+      res.status(200).json({ message: 'Login exitoso', usuario: result[0] });
+  } catch (error) {
+      res.status(500).json({ error: 'Error al iniciar sesión' });
+  }
+};  
+
+//Metodo para registrar paciente 
+public async  registrarUsuario (req: Request, res: Response): Promise<void> {
+  try {
+      const { id_rol, nombre, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, id_especialidad, id_horario, correo_electronico, contrasena } = req.body;
+
+      // Aquí puedes agregar validaciones y encriptar la contraseña si es necesario
+      await pool.query('INSERT INTO usuario SET ?', {
+          id_rol, nombre, fecha_nac, genero, direccion, tipo_sangre, curp,
+          num_telefono, id_especialidad, id_horario, correo_electronico, contrasena
+      });
+
+      res.status(201).json({ message: 'Usuario registrado correctamente' });
+  } catch (error) {
+      res.status(500).json({ error: 'Error al registrar el usuario' });
+  }
+};
 
     //METODOS PARA PACIENTE
+//Muestra todos los pacientes
 public async listPaciente(req: Request, res: Response): Promise<void> {
     try {
-        const paciente = await pool.query('select * from paciente');
+        const paciente = await pool.query('select * from usuario where id_rol=3');
         res.json(paciente);
     } catch (error) {
         console.error('Database query error:', error); // Imprimir el error completo
         res.status(500).send('Error al consultar la base de datos');
       }
     } 
-    
-    public async  registrarUsuario (req: Request, res: Response): Promise<void> {
-        try {
-            const { id_rol, nombre, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, id_especialidad, id_horario, correo_electronico, contrasena } = req.body;
-    
-            // Aquí puedes agregar validaciones y encriptar la contraseña si es necesario
-            await pool.query('INSERT INTO usuario SET ?', {
-                id_rol,
-                nombre,
-                fecha_nac,
-                genero,
-                direccion,
-                tipo_sangre,
-                curp,
-                num_telefono,
-                id_especialidad,
-                id_horario,
-                correo_electronico,
-                contrasena
-            });
-    
-            res.status(201).json({ message: 'Usuario registrado correctamente' });
-        } catch (error) {
-            res.status(500).json({ error: 'Error al registrar el usuario' });
-        }
-    };
 
-public async  loginUsuario (req: Request, res: Response) : Promise<void> {
-        try {
-            const { correo_electronico, contrasena } = req.body;
-            const result = await pool.query('SELECT * FROM usuario WHERE correo_electronico = ? AND contrasena = ?', [correo_electronico, contrasena]);
-    
-            if (result.length === 0) {
-            res.status(401).json({ error: 'Correo electrónico o contraseña incorrectos' });
-            }
-    
-            // Aquí puedes agregar lógica para generar y devolver un token de autenticación
-            res.status(200).json({ message: 'Login exitoso', usuario: result[0] });
-        } catch (error) {
-            res.status(500).json({ error: 'Error al iniciar sesión' });
-        }
-    };  
 
-public async deletePaciente(req: Request, res: Response): Promise<void> {
+    //obtener id del paciente (usuario)
+    public async getPacienteId(req: Request, res: Response): Promise<void> {
+      try {
+          const { id_usuario } = req.params;
+          const paciente = await pool.query('SELECT id_usuario FROM usuario WHERE id_usuario = ? AND id_rol =3', [id_usuario]);
+          res.json(paciente);
+      } catch (error) {
+          console.error('Database query error:', error);
+          res.status(500).json({ message: 'Error al consultar el paciente' });
+      }
+  }
+
+        //obtener nombre del paciente (usuario)
+        public async getPacienteNombre(req: Request, res: Response): Promise<void> {
+          try {
+              const { id_usuario } = req.params;
+              const nombrePaciente = await pool.query('SELECT nombre FROM usuario WHERE id_usuario = ? AND id_rol =3', [id_usuario]);
+              res.json({ nombre: nombrePaciente[0]?.nombre });
+            } catch (error) {
+              console.error('Database query error:', error);
+              res.status(500).json({ message: 'Error al consultar el nombre del paciente' });
+          }
+      }
+
+      public async getOneUsuario(req: Request, res: Response) {
+        try {
+            const {id_usuario} = req.params;//Se recupera el id del params
+            const usuario=await pool.query('SELECT * FROM usuario WHERE id_usuario=?', [id_usuario])
+            res.json(usuario);
+        } catch (error) {
+            console.error('Database query error:', error);
+            res.status(500).send('Error el paciente no existe');
+          }
+        }
+      
+
+
+public async deleteUsuario(req: Request, res: Response): Promise<void> {
     try {
-        const {id_paciente} = req.params;
-        await pool.query('DELETE FROM paciente WHERE id_paciente =?', [id_paciente])
-        res.json({message : 'Datos de paciente eliminados'});
+        const {id_usuario} = req.params;
+        await pool.query('DELETE FROM usuario WHERE id_usuario =?', [id_usuario])
+        res.json({message : 'Datos del usuario eliminados'});
     } catch (error) {
           console.error('Database query error:', error); // Imprimir el error completo
           res.status(500).send('Error al eliminar los datos del paciente');
         }
     }
       
-public async updatePaciente(req: Request, res: Response): Promise<void> {
+public async updateUsuario(req: Request, res: Response): Promise<void> {
     try {
-        const {id_paciente} = req.params;
-        const {nom_paciente, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, correo_electronico, contrasena } = req.body;
+        const {id_usuario} = req.params;
+        const {nombre, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, correo_electronico, contrasena } = req.body;
 
-        const result=await pool.query('UPDATE paciente SET nom_paciente =?, fecha_nac =?, genero =?, direccion =?, tipo_sangre =?, curp =?, num_telefono =?, correo_electronico =?, contrasena=? WHERE id_paciente=?', [nom_paciente, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, correo_electronico,contrasena, id_paciente])
+        const result=await pool.query('UPDATE usuario SET nombre =?, fecha_nac =?, genero =?, direccion =?, tipo_sangre =?, curp =?, num_telefono =?, correo_electronico =?, contrasena=? WHERE id_paciente=?', [nombre, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, correo_electronico,contrasena, id_usuario])
              res.json({ message: 'Datos del paciente actualizados' });
     } catch (error) {
         console.error('Database query error:', error);
@@ -80,29 +110,6 @@ public async updatePaciente(req: Request, res: Response): Promise<void> {
       }
     }
 
-    //obtener id del paciente (usuario)
-    public async getPacienteId(req: Request, res: Response): Promise<void> {
-      try {
-          const { id_usuario } = req.params;
-          const paciente = await pool.query('SELECT id_usuario FROM usuario WHERE id_usuario = ? AND id_rol = 3', [id_usuario]);
-          res.json(paciente);
-      } catch (error) {
-          console.error('Database query error:', error);
-          res.status(500).send('Error al consultar el paciente');
-      }
-  }
-
-        //obtener nombre del paciente (usuario)
-        public async getPacienteNom(req: Request, res: Response): Promise<void> {
-          try {
-              const { id_usuario } = req.params;
-              const paciente = await pool.query('SELECT nombre FROM usuario WHERE id_usuario = ? AND id_rol = 3', [id_usuario]);
-              res.json(paciente);
-          } catch (error) {
-              console.error('Database query error:', error);
-              res.status(500).send('Error al consultar el nombre del paciente');
-          }
-      }
 
 
     //METODOS PARA DOCTOR
@@ -126,7 +133,7 @@ public async updatePaciente(req: Request, res: Response): Promise<void> {
         // Manejar la solicitud GET para listar todos los doctores
         public async listDoctor(req: Request, res: Response): Promise<void> {
             try {
-                const [doctors] = await pool.query('SELECT * FROM doctor');
+                const [doctors] = await pool.query('SELECT * FROM usuario where id_rol=2');
                 res.json(doctors);
             } catch (error) {
                 console.error('Database query error:', error);
@@ -144,11 +151,10 @@ public async updatePaciente(req: Request, res: Response): Promise<void> {
                     res.status(400).json({ message: 'Datos incompletos' });
                     return;
                 }
-    
                 console.log('Received data:', doctor);
     
                 const result = await pool.query(
-                    'INSERT INTO doctor (usuario, id_especialidad, id_horario, nombre_doc, tipo_doctor) VALUES (?, ?, ?, ?, ?)',
+                    'INSERT INTO usuario (id_rol, id_especialidad, id_horario, nombre_doc, especialidad) VALUES (?, ?, ?, ?, ?)',
                     [usuario, id_especialidad, id_horario, nombre_doc, tipo_doctor]
                 );
     
@@ -165,7 +171,7 @@ public async updatePaciente(req: Request, res: Response): Promise<void> {
         public async deleteDoctor(req: Request, res: Response): Promise<void> {
             try {
                 const { id_doctor } = req.params;
-                const [result] = await pool.query('DELETE FROM doctor WHERE id_doctor = ?', [id_doctor]);
+                const [result] = await pool.query('DELETE FROM usuario WHERE id_usuario = ? and id_rol=2', [id_doctor]);
     
                 if ((result as any).affectedRows === 0) {
                     res.status(404).send('Doctor no encontrado');
@@ -209,7 +215,7 @@ public async updatePaciente(req: Request, res: Response): Promise<void> {
         public async getOneDoctor(req: Request, res: Response): Promise<void> {
             try {
                 const { id_doctor } = req.params;
-                const [result] = await pool.query('SELECT * FROM doctor WHERE id_doctor = ?', [id_doctor]);
+                const [result] = await pool.query('SELECT * usuario doctor WHERE id_usuario = ? and id_rol=2', [id_doctor]);
     
                 if ((result as any).length === 0) {
                     res.status(404).send('Doctor no encontrado');
@@ -341,7 +347,7 @@ public async updatePaciente(req: Request, res: Response): Promise<void> {
       }
 
       // Eliminar administrador
-      await pool.query('DELETE FROM administrador WHERE id_administrador = ?', [id_administrador]);
+      await pool.query('DELETE FROM usuario WHERE id_usuario = ?', [id_administrador]);
       res.json({ message: 'Administrador eliminado con éxito' });
     } catch (error) {
       console.error('Database query error:', error);
