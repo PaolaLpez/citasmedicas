@@ -8,7 +8,7 @@ const pool = promise_mysql_1.default.createPool({
     host: 'localhost',
     user: 'root', // Cambia esto si tu usuario es diferente
     password: '', // Cambia esto si tu contraseña es diferente
-    database: 'proyecto',
+    database: 'citasmedicas',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
