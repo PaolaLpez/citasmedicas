@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-    <html lang="es">
-        <app-panel-administrador></app-panel-administrador>
+<html lang="es">
+    <app-panel-administrador></app-panel-administrador>
+ 
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,11 +32,7 @@
                         required
                     >
                         <option value="">Seleccione un doctor</option>
-                        <option value="doctor1">Doctor 1</option>
-                        <option value="doctor2">Doctor 2</option>
-                        <option value="doctor3">Doctor 3</option>
-                        <option value="doctor4">Doctor 4</option>
-                        <option value="doctor5">Doctor 5</option>
+                        <option *ngFor="let doc of doctores" [value]="doc.id">{{doc.nombre}}</option>
                     </select>
                     <div *ngIf="doctor.invalid && (doctor.dirty || doctor.touched)" class="error-message">
                         <span *ngIf="doctor.errors?.['required']">Este campo es obligatorio.</span>
