@@ -4,33 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar nuevo administrador</title>
+    <title>Agregar Nuevo Administrador</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .error-message {
+            color: red;
+        }
+        .success-message {
+            color: green;
+        }
+        .button-container {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-
     <div class="main-content">
         <div class="container">
-            <h1>Agregar nuevo administrador</h1>
+            <h1>Agregar Nuevo Administrador</h1>
             <form id="adminForm" (ngSubmit)="saveAdmin(adminForm)" #adminForm="ngForm">
-                <label for="usuario">Usuario:</label>
-                <input 
-                    type="text" 
-                    id="usuario" 
-                    name="usuario" 
-                    maxlength="20" 
-                    pattern="[A-Za-z\s]+" 
-                    title="El usuario solo puede contener letras y espacios" 
-                    required
-                    [(ngModel)]="admin.usuario"
-                    #usuario="ngModel"
-                ><br><br>
-                <div *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)" class="error-message">
-                    <span *ngIf="usuario.errors?.['required']">Este campo es obligatorio.</span>
-                    <span *ngIf="usuario.errors?.['pattern']">El usuario solo puede contener letras y espacios.</span>
-                    <span *ngIf="usuario.errors?.['maxlength']">El usuario no debe exceder los 20 caracteres.</span>
-                </div>
-    
                 <label for="nombre">Nombre completo del administrador:</label>
                 <input 
                     type="text" 
@@ -95,7 +87,7 @@
             <p>CAISES San Luis de la Paz</p>
             <p>Dirección: Calle Velasco Ibarra & Calle México 68, La Ladrillera, 37906 San Luis de la Paz, Gto.</p>
             <p>Teléfono: 468 688 2045</p>
-            <p>Horario: 8 a.m. a 10 p.m.</p>
+            <p>Horario: 8 a.m. a 10 p.m.</p>
         </div>
     </div>
 </body>
