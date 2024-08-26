@@ -106,5 +106,24 @@ class CitaController {
             }
         });
     }
+    // Método para obtener las horas ocupadas en una fecha específica
+    getHorasOcupadas(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { fecha } = req.query;
+                if (!fecha) {
+                    res.status(400).json({ message: 'Fecha requerida' });
+                    return;
+                }
+                const [result] = yield database_1.default.query('SELECT hora FROM cita WHERE fecha = ?', [fecha]);
+                const horasOcupadas = Array.isArray(result) ? result.map((row) => row.hora) : [];
+                res.json({ horasOcupadas });
+            }
+            catch (error) {
+                console.error('Error al consultar las horas ocupadas:', error);
+                res.status(500).json({ message: 'Error al consultar las horas ocupadas', error: error.message });
+            }
+        });
+    }
 }
 exports.citaController = new CitaController();

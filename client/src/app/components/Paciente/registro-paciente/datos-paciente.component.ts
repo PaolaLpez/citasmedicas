@@ -33,7 +33,7 @@ export class DatosPacienteComponent {
     this.usuarioService.createUsuario(this.paciente).subscribe(
       resp => {
         console.log('Paciente creado', resp);
-        this.router.navigate(['/inicio-paciente']);
+        this.router.navigate(['/inicio-paciente', resp.id_usuario]);
       },
       err => console.error('Error al crear el paciente', err)
     );

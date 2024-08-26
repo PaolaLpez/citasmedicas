@@ -1,8 +1,9 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding, ViewChild } from '@angular/core';
 import { Usuario } from '../../../models/usuario';
 import { UsuarioService } from '../../../services/usuario.service';
 import { ActivatedRoute,Router } from '@angular/router';
 import { AuthIDService } from '../../../services/auto-id.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-perfil-paciente',
@@ -12,7 +13,7 @@ import { AuthIDService } from '../../../services/auto-id.service';
 export class PerfilPacienteComponent {
 
   @HostBinding('class') classes='row';
-  usuario : Usuario = {
+  paciente : Usuario = {
     id_rol:3 ,
     nombre: '',
     fecha_nac: null,
@@ -42,8 +43,8 @@ ngOnInit(): void {
       this.usuarioService.getOneUsuario(id_usuario).subscribe(
         usuario => {
           if (Array.isArray(usuario) && usuario.length > 0) {
-            this.usuario = usuario[0]; // Asigna el primer (y único) elemento del array a `usuario`
-            console.log('Información del paciente cargada:', this.usuario);
+            this.paciente = usuario[0]; // Asigna el primer (y único) elemento del array a `usuario`
+            console.log('Información del paciente cargada:', this.paciente);
           } else {
             console.error('No se encontró el usuario con el ID proporcionado.');
           }
@@ -64,8 +65,8 @@ getinfoPaciente(): void {
   if (usuario && usuario.id_usuario) {
     this.usuarioService.getOneUsuario(usuario.id_usuario).subscribe(
       resp => {
-        this.usuario = resp; // Carga los datos en el formulario
-        console.log('Información del paciente cargada:', this.usuario);
+        this.paciente = resp; // Carga los datos en el formulario
+        console.log('Información del paciente cargada:', this.paciente);
       },
       err => {
         console.error('Error al obtener la información del paciente:', err);
@@ -87,52 +88,8 @@ calcularEdad(fecha_nac: Date | null | undefined): number | null {
   return edad >= 0 ? edad : null; // Asegura que la edad no sea negativa
 }
 
-
-
-/* ngOnInit(): void {
-this.saveNewPaciente();
-}
-
- 
- saveNewPaciente(){
-  delete this.paciente.id_usuario;
-  this.usuarioService.createUsuario(this.paciente).subscribe(
-    resp => {
-        console.log(resp);
-        this.router.navigate(['/perfil-paciente']);
-      },
-    err => console.log(err)
-  );
- }
-
- getinfoPaciente(){
- const id_usuario = this.authIdService.getUsuarioStored(); // Recupera el ID del usuario de la sesión
- if (id_usuario) {
-   this.usuarioService.getOneUsuario(id_usuario).subscribe(
-     resp => {
-       this.paciente = resp; // Carga los datos en el formulario
-       console.log('Usuario guardado:', this.authIdService.getUsuarioStored());
-       console.log('ID guardado en localStorage:', localStorage.getItem('userId'));
-               
-     },
-     err => console.error(err)
-   );
- } else {
-   console.error('Usuario no identificado');
-   // Puedes redirigir al login si el usuario no está autenticado
-   this.router.navigate(['/login']);
- }
-}
- *//* updatePaciente(){
-  let number : number = Number(this.paciente.id_usuario);
-  console.log(this.paciente);
-this.usuarioService.updateUsuario(number, this.paciente).subscribe(
-    resp => {
-      console.log('Paciente actualizado',resp)
-      this.router.navigate(['/perfil-paciente'])
-    },
-    err=> console.error('Error al actualizar el paciente',err)
-  ) 
-  } */
+updatePaciente() {
+  throw new Error('Method not implemented.');
+  }
 }
 

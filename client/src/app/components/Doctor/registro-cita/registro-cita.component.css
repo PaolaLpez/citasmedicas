@@ -1,3 +1,5 @@
+
+
 body {
     background-image: url('https://thumbs.dreamstime.com/b/fondo-m%C3%A9dico-y-de-la-atenci%C3%B3n-sanitaria-ecg-monitor-azul-del-pulso-coraz-n-con-se-al-el-coraz%C3%B3n-bati%C3%B3-154045262.jpg');
     background-size: cover;
@@ -12,12 +14,14 @@ body {
     align-items: center; /* Centro el contenido horizontalmente */
 }
 
+
 .main-content {
     padding: 20px;
     box-sizing: border-box;
     width: 100%;
     max-width: 600px; /* Asegura que el contenido no se expanda más allá de 600px */
 }
+
 
 .container {
     width: 100%;
@@ -29,15 +33,18 @@ body {
     margin: 20px auto; /* Centro el contenedor horizontalmente */
 }
 
+
 h1 {
     text-align: center;
     color: #007bff;
 }
 
+
 label {
     display: block;
     margin-top: 10px;
 }
+
 
 input[type="text"], input[type="date"], select {
     width: calc(100% - 22px);
@@ -47,10 +54,12 @@ input[type="text"], input[type="date"], select {
     border-radius: 5px;
 }
 
+
 .button-container {
     text-align: center;
     margin-top: 20px;
 }
+
 
 .button-container button {
     padding: 10px 20px;
@@ -63,9 +72,11 @@ input[type="text"], input[type="date"], select {
     transition: background-color 0.3s ease;
 }
 
+
 .button-container button:hover {
     background-color: #0056b3;
 }
+
 
 .time-select {
     display: flex;
@@ -74,9 +85,11 @@ input[type="text"], input[type="date"], select {
     margin-top: 5px;
 }
 
+
 .time-select select {
     width: 48%;
 }
+
 
 .footer {
     width: 100%;
@@ -90,6 +103,100 @@ input[type="text"], input[type="date"], select {
     left: 0;
 }
 
+
 .footer p {
     margin: 1px;
+}
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+}
+
+
+.button-container {
+    margin-top: 1em;
+}
+
+
+.button-container button {
+    margin-right: 1em;
+}
+
+
+.footer {
+    background: #000000;
+    text-align: center;
+    padding: 1em;
+    position: relative;
+}
+.success-message {
+    background-color: #28a745; /* Green color for success */
+    color: #ffffff; /* White text */
+    padding: 20px; /* Padding around content */
+    border-radius: 50%; /* Circular shape */
+    width: 200px; /* Set width to fit content */
+    height: 200px; /* Set height to fit content */
+    display: flex; /* Flexbox for centering content */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    text-align: center; /* Center text */
+    font-size: 20px; /* Font size */
+    font-weight: bold; /* Bold text */
+    position: fixed; /* Fixed position */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Center in both axes */
+    z-index: 1000; /* Ensure it appears above other elements */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for better visibility */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.5s ease; /* Smooth transition for opacity */
+}
+
+
+.success-message.visible {
+    opacity: 1; /* Show the message */
+}
+
+
+.success-message .icon {
+    font-size: 40px; /* Larger icon size */
+}
+
+
+.success-message .text {
+    margin-top: 10px; /* Margin between icon and text */
+}
+
+
+.success-message::before {
+    content: '✔'; /* Checkmark icon */
+    font-size: 40px; /* Larger icon */
 }

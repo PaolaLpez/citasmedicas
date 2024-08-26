@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
-  
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Citas Pendientes</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    
+    /* Aquí puedes añadir tus estilos */
   </style>
 </head>
 <app-panel-doctor></app-panel-doctor>
 <body>
+
+
   <div class="content">
     <h1>Citas Pendientes del Doctor</h1>
     <table id="citasTable">
@@ -24,26 +25,7 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Ejemplos de citas -->
-        <tr>
-          <td>Juan Perez</td>
-          <td>3 de Agosto, 2024</td>
-          <td>10:00 AM</td>
-          <td><button onclick="cancelarCita(1)">Cancelar</button></td>
-        </tr>
-        <tr>
-          <td>Laura Gomez</td>
-          <td>5 de Agosto, 2024</td>
-          <td>2:30 PM</td>
-          <td><button onclick="cancelarCita(2)">Cancelar</button></td>
-        </tr>
-        <tr>
-          <td>Ricardo Fernandez</td>
-          <td>10 de Agosto, 2024</td>
-          <td>9:00 AM</td>
-          <td><button onclick="cancelarCita(3)">Cancelar</button></td>
-        </tr>
-        <!-- Fin de ejemplos -->
+        <!-- Las filas de la tabla se llenarán dinámicamente -->
       </tbody>
     </table>
   </div>
@@ -56,35 +38,38 @@
           const tableBody = document.querySelector('#citasTable tbody');
           data.forEach(cita => {
             const row = document.createElement('tr');
+            row.setAttribute('id', `cita-${cita.id}`); // Añadir un id único a la fila
             row.innerHTML = `
               <td>${cita.paciente}</td>
               <td>${cita.dia}</td>
               <td>${cita.hora}</td>
-              <td><button onclick="cancelarCita(${cita.id})">Cancelar</button></td>
+              <td><button onclick="cancelarCita(${cita.id}, this)">Cancelar</button></td>
             `;
             tableBody.appendChild(row);
           });
         });
     });
 
-    function cancelarCita(id) {
+
+    function cancelarCita(id, button) {
       fetch(`/citas/${id}`, { method: 'DELETE' })
         .then(response => response.json())
         .then(data => {
           alert(data.message);
-          location.reload(); // Recargar la página para actualizar la lista de citas
-        });
+          // Eliminar la fila de la tabla
+          const row = button.closest('tr');
+          if (row) {
+            row.remove();
+          }
+        })
+        .catch(error => console.error('Error al cancelar la cita:', error));
     }
   </script>
-   <div class="footer">
+  <div class="footer">
     <p>CAISES San Luis de la Paz</p>
     <p>Dirección: Calle Velasco Ibarra & Calle México 68, La Ladrillera, 37906 San Luis de la Paz, Gto.</p>
     <p>Teléfono: 468 688 2045</p>
     <p>Horario: 8 a.m. a 10 p.m.</p>
-</div>
+  </div>
 </body>
-
 </html>
-
-
-

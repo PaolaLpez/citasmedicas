@@ -12,47 +12,129 @@
             <img src="https://cdn-icons-png.flaticon.com/512/6073/6073873.png" alt="Profile Picture">
             <h2>Perfil paciente</h2>
             <p>
-                {{usuario.nombre}}
+                {{paciente.nombre}}
             </p>
         </div>
         <div class="profile-info">
             <h3>Información Personal</h3>
-            <form id="profileForm">
-                <table>
+            <form id="profileForm" (ngSubmit)="updatePaciente()" #profileForm="ngForm">                <table>
+
                     <tr>
                         <th>Nombre</th>
-                        <td><input type="text" id="name" name="name" [(ngModel)]="usuario.nombre" required></td>
-                    </tr> 
+                        <td>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                [(ngModel)]="paciente.nombre"
+                                required
+                                minlength="18"
+                                maxlength="30"
+                                pattern="[A-Za-zÁáÉéÍíÓóÚúÑñ\s]+"
+                                title="El nombre debe contener solo letras y espacios, con un mínimo de 18 caracteres y un máximo de 30."
+                                #name="ngModel">
+                            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error-message">
+                                <span *ngIf="name.errors?.['required']">Este campo es obligatorio.</span>
+                                <span *ngIf="name.errors?.['minlength']">El nombre debe tener al menos 18 caracteres.</span>
+                                <span *ngIf="name.errors?.['maxlength']">El nombre no debe exceder los 30 caracteres.</span>
+                                <span *ngIf="name.errors?.['pattern']">El nombre solo puede contener letras y espacios.</span>
+                            </div>
+                        </td>
+                    </tr>
+
                     <tr>
                         <th>Edad</th>
-                        <td><input type="number" id="age" name="age" [value]="calcularEdad(usuario.fecha_nac)" readonly></td>
-                      </tr>
+                        <td><input type="number" id="age" name="age" [value]="calcularEdad(paciente.fecha_nac)" readonly></td>
+                    </tr>
                       
                     <tr>
                         <th>Género</th>
-                        <td><input type="genero" id="genero" name="genero" [(ngModel)]="usuario.genero" readonly></td>
-
+                        <td>
+                            <input
+                                type="text"
+                                id="genero"
+                                name="genero"
+                                [(ngModel)]="paciente.genero"
+                                readonly>
+                        </td>
                     </tr>
+
                     <tr>
                         <th>Dirección</th>
-                        <td><input type="text" id="address" name="address" [(ngModel)]="usuario.direccion" required></td>
+                        <td>
+                            <input
+                                type="text"
+                                id="address"
+                                name="address"
+                                [(ngModel)]="paciente.direccion"
+                                required
+                                pattern="^[a-zA-Z\s]+\s#[0-9]+$"
+                                title="Ingresa una dirección válida."
+                                #address="ngModel">
+                            <div *ngIf="address.invalid && (address.dirty || address.touched)" class="error-message">
+                                <span *ngIf="address.errors?.['required']">Este campo es obligatorio.</span>
+                                <span *ngIf="address.errors?.['pattern']">Ingresa una dirección válida.</span>
+                            </div>
+                        </td>
                     </tr>
+
                     <tr>
                         <th>Teléfono</th>
-                        <td><input type="tel" id="phone" name="phone" [(ngModel)]="usuario.num_telefono" required></td>
+                        <td>
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                [(ngModel)]="paciente.num_telefono"
+                                required
+                                minlength="10"
+                                maxlength="10"
+                                pattern="[0-9]+"
+                                title="El número de teléfono debe contener solo números y tener exactamente 10 caracteres."
+                                #phone="ngModel">
+                            <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="error-message">
+                                <span *ngIf="phone.errors?.['required']">Este campo es obligatorio.</span>
+                                <span *ngIf="phone.errors?.['minlength'] || phone.errors?.['maxlength']">El número de teléfono debe tener exactamente 10 caracteres.</span>
+                                <span *ngIf="phone.errors?.['pattern']">El número de teléfono solo puede contener números.</span>
+                            </div>
+                        </td>
                     </tr>
+
                     <tr>
                         <th>Email</th>
-                        <td><input type="email" id="email" name="email" [(ngModel)]="usuario.correo_electronico" required></td>
+                        <td>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                [(ngModel)]="paciente.correo_electronico"
+                                required
+                                pattern=".+@.+\..+"
+                                title="Introduce una dirección de correo electrónico válida con '@' y un dominio."
+                                #email="ngModel">
+                            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message">
+                                <span *ngIf="email.errors?.['required']">Este campo es obligatorio.</span>
+                                <span *ngIf="email.errors?.['pattern']">Introduce una dirección de correo electrónico válida que contenga '&#64;' y un dominio.</span>
+                                <span *ngIf="email.errors?.['email']">Introduce una dirección de correo electrónico válida.</span>
+                            </div>
+                        </td>
                     </tr>
+
                     <tr>
-                        <th>Tipo de sangre</th>
-                        <td><input type="text" id="blood-type" name="blood-type" [(ngModel)]="usuario.tipo_sangre" readonly></td>
+                        <th>Tipo de Sangre</th>
+                        <td>
+                            <input
+                                type="text"
+                                id="blood-type"
+                                name="blood-type"
+                                [(ngModel)]="paciente.tipo_sangre"
+                                readonly>
+                        </td>
                     </tr>
+
                 </table>
                 <div class="form-actions" style="margin-top: 20px;">
-                    <button class="btn btn-success btn-block"                                                      >Guardar</button>
-                                                             <!--  //(click)="edit ? updatePaciente() : saveNewPaciente()" -->
+                    <button class="btn btn-success btn-block" [disabled]="profileForm.invalid">Guardar</button>
                 </div>
             </form>
         </div>
@@ -61,17 +143,9 @@
         <p>CAISES San Luis de la Paz</p>
         <p>Horario: 8 a.m. a 10 p.m.</p>
     </div>
-    <script>
-        document.getElementById('profileForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Evita el envío tradicional del formulario
-            
-            // Aquí puedes agregar la lógica para manejar el formulario, como enviar los datos a un servidor
-
-            alert('Datos guardados con éxito.');
-        });
-    </script>
 </body>
 </html>
+
 
 
 

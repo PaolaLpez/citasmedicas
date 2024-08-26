@@ -14,8 +14,8 @@ export class CitaService {
   constructor(private http: HttpClient) {}
 
   //getcita trae todas las citas
-  getCita() {
-    return this.http.get(this.citaUr1);
+  getCitas(): Observable<Cita[]> {
+    return this.http.get<Cita[]>(`${this.citaUr1}`);
   }
 
 //get one cita trae una cita por su id
