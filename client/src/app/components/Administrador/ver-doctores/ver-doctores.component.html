@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+    <app-panel-administrador></app-panel-administrador>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctores Disponibles</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
 </head>
-<app-panel-administrador></app-panel-administrador>
 <body>
     <div class="container">
         <h1>Doctores Disponibles</h1>
@@ -22,70 +21,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Dr. Juan Pérez</td>
-                    <td>Cardiólogo</td>
-                    <td>General</td>
-                    <td><button class="delete-button" onclick="eliminarDoctor(1)">Eliminar</button></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Dra. Laura Gómez</td>
-                    <td>Pediatra</td>
-                    <td>General</td>
-                    <td><button class="delete-button" onclick="eliminarDoctor(2)">Eliminar</button></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Dr. Luis Martínez</td>
-                    <td>Nutriólogo</td>
-                    <td>Especialista</td>
-                    <td><button class="delete-button" onclick="eliminarDoctor(3)">Eliminar</button></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Dra. Ana Rodríguez</td>
-                    <td>Psiquiatra</td>
-                    <td>Especialista</td>
-                    <td><button class="delete-button" onclick="eliminarDoctor(4)">Eliminar</button></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Dr. Miguel López</td>
-                    <td>Odontólogo</td>
-                    <td>General</td>
-                    <td><button class="delete-button" onclick="eliminarDoctor(5)">Eliminar</button></td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>Dra. Clara Mendoza</td>
-                    <td>Cardióloga</td>
-                    <td>Especialista</td>
-                    <td><button class="delete-button" onclick="eliminarDoctor(6)">Eliminar</button></td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>Dr. Pedro Hernández</td>
-                    <td>Psiquiatra</td>
-                    <td>Especialista</td>
-                    <td><button class="delete-button" onclick="eliminarDoctor(7)">Eliminar</button></td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>Dra. María Salinas</td>
-                    <td>Psicóloga</td>
-                    <td>Especialista</td>
-                    <td><button class="delete-button" onclick="eliminarDoctor(8)">Eliminar</button></td>
+                <tr *ngFor="let doctor of doctores">
+                    <td>{{ doctor.id }}</td>
+                    <td>{{ doctor.nombre }}</td>
+                    <td>{{ doctor.especialidad }}</td>
+                    <td>{{ doctor.tipo }}</td>
+                    <td><button class="delete-button" (click)="eliminarDoctor(doctor.id)">Eliminar</button></td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <script>
-        function eliminarDoctor(idDoctor) {
-            alert(`Eliminar doctor con ID: ${idDoctor}`);
-            // Aquí puedes agregar la lógica para eliminar el doctor de la base de datos
-        }
-    </script>
 </body>
 </html>

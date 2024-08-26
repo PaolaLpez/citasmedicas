@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS especialidad (
     nombre_especialidad VARCHAR(60) NOT NULL
 );
 
--- Crear tabla usuario (combina pacientes, doctores y administradores)
+-- Crear tabla usuario (combina pacientes, doctores y administradores) 
 CREATE TABLE IF NOT EXISTS usuario (
     id_usuario INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     id_rol INT NOT NULL,

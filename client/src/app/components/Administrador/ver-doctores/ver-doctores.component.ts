@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './ver-doctores.component.css'
 })
 export class VerDoctoresComponent {
+eliminarDoctor(arg0: any) {
+throw new Error('Method not implemented.');
+}
+doctores: any;
 
 }

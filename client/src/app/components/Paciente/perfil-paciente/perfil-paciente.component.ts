@@ -19,7 +19,7 @@ throw new Error('Method not implemented.');
 
   @HostBinding('class') classes='row';
   paciente : Usuario = {
-    id_rol:3 ,
+    id_rol: 3,
     nombre: '',
     fecha_nac: null,
     genero: '',

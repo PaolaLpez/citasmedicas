@@ -1,76 +1,108 @@
 <!DOCTYPE html>
 <html lang="es">
+    <app-panel-administrador></app-panel-administrador>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar nuevo doctor</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .error-message {
+            color: red;
+        }
+        .success-message {
+            color: green;
+        }
+    </style>
 </head>
-<app-panel-administrador></app-panel-administrador>
 <body>
     <div class="main-content">
         <div class="container">
             <h1>Registro de nuevo doctor</h1>
-            <form id="registroForm">
-                <label for="usuario">Usuario:</label>
-                <input type="text" id="usuario" name="usuario" maxlength="20" pattern="[A-Za-z0-9]+" title="El usuario solo puede contener letras y números" required><br><br>
+            <form #doctorForm="ngForm" (ngSubmit)="onSubmit(doctorForm)" novalidate>
+                <label for="nombre">Nombre completo:</label>
+                <input 
+                    type="text" 
+                    id="nombre" 
+                    name="nombre" 
+                    [(ngModel)]="doctor.nombre" 
+                    #nombre="ngModel"
+                    maxlength="60" 
+                    pattern="[A-Za-z\s]+" 
+                    title="El nombre solo puede contener letras y espacios" 
+                    required
+                ><br><br>
+                <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="error-message">
+                    <span *ngIf="nombre.errors?.['required']">Este campo es obligatorio.</span>
+                    <span *ngIf="nombre.errors?.['pattern']">El nombre solo puede contener letras y espacios.</span>
+                </div>
 
-                <label for="nombre_doc">Nombre completo:</label>
-                <input type="text" id="nombre_doc" name="nombre_doc" maxlength="50" pattern="[A-Za-z\s]+" title="El nombre solo puede contener letras y espacios" required><br><br>
-
-                <label for="especialidad">Especialidad:</label>
-                <input type="text" id="especialidad" name="especialidad" required><br><br>
-
-                <label for="tipo_doctor">Tipo de doctor:</label>
-                <select id="tipo_doctor" name="tipo_doctor" required>
-                    <option value="">Seleccione el tipo de doctor</option>
-                    <option value="psiquiatra">Psiquiatra</option>
-                    <option value="doctor general">Doctor General</option>
-                    <option value="medico general">Médico General</option>
-                    <option value="pediatra">Pediatra</option>
-                    <option value="cardiologo">Cardiólogo</option>
-                    <option value="dentista">Dentista</option>
-                    <option value="nutriologo">Nutriólogo</option>
-                    <option value="psicologo">Psicólogo</option>
+                <label for="id_especialidad">Especialidad:</label>
+                <select 
+                    id="id_especialidad" 
+                    name="id_especialidad" 
+                    [(ngModel)]="doctor.id_especialidad"
+                    #id_especialidad="ngModel"
+                >
+                    <option value="">Seleccione la especialidad</option>
+                    <option *ngFor="let especialidad of especialidades" [value]="especialidad.id_especialidad">
+                        {{ especialidad.nombre_especialidad }}
+                    </option>
                 </select><br><br>
 
-                <label for="edad">Edad:</label>
-                <input type="number" id="edad" name="edad" required><br><br>
-
-                <label for="genero">Género:</label>
-                <select id="genero" name="genero" required>
-                    <option value="">Seleccione el género</option>
-                    <option value="masculino">Masculino</option>
-                    <option value="femenino">Femenino</option>
-                    <option value="otro">Otro</option>
+                <label for="id_horario">Horario:</label>
+                <select 
+                    id="id_horario" 
+                    name="id_horario" 
+                    [(ngModel)]="doctor.id_horario"
+                    #id_horario="ngModel"
+                >
+                    <option value="">Seleccione el horario</option>
+                    <option *ngFor="let horario of horarios" [value]="horario.id_horario">
+                        {{ horario.hora_inicio }} - {{ horario.hora_fin }}
+                    </option>
                 </select><br><br>
 
-                <label for="direccion">Dirección:</label>
-                <input type="text" id="direccion" name="direccion" required><br><br>
+                <label for="correo_electronico">Correo electrónico:</label>
+                <input 
+                    type="email" 
+                    id="correo_electronico" 
+                    name="correo_electronico" 
+                    [(ngModel)]="doctor.correo_electronico" 
+                    #correo_electronico="ngModel"
+                    maxlength="60" 
+                    required
+                ><br><br>
+                <div *ngIf="correo_electronico.invalid && (correo_electronico.dirty || correo_electronico.touched)" class="error-message">
+                    <span *ngIf="correo_electronico.errors?.['required']">Este campo es obligatorio.</span>
+                    <span *ngIf="correo_electronico.errors?.['email']">Introduce una dirección de correo electrónico válida.</span>
+                </div>
 
-                <label for="telefono">Teléfono:</label>
-                <input type="text" id="telefono" name="telefono" pattern="\d{10}" title="Debe ingresar un número de 10 dígitos" required><br><br>
-
-                <label for="correo">Correo electrónico:</label>
-                <input type="email" id="correo" name="correo" required><br><br>
-
-                <label for="tipo_sangre">Tipo de sangre:</label>
-                <select id="tipo_sangre" name="tipo_sangre" required>
-                    <option value="">Seleccione el tipo de sangre</option>
-                    <option value="A+">A+</option>
-                    <option value="A-">A-</option>
-                    <option value="B+">B+</option>
-                    <option value="B-">B-</option>
-                    <option value="O+">O+</option>
-                    <option value="O-">O-</option>
-                    <option value="AB+">AB+</option>
-                    <option value="AB-">AB-</option>
-                </select><br><br>
+                <label for="contrasena">Contraseña:</label>
+                <input 
+                    type="password" 
+                    id="contrasena" 
+                    name="contrasena" 
+                    [(ngModel)]="doctor.contrasena"
+                    #contrasena="ngModel"
+                    maxlength="50" 
+                    required
+                ><br><br>
+                <div *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)" class="error-message">
+                    <span *ngIf="contrasena.errors?.['required']">Este campo es obligatorio.</span>
+                    <span *ngIf="contrasena.errors?.['maxlength']">La contraseña no debe exceder los 50 caracteres.</span>
+                </div>
 
                 <div class="button-container">
-                    <button type="submit">Registrar</button>
+                    <button type="submit" [disabled]="doctorForm.invalid">Registrar</button>
                     <button type="reset">Cancelar</button>
+                </div>
+
+                <div *ngIf="successMessage" class="success-message">
+                    {{ successMessage }}
+                </div>
+                <div *ngIf="errorMessage" class="error-message">
+                    {{ errorMessage }}
                 </div>
             </form>
         </div>
