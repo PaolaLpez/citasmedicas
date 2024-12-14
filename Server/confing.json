@@ -1,0 +1,13 @@
+{
+    "server": {
+      "port": 3000
+    },
+    "database": {
+      "host": "localhost",
+      "user": "root",
+      "password": "your_password",
+      "name": "citasmedicas"
+    },
+    "someOtherConfig": "value"
+  }
+  

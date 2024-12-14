@@ -1,0 +1,279 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden; /* Evita el scroll */
+    background: url('https://img.freepik.com/vector-gratis/fondo-medico-azul-moderno_1055-6880.jpg') no-repeat center center fixed; /* Imagen de fondo */
+    background-size: cover; /* Ajusta el tamaño de la imagen */
+    height: 100vh; /* Asegura que el fondo cubra toda la altura de la ventana */
+    width: 100vw; /* Asegura que el fondo cubra toda la anchura de la ventana */
+  }
+
+  @keyframes borderAnimation {
+    0% {
+      border-color: #ff0080;
+    }
+    25% {
+      border-color: #00bfff;
+    }
+    50% {
+      border-color: #7300ff;
+    }
+    75% {
+      border-color: #02fff7;
+    }
+    100% {
+      border-color: #ff0080;
+    }
+  }
+
+  .login-container {
+    background: url('https://img.freepik.com/vector-gratis/fondo-azul-salud-ciencias-medicas-espacio-texto_1017-26089.jpg') no-repeat center center; /* Imagen de fondo del contenedor */
+    background-size: cover; /* Ajusta el tamaño de la imagen del contenedor */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    width: 350px;
+    text-align: center;
+    color: #000000;
+    position: absolute; /* Permite centrar con top, left, transform */
+    top: 50%; /* Centra verticalmente */
+    left: 50%; /* Centra horizontalmente */
+    transform: translate(-50%, -50%); /* Ajusta el contenedor al centro */
+    border: 15px solid transparent; /* Contorno grueso animado */
+    animation: borderAnimation 10s linear infinite; /* Aplicación de la animación de borde */
+  }
+
+  .login-container h1 {
+    color: #ff0000;
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .login-container label {
+    display: block;
+    color: #ff7300;
+    margin: 10px 0 5px;
+    text-align: left;
+    font-size: 20px;
+  }
+
+  .login-container input[type="text"],
+  .login-container input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 12px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    display: block;
+    font-size: 16px;
+    background-color: rgba(2, 150, 255, 0.607);
+    color: #ffffff;
+  }
+
+  .login-container input[type="text"]::placeholder,
+  .login-container input[type="password"]::placeholder {
+    color: rgba(0, 0, 0, 0.619);
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .login-container button {
+    border: none;
+    color: #ffffff;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+
+  .login-container .primary-button {
+    background-color: #9000ff;
+  }
+
+  .login-container .primary-button:hover {
+    background-color: #009acd;
+  }
+
+  .login-container .back-button {
+    background-color: #03b3ad;
+  }
+
+  .login-container .back-button:hover {
+    background-color: #e63900;
+  }
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('https://thumbs.dreamstime.com/b/fondo-m%C3%A9dico-y-de-la-atenci%C3%B3n-sanitaria-ecg-monitor-azul-del-pulso-coraz-n-con-se-al-el-coraz%C3%B3n-bati%C3%B3-154045262.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+  .login-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+  }
+  h1 {
+    margin-bottom: 20px;
+    color: #007bff;
+  }
+  label {
+    display: block;
+    margin: 10px 0 5px;
+  }
+  input[type="text"], input[type="password"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  .primary-button, .back-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .primary-button:hover {
+    background-color: #0056b3;
+  }
+  .back-button {
+    background-color: #6c757d;
+  }
+  .back-button:hover {
+    background-color: #5a6268;
+  }
+
+  body {
+    background-image: url('https://image.slidesdocs.com/responsive-images/background/poster-medical-creativity-medicine-treatment-care-creative-powerpoint-background_b08895bb61__960_540.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  .login-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 20px auto; /* Margen superior reducido aún más para subir el cuadro */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  h1 {
+    text-align: center;
+  }
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  .primary-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .back-button {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  body {
+    background-image: url('https://image.slidesdocs.com/responsive-images/background/poster-medical-creativity-medicine-treatment-care-creative-powerpoint-background_b08895bb61__960_540.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  .login-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  h1 {
+    text-align: center;
+  }
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  .primary-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .back-button {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .error-message {
+    color: red;
+    font-size: 0.875em;
+    margin-top: -10px;
+    margin-bottom: 10px;
+  }

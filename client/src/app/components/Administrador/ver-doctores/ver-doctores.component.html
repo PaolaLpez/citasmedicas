@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+    <app-panel-administrador></app-panel-administrador>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctores Disponibles</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Doctores Disponibles</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Doctor</th>
+                    <th>Nombre Completo</th>
+                    <th>Especialidad</th>
+                    <th>Tipo de Doctor</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let doctor of doctores">
+                    <td>{{ doctor.id }}</td>
+                    <td>{{ doctor.nombre }}</td>
+                    <td>{{ doctor.especialidad }}</td>
+                    <td>{{ doctor.tipo }}</td>
+                    <td><button class="delete-button" (click)="eliminarDoctor(doctor.id)">Eliminar</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

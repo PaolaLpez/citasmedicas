@@ -6,81 +6,88 @@
     <title>Formulario de Recordatorios</title>
     <style>
         body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
             font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px auto;
-            max-width: 400px;
+            background-color: #f0f0f0;
+        }
+        .form-container {
+            background-color: white;
             padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
         }
         h2 {
+            text-align: center;
             color: #333;
-        }
-        form {
-            text-align: left;
         }
         label {
             display: block;
-            margin-bottom: 8px;
-            color: #555;
+            margin-top: 10px;
         }
-        input[type="email"],
-        input[type="tel"] {
+        input[type="email"], input[type="tel"] {
             width: calc(100% - 20px);
-            padding: 8px;
-            margin-bottom: 15px;
+            padding: 10px;
+            margin-top: 5px;
             border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 14px;
+            border-radius: 5px;
         }
         .button-container {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            margin-top: 20px;
         }
-        .link-button {
-            background-color: #f44336;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 16px;
-            display: inline-block;
-        }
-        .link-button:hover {
-            background-color: #e31e1e;
-        }
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
+        .link-button, input[type="submit"] {
             padding: 10px 20px;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
             cursor: pointer;
-            font-size: 16px;
+            text-decoration: none;
+            text-align: center;
         }
-        input[type="submit"]:hover {
-            background-color: #45a049;
+        .link-button:hover, input[type="submit"]:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <h2>Formulario para recibir recordatorios</h2>
-    <form action="https://formspree.io/f/manwyeob" method="post">
-        <label for="email">Correo electrónico:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
-        
-        <label for="telefono">Número de teléfono:</label><br>
-        <input type="tel" id="telefono" name="telefono" pattern="[0-9]{10}" required><br><br>
-        
-        <div class="button-container">
-            <a href="/recordatorios" class="link-button">Atrás</a>
-            <input type="submit" value="Enviar">
-        </div>
-    </form>
+    <div class="form-container">
+        <h2>Formulario para recibir recordatorios</h2>
+        <form id="recordatoriosForm" action="https://formspree.io/f/manwyeob" method="post" onsubmit="return validarFormulario(event)">
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            
+            <label for="telefono">Número de teléfono:</label>
+            <input type="tel" id="telefono" name="telefono" pattern="[0-9]{10}" title="El número de teléfono debe tener 10 dígitos." required><br><br>
+            
+            <div class="button-container">
+                <a href="/recordatorios" class="link-button">Atrás</a>
+                <input type="submit" value="Enviar">
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function validarFormulario(event) {
+            const form = document.getElementById('recordatoriosForm');
+
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                const firstInvalidField = form.querySelector(':invalid');
+                firstInvalidField.reportValidity();
+                return false;
+            }
+        }
+
+        document.getElementById('recordatoriosForm').addEventListener('submit', validarFormulario);
+    </script>
 </body>
 </html>
+
 

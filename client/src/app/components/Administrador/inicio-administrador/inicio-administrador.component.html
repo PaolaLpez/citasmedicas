@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+    <app-panel-administrador></app-panel-administrador>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar nuevo administrador</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div class="main-content">
+        <div class="container">
+            <h1>Agregar nuevo administrador</h1>
+            <form id="adminForm" (ngSubmit)="saveAdmin(adminForm)" #adminForm="ngForm">
+                <label for="usuario">Usuario:</label>
+                <input 
+                    type="text" 
+                    id="usuario" 
+                    name="usuario" 
+                    maxlength="20" 
+                    pattern="[A-Za-z\s]+" 
+                    title="El usuario solo puede contener letras y espacios" 
+                    required
+                    [(ngModel)]="admin.usuario"
+                    #usuario="ngModel"
+                ><br><br>
+                <div *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)" class="error-message">
+                    <span *ngIf="usuario.errors?.['required']">Este campo es obligatorio.</span>
+                    <span *ngIf="usuario.errors?.['pattern']">El usuario solo puede contener letras y espacios.</span>
+                    <span *ngIf="usuario.errors?.['maxlength']">El usuario no debe exceder los 20 caracteres.</span>
+                </div>
+    
+                <label for="nombre">Nombre completo del administrador:</label>
+                <input 
+                    type="text" 
+                    id="nombre" 
+                    name="nombre" 
+                    maxlength="50" 
+                    pattern="[A-Za-z\s]+" 
+                    title="El nombre solo puede contener letras y espacios" 
+                    required
+                    [(ngModel)]="admin.nombre"
+                    #nombre="ngModel"
+                ><br><br>
+                <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="error-message">
+                    <span *ngIf="nombre.errors?.['required']">Este campo es obligatorio.</span>
+                    <span *ngIf="nombre.errors?.['pattern']">El nombre solo puede contener letras y espacios.</span>
+                    <span *ngIf="nombre.errors?.['maxlength']">El nombre no debe exceder los 50 caracteres.</span>
+                </div>
+    
+                <label for="correo_electronico">Correo electrónico:</label>
+                <input 
+                    type="email" 
+                    id="correo_electronico" 
+                    name="correo_electronico" 
+                    maxlength="60" 
+                    required
+                    [(ngModel)]="admin.correo_electronico"
+                    #correo_electronico="ngModel"
+                ><br><br>
+                <div *ngIf="correo_electronico.invalid && (correo_electronico.dirty || correo_electronico.touched)" class="error-message">
+                    <span *ngIf="correo_electronico.errors?.['required']">Este campo es obligatorio.</span>
+                    <span *ngIf="correo_electronico.errors?.['email']">Introduce una dirección de correo electrónico válida.</span>
+                </div>
+    
+                <label for="contrasena">Contraseña:</label>
+                <input 
+                    type="password" 
+                    id="contrasena" 
+                    name="contrasena" 
+                    maxlength="50" 
+                    required
+                    [(ngModel)]="admin.contrasena"
+                    #contrasena="ngModel"
+                ><br><br>
+                <div *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)" class="error-message">
+                    <span *ngIf="contrasena.errors?.['required']">Este campo es obligatorio.</span>
+                    <span *ngIf="contrasena.errors?.['maxlength']">La contraseña no debe exceder los 50 caracteres.</span>
+                </div>
+    
+                <div *ngIf="successMessage" class="success-message">
+                    {{ successMessage }}
+                </div>
+    
+                <div class="button-container">
+                    <button type="submit" [disabled]="adminForm.invalid">Agregar administrador</button>
+                    <button type="reset">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="sidebar">
+        <div class="footer">
+            <p>CAISES San Luis de la Paz</p>
+            <p>Dirección: Calle Velasco Ibarra & Calle México 68, La Ladrillera, 37906 San Luis de la Paz, Gto.</p>
+            <p>Teléfono: 468 688 2045</p>
+            <p>Horario: 8 a.m. a 10 p.m.</p>
+        </div>
+    </div>
+</body>
+</html>

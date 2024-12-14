@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Citas Médicas</title>
+
+</head>
+<body>
+  <div class="login-container">
+    <h1>Citas Médicas</h1>
+    <form (ngSubmit)="onSubmit()">
+      <label for="correo">Correo Electrónico</label>
+      <input type="text" id="correo" [(ngModel)]="correo" name="correo" required />
+    
+      <label for="contrasena">Contraseña</label>
+      <input type="password" id="password" pattern=".{6,8}" title="La contraseña debe tener entre 6 y 8 caracteres." placeholder="Ingrese su contraseña" maxlength="8" 
+      [(ngModel)]="contrasena" name="contrasena" required />
+    
+      <div id="password-error" class="error-message"></div>
+
+      <button type="submit" class="primary-button">Ingresar</button>
+      <button type="button" class="back-button" onclick="window.location.href='/inicio'">Regresar</button>
+    </form>
+  </div>
+
+   <script>
+    function validarFormulario(event) {
+      const form = document.getElementById('loginForm');
+      const username = document.getElementById('username');
+      const password = document.getElementById('password');
+      const usernameError = document.getElementById('username-error');
+      const passwordError = document.getElementById('password-error');
+
+      // Limpiar mensajes de error
+      usernameError.textContent = '';
+      passwordError.textContent = '';
+
+      let isValid = true;
+
+      if (!username.checkValidity()) {
+        usernameError.textContent = username.title;
+        isValid = false;
+      }
+
+      if (!password.checkValidity()) {
+        passwordError.textContent = password.title;
+        isValid = false;
+      }
+
+      if (!isValid) {
+        event.preventDefault();
+      }
+
+      return isValid;
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', validarFormulario);
+  </script>
+</body>

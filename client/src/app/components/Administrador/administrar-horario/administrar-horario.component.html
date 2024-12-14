@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+    <html lang="es">
+        <app-panel-administrador></app-panel-administrador>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Gestión de Horarios Médicos</title>
+        <style>
+            .error-message {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Gestión de Horarios Médicos</h1>
+            
+            <div class="admin">
+                <img src="https://cdn-icons-png.freepik.com/512/4326/4326320.png" alt="Admin Icon">
+                <span>Administrador</span>
+            </div>
+            
+            <form #horariosForm="ngForm" (ngSubmit)="onSubmit(horariosForm)" novalidate>
+                <div class="form-group">
+                    <label for="doctor">Selecciona un doctor:</label>
+                    <select 
+                        id="doctor" 
+                        name="doctor" 
+                        [(ngModel)]="horario.doctor" 
+                        #doctor="ngModel"
+                        required
+                    >
+                        <option value="">Seleccione un doctor</option>
+                        <option value="doctor1">Doctor 1</option>
+                        <option value="doctor2">Doctor 2</option>
+                        <option value="doctor3">Doctor 3</option>
+                        <option value="doctor4">Doctor 4</option>
+                        <option value="doctor5">Doctor 5</option>
+                    </select>
+                    <div *ngIf="doctor.invalid && (doctor.dirty || doctor.touched)" class="error-message">
+                        <span *ngIf="doctor.errors?.['required']">Este campo es obligatorio.</span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="hora-desde">Selecciona un horario:</label>
+                    <div>
+                        Desde: 
+                        <select 
+                            id="hora-desde-hora" 
+                            name="hora-desde-hora" 
+                            [(ngModel)]="horario.horaDesdeHora" 
+                            #horaDesdeHora="ngModel"
+                            required
+                        >
+                            <option value="">Hora</option>
+                            <option *ngFor="let hora of horas" [value]="hora">{{hora}}</option>
+                        </select>
+                        :
+                        <select 
+                            id="hora-desde-minuto" 
+                            name="hora-desde-minuto" 
+                            [(ngModel)]="horario.horaDesdeMinuto" 
+                            #horaDesdeMinuto="ngModel"
+                            required
+                        >
+                            <option value="">Minuto</option>
+                            <option *ngFor="let minuto of minutos" [value]="minuto">{{minuto}}</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        Hasta:
+                        <select 
+                            id="hora-hasta-hora" 
+                            name="hora-hasta-hora" 
+                            [(ngModel)]="horario.horaHastaHora" 
+                            #horaHastaHora="ngModel"
+                            required
+                        >
+                            <option value="">Hora</option>
+                            <option *ngFor="let hora of horas" [value]="hora">{{hora}}</option>
+                        </select>
+                        :
+                        <select 
+                            id="hora-hasta-minuto" 
+                            name="hora-hasta-minuto" 
+                            [(ngModel)]="horario.horaHastaMinuto" 
+                            #horaHastaMinuto="ngModel"
+                            required
+                        >
+                            <option value="">Minuto</option>
+                            <option *ngFor="let minuto of minutos" [value]="minuto">{{minuto}}</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="fecha-inicio">Selecciona la fecha inicio:</label>
+                    <div>
+                        <select 
+                            id="dia-inicio" 
+                            name="dia-inicio" 
+                            [(ngModel)]="horario.diaInicio" 
+                            #diaInicio="ngModel"
+                            required
+                        >
+                            <option value="">Día</option>
+                            <option *ngFor="let dia of dias" [value]="dia">{{dia}}</option>
+                        </select>
+                        <select 
+                            id="mes-inicio" 
+                            name="mes-inicio" 
+                            [(ngModel)]="horario.mesInicio" 
+                            #mesInicio="ngModel"
+                            required
+                        >
+                            <option value="">Mes</option>
+                            <option *ngFor="let mes of meses" [value]="mes.value">{{mes.nombre}}</option>
+                        </select>
+                        <select 
+                            id="anio-inicio" 
+                            name="anio-inicio" 
+                            [(ngModel)]="horario.anioInicio" 
+                            #anioInicio="ngModel"
+                            required
+                        >
+                            <option value="">Año</option>
+                            <option *ngFor="let anio of anos" [value]="anio">{{anio}}</option>
+                        </select>
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <label for="fecha-fin">Selecciona la fecha fin:</label>
+                    <div>
+                        <select 
+                            id="dia-fin" 
+                            name="dia-fin" 
+                            [(ngModel)]="horario.diaFin" 
+                            #diaFin="ngModel"
+                            required
+                        >
+                            <option value="">Día</option>
+                            <option *ngFor="let dia of dias" [value]="dia">{{dia}}</option>
+                        </select>
+                        <select 
+                            id="mes-fin" 
+                            name="mes-fin" 
+                            [(ngModel)]="horario.mesFin" 
+                            #mesFin="ngModel"
+                            required
+                        >
+                            <option value="">Mes</option>
+                            <option *ngFor="let mes of meses" [value]="mes.value">{{mes.nombre}}</option>
+                        </select>
+                        <select 
+                            id="anio-fin" 
+                            name="anio-fin" 
+                            [(ngModel)]="horario.anioFin" 
+                            #anioFin="ngModel"
+                            required
+                        >
+                            <option value="">Año</option>
+                            <option *ngFor="let anio of anos" [value]="anio">{{anio}}</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button type="submit" [disabled]="horariosForm.invalid">Guardar</button>
+            </form>
+        </div>
+    </body>
+    </html>
+    

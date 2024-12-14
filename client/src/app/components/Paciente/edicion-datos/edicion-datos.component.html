@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración del Sistema</title>
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Edicion de datos</h1>
+        <form id="configuracionForm" onsubmit="return validarFormulario(event)">
+            <fieldset>
+                <label for="nombre-paciente">Modificar nombre</label>
+                <input type="text" id="nombre-paciente" name="nombre-paciente" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+" title="El nombre solo debe contener letras y espacios" required>
+
+                <label for="fecha-cita">Modificar tu Fecha de nacimiento</label>
+                <input type="date" id="fecha-cita" name="fecha-cita" required>
+
+                <label for="identificacion">Modificar CURP</label>
+                <input type="text" id="identificacion" name="identificacion"pattern="[A-Z]{4}[0-9]{6}[A-Z]{6}[0-9]{2}" title="Debe tener 18 caracteres con el formato adecuado" required>
+
+                <label for="telefono">Modificar número de teléfono</label>
+                <input type="text" id="telefono" name="telefono"pattern="[0-9]" title="Debe tener el formato adecuado: 10 digítos" required>
+
+                <label for="correo">Modificar correo electrónico</label>
+                <input type="email" id="correo" name="correo" value="@gmail.com" required>
+            </fieldset>
+
+            <button type="submit">Enviar</button>
+        </form>
+        <a href="/ingreso" class="home-button">Volver a Inicio</a>
+    </div>
+
+    <script type="text/typescript">
+        function validarFormulario(event: Event): boolean {
+            const form = document.getElementById('configuracionForm') as HTMLFormElement;
+
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                const firstInvalidField = form.querySelector(':invalid') as HTMLElement;
+                firstInvalidField.reportValidity();
+                return false;
+            }
+
+            return true;
+        }
+
+        document.getElementById('configuracionForm')?.addEventListener('submit', validarFormulario);
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typescript/4.4.2/typescript.min.js"></script>
+    <script>
+        const ts = window['ts'];
+        const tsCode = document.querySelector('script[type="text/typescript"]')?.textContent || '';
+        const jsCode = ts.transpile(tsCode);
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.text = jsCode;
+        document.body.appendChild(script);
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,74 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: url('https://img.freepik.com/vector-gratis/fondo-medico-azul-moderno_1055-6880.jpg') no-repeat center center fixed; /* Imagen de fondo */
+    background-size: cover; /* Ajusta el tamaño de la imagen */
+    height: 200vh; /* Asegura que el fondo cubra toda la altura de la ventana */
+    width: 100vw; /* Asegura que el fondo cubra toda la anchura de la ventana */
+    color: #333;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-left: 300px; /* Ajusta el margen izquierdo para desplazar la tabla más a la izquierda */
+    position: relative;
+    top: 50px; /* Ajusta la posición desde la parte superior si es necesario */
+  }
+
+  h1 {
+    text-align: center;
+    color: #003366;
+    margin-bottom: 20px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    background-color: #003366;
+    color: #ffffff;
+    font-size: 18px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #e0e0e0;
+  }
+
+  .no-data {
+    text-align: center;
+    padding: 20px;
+    font-size: 18px;
+    color: #555;
+  }
+
+  .cancel-button {
+    background-color: #ff4d4d;
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+
+  .cancel-button:hover {
+    background-color: #cc0000;
+  }

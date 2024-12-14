@@ -1,0 +1,127 @@
+body {
+    background: url('https://thumbs.dreamstime.com/b/fondo-m%C3%A9dico-y-de-la-atenci%C3%B3n-sanitaria-ecg-monitor-azul-del-pulso-coraz-n-con-se-al-el-coraz%C3%B3n-bati%C3%B3-154045262.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(243, 243, 243, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 50px auto;
+    margin-left: 270px; /* Ajusta este valor para evitar superposición con la barra de navegación */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-header img {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.profile-header h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0;
+}
+
+.profile-header p {
+    color: #777;
+    margin: 5px 0 0;
+}
+
+.profile-info {
+    width: 100%;
+}
+
+.profile-info h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #0052cc;
+    padding-bottom: 5px;
+}
+
+.profile-info table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.profile-info th,
+.profile-info td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.profile-info th {
+    background-color: #f2f2f2;
+}
+
+.profile-info input[type="text"],
+.profile-info input[type="number"],
+.profile-info input[type="email"],
+.profile-info input[type="tel"] { /* Aseguramos que el campo de teléfono tenga el mismo estilo */
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.profile-info input[readonly] {
+    background-color: #f9f9f9;
+    cursor: not-allowed;
+}
+
+.save-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #0052cc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.save-button:hover {
+    background-color: #003a99;
+}
+
+.footer {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    text-align: center;
+}
+
+.footer p {
+    margin: 5px 0;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+
