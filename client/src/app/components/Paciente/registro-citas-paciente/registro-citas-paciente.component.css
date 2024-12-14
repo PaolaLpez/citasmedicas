@@ -88,3 +88,8 @@ input[type="text"], input[type="date"], select {
     padding: 10px;
     border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }

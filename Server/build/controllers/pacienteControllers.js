@@ -30,12 +30,27 @@ class PacienteController {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield database_1.default.query('INSERT INTO paciente set ?', [req.body]);
-                res.json({ message: 'Datos de inventario insertado' });
+                console.log('Datos recibidos', req.body);
+                if (!req.body || typeof req.body !== 'object') {
+                    res.status(400).json({ message: 'No se enviaron datos de usuario o el formato es incorrecto' });
+                    return;
+                }
+                const usuario = req.body;
+                // Validar que todos los campos requeridos están presentes
+                const { nombre, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, id_especialidad, id_horario, correo_electronico, contrasena, id_rol } = usuario;
+                if (!nombre || !correo_electronico || !contrasena || !id_rol) {
+                    res.status(400).json({ message: 'Datos incompletos' });
+                    return;
+                }
+                // Ejecutar la consulta
+                const result = yield database_1.default.query('INSERT INTO usuario (id_rol, nombre, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, id_especialidad, id_horario, correo_electronico, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [id_rol, nombre, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, id_especialidad, id_horario, correo_electronico, contrasena]);
+                res.status(201).json({ message: 'Datos de usuario insertados', id_usuario: result.insertId });
             }
             catch (error) {
-                console.error('Database query error:', error); // Imprimir el error completo
-                res.status(500).send('Error al consultar la base de datos');
+                console.error('Error en la base de datos:', error);
+                if (!res.headersSent) {
+                    res.status(500).json({ message: 'Error al consultar la base de datos' });
+                }
             }
         });
     }
@@ -56,7 +71,8 @@ class PacienteController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const { id_paciente } = req.params;
-                yield database_1.default.query('UPDATE FROM paciente SET id_paciente =? WHERE id_paciente=?', [id_paciente]);
+                const { nom_paciente, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, correo_electronico, contrasena } = req.body;
+                const result = yield database_1.default.query('UPDATE paciente SET nom_paciente =?, fecha_nac =?, genero =?, direccion =?, tipo_sangre =?, curp =?, num_telefono =?, correo_electronico =?, contrasena=? WHERE id_paciente=?', [nom_paciente, fecha_nac, genero, direccion, tipo_sangre, curp, num_telefono, correo_electronico, contrasena, id_paciente]);
                 res.json({ message: 'Datos del paciente actualizados' });
             }
             catch (error) {
@@ -71,9 +87,6 @@ class PacienteController {
                 const { id_paciente } = req.params; //Se recupera el id del params
                 const paciente = yield database_1.default.query('SELECT * FROM paciente WHERE id_paciente=?', [id_paciente]);
                 res.json(paciente);
-                if (paciente.length > 0) {
-                    return res.json(paciente[0]);
-                }
             }
             catch (error) {
                 console.error('Database query error:', error);

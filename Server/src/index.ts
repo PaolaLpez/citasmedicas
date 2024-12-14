@@ -1,9 +1,16 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+
+//RoutesTablas
 import citaRoutes from './routes/citaRoutes';
 import indexRoutes from './routes/indexRoutes';
-import pacienteRoutes from './routes/pacienteRoutes';
+import especialidadRoutes from './routes/especialidadRoutes';
+import horarioRoutes from './routes/horarioRoutes';
+import rolRoutes from './routes/rolRoutes';
+import loginRoutes from './routes/loginRoutes';
+import usuarioRoutes from './routes/usuarioRoutes';
+
 
 
 class Server {
@@ -24,8 +31,12 @@ class Server {
 
   routes(): void {
     this.app.use('/', indexRoutes);
-    this.app.use('/api/citas', citaRoutes);
-    this.app.use('/api/paciente', pacienteRoutes)
+    this.app.use('/api/login', loginRoutes);
+    this.app.use('/api/cita', citaRoutes);
+    this.app.use('/api/especialidad', especialidadRoutes);
+    this.app.use('/api/horario', horarioRoutes);
+    this.app.use('/api/rol', rolRoutes);
+    this.app.use('/api/usuario', usuarioRoutes);
   }
 
   start(): void {

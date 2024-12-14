@@ -1,21 +1,19 @@
 import { Router } from "express";
 import { pacienteControllers } from "../controllers/pacienteControllers";
 
-
 class PacienteRoutes {
-    public router: Router = Router();// Se está creando la propiedad que guardara el objeto
-    // devuelto y se inicializa esta propiedad en la misma línea de código. 
-  
+    public router: Router = Router();
+
     constructor() {
       this.config();
     }
   
     config(): void {
-      this.router.get('/', pacienteControllers.getOne);
+      this.router.get('/', pacienteControllers.list);
       this.router.post('/', pacienteControllers.create);
-      this.router.delete('/:id', pacienteControllers.delete);
-      this.router.put('/:id', pacienteControllers.update);
-      this.router.get('/:id', pacienteControllers.getOne);
+      this.router.delete('/:id_paciente', pacienteControllers.delete);
+      this.router.put('/:id_paciente', pacienteControllers.update);
+      this.router.get('/:id_paciente', pacienteControllers.getOne);
     }
   }
   
