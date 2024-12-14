@@ -1,11 +1,17 @@
 import mysql from 'promise-mysql';
 import keys from './keys';
 
-const pool = mysql.createPool(keys.database);
 
-pool.getConnection().then(connection => {
-  console.log('DB is connected');
-  pool.releaseConnection(connection);
+const pool = mysql.createPool({
+    host: 'localhost',
+    user: 'root', // Cambia esto si tu usuario es diferente
+    password: '', // Cambia esto si tu contraseña es diferente
+    database: 'citasmedicas',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
 export default pool;
+
+
